@@ -2,108 +2,125 @@ import { NextResponse } from "next/server"
 import { auth } from "@/lib/auth"
 import { getStripe } from "@/lib/stripe"
 import dbConnect from "@/lib/mongodb"
-import SubscriptionPlan from "@/models/SubscriptionPlan"
-import Product from "@/models/Product"
+import Order from "@/models/Order"
+import GiftDelivery from "@/models/GiftDelivery"
+import SeniorCenter from "@/models/SeniorCenter"
+import { getShippingFee, shippingConfig } from "@/lib/config"
 
 export async function POST(request) {
   try {
     const session = await auth()
-    const { mode, planSlug, items } = await request.json()
-
-    await dbConnect()
+    const body = await request.json()
+    const { items, mode, planSlug, giftOneEnabled, giftOneType, customCenter } = body
 
     const stripe = getStripe()
-    const baseUrl = process.env.NEXTAUTH_URL || "http://localhost:3000"
-
+    
     let lineItems = []
-    let checkoutMode = mode === "subscription" ? "subscription" : "payment"
-
+    let checkoutMode = mode || "payment"
+    
     if (mode === "subscription" && planSlug) {
-      const plan = await SubscriptionPlan.findOne({ slug: planSlug, active: true })
-
+      const plans = {
+        "weekly-3-pack": { name: "Starter - 3 packs/week", price: 1899 },
+        "weekly-5-pack": { name: "Family - 5 packs/week", price: 2999 },
+        "weekly-7-pack": { name: "Chef - 7 packs/week", price: 3999 },
+      }
+      
+      const plan = plans[planSlug]
       if (!plan) {
-        return NextResponse.json(
-          { error: "Subscription plan not found" },
-          { status: 404 }
-        )
+        return NextResponse.json({ error: "Invalid plan" }, { status: 400 })
       }
-
-      if (plan.stripePriceId && !plan.stripePriceId.startsWith("price_placeholder")) {
-        lineItems = [
-          {
-            price: plan.stripePriceId,
-            quantity: 1,
-          },
-        ]
-      } else {
-        lineItems = [
-          {
-            price_data: {
-              currency: "cad",
-              product_data: {
-                name: plan.name,
-                description: plan.description || `${plan.packsPerWeek} packs per week`,
-              },
-              unit_amount: Math.round(plan.pricePerWeek * 100),
-              recurring: {
-                interval: "week",
-              },
+      
+      lineItems = [
+        {
+          price_data: {
+            currency: "cad",
+            product_data: {
+              name: plan.name,
+              description: "Weekly microgreens subscription - delivered Friday evening",
             },
-            quantity: 1,
+            unit_amount: plan.price,
+            recurring: {
+              interval: "week",
+            },
           },
-        ]
-      }
+          quantity: 1,
+        },
+      ]
+      checkoutMode = "subscription"
     } else if (items && items.length > 0) {
-      checkoutMode = "payment"
-
-      for (const item of items) {
-        const product = await Product.findById(item.productId)
-
-        if (!product) {
-          continue
+      let subtotal = 0
+      
+      lineItems = items.map((item) => {
+        subtotal += item.price * 100 * item.quantity
+        return {
+          price_data: {
+            currency: "cad",
+            product_data: {
+              name: item.name,
+            },
+            unit_amount: Math.round(item.price * 100),
+          },
+          quantity: item.quantity,
         }
-
+      })
+      
+      const shippingFee = getShippingFee(subtotal / 100)
+      if (shippingFee > 0) {
         lineItems.push({
           price_data: {
             currency: "cad",
             product_data: {
-              name: product.name,
-              description: product.shortDescription,
-              images: product.image ? [`${baseUrl}${product.image}`] : [],
+              name: "Delivery Fee",
             },
-            unit_amount: Math.round(product.price * 100),
+            unit_amount: shippingFee * 100,
           },
-          quantity: item.quantity || 1,
+          quantity: 1,
         })
       }
+    } else {
+      return NextResponse.json({ error: "No items provided" }, { status: 400 })
     }
-
-    if (lineItems.length === 0) {
-      return NextResponse.json(
-        { error: "No valid items for checkout" },
-        { status: 400 }
-      )
-    }
-
+    
     const checkoutSession = await stripe.checkout.sessions.create({
       mode: checkoutMode,
-      payment_method_types: ["card"],
       line_items: lineItems,
-      success_url: `${baseUrl}/account?checkout=success`,
-      cancel_url: `${baseUrl}/subscribe?checkout=cancelled`,
+      success_url: `${process.env.NEXTAUTH_URL}/account?success=true`,
+      cancel_url: `${process.env.NEXTAUTH_URL}/shop?canceled=true`,
       customer_email: session?.user?.email,
       metadata: {
-        userId: session?.user?.id || "guest",
-        type: mode || "one-off",
+        userId: session?.user?.id || "",
+        giftOneEnabled: giftOneEnabled ? "true" : "false",
+        giftOneType: giftOneType || "",
+        customCenterName: customCenter?.name || "",
+        customCenterAddress: customCenter?.address || "",
       },
     })
 
+    if (giftOneEnabled && session?.user?.id) {
+      await dbConnect()
+      
+      const giftData = {
+        subscriber: session.user.id,
+        giftType: giftOneType,
+        status: "pending",
+      }
+
+      if (giftOneType === "default-center") {
+        const center = await SeniorCenter.findOne({ active: true })
+        if (center) {
+          giftData.seniorCenter = center._id
+        }
+      } else if (giftOneType === "custom-center" && customCenter) {
+        giftData.customCenterName = customCenter.name
+        giftData.customCenterAddress = customCenter.address
+      }
+
+      await GiftDelivery.create(giftData)
+    }
+
     return NextResponse.json({ url: checkoutSession.url })
   } catch (error) {
-    console.error("Checkout session error:", error)
-    return NextResponse.json(
-      { error: "Failed to create checkout session" },
-      { status: 500 }
-    )
+    console.error("Checkout error:", error)
+    return NextResponse.json({ error: "Checkout failed" }, { status: 500 })
   }
 }

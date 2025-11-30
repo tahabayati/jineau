@@ -1,9 +1,11 @@
 "use client"
 
-import { useRouter } from "next/navigation"
+import { useRouter } from "@/i18n/routing"
+import { useTranslations } from "next-intl"
 
 export default function ShopFilters({ category, sort }) {
   const router = useRouter()
+  const t = useTranslations("shop")
 
   const handleSortChange = (e) => {
     router.push(`/shop?category=${category}&sort=${e.target.value}`)
@@ -14,49 +16,48 @@ export default function ShopFilters({ category, sort }) {
       <div className="flex flex-wrap gap-2">
         <a
           href="/shop"
-          className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+          className={`px-4 py-2 rounded-full text-sm font-medium transition-all shadow-sm ${
             category === "all"
-              ? "bg-brand-primary text-white"
-              : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+              ? "bg-brand-primary text-white shadow-md"
+              : "bg-white text-gray-700 hover:bg-brand-mist/30 border border-gray-200"
           }`}
         >
-          All Products
+          {t("allProducts")}
         </a>
         <a
           href="/shop?category=microgreens"
-          className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+          className={`px-4 py-2 rounded-full text-sm font-medium transition-all shadow-sm ${
             category === "microgreens"
-              ? "bg-brand-primary text-white"
-              : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+              ? "bg-brand-primary text-white shadow-md"
+              : "bg-white text-gray-700 hover:bg-brand-mist/30 border border-gray-200"
           }`}
         >
-          Microgreens
+          {t("microgreens")}
         </a>
         <a
           href="/shop?category=hydrosols"
-          className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
+          className={`px-4 py-2 rounded-full text-sm font-medium transition-all shadow-sm ${
             category === "hydrosols"
-              ? "bg-brand-primary text-white"
-              : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+              ? "bg-brand-primary text-white shadow-md"
+              : "bg-white text-gray-700 hover:bg-brand-mist/30 border border-gray-200"
           }`}
         >
-          Hydrosols
+          {t("hydrosols")}
         </a>
       </div>
 
       <div className="flex items-center gap-2">
-        <span className="text-sm text-gray-500">Sort by:</span>
+        <span className="text-sm text-gray-500">{t("sortBy")}:</span>
         <select
           value={sort}
           onChange={handleSortChange}
-          className="px-3 py-2 rounded-lg border border-gray-200 text-sm focus:ring-2 focus:ring-brand-primary focus:border-transparent"
+          className="px-3 py-2 rounded-lg border border-gray-200 text-sm focus:ring-2 focus:ring-brand-primary focus:border-transparent bg-white shadow-sm"
         >
-          <option value="recommended">Recommended</option>
-          <option value="price-low">Price: Low to High</option>
-          <option value="price-high">Price: High to Low</option>
+          <option value="recommended">{t("recommended")}</option>
+          <option value="price-low">{t("priceLowToHigh")}</option>
+          <option value="price-high">{t("priceHighToLow")}</option>
         </select>
       </div>
     </div>
   )
 }
-

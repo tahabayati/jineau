@@ -35,6 +35,18 @@ const UserSchema = new mongoose.Schema(
     stripeCustomerId: {
       type: String,
     },
+    isAdmin: {
+      type: Boolean,
+      default: false,
+    },
+    activeSubscription: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Order",
+    },
+    giftOneEnabled: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     timestamps: true,
@@ -42,4 +54,3 @@ const UserSchema = new mongoose.Schema(
 )
 
 export default mongoose.models.User || mongoose.model("User", UserSchema)
-

@@ -1,34 +1,18 @@
 export default function MarmotMascot({ size = "md", className = "" }) {
   const sizes = {
-    sm: "w-16 h-16",
-    md: "w-24 h-24",
-    lg: "w-32 h-32",
-    xl: "w-48 h-48",
+    sm: "w-12 h-12 text-3xl",
+    md: "w-20 h-20 text-5xl",
+    lg: "w-28 h-28 text-6xl",
+    xl: "w-36 h-36 text-7xl",
   }
-  
+
   return (
-    <div className={`${sizes[size]} ${className}`}>
-      <svg viewBox="0 0 100 100" className="w-full h-full">
-        <ellipse cx="50" cy="60" rx="35" ry="30" fill="#8B7355" />
-        <circle cx="50" cy="35" r="25" fill="#A0826D" />
-        <ellipse cx="35" cy="28" rx="6" ry="8" fill="#8B7355" />
-        <ellipse cx="65" cy="28" rx="6" ry="8" fill="#8B7355" />
-        <circle cx="42" cy="35" r="4" fill="#2D1810" />
-        <circle cx="58" cy="35" r="4" fill="#2D1810" />
-        <circle cx="43" cy="34" r="1.5" fill="white" />
-        <circle cx="59" cy="34" r="1.5" fill="white" />
-        <ellipse cx="50" cy="42" rx="4" ry="3" fill="#2D1810" />
-        <path d="M 46 48 Q 50 52 54 48" stroke="#2D1810" strokeWidth="2" fill="none" strokeLinecap="round" />
-        <ellipse cx="38" cy="45" rx="6" ry="4" fill="#D4A574" opacity="0.5" />
-        <ellipse cx="62" cy="45" rx="6" ry="4" fill="#D4A574" opacity="0.5" />
-        <ellipse cx="25" cy="70" rx="8" ry="6" fill="#8B7355" />
-        <ellipse cx="75" cy="70" rx="8" ry="6" fill="#8B7355" />
-        <path d="M 30 85 Q 50 95 70 85" fill="#016B61" />
-        <ellipse cx="40" cy="90" rx="3" ry="2" fill="#70B2B2" />
-        <ellipse cx="50" cy="92" rx="2" ry="1.5" fill="#5A9690" />
-        <ellipse cx="60" cy="90" rx="3" ry="2" fill="#70B2B2" />
-      </svg>
+    <div
+      className={`${sizes[size]} ${className} flex items-center justify-center rounded-full bg-gradient-to-br from-brand-mint/40 to-brand-mist/50 shadow-lg`}
+    >
+      <span role="img" aria-label="Marmot mascot">
+        🦫
+      </span>
     </div>
   )
 }
-

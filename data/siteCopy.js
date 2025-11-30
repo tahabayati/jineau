@@ -1,3 +1,5 @@
+import { shippingConfig, deliveryConfig, regionConfig } from "@/lib/config"
+
 export const brandName = "Jineau"
 
 export const taglines = {
@@ -9,8 +11,8 @@ export const taglines = {
 export const brandStory = {
   nameOrigin: {
     title: "What is Jineau?",
-    description: "Jineau combines \"Jin\" (جین) — Kurdish for life — with \"Eau\" — French for water. Together, they form \"Water of Life,\" a name that honors our roots and our mission.",
-    jin: { word: "Jin", meaning: "Life", language: "Kurdish" },
+    description: "Jineau combines \"Jin\" (ژین) — Kurdish for life — with \"Eau\" — French for water. Together, they form \"Water of Life,\" a name that honors our roots and our mission.",
+    jin: { word: "Jin", meaning: "Life", language: "Kurdish", script: "ژین" },
     eau: { word: "Eau", meaning: "Water", language: "French" }
   },
   mission: "We grow microgreens packed with nutrients using water-efficient, pesticide-free urban farming methods. Our zero-waste philosophy means surplus greens become aromatic hydrosols. We combine Kurdish–Persian herbal wisdom with modern science, using simple sustainable packaging and delivering direct from farm to your table.",
@@ -36,8 +38,8 @@ export const differentiators = [
     icon: "leaf"
   },
   {
-    title: "Plasma-Cleaned Greens",
-    description: "Cold-plasma sanitization technology means your greens are clean and ready to eat — no washing required.",
+    title: "High-Tech Clean Technology",
+    description: "Advanced sanitization technology means your greens are clean and ready to eat — no washing required.",
     icon: "sparkle"
   },
   {
@@ -47,7 +49,7 @@ export const differentiators = [
   },
   {
     title: "Just-in-Time Harvest",
-    description: "Harvested Friday, delivered Saturday. Your greens are at peak freshness within 24 hours of harvest.",
+    description: `Harvested fresh, delivered ${deliveryConfig.deliveryDay}. Your greens are at peak freshness within 24 hours of harvest.`,
     icon: "clock"
   },
   {
@@ -58,20 +60,20 @@ export const differentiators = [
 ]
 
 export const deliveryInfo = {
-  orderCutoff: "Wednesday 11:59 PM",
-  harvestDay: "Friday",
-  deliveryDay: "Saturday",
-  freeDeliveryThreshold: 25,
-  deliveryFee: 4.99,
+  orderCutoff: deliveryConfig.orderCutoff,
+  harvestDay: deliveryConfig.harvestDay,
+  deliveryDay: deliveryConfig.deliveryDay,
+  freeDeliveryThreshold: shippingConfig.freeShippingThreshold,
+  deliveryFee: shippingConfig.deliveryFee,
   freshnessGuarantee: "Within 24 hours of harvest"
 }
 
 export const subscription = {
   title: "Subscriptions Made Simple",
-  description: "Choose your weekly pack size, select your favorite microgreens, and we handle the rest. Cancel or modify anytime before Wednesday 11:59 PM.",
+  description: `Choose your weekly pack size, select your favorite microgreens, and we handle the rest. Cancel or modify anytime before ${deliveryConfig.orderCutoff}.`,
   benefits: [
     "3-7 packs per week",
-    "Free replacement guarantee",
+    "Fresh Swap Guarantee",
     "Skip or cancel anytime",
     "Priority harvest selection"
   ],
@@ -111,12 +113,12 @@ export const audiences = {
 
 export const testimonials = [
   {
-    quote: "The freshest microgreens we've ever tasted. The plasma-cleaning means they're ready to eat straight from the pack.",
+    quote: "The freshest microgreens we've ever tasted. The advanced clean technology means they're ready to eat straight from the pack.",
     author: "S.L.",
     location: "Longueuil"
   },
   {
-    quote: "The free replacement program is genius. I never worry about wasting greens anymore.",
+    quote: "The Fresh Swap Guarantee is genius. I never worry about wasting greens anymore.",
     author: "M.R.",
     location: "Brossard"
   },
@@ -139,15 +141,15 @@ export const faqItems = [
   },
   {
     question: "Do I need to wash the microgreens before eating?",
-    answer: "No! Our microgreens are plasma-cleaned using cold-plasma sanitization technology. They're ready to eat straight from the package."
+    answer: "No! Our microgreens are sanitized using advanced high-tech clean technology. They're ready to eat straight from the package."
   },
   {
     question: "What areas do you deliver to?",
-    answer: "We deliver to the South Shore of Montreal (Montérégie region), including Longueuil, Brossard, St-Lambert, La Prairie, and surrounding areas. Check our delivery zone map for specific postal codes."
+    answer: `We deliver throughout ${regionConfig.deliveryRegion}, including Longueuil, Brossard, St-Lambert, La Prairie, Candiac, and surrounding areas. Check our delivery zone map for specific postal codes.`
   },
   {
     question: "What's the minimum order and delivery fee?",
-    answer: "There's no minimum order. Delivery is free for orders over $25 CAD. Orders under $25 have a $4.99 delivery fee."
+    answer: `There's no minimum order. Delivery is free for orders over $${shippingConfig.freeShippingThreshold} CAD. Orders of $${shippingConfig.freeShippingThreshold} or less have a $${shippingConfig.deliveryFee} delivery fee.`
   },
   {
     question: "How do I use hydrosols?",
@@ -159,23 +161,31 @@ export const faqItems = [
   },
   {
     question: "How do subscriptions work?",
-    answer: "Choose your weekly pack size (3, 5, or 7 packs), select your microgreens, and we deliver fresh every Saturday. You can modify, skip, or cancel anytime before Wednesday 11:59 PM."
+    answer: `Choose your weekly pack size (3, 5, or 7 packs), select your microgreens, and we deliver fresh every ${deliveryConfig.deliveryDay}. You can modify, skip, or cancel anytime before ${deliveryConfig.orderCutoff}.`
+  },
+  {
+    question: "What's the Fresh Swap Guarantee?",
+    answer: "If you didn't use a product from your subscription delivery and kept it sealed and refrigerated, you can request a free replacement in your next delivery. Requests must be made before the weekly cutoff, and you can use this up to 2 times per month."
   },
   {
     question: "What's your refund policy?",
-    answer: "We handle returns on a case-by-case basis. Fresh products can be returned within 2 days. We also offer a free replacement program for unused packs within your weekly subscription flow."
+    answer: "We handle returns on a case-by-case basis. Fresh products can be returned within 2 days. Subscription customers also benefit from our Fresh Swap Guarantee for unopened products."
   },
   {
-    question: "When is the order cutoff for Saturday delivery?",
-    answer: "Orders must be placed by Wednesday 11:59 PM for Saturday delivery. We harvest on Friday and deliver within 24 hours."
+    question: "When do orders arrive?",
+    answer: `Orders are delivered ${deliveryConfig.deliveryDay}. We harvest fresh and deliver within 24 hours for maximum freshness.`
+  },
+  {
+    question: "What is Buy One, Gift One?",
+    answer: `When you start a subscription, you can choose to have a second box delivered to a senior center in ${regionConfig.deliveryRegion}. You can specify a center or let us choose one for you.`
   }
 ]
 
 export const seoKeywords = [
-  "microgreens delivery Montérégie",
-  "ready-to-eat microgreens Montreal South Shore",
+  `microgreens delivery ${regionConfig.deliveryRegion}`,
+  "ready-to-eat microgreens Montreal",
   "pesticide-free microgreens Quebec",
-  "cold-plasma sanitized greens",
+  "high-tech clean microgreens",
   "botanical hydrosols Montreal",
   "fresh microgreens Longueuil",
   "organic microgreens Brossard",
@@ -185,7 +195,7 @@ export const seoKeywords = [
 export const contactInfo = {
   email: "hello@jineau.ca",
   phone: "(514) 555-0123",
-  address: "South Shore, Montreal, QC",
+  address: `${regionConfig.companyLocation}, ${regionConfig.province}`,
   socialMedia: {
     instagram: "https://instagram.com/jineaufarm",
     facebook: "https://facebook.com/jineaufarm"
@@ -197,4 +207,3 @@ export const policies = {
   terms: "/terms",
   refunds: "/refunds"
 }
-

@@ -7,18 +7,42 @@
   --color-brand-mist: #9ECFD4;
   --color-brand-gold: #E9C46A;
   --color-brand-blue: #6E8CFB;
-  --color-background: #ffffff;
+  --color-background: #fafffe;
   --color-foreground: #171717;
   --font-heading: var(--font-playfair);
   --font-body: var(--font-inter);
 }
 
 body {
-  background: var(--color-background);
+  background: linear-gradient(135deg, var(--color-background) 0%, #f0faf8 50%, #fefcf5 100%);
   color: var(--color-foreground);
   font-family: var(--font-body), system-ui, sans-serif;
+  min-height: 100vh;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading), serif;
+}
+
+::selection {
+  background-color: var(--color-brand-mist);
+  color: var(--color-brand-primary);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-brand-primary);
+  outline-offset: 2px;
+}
+
+.prose h2 {
+  color: var(--color-brand-primary);
+}
+
+.prose a {
+  color: var(--color-brand-primary);
+  text-decoration: underline;
+}
+
+.prose a:hover {
+  color: var(--color-brand-secondary);
 }

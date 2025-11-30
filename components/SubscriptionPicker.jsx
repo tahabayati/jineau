@@ -1,8 +1,10 @@
 "use client"
 
 import { useState } from "react"
+import { useTranslations } from "next-intl"
 import Button from "./Button"
 import Badge from "./Badge"
+import GiftOneSection from "./GiftOneSection"
 
 const plans = [
   {
@@ -37,6 +39,10 @@ const plans = [
 export default function SubscriptionPicker({ onSelect }) {
   const [selectedPlan, setSelectedPlan] = useState(5)
   const [isLoading, setIsLoading] = useState(false)
+  const [giftOneEnabled, setGiftOneEnabled] = useState(false)
+  const [giftOneType, setGiftOneType] = useState("default-center")
+  const [customCenter, setCustomCenter] = useState({ name: "", address: "" })
+  const t = useTranslations("subscribe")
 
   const handleSubscribe = async () => {
     setIsLoading(true)
@@ -49,6 +55,9 @@ export default function SubscriptionPicker({ onSelect }) {
         body: JSON.stringify({
           mode: "subscription",
           planSlug: `weekly-${plan.packs}-pack`,
+          giftOneEnabled,
+          giftOneType,
+          customCenter: giftOneType === "custom-center" ? customCenter : null,
         }),
       })
       
@@ -73,8 +82,8 @@ export default function SubscriptionPicker({ onSelect }) {
             onClick={() => setSelectedPlan(plan.id)}
             className={`relative p-6 rounded-2xl border-2 text-left transition-all ${
               selectedPlan === plan.id
-                ? "border-brand-primary bg-brand-primary/5"
-                : "border-gray-200 hover:border-brand-secondary"
+                ? "border-brand-primary bg-brand-primary/5 shadow-lg"
+                : "border-gray-200 hover:border-brand-secondary bg-white"
             }`}
           >
             {plan.popular && (
@@ -112,16 +121,25 @@ export default function SubscriptionPicker({ onSelect }) {
         ))}
       </div>
 
-      <div className="bg-brand-mist/20 rounded-xl p-6">
-        <h4 className="font-semibold text-gray-900 mb-3">What's included:</h4>
+      <GiftOneSection
+        enabled={giftOneEnabled}
+        onToggle={setGiftOneEnabled}
+        giftType={giftOneType}
+        onTypeChange={setGiftOneType}
+        customCenter={customCenter}
+        onCustomCenterChange={setCustomCenter}
+      />
+
+      <div className="bg-gradient-to-r from-brand-mist/30 to-brand-mint/20 rounded-xl p-6 border border-brand-mist/40">
+        <h4 className="font-semibold text-gray-900 mb-3">{t("whatsIncluded")}:</h4>
         <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
           {[
-            "Fresh microgreens every Saturday",
-            "Free delivery on all subscriptions",
-            "Skip or cancel anytime",
-            "Free replacement guarantee",
-            "Priority harvest selection",
-            "Exclusive subscriber recipes",
+            t("freshEveryFriday"),
+            t("freeDelivery"),
+            t("skipCancel"),
+            t("freshSwap"),
+            t("priorityHarvest"),
+            t("exclusiveRecipes"),
           ].map((benefit, index) => (
             <li key={index} className="flex items-center gap-2 text-gray-700">
               <svg className="w-5 h-5 text-brand-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
@@ -139,13 +157,12 @@ export default function SubscriptionPicker({ onSelect }) {
         className="w-full"
         disabled={isLoading}
       >
-        {isLoading ? "Processing..." : `Start Weekly Subscription - $${plans.find((p) => p.id === selectedPlan)?.price.toFixed(2)}/week`}
+        {isLoading ? "Processing..." : `${t("startWeeklySubscription")} - $${plans.find((p) => p.id === selectedPlan)?.price.toFixed(2)}/week`}
       </Button>
 
       <p className="text-center text-sm text-gray-500">
-        Order by Wednesday 11:59 PM for Saturday delivery. Cancel anytime.
+        {t("orderCutoffNote")}
       </p>
     </div>
   )
 }
-

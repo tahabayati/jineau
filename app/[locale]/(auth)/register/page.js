@@ -1,0 +1,45 @@
+import { getTranslations } from "next-intl/server"
+import { Link } from "@/i18n/routing"
+import AuthForm from "@/components/AuthForm"
+import MarmotMascot from "@/components/MarmotMascot"
+
+export async function generateMetadata({ params }) {
+  const { locale } = await params
+  const titles = { en: "Create Account", fr: "Créer un compte", fa: "ایجاد حساب" }
+  return { title: titles[locale] || titles.en }
+}
+
+export default async function RegisterPage() {
+  const t = await getTranslations("auth")
+
+  return (
+    <div className="min-h-[80vh] flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-brand-mist/20 via-white to-brand-gold/10">
+      <div className="w-full max-w-md space-y-8">
+        <div className="text-center">
+          <div className="flex justify-center mb-4">
+            <div className="p-4 bg-white rounded-full shadow-lg">
+              <MarmotMascot size="lg" />
+            </div>
+          </div>
+          <h1 className="text-3xl font-bold text-gray-900">
+            {t("createAccount")}
+          </h1>
+          <p className="mt-2 text-gray-600">
+            {t("createAccountSubtitle")}
+          </p>
+        </div>
+
+        <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
+          <AuthForm mode="register" />
+        </div>
+
+        <p className="text-center text-gray-600">
+          {t("haveAccount")}{" "}
+          <Link href="/login" className="text-brand-primary font-medium hover:underline">
+            {t("signInLink")}
+          </Link>
+        </p>
+      </div>
+    </div>
+  )
+}

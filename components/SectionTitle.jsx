@@ -1,8 +1,8 @@
-export default function SectionTitle({ 
-  title, 
-  subtitle, 
+export default function SectionTitle({
+  title,
+  subtitle,
   centered = true,
-  className = "" 
+  className = "",
 }) {
   return (
     <div className={`mb-12 ${centered ? "text-center" : ""} ${className}`}>
@@ -17,4 +17,3 @@ export default function SectionTitle({
     </div>
   )
 }
-
