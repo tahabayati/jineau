@@ -103,7 +103,7 @@ export default async function LocaleLayout({ children, params }) {
           }}
         />
       </head>
-      <body className={`antialiased min-h-screen flex flex-col bg-brand-mist/5 ${isRtl ? "text-right" : ""}`}>
+      <body className={`antialiased min-h-screen flex flex-col ${isRtl ? "text-right" : ""}`}>
         <NextIntlClientProvider messages={messages}>
           <CartProvider>
             <Header locale={locale} />

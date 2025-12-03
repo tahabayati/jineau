@@ -1,17 +1,25 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useTranslations } from "next-intl"
-import { Link, usePathname, useRouter } from "@/i18n/routing"
+import { Link, usePathname } from "@/i18n/routing"
 import { useCart } from "./CartProvider"
-import Button from "./Button"
 import LanguageSwitcher from "./LanguageSwitcher"
 
 export default function Header({ locale }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const t = useTranslations("nav")
   const tCommon = useTranslations("common")
   const { itemCount, openCart } = useCart()
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20)
+    }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   const mainLinks = [
     { href: "/shop", label: t("shop") },
@@ -28,14 +36,21 @@ export default function Header({ locale }) {
   ]
 
   return (
-    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-sm border-b border-gray-100 shadow-sm">
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      scrolled 
+        ? 'glass-strong shadow-2xl shadow-black/20' 
+        : 'bg-transparent'
+    }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
-          <Link href="/" className="flex items-center gap-2">
-            <div className="w-10 h-10 bg-brand-primary rounded-full flex items-center justify-center shadow-md">
-              <span className="text-white font-bold text-xl">J</span>
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-brand-mint to-brand-gold rounded-full blur-md opacity-50 group-hover:opacity-75 transition-opacity" />
+              <div className="relative w-10 h-10 bg-gradient-to-br from-brand-mint to-brand-primary rounded-full flex items-center justify-center">
+                <span className="text-white font-bold text-xl">J</span>
+              </div>
             </div>
-            <span className="text-xl font-bold text-brand-primary hidden sm:block">Jineau</span>
+            <span className="text-xl font-bold gradient-text hidden sm:block">Jineau</span>
           </Link>
 
           <nav className="hidden lg:flex items-center gap-1">
@@ -43,26 +58,26 @@ export default function Header({ locale }) {
               <Link
                 key={link.href}
                 href={link.href}
-                className="px-3 py-2 text-gray-700 hover:text-brand-primary font-medium transition-colors rounded-lg hover:bg-brand-mist/20"
+                className="px-4 py-2 text-white/80 hover:text-white font-medium transition-all rounded-full hover:bg-white/10"
               >
                 {link.label}
               </Link>
             ))}
 
             <div className="relative group">
-              <button className="px-3 py-2 text-gray-700 hover:text-brand-primary font-medium transition-colors rounded-lg hover:bg-brand-mist/20 flex items-center gap-1">
+              <button className="px-4 py-2 text-white/80 hover:text-white font-medium transition-all rounded-full hover:bg-white/10 flex items-center gap-1">
                 {t("forYou")}
                 <svg className="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
 
-              <div className="absolute top-full left-0 mt-1 w-48 bg-white rounded-xl shadow-lg border border-gray-100 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+              <div className="absolute top-full left-0 mt-2 w-56 glass-card rounded-2xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
                 {audienceLinks.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="block px-4 py-2 text-gray-700 hover:text-brand-primary hover:bg-brand-mist/20"
+                    className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 transition-all"
                   >
                     {link.label}
                   </Link>
@@ -72,37 +87,40 @@ export default function Header({ locale }) {
 
             <Link
               href="/login"
-              className="px-3 py-2 text-gray-700 hover:text-brand-primary font-medium transition-colors rounded-lg hover:bg-brand-mist/20"
+              className="px-4 py-2 text-white/80 hover:text-white font-medium transition-all rounded-full hover:bg-white/10"
             >
               {tCommon("account")}
             </Link>
           </nav>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <LanguageSwitcher locale={locale} />
 
             <button
               onClick={openCart}
-              className="relative p-2 text-gray-700 hover:text-brand-primary hover:bg-brand-mist/20 rounded-lg transition-colors"
+              className="relative p-2.5 text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all"
               aria-label="Open cart"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
               </svg>
               {itemCount > 0 && (
-                <span className="absolute -top-1 -right-1 w-5 h-5 bg-brand-gold text-xs font-bold text-gray-900 rounded-full flex items-center justify-center">
+                <span className="absolute -top-1 -right-1 w-5 h-5 bg-brand-gold text-xs font-bold text-gray-900 rounded-full flex items-center justify-center animate-pulse">
                   {itemCount}
                 </span>
               )}
             </button>
 
-            <Button href="/shop" size="sm" className="hidden sm:inline-flex">
+            <Link 
+              href="/shop" 
+              className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-brand-mint to-brand-primary text-white font-medium rounded-full hover:shadow-[0_0_20px_rgba(112,178,178,0.4)] transition-all"
+            >
               {tCommon("shopMicrogreens")}
-            </Button>
+            </Link>
             
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 text-gray-600 hover:text-brand-primary"
+              className="lg:hidden p-2 text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all"
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? (
@@ -118,42 +136,43 @@ export default function Header({ locale }) {
           </div>
         </div>
 
+        {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden py-4 border-t border-gray-100">
-            <nav className="flex flex-col gap-2">
+          <div className="lg:hidden glass-card rounded-2xl mt-2 mb-4 overflow-hidden">
+            <nav className="flex flex-col py-4">
               {mainLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="px-4 py-2 text-gray-700 hover:bg-brand-mist/20 rounded-lg"
+                  className="px-6 py-3 text-white/80 hover:text-white hover:bg-white/10 transition-all"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.label}
                 </Link>
               ))}
-              <div className="border-t border-gray-100 mt-2 pt-2">
+              <div className="border-t border-white/10 mt-2 pt-2">
                 {audienceLinks.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="px-4 py-2 text-gray-600 hover:bg-brand-mist/20 rounded-lg block"
+                    className="px-6 py-3 text-white/60 hover:text-white hover:bg-white/10 transition-all block"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {link.label}
                   </Link>
                 ))}
               </div>
-              <div className="border-t border-gray-100 mt-2 pt-2">
+              <div className="border-t border-white/10 mt-2 pt-2">
                 <Link
                   href="/login"
-                  className="px-4 py-2 text-gray-700 hover:bg-brand-mist/20 rounded-lg block"
+                  className="px-6 py-3 text-white/80 hover:text-white hover:bg-white/10 transition-all block"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {tCommon("login")}
                 </Link>
                 <Link
                   href="/account"
-                  className="px-4 py-2 text-gray-700 hover:bg-brand-mist/20 rounded-lg block"
+                  className="px-6 py-3 text-white/80 hover:text-white hover:bg-white/10 transition-all block"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {tCommon("account")}

@@ -11,8 +11,8 @@ export default function Footer({ locale }) {
 
   const shopLinks = [
     { href: "/shop", label: t("allProducts") },
-    { href: "/shop?category=microgreens", label: tNav("shop") + " - Microgreens" },
-    { href: "/shop?category=hydrosols", label: tNav("shop") + " - Hydrosols" },
+    { href: "/shop?category=microgreens", label: "Microgreens" },
+    { href: "/shop?category=hydrosols", label: "Hydrosols" },
     { href: "/subscribe", label: t("subscriptions") },
   ]
 
@@ -30,25 +30,39 @@ export default function Footer({ locale }) {
   ]
 
   return (
-    <footer className="bg-gradient-to-b from-gray-50 to-gray-100 border-t border-gray-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
+    <footer className="relative bg-[#040a10] overflow-hidden">
+      {/* Background elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-brand-primary/8 rounded-full blur-[180px]" />
+        <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-brand-blue/6 rounded-full blur-[150px]" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-brand-mint/4 rounded-full blur-[200px]" />
+      </div>
+
+      {/* Top border gradient */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-brand-mint/30 to-transparent" />
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 lg:gap-12">
+          {/* Brand column */}
           <div className="col-span-2 lg:col-span-1">
-            <Link href="/" className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 bg-brand-primary rounded-full flex items-center justify-center shadow-md">
-                <span className="text-white font-bold text-xl">J</span>
+            <Link href="/" className="inline-flex items-center gap-3 mb-6 group">
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-brand-mint to-brand-gold rounded-full blur-md opacity-50 group-hover:opacity-75 transition-opacity" />
+                <div className="relative w-10 h-10 bg-gradient-to-br from-brand-mint to-brand-primary rounded-full flex items-center justify-center">
+                  <span className="text-white font-bold text-xl">J</span>
+                </div>
               </div>
-              <span className="text-xl font-bold text-brand-primary">Jineau</span>
+              <span className="text-xl font-bold gradient-text">Jineau</span>
             </Link>
-            <p className="text-gray-600 text-sm mb-4">
+            <p className="text-white/50 text-sm mb-6 leading-relaxed">
               {t("tagline")}
             </p>
-            <div className="flex gap-4">
+            <div className="flex gap-3">
               <a
                 href={contactInfo.socialMedia.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-brand-mist/30 rounded-full flex items-center justify-center text-brand-primary hover:bg-brand-primary hover:text-white transition-colors"
+                className="w-10 h-10 glass rounded-full flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 transition-all"
                 aria-label="Instagram"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -59,7 +73,7 @@ export default function Footer({ locale }) {
                 href={contactInfo.socialMedia.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 bg-brand-mist/30 rounded-full flex items-center justify-center text-brand-primary hover:bg-brand-primary hover:text-white transition-colors"
+                className="w-10 h-10 glass rounded-full flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 transition-all"
                 aria-label="Facebook"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -69,12 +83,13 @@ export default function Footer({ locale }) {
             </div>
           </div>
 
+          {/* Shop links */}
           <div>
-            <h3 className="font-semibold text-gray-900 mb-4">{t("shop")}</h3>
-            <ul className="space-y-2">
+            <h3 className="font-semibold text-white mb-4">{t("shop")}</h3>
+            <ul className="space-y-3">
               {shopLinks.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-gray-600 hover:text-brand-primary text-sm transition-colors">
+                  <Link href={link.href} className="text-white/50 hover:text-brand-mint text-sm transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -82,12 +97,13 @@ export default function Footer({ locale }) {
             </ul>
           </div>
 
+          {/* Company links */}
           <div>
-            <h3 className="font-semibold text-gray-900 mb-4">{t("company")}</h3>
-            <ul className="space-y-2">
+            <h3 className="font-semibold text-white mb-4">{t("company")}</h3>
+            <ul className="space-y-3">
               {companyLinks.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-gray-600 hover:text-brand-primary text-sm transition-colors">
+                  <Link href={link.href} className="text-white/50 hover:text-brand-mint text-sm transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -95,12 +111,13 @@ export default function Footer({ locale }) {
             </ul>
           </div>
 
+          {/* Audience links */}
           <div>
-            <h3 className="font-semibold text-gray-900 mb-4">{tNav("forYou")}</h3>
-            <ul className="space-y-2">
+            <h3 className="font-semibold text-white mb-4">{tNav("forYou")}</h3>
+            <ul className="space-y-3">
               {audienceLinks.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-gray-600 hover:text-brand-primary text-sm transition-colors">
+                  <Link href={link.href} className="text-white/50 hover:text-brand-mint text-sm transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -108,37 +125,39 @@ export default function Footer({ locale }) {
             </ul>
           </div>
 
+          {/* Contact */}
           <div>
-            <h3 className="font-semibold text-gray-900 mb-4">{t("contact")}</h3>
-            <ul className="space-y-2 text-sm text-gray-600">
+            <h3 className="font-semibold text-white mb-4">{t("contact")}</h3>
+            <ul className="space-y-3 text-sm text-white/50">
               <li>
-                <a href={`mailto:${contactInfo.email}`} className="hover:text-brand-primary transition-colors">
+                <a href={`mailto:${contactInfo.email}`} className="hover:text-brand-mint transition-colors">
                   {contactInfo.email}
                 </a>
               </li>
               <li>{contactInfo.phone}</li>
               <li>{regionConfig.companyLocation}, {regionConfig.province}</li>
             </ul>
-            <div className="mt-4 p-3 bg-brand-primary/10 rounded-lg border border-brand-primary/20">
-              <p className="text-xs text-brand-primary font-medium">{t("deliveryAreas")}</p>
-              <p className="text-xs text-gray-600 mt-1">{t("deliveryAreasDesc")}</p>
+            <div className="mt-4 glass rounded-xl p-4">
+              <p className="text-xs text-brand-mint font-medium">{t("deliveryAreas")}</p>
+              <p className="text-xs text-white/40 mt-1">{t("deliveryAreasDesc")}</p>
             </div>
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-gray-200">
+        {/* Bottom bar */}
+        <div className="mt-16 pt-8 border-t border-white/10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-gray-500">
+            <p className="text-sm text-white/40">
               © {new Date().getFullYear()} Jineau. {t("allRightsReserved")}
             </p>
             <div className="flex gap-6">
-              <Link href="/privacy" className="text-sm text-gray-500 hover:text-brand-primary transition-colors">
+              <Link href="/privacy" className="text-sm text-white/40 hover:text-brand-mint transition-colors">
                 {t("privacyPolicy")}
               </Link>
-              <Link href="/terms" className="text-sm text-gray-500 hover:text-brand-primary transition-colors">
+              <Link href="/terms" className="text-sm text-white/40 hover:text-brand-mint transition-colors">
                 {t("termsOfService")}
               </Link>
-              <Link href="/refunds" className="text-sm text-gray-500 hover:text-brand-primary transition-colors">
+              <Link href="/refunds" className="text-sm text-white/40 hover:text-brand-mint transition-colors">
                 {t("refundPolicy")}
               </Link>
             </div>
