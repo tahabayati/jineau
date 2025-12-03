@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation"
-import { products } from "@/data/initialProducts"
+import dbConnect from "@/lib/mongodb"
+import Product from "@/models/Product"
 import { Link } from "@/i18n/routing"
 import Button from "@/components/Button"
 import Badge from "@/components/Badge"
@@ -8,9 +9,35 @@ import AddToCartButton from "@/components/AddToCartButton"
 import { generateProductSchema } from "@/lib/seo"
 import { brandName } from "@/data/siteCopy"
 
+async function getProduct(slug) {
+  await dbConnect()
+  const product = await Product.findOne({ slug, active: true }).populate("category").lean()
+  if (!product) return null
+  return {
+    ...product,
+    _id: product._id.toString(),
+    category: product.category ? {
+      ...product.category,
+      _id: product.category._id.toString()
+    } : null
+  }
+}
+
+async function getRelatedProducts(type, excludeSlug) {
+  await dbConnect()
+  const products = await Product.find({ type, slug: { $ne: excludeSlug }, active: true })
+    .limit(3)
+    .lean()
+  return products.map(p => ({
+    ...p,
+    _id: p._id.toString(),
+    category: p.category ? p.category.toString() : null
+  }))
+}
+
 export async function generateMetadata({ params }) {
   const { slug } = await params
-  const product = products.find((p) => p.slug === slug)
+  const product = await getProduct(slug)
 
   if (!product) {
     return { title: "Product Not Found" }
@@ -26,23 +53,15 @@ export async function generateMetadata({ params }) {
   }
 }
 
-export async function generateStaticParams() {
-  return products.map((product) => ({
-    slug: product.slug,
-  }))
-}
-
 export default async function ProductPage({ params }) {
   const { slug } = await params
-  const product = products.find((p) => p.slug === slug)
+  const product = await getProduct(slug)
 
   if (!product) {
     notFound()
   }
 
-  const relatedProducts = products
-    .filter((p) => p.type === product.type && p.slug !== product.slug)
-    .slice(0, 3)
+  const relatedProducts = await getRelatedProducts(product.type, product.slug)
 
   const productSchema = generateProductSchema(product)
 

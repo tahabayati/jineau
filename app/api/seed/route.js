@@ -23,6 +23,7 @@ export async function POST() {
         name: cat.name,
         slug: cat.slug,
         description: cat.description,
+        type: cat.slug === "microgreens" ? "microgreen" : "hydrosol",
       }))
     )
 

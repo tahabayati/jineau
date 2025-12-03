@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server"
-import { products } from "@/data/initialProducts"
+import dbConnect from "@/lib/mongodb"
+import Product from "@/models/Product"
 import ProductGrid from "@/components/ProductGrid"
 import SectionTitle from "@/components/SectionTitle"
 import ShopFilters from "@/components/ShopFilters"
@@ -16,6 +17,42 @@ export async function generateMetadata({ params }) {
   return { title: titles[locale] || titles.en }
 }
 
+async function getProducts(category, sort) {
+  await dbConnect()
+  
+  const query = { active: true }
+  
+  if (category && category !== "all") {
+    // Match either category slug or type
+    query.$or = [
+      { type: category.replace("s", "") },
+      { "category.slug": category }
+    ]
+  }
+
+  let sortOption = { createdAt: -1 }
+  if (sort === "price-low") {
+    sortOption = { price: 1 }
+  } else if (sort === "price-high") {
+    sortOption = { price: -1 }
+  }
+
+  const products = await Product.find(query)
+    .populate("category")
+    .sort(sortOption)
+    .lean()
+
+  // Transform MongoDB documents to plain objects with string IDs
+  return products.map(p => ({
+    ...p,
+    _id: p._id.toString(),
+    category: p.category ? {
+      ...p.category,
+      _id: p.category._id.toString()
+    } : null
+  }))
+}
+
 export default async function ShopPage({ searchParams }) {
   const t = await getTranslations("shop")
   const tDelivery = await getTranslations("delivery")
@@ -23,19 +60,7 @@ export default async function ShopPage({ searchParams }) {
   const category = resolvedParams?.category || "all"
   const sort = resolvedParams?.sort || "recommended"
 
-  let filteredProducts = [...products]
-
-  if (category !== "all") {
-    filteredProducts = filteredProducts.filter(
-      (p) => p.category === category || p.type === category.replace("s", "")
-    )
-  }
-
-  if (sort === "price-low") {
-    filteredProducts.sort((a, b) => a.price - b.price)
-  } else if (sort === "price-high") {
-    filteredProducts.sort((a, b) => b.price - a.price)
-  }
+  const filteredProducts = await getProducts(category, sort)
 
   return (
     <div className="py-12 md:py-20">

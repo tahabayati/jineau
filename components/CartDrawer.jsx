@@ -116,7 +116,7 @@ export default function CartDrawer() {
             )}
 
             <div className="space-y-2">
-              <Button href="/checkout" className="w-full">
+              <Button href="/checkout" onClick={closeCart} className="w-full">
                 {t("proceedToCheckout")}
               </Button>
               <Button onClick={closeCart} variant="ghost" className="w-full">
