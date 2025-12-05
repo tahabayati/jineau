@@ -35,7 +35,7 @@ export default function Hero({
   return (
     <section className="relative min-h-screen overflow-hidden flex items-center justify-center">
       {/* Animated gradient background - Dark Blue Green */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#050d14] via-[#081620] to-[#0a1a28]">
+      <div className="absolute inset-0 bg-gradient-to-br from-[#70B2B2] to-[#016B61]">
         {/* Large morphing orbs - smoother animations */}
         <div 
           className="absolute w-[900px] h-[900px] bg-gradient-to-br from-brand-primary/20 to-brand-mint/10 rounded-full blur-[150px] animate-breathe"
@@ -205,7 +205,7 @@ export default function Hero({
       </div>
 
       {/* Bottom gradient fade */}
-      <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-[#050d14] via-[#050d14]/90 to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-[#016B61] via-[#016B61]/90 to-transparent pointer-events-none" />
 
       {/* Scroll indicator */}
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
