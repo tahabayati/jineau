@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl"
 import { Link } from "@/i18n/routing"
 import { contactInfo } from "@/data/siteCopy"
 import { regionConfig } from "@/lib/config"
+import Image from "next/image"
 
 export default function Footer({ locale }) {
   const t = useTranslations("footer")
@@ -48,8 +49,28 @@ export default function Footer({ locale }) {
             <Link href="/" className="inline-flex items-center gap-3 mb-6 group">
               <div className="relative">
                 <div className="absolute inset-0 bg-gradient-to-r from-brand-mint to-brand-gold rounded-full blur-md opacity-50 group-hover:opacity-75 transition-opacity" />
-                <div className="relative w-10 h-10 bg-gradient-to-br from-brand-mint to-brand-primary rounded-full flex items-center justify-center">
-                  <span className="text-white font-bold text-xl">J</span>
+                <div className="relative w-10 h-10 flex items-center justify-center">
+                  {/* Logo - no rotation */}
+                  <div className="relative w-8 h-8 z-10">
+                    <Image 
+                      src="/jineauLogo.svg" 
+                      alt="Jineau Logo" 
+                      width={32} 
+                      height={32}
+                      className="w-full h-full"
+                    />
+                  </div>
+                  
+                  {/* Orbiting particles */}
+                  <div className="absolute -inset-6 animate-rotate-slow">
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 bg-gradient-to-br from-brand-gold to-amber-400 rounded-full shadow-[0_0_15px_rgba(233,196,106,0.6)]" />
+                  </div>
+                  <div className="absolute -inset-8 animate-rotate-slow" style={{ animationDirection: 'reverse', animationDuration: '45s' }}>
+                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-gradient-to-br from-brand-mint to-brand-primary rounded-full shadow-[0_0_12px_rgba(112,178,178,0.5)]" />
+                  </div>
+                  <div className="absolute -inset-5 animate-rotate-slow" style={{ animationDuration: '60s' }}>
+                    <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-gradient-to-br from-brand-blue to-brand-mist rounded-full shadow-[0_0_10px_rgba(110,140,251,0.5)]" />
+                  </div>
                 </div>
               </div>
               <span className="text-xl font-bold gradient-text">Jineau</span>

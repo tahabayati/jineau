@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server"
 import Hero from "@/components/Hero"
 import { Link } from "@/i18n/routing"
 import { differentiators, testimonials, subscription } from "@/data/siteCopy"
+import Image from "next/image"
 
 // SVG Icon Components
 const WaterIcon = () => (
@@ -151,16 +152,23 @@ export default async function HomePage() {
   ]
 
   return (
-    <div className="min-h-screen relative">
-      {/* Global background overlay */}
-      <div className="fixed inset-0 pointer-events-none">
-        <div className="absolute top-0 left-0 w-full h-full aurora opacity-50" />
-        <div className="absolute top-1/4 -left-20 w-[600px] h-[600px] bg-brand-primary/10 rounded-full blur-[150px] animate-breathe" />
-        <div className="absolute bottom-1/4 -right-20 w-[500px] h-[500px] bg-brand-blue/10 rounded-full blur-[120px] animate-breathe" style={{ animationDelay: '-4s' }} />
-        <div className="absolute top-3/4 left-1/3 w-[400px] h-[400px] bg-brand-mint/8 rounded-full blur-[100px] animate-breathe" style={{ animationDelay: '-2s' }} />
+    <div 
+      className="min-h-screen relative"
+      style={{
+        background: 'linear-gradient(135deg, #5A9A9B 0%, #6FA8AA 50%, #5A9A9B 100%)',
+        backgroundSize: '200% 200%',
+        animation: 'gradient-flow 20s ease infinite'
+      }}
+    >
+      {/* Global background overlay - more subtle */}
+      <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 0 }}>
+        <div className="absolute top-0 left-0 w-full h-full aurora opacity-20" />
+        <div className="absolute top-1/4 -left-20 w-[600px] h-[600px] bg-white/5 rounded-full blur-[150px] animate-breathe" />
+        <div className="absolute bottom-1/4 -right-20 w-[500px] h-[500px] bg-white/5 rounded-full blur-[120px] animate-breathe" style={{ animationDelay: '-4s' }} />
+        <div className="absolute top-3/4 left-1/3 w-[400px] h-[400px] bg-white/4 rounded-full blur-[100px] animate-breathe" style={{ animationDelay: '-2s' }} />
       </div>
 
-      <div className="relative">
+      <div className="relative z-10">
         <Hero
           title={t("heroTitle")}
           subtitle={t("heroSubtitle")}
@@ -170,7 +178,7 @@ export default async function HomePage() {
         />
 
         {/* What is Jineau - Glassmorphism Section */}
-        <section className="relative py-32 overflow-hidden">
+        <section className="relative py-24 md:py-32 overflow-hidden">
           {/* Section background elements */}
           <div className="absolute inset-0">
             <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-brand-mint/15 to-transparent rounded-full blur-[100px]" />
@@ -183,22 +191,22 @@ export default async function HomePage() {
               <span className="inline-block glass px-5 py-2.5 rounded-full text-brand-mint text-sm font-medium mb-6 tracking-wide">
                 Our Philosophy
               </span>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 drop-shadow-xl">
                 {t("whatIsJineau")}
               </h2>
-              <p className="text-xl text-white/50 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed drop-shadow-lg">
                 {t("jineauDescription")}
               </p>
             </div>
 
             {/* Name meaning cards */}
-            <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-4 mb-24">
+            <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-4 mb-24 relative">
               {/* Jin card */}
               <div className="glass-card rounded-3xl p-8 text-center w-full max-w-xs group">
                 <div className="w-24 h-24 mx-auto mb-4 relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-brand-mint to-brand-primary rounded-full animate-pulse-glow opacity-40" />
-                  <div className="relative w-full h-full bg-gradient-to-br from-brand-mint/20 to-brand-primary/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-white/10 group-hover:border-white/20 transition-all duration-500">
-                    <span className="text-3xl font-bold text-white">Jin</span>
+                  <div className="absolute inset-0 bg-gradient-to-br from-brand-mint to-brand-primary rounded-full opacity-30" />
+                  <div className="relative w-full h-full bg-gradient-to-br from-brand-mint/20 to-brand-primary/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-white/10 group-hover:border-white/20 transition-all duration-300">
+                    <span className="text-3xl font-bold text-white drop-shadow-md">Jin</span>
                   </div>
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-2">{t("jinMeaning")}</h3>
@@ -211,9 +219,9 @@ export default async function HomePage() {
               {/* Eau card */}
               <div className="glass-card rounded-3xl p-8 text-center w-full max-w-xs group">
                 <div className="w-24 h-24 mx-auto mb-4 relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-brand-mist to-brand-blue rounded-full animate-pulse-glow opacity-40" style={{ animationDelay: '-3s' }} />
-                  <div className="relative w-full h-full bg-gradient-to-br from-brand-mist/20 to-brand-blue/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-white/10 group-hover:border-white/20 transition-all duration-500">
-                    <span className="text-3xl font-bold text-white">Eau</span>
+                  <div className="absolute inset-0 bg-gradient-to-br from-brand-mist to-brand-blue rounded-full opacity-30" />
+                  <div className="relative w-full h-full bg-gradient-to-br from-brand-mist/20 to-brand-blue/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-white/10 group-hover:border-white/20 transition-all duration-300">
+                    <span className="text-3xl font-bold text-white drop-shadow-md">Eau</span>
                   </div>
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-2">{t("eauMeaning")}</h3>
@@ -224,16 +232,28 @@ export default async function HomePage() {
               <div className="text-5xl text-brand-gold/40 font-extralight">=</div>
 
               {/* Jineau card */}
-              <div className="glass-card rounded-3xl p-8 text-center w-full max-w-xs glow-mint group">
+              <div className="glass-card rounded-3xl p-8 text-center w-full max-w-xs group">
                 <div className="w-24 h-24 mx-auto mb-4 relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-brand-gold via-brand-mint to-brand-primary rounded-full animate-rotate-slow opacity-60" />
-                  <div className="absolute inset-1 bg-[#081620] rounded-full" />
-                  <div className="relative w-full h-full flex items-center justify-center">
-                    <span className="text-2xl font-bold gradient-text">Jineau</span>
+                  <div className="absolute inset-0 bg-gradient-to-br from-brand-gold via-brand-mint to-brand-primary rounded-full opacity-40" />
+                  <div className="relative w-full h-full bg-gradient-to-br from-brand-gold/20 via-brand-mint/20 to-brand-primary/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-white/10 group-hover:border-white/20 transition-all duration-300">
+                    <span className="text-2xl font-bold gradient-text drop-shadow-md">Jineau</span>
                   </div>
                 </div>
-                <h3 className="text-2xl font-bold gradient-text mb-2">{t("waterOfLife")}</h3>
-                <p className="text-brand-mist/80">{t("ourPhilosophy")}</p>
+                <h3 className="text-2xl font-bold gradient-text mb-2 drop-shadow-sm">{t("waterOfLife")}</h3>
+                <p className="text-white/70">{t("ourPhilosophy")}</p>
+              </div>
+
+              {/* Beaver character illustration in yellow heart */}
+              <div className="absolute -right-20 top-1/2 -translate-y-1/2 hidden xl:block">
+                <div className="relative w-48 h-48">
+                  <Image 
+                    src="/jineau-home-images/1-07.svg" 
+                    alt="Beaver mascot" 
+                    width={192} 
+                    height={192}
+                    className="w-full h-full"
+                  />
+                </div>
               </div>
             </div>
 
@@ -245,11 +265,11 @@ export default async function HomePage() {
                   className="glass-card rounded-2xl p-6 text-center group cursor-pointer"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
-                  <div className={`w-16 h-16 mx-auto mb-4 bg-gradient-to-br ${element.gradient} rounded-2xl flex items-center justify-center icon-container text-white shadow-lg`}>
+                  <div className={`w-16 h-16 mx-auto mb-4 bg-gradient-to-br ${element.gradient} rounded-2xl flex items-center justify-center text-white shadow-lg transition-transform duration-300 group-hover:scale-110`}>
                     {element.icon}
                   </div>
-                  <h4 className="text-lg font-semibold text-white mb-1 group-hover:text-brand-mint transition-colors duration-300">{element.name}</h4>
-                  <p className="text-sm text-white/40">{element.desc}</p>
+                  <h4 className="text-lg font-semibold text-white mb-1 group-hover:text-brand-mint transition-colors duration-300 drop-shadow-md">{element.name}</h4>
+                  <p className="text-sm text-white/75">{element.desc}</p>
                 </div>
               ))}
             </div>
@@ -257,22 +277,56 @@ export default async function HomePage() {
         </section>
 
         {/* Why Jineau - Features Section */}
-        <section className="relative py-32 overflow-hidden">
+        <section className="relative py-24 md:py-32 overflow-hidden">
           <div className="absolute inset-0">
             <div className="absolute top-1/2 left-0 w-[700px] h-[700px] bg-gradient-to-r from-brand-primary/12 to-transparent rounded-full blur-[150px] -translate-y-1/2" />
           </div>
 
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
+            <div className="text-center mb-16 relative">
               <span className="inline-block glass px-5 py-2.5 rounded-full text-brand-gold text-sm font-medium mb-6 tracking-wide">
                 Our Difference
               </span>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 drop-shadow-xl">
                 {t("whyJineau")}
               </h2>
-              <p className="text-xl text-white/50 max-w-2xl mx-auto leading-relaxed">
+              <p className="text-xl text-white/90 max-w-2xl mx-auto leading-relaxed drop-shadow-lg">
                 {t("whyJineauSubtitle")}
               </p>
+              
+              {/* Mortar and pestle icon with decorative shapes */}
+              <div className="absolute left-0 top-1/2 -translate-y-1/2 hidden lg:block">
+                <div className="relative w-64 h-64">
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <Image 
+                      src="/jineau-home-images/1-08.svg" 
+                      alt="Mortar and pestle" 
+                      width={256} 
+                      height={256}
+                      className="w-full h-full opacity-90"
+                    />
+                  </div>
+                  {/* Decorative star shapes */}
+                  <div className="absolute -top-10 -left-10 w-16 h-16 animate-float">
+                    <Image 
+                      src="/jineau-home-images/1-09.svg" 
+                      alt="" 
+                      width={64} 
+                      height={64}
+                      className="w-full h-full opacity-70"
+                    />
+                  </div>
+                  <div className="absolute -bottom-10 -right-10 w-20 h-20 animate-float" style={{ animationDelay: '-2s' }}>
+                    <Image 
+                      src="/jineau-home-images/1-10.svg" 
+                      alt="" 
+                      width={80} 
+                      height={80}
+                      className="w-full h-full opacity-70"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -281,13 +335,13 @@ export default async function HomePage() {
                   key={index}
                   className="glass-card rounded-3xl p-8 group"
                 >
-                  <div className="w-14 h-14 mb-6 bg-gradient-to-br from-brand-mint/30 to-brand-primary/30 rounded-2xl flex items-center justify-center icon-container text-brand-mint border border-white/10">
+                  <div className="w-14 h-14 mb-6 bg-gradient-to-br from-brand-mint/30 to-brand-primary/30 rounded-2xl flex items-center justify-center text-brand-mint border border-white/10 transition-transform duration-300 group-hover:scale-110">
                     {featureIcons[feature.icon] || <SparklesIcon />}
                   </div>
-                  <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-brand-mint transition-colors duration-300">
+                  <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-brand-mint transition-colors duration-300 drop-shadow-md">
                     {feature.title}
                   </h3>
-                  <p className="text-white/50 leading-relaxed">
+                  <p className="text-white/80 leading-relaxed">
                     {feature.description}
                   </p>
                 </div>
@@ -297,23 +351,36 @@ export default async function HomePage() {
         </section>
 
         {/* Subscription Plans */}
-        <section className="relative py-32 overflow-hidden">
+        <section className="relative py-24 md:py-32 overflow-hidden">
           <div className="absolute inset-0">
             <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-gradient-to-tl from-brand-gold/12 to-transparent rounded-full blur-[120px]" />
             <div className="absolute top-0 left-1/4 w-[400px] h-[400px] bg-gradient-to-br from-brand-blue/10 to-transparent rounded-full blur-[100px]" />
           </div>
 
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
+            <div className="text-center mb-16 relative">
               <span className="inline-block glass px-5 py-2.5 rounded-full text-brand-mint text-sm font-medium mb-6 tracking-wide">
                 Simple Pricing
               </span>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 drop-shadow-xl">
                 {t("subscriptionsMadeSimple")}
               </h2>
-              <p className="text-xl text-white/50 max-w-2xl mx-auto leading-relaxed">
+              <p className="text-xl text-white/90 max-w-2xl mx-auto leading-relaxed drop-shadow-lg">
                 {t("subscriptionDescription")}
               </p>
+              
+              {/* Bowl with growth lines icon */}
+              <div className="absolute left-0 top-1/2 -translate-y-1/2 hidden lg:block">
+                <div className="relative w-56 h-56">
+                  <Image 
+                    src="/jineau-home-images/1-15.svg" 
+                    alt="Subscription bowl" 
+                    width={224} 
+                    height={224}
+                    className="w-full h-full opacity-90"
+                  />
+                </div>
+              </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
@@ -334,12 +401,12 @@ export default async function HomePage() {
                     </div>
                   )}
 
-                  <h3 className="text-2xl font-bold text-white mb-2">{plan.name}</h3>
-                  <p className="text-white/40 mb-8">{plan.description}</p>
+                <h3 className="text-2xl font-bold text-white mb-2 drop-shadow-md">{plan.name}</h3>
+                <p className="text-white/70 mb-8">{plan.description}</p>
                   
                   <div className="mb-8">
-                    <span className="text-6xl font-bold gradient-text">{plan.packs}</span>
-                    <span className="text-white/50 ml-2 text-lg">packs/week</span>
+                    <span className="text-6xl font-bold gradient-text drop-shadow-lg">{plan.packs}</span>
+                    <span className="text-white/75 ml-2 text-lg">packs/week</span>
                   </div>
 
                   <Link
@@ -359,22 +426,35 @@ export default async function HomePage() {
         </section>
 
         {/* Who We Grow For */}
-        <section className="relative py-32 overflow-hidden">
+        <section className="relative py-24 md:py-32 overflow-hidden">
           <div className="absolute inset-0">
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-gradient-radial from-brand-primary/8 to-transparent rounded-full blur-[150px]" />
           </div>
 
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
+            <div className="text-center mb-16 relative">
               <span className="inline-block glass px-5 py-2.5 rounded-full text-brand-mist text-sm font-medium mb-6 tracking-wide">
                 For Everyone
               </span>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 drop-shadow-xl">
                 {t("whoWeGrowFor")}
               </h2>
-              <p className="text-xl text-white/50 max-w-2xl mx-auto leading-relaxed">
+              <p className="text-xl text-white/90 max-w-2xl mx-auto leading-relaxed drop-shadow-lg">
                 {t("whoWeGrowForSubtitle")}
               </p>
+              
+              {/* Beaver character next to pot */}
+              <div className="absolute right-0 top-1/2 -translate-y-1/2 hidden xl:block">
+                <div className="relative w-64 h-64">
+                  <Image 
+                    src="/jineau-home-images/11.png" 
+                    alt="Beaver with pot" 
+                    width={256} 
+                    height={256}
+                    className="w-full h-full"
+                  />
+                </div>
+              </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -384,13 +464,13 @@ export default async function HomePage() {
                   href={audience.href}
                   className="glass-card rounded-3xl p-8 text-center group"
                 >
-                  <div className={`w-20 h-20 mx-auto mb-6 bg-gradient-to-br ${audience.gradient} rounded-3xl flex items-center justify-center icon-container text-white shadow-xl`}>
+                  <div className={`w-20 h-20 mx-auto mb-6 bg-gradient-to-br ${audience.gradient} rounded-3xl flex items-center justify-center text-white shadow-xl transition-transform duration-300 group-hover:scale-110`}>
                     {audience.icon}
                   </div>
-                  <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-brand-mint transition-colors duration-300">
+                  <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-brand-mint transition-colors duration-300 drop-shadow-md">
                     {audience.title}
                   </h3>
-                  <p className="text-white/40">{audience.tagline}</p>
+                  <p className="text-white/75">{audience.tagline}</p>
                 </Link>
               ))}
             </div>
@@ -398,22 +478,35 @@ export default async function HomePage() {
         </section>
 
         {/* Testimonials */}
-        <section className="relative py-32 overflow-hidden">
+        <section className="relative py-24 md:py-32 overflow-hidden">
           <div className="absolute inset-0">
             <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-gradient-to-bl from-brand-gold/10 to-transparent rounded-full blur-[120px]" />
           </div>
 
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
+            <div className="text-center mb-16 relative">
               <span className="inline-block glass px-5 py-2.5 rounded-full text-brand-gold text-sm font-medium mb-6 tracking-wide">
                 Testimonials
               </span>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 drop-shadow-xl">
                 {t("testimonials")}
               </h2>
-              <p className="text-xl text-white/50 max-w-2xl mx-auto leading-relaxed">
+              <p className="text-xl text-white/90 max-w-2xl mx-auto leading-relaxed drop-shadow-lg">
                 {t("testimonialsSubtitle")}
               </p>
+              
+              {/* Beaver character in heart saying HI */}
+              <div className="absolute left-0 top-1/2 -translate-y-1/2 hidden lg:block">
+                <div className="relative w-56 h-56">
+                  <Image 
+                    src="/jineau-home-images/14.png" 
+                    alt="Beaver mascot" 
+                    width={224} 
+                    height={224}
+                    className="w-full h-full"
+                  />
+                </div>
+              </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -426,7 +519,7 @@ export default async function HomePage() {
                       </svg>
                     ))}
                   </div>
-                  <p className="text-white/70 mb-8 italic leading-relaxed text-lg">"{testimonial.quote}"</p>
+                  <p className="text-white/85 mb-8 italic leading-relaxed text-lg drop-shadow-sm">"{testimonial.quote}"</p>
                   <div className="flex items-center gap-4">
                     <div className="w-12 h-12 bg-gradient-to-br from-brand-mint to-brand-primary rounded-full flex items-center justify-center shadow-lg">
                       <span className="text-white font-bold">{testimonial.author.charAt(0)}</span>
@@ -443,7 +536,7 @@ export default async function HomePage() {
         </section>
 
         {/* Final CTA */}
-        <section className="relative py-32 overflow-hidden">
+        <section className="relative py-24 md:py-32 overflow-hidden">
           <div className="absolute inset-0">
             <div className="absolute inset-0 bg-gradient-to-r from-brand-primary/15 via-brand-mint/8 to-brand-blue/15" />
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1200px] bg-gradient-radial from-brand-mint/10 to-transparent rounded-full blur-[200px] animate-breathe" />
@@ -451,10 +544,10 @@ export default async function HomePage() {
 
           <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div className="glass-strong rounded-[48px] p-12 md:p-20">
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8">
+              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 drop-shadow-xl">
                 {t("readyToTransform")}
               </h2>
-              <p className="text-xl text-white/60 mb-12 max-w-2xl mx-auto leading-relaxed">
+              <p className="text-xl text-white/85 mb-12 max-w-2xl mx-auto leading-relaxed drop-shadow-lg">
                 {t("ctaSubtitle")}
               </p>
               
