@@ -104,24 +104,43 @@ export default function Hero({
           />
         ))}
 
-        {/* Subtle grid overlay */}
-        <div 
-          className="absolute inset-0 opacity-[0.02]"
-          style={{
-            backgroundImage: `
-              linear-gradient(rgba(112, 178, 178, 0.5) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(112, 178, 178, 0.5) 1px, transparent 1px)
-            `,
-            backgroundSize: '80px 80px',
-          }}
-        />
-        
         {/* Aurora effect layer */}
-        <div className="absolute inset-0 aurora opacity-30" />
+        <div className="absolute inset-0 aurora opacity-20" style={{ zIndex: 1 }} />
+        
+        {/* 5 seedling illustrations - 1-07.svg around hero (no animation) */}
+        {[
+          { size: 100, top: '15%', left: '8%', opacity: 0.6 },
+          { size: 80, top: '25%', left: '5%', opacity: 0.5 },
+          { size: 90, top: '60%', left: '10%', opacity: 0.6 },
+          { size: 95, top: '20%', right: '8%', opacity: 0.6 },
+          { size: 85, top: '65%', right: '12%', opacity: 0.5 },
+        ].map((seedling, index) => (
+          <div
+            key={index}
+            className="absolute pointer-events-none"
+            style={{
+              width: `${seedling.size}px`,
+              height: `${seedling.size}px`,
+              top: seedling.top,
+              left: seedling.left,
+              right: seedling.right,
+              opacity: seedling.opacity,
+              zIndex: 2,
+            }}
+          >
+            <Image 
+              src="/jineau-home-images/1-07.svg" 
+              alt="" 
+              width={seedling.size} 
+              height={seedling.size}
+              className="w-full h-full"
+            />
+          </div>
+        ))}
       </div>
 
       {/* Main content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
+      <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left side - Microgreens image with SVG below */}
           <div className={`relative flex flex-col items-center lg:items-start ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '0.2s' }}>
@@ -149,43 +168,8 @@ export default function Hero({
             </div>
           </div>
 
-          {/* Right side - Text content with rotating images */}
-          <div className="relative text-center lg:text-left">
-            {/* Rotating decorative images on the right - fun and playful! */}
-            <div className="absolute -top-20 -right-20 w-40 h-40 hidden lg:block z-0">
-              <div 
-                className="w-full h-full"
-                style={{
-                  animation: 'rotate-slow 20s linear infinite',
-                  transformOrigin: 'center center'
-                }}
-              >
-                <Image 
-                  src="/jineau-home-images/1-03.svg" 
-                  alt="" 
-                  width={160} 
-                  height={160}
-                  className="w-full h-full"
-                />
-              </div>
-            </div>
-            <div className="absolute top-1/2 -right-10 w-32 h-32 hidden lg:block z-0">
-              <div 
-                className="w-full h-full"
-                style={{
-                  animation: 'rotate-slow 15s linear infinite reverse',
-                  transformOrigin: 'center center'
-                }}
-              >
-                <Image 
-                  src="/jineau-home-images/1-04.svg" 
-                  alt="" 
-                  width={128} 
-                  height={128}
-                  className="w-full h-full"
-                />
-              </div>
-            </div>
+           {/* Right side - Text content */}
+           <div className="relative text-center lg:text-left">
             {/* Badge */}
             <div className={`inline-flex items-center gap-3 glass px-6 py-3 rounded-full mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '0.4s' }}>
               <span className="relative flex h-2.5 w-2.5">
@@ -258,8 +242,20 @@ export default function Hero({
         </div>
       </div>
 
+      {/* Wavy lines pattern at bottom - 1-06.svg behind hero */}
+      <div className="absolute bottom-0 left-0 right-0 h-64 pointer-events-none" style={{ zIndex: 1 }}>
+        <Image 
+          src="/jineau-home-images/1-06.svg" 
+          alt="" 
+          width={1920} 
+          height={481}
+          className="w-full h-full object-cover opacity-60"
+          style={{ objectPosition: 'top' }}
+        />
+      </div>
+      
       {/* Bottom gradient fade - seamless transition to home page gradient */}
-      <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-[#5A9A9B] via-[#5A9A9B]/80 to-transparent pointer-events-none" />
+      <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-[#5A9A9B] via-[#5A9A9B]/80 to-transparent pointer-events-none" style={{ zIndex: 2 }} />
 
       {/* Scroll indicator */}
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
