@@ -268,7 +268,7 @@ export default async function HomePage() {
                   <div className={`w-16 h-16 mx-auto mb-4 bg-gradient-to-br ${element.gradient} rounded-2xl flex items-center justify-center text-white shadow-lg transition-transform duration-300 group-hover:scale-110`}>
                     {element.icon}
                   </div>
-                  <h4 className="text-lg font-semibold text-white mb-1 group-hover:text-brand-mint transition-colors duration-300 drop-shadow-md">{element.name}</h4>
+                  <h4 className="text-lg font-semibold text-white mb-1 group-hover:text-brand-gold transition-colors duration-300 drop-shadow-md">{element.name}</h4>
                   <p className="text-sm text-white/75">{element.desc}</p>
                 </div>
               ))}
@@ -338,7 +338,7 @@ export default async function HomePage() {
                   <div className="w-14 h-14 mb-6 bg-gradient-to-br from-brand-mint/30 to-brand-primary/30 rounded-2xl flex items-center justify-center text-brand-mint border border-white/10 transition-transform duration-300 group-hover:scale-110">
                     {featureIcons[feature.icon] || <SparklesIcon />}
                   </div>
-                  <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-brand-mint transition-colors duration-300 drop-shadow-md">
+                  <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-brand-gold transition-colors duration-300 drop-shadow-md">
                     {feature.title}
                   </h3>
                   <p className="text-white/80 leading-relaxed">
@@ -467,7 +467,7 @@ export default async function HomePage() {
                   <div className={`w-20 h-20 mx-auto mb-6 bg-gradient-to-br ${audience.gradient} rounded-3xl flex items-center justify-center text-white shadow-xl transition-transform duration-300 group-hover:scale-110`}>
                     {audience.icon}
                   </div>
-                  <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-brand-mint transition-colors duration-300 drop-shadow-md">
+                  <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-brand-gold transition-colors duration-300 drop-shadow-md">
                     {audience.title}
                   </h3>
                   <p className="text-white/75">{audience.tagline}</p>

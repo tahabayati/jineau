@@ -47,7 +47,7 @@ export function StandardSection({
         {(badge || title || subtitle) && (
           <div className="text-center mb-16">
             {badge && (
-              <span className={`inline-block glass px-5 py-2.5 rounded-full ${badgeColorClass} text-sm font-medium mb-6 tracking-wide`}>
+              <span className={`inline-block bg-brand-primary/80 border border-brand-mint/30 px-5 py-2.5 rounded-full ${badgeColorClass} text-sm font-medium mb-6 tracking-wide`}>
                 {badge}
               </span>
             )}
@@ -111,13 +111,13 @@ export function FeaturesSection({
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {features.map((feature, index) => (
-            <div key={index} className="glass-card rounded-3xl p-8 group">
+            <div key={index} className="bg-brand-primary/50 border border-brand-mint/20 rounded-3xl p-8 group">
               {feature.icon && (
                 <div className="w-14 h-14 mb-6 bg-gradient-to-br from-brand-mint/30 to-brand-primary/30 rounded-2xl flex items-center justify-center icon-container text-brand-mint border border-white/10">
                   {feature.icon}
                 </div>
               )}
-              <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-brand-mint transition-colors duration-300">
+              <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-brand-gold transition-colors duration-300">
                 {feature.title}
               </h3>
               <p className="text-white/50 leading-relaxed">
@@ -180,14 +180,14 @@ export function CardGridSection({
             <Link
               key={index}
               href={card.href || "#"}
-              className="glass-card rounded-3xl p-8 text-center group"
+              className="bg-brand-primary/50 border border-brand-mint/20 rounded-3xl p-8 text-center group"
             >
               {card.icon && (
                 <div className={`w-20 h-20 mx-auto mb-6 bg-gradient-to-br ${card.gradient || "from-brand-mint to-brand-primary"} rounded-3xl flex items-center justify-center icon-container text-white shadow-xl`}>
                   {card.icon}
                 </div>
               )}
-              <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-brand-mint transition-colors duration-300">
+              <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-brand-gold transition-colors duration-300">
                 {card.title}
               </h3>
               {card.tagline && (
@@ -240,7 +240,7 @@ export function TestimonialsSection({
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {testimonials.map((testimonial, index) => (
-            <div key={index} className="glass-card rounded-3xl p-8">
+            <div key={index} className="bg-brand-primary/50 border border-brand-mint/20 rounded-3xl p-8">
               <div className="flex items-center gap-1 mb-6">
                 {[...Array(5)].map((_, i) => (
                   <svg key={i} className="w-5 h-5 text-brand-gold" fill="currentColor" viewBox="0 0 20 20">
@@ -286,7 +286,7 @@ export function FinalCTASection({
       </div>
 
       <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <div className="glass-strong rounded-[48px] p-12 md:p-20">
+        <div className="bg-brand-primary border border-brand-mint/25 rounded-[48px] p-12 md:p-20">
           {title && (
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8">
               {title}
@@ -313,7 +313,7 @@ export function FinalCTASection({
             {secondaryCta && (
               <Link
                 href={secondaryCta.href}
-                className="inline-flex items-center justify-center gap-3 px-10 py-5 glass text-white font-semibold rounded-full transition-all duration-500 hover:bg-white/10 hover:scale-105"
+                className="inline-flex items-center justify-center gap-3 px-10 py-5 bg-brand-secondary border border-brand-mint/30 text-white font-semibold rounded-full transition-all duration-500 hover:bg-brand-mint hover:border-brand-mint/50"
               >
                 {secondaryCta.label}
               </Link>

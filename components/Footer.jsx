@@ -83,7 +83,7 @@ export default function Footer({ locale }) {
                 href={contactInfo.socialMedia.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 glass rounded-full flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 transition-all"
+                className="w-10 h-10 bg-brand-secondary border border-brand-mint/30 rounded-full flex items-center justify-center text-white/60 hover:text-white hover:bg-brand-mint hover:border-brand-mint/50 transition-all"
                 aria-label="Instagram"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -94,7 +94,7 @@ export default function Footer({ locale }) {
                 href={contactInfo.socialMedia.facebook}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-10 h-10 glass rounded-full flex items-center justify-center text-white/60 hover:text-white hover:bg-white/10 transition-all"
+                className="w-10 h-10 bg-brand-secondary border border-brand-mint/30 rounded-full flex items-center justify-center text-white/60 hover:text-white hover:bg-brand-mint hover:border-brand-mint/50 transition-all"
                 aria-label="Facebook"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -110,7 +110,7 @@ export default function Footer({ locale }) {
             <ul className="space-y-3">
               {shopLinks.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-white/50 hover:text-brand-mint text-sm transition-colors">
+                  <Link href={link.href} className="text-white/50 hover:text-white text-sm transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -124,7 +124,7 @@ export default function Footer({ locale }) {
             <ul className="space-y-3">
               {companyLinks.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-white/50 hover:text-brand-mint text-sm transition-colors">
+                  <Link href={link.href} className="text-white/50 hover:text-white text-sm transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -138,7 +138,7 @@ export default function Footer({ locale }) {
             <ul className="space-y-3">
               {audienceLinks.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-white/50 hover:text-brand-mint text-sm transition-colors">
+                  <Link href={link.href} className="text-white/50 hover:text-white text-sm transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -151,14 +151,14 @@ export default function Footer({ locale }) {
             <h3 className="font-semibold text-white mb-4">{t("contact")}</h3>
             <ul className="space-y-3 text-sm text-white/50">
               <li>
-                <a href={`mailto:${contactInfo.email}`} className="hover:text-brand-mint transition-colors">
+                <a href={`mailto:${contactInfo.email}`} className="hover:text-white transition-colors">
                   {contactInfo.email}
                 </a>
               </li>
               <li>{contactInfo.phone}</li>
               <li>{regionConfig.companyLocation}, {regionConfig.province}</li>
             </ul>
-            <div className="mt-4 glass rounded-xl p-4">
+            <div className="mt-4 bg-brand-primary/60 border border-brand-mint/20 rounded-xl p-4">
               <p className="text-xs text-brand-mint font-medium">{t("deliveryAreas")}</p>
               <p className="text-xs text-white/40 mt-1">{t("deliveryAreasDesc")}</p>
             </div>
@@ -172,13 +172,13 @@ export default function Footer({ locale }) {
               © {new Date().getFullYear()} Jineau. {t("allRightsReserved")}
             </p>
             <div className="flex gap-6">
-              <Link href="/privacy" className="text-sm text-white/40 hover:text-brand-mint transition-colors">
+              <Link href="/privacy" className="text-sm text-white/40 hover:text-white transition-colors">
                 {t("privacyPolicy")}
               </Link>
-              <Link href="/terms" className="text-sm text-white/40 hover:text-brand-mint transition-colors">
+              <Link href="/terms" className="text-sm text-white/40 hover:text-white transition-colors">
                 {t("termsOfService")}
               </Link>
-              <Link href="/refunds" className="text-sm text-white/40 hover:text-brand-mint transition-colors">
+              <Link href="/refunds" className="text-sm text-white/40 hover:text-white transition-colors">
                 {t("refundPolicy")}
               </Link>
             </div>

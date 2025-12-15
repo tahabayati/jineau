@@ -119,67 +119,50 @@ export default function Header({ locale }) {
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-      scrolled 
-        ? 'glass-strong shadow-2xl shadow-black/20' 
+      scrolled
+        ? 'bg-brand-primary/98 backdrop-blur-md border-b border-brand-mint/30 shadow-lg shadow-black/20'
         : 'bg-transparent'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
           <Link href="/" className="flex items-center gap-3 group">
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-brand-mint to-brand-gold rounded-full blur-md opacity-50 group-hover:opacity-75 transition-opacity" />
-              <div className="relative w-10 h-10 flex items-center justify-center">
-                {/* Logo - no rotation */}
-                <div className="relative w-8 h-8 z-10">
-                  <Image 
-                    src="/jineauLogo.svg" 
-                    alt="Jineau Logo" 
-                    width={32} 
-                    height={32}
-                    className="w-full h-full"
-                  />
-                </div>
-                
-                {/* Orbiting particles */}
-                <div className="absolute -inset-6 animate-rotate-slow">
-                  <div className="absolute top-0 left-1/2 -translate-x-1/2 w-2 h-2 bg-gradient-to-br from-brand-gold to-amber-400 rounded-full shadow-[0_0_15px_rgba(233,196,106,0.6)]" />
-                </div>
-                <div className="absolute -inset-8 animate-rotate-slow" style={{ animationDirection: 'reverse', animationDuration: '45s' }}>
-                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1.5 h-1.5 bg-gradient-to-br from-brand-mint to-brand-primary rounded-full shadow-[0_0_12px_rgba(112,178,178,0.5)]" />
-                </div>
-                <div className="absolute -inset-5 animate-rotate-slow" style={{ animationDuration: '60s' }}>
-                  <div className="absolute right-0 top-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-gradient-to-br from-brand-blue to-brand-mist rounded-full shadow-[0_0_10px_rgba(110,140,251,0.5)]" />
-                </div>
-              </div>
+            <div className="relative w-10 h-10 flex items-center justify-center">
+              <Image 
+                src="/jineauLogo.svg" 
+                alt="Jineau Logo" 
+                width={40} 
+                height={40}
+                className="w-full h-full transition-transform duration-300 group-hover:scale-110"
+              />
             </div>
-            <span className="text-xl font-bold gradient-text hidden sm:block">Jineau</span>
+            <span className="text-xl md:text-2xl font-bold gradient-text hidden sm:block transition-all duration-300 group-hover:scale-105">Jineau</span>
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-1">
+          <nav className="hidden lg:flex items-center gap-2">
             {mainLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="px-4 py-2 text-white/80 hover:text-white font-medium transition-all rounded-full hover:bg-white/10"
+                className="px-4 py-2 text-white/90 hover:text-white font-medium transition-all duration-300 rounded-lg hover:bg-brand-mint/20 hover:border-b-2 hover:border-brand-mint"
               >
                 {link.label}
               </Link>
             ))}
 
             <div className="relative group">
-              <button className="px-4 py-2 text-white/80 hover:text-white font-medium transition-all rounded-full hover:bg-white/10 flex items-center gap-1">
+              <button className="px-4 py-2 text-white/90 hover:text-white font-medium transition-all duration-300 rounded-lg hover:bg-brand-mint/20 hover:border-b-2 hover:border-brand-mint flex items-center gap-1">
                 {t("forYou")}
-                <svg className="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-4 h-4 transition-transform duration-300 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
 
-              <div className="absolute top-full left-0 mt-2 w-56 glass-card rounded-2xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+              <div className="absolute top-full left-0 mt-2 w-56 bg-brand-primary/98 backdrop-blur-md border border-brand-mint/30 rounded-xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl">
                 {audienceLinks.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="block px-4 py-3 text-white/80 hover:text-white hover:bg-white/10 transition-all"
+                    className="block px-4 py-3 text-white/90 hover:text-white hover:bg-brand-mint/20 transition-all duration-200 first:rounded-t-xl last:rounded-b-xl"
                   >
                     {link.label}
                   </Link>
@@ -189,7 +172,7 @@ export default function Header({ locale }) {
 
             <Link
               href="/login"
-              className="px-4 py-2 text-white/80 hover:text-white font-medium transition-all rounded-full hover:bg-white/10"
+              className="px-4 py-2 text-white/90 hover:text-white font-medium transition-all duration-300 rounded-lg hover:bg-brand-mint/20 hover:border-b-2 hover:border-brand-mint"
             >
               {tCommon("account")}
             </Link>
@@ -215,7 +198,7 @@ export default function Header({ locale }) {
                       setTimeout(() => setShowSearchResults(false), 200)
                     }}
                     placeholder="Search..."
-                    className="w-[180px] px-3 py-2 pl-9 pr-9 bg-white/5 border border-white/10 rounded-full text-white placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-brand-mint/50 focus:border-brand-mint/50 transition-all text-sm"
+                    className="w-[180px] px-3 py-2 pl-9 pr-9 bg-brand-secondary/40 border border-brand-mint/30 rounded-full text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-brand-mint/50 focus:border-brand-mint focus:bg-brand-secondary/60 transition-all text-sm"
                     autoFocus
                   />
                   <svg
@@ -260,7 +243,7 @@ export default function Header({ locale }) {
                           className="w-full px-4 py-3 text-left hover:bg-white/10 transition-all border-b border-white/5 last:border-0 flex items-center gap-3 group"
                         >
                           <div className="flex-1">
-                            <div className="text-white font-medium group-hover:text-brand-mint transition-colors text-sm">
+                            <div className="text-white font-medium group-hover:text-brand-gold transition-colors text-sm">
                               {product.name}
                             </div>
                             {product.shortDescription && (
@@ -273,7 +256,7 @@ export default function Header({ locale }) {
                             </div>
                           </div>
                           <svg
-                            className="w-4 h-4 text-white/40 group-hover:text-brand-mint transition-all"
+                            className="w-4 h-4 text-white/40 group-hover:text-white transition-all"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
@@ -317,7 +300,7 @@ export default function Header({ locale }) {
                     setShowMobileSearch(true)
                     setTimeout(() => searchInputRef.current?.focus(), 100)
                   }}
-                  className="p-2.5 text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all"
+                  className="p-2.5 text-white/90 hover:text-white hover:bg-brand-mint/20 rounded-full transition-all duration-300"
                   aria-label="Search"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -351,14 +334,14 @@ export default function Header({ locale }) {
 
             <Link 
               href="/shop" 
-              className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-brand-mint to-brand-primary text-white font-medium rounded-full hover:shadow-[0_0_20px_rgba(112,178,178,0.4)] transition-all"
+              className="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-brand-mint to-brand-primary text-white font-semibold rounded-full hover:from-brand-mist hover:to-brand-secondary hover:shadow-[0_0_25px_rgba(112,178,178,0.5)] hover:scale-105 transition-all duration-300"
             >
               {tCommon("shopMicrogreens")}
             </Link>
             
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden relative p-2.5 text-white/80 hover:text-white hover:bg-white/10 rounded-full transition-all group"
+              className="lg:hidden relative p-2.5 text-white/90 hover:text-white hover:bg-brand-mint/20 rounded-full transition-all duration-300 group"
               aria-label="Toggle menu"
             >
               <div className="relative w-6 h-5 flex flex-col justify-between">
@@ -385,7 +368,7 @@ export default function Header({ locale }) {
         {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="lg:hidden">
-            <div className="glass-strong rounded-2xl mt-3 mb-4 overflow-hidden border border-white/10 shadow-2xl">
+            <div className="bg-brand-primary/98 backdrop-blur-md rounded-xl mt-3 mb-4 overflow-hidden border border-brand-mint/30 shadow-xl">
               {/* Navigation Menu */}
               <nav className="flex flex-col">
                 {/* Main Links */}
@@ -397,12 +380,12 @@ export default function Header({ locale }) {
                     <Link
                       key={link.href}
                       href={link.href}
-                      className="flex items-center gap-3 px-3 py-3 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-all group"
+                      className="flex items-center gap-3 px-3 py-3 rounded-lg text-white/90 hover:text-white hover:bg-brand-mint/20 transition-all duration-200 group"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       <span className="font-medium">{link.label}</span>
                       <svg
-                        className="w-4 h-4 ml-auto text-white/20 group-hover:text-brand-mint group-hover:translate-x-1 transition-all"
+                        className="w-4 h-4 ml-auto text-white/20 group-hover:text-white group-hover:translate-x-1 transition-all"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -427,12 +410,12 @@ export default function Header({ locale }) {
                     <Link
                       key={link.href}
                       href={link.href}
-                      className="flex items-center gap-3 px-3 py-3 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-all group"
+                      className="flex items-center gap-3 px-3 py-3 rounded-lg text-white/80 hover:text-white hover:bg-brand-mint/20 transition-all duration-200 group"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       <span>{link.label}</span>
                       <svg
-                        className="w-4 h-4 ml-auto text-white/20 group-hover:text-brand-mint group-hover:translate-x-1 transition-all"
+                        className="w-4 h-4 ml-auto text-white/20 group-hover:text-white group-hover:translate-x-1 transition-all"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -460,7 +443,7 @@ export default function Header({ locale }) {
                   >
                     <span className="font-medium">{tCommon("login")}</span>
                     <svg
-                      className="w-4 h-4 ml-auto text-white/20 group-hover:text-brand-mint group-hover:translate-x-1 transition-all"
+                      className="w-4 h-4 ml-auto text-white/20 group-hover:text-white group-hover:translate-x-1 transition-all"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
@@ -480,7 +463,7 @@ export default function Header({ locale }) {
                   >
                     <span className="font-medium">{tCommon("account")}</span>
                     <svg
-                      className="w-4 h-4 ml-auto text-white/20 group-hover:text-brand-mint group-hover:translate-x-1 transition-all"
+                      className="w-4 h-4 ml-auto text-white/20 group-hover:text-white group-hover:translate-x-1 transition-all"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"

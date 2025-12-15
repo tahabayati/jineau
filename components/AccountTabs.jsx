@@ -87,7 +87,7 @@ export default function AccountTabs({ userId, userEmail }) {
               </svg>
               {t("nextDelivery")}
             </h2>
-            <div className="bg-gray-50 rounded-xl p-4">
+            <div className="bg-brand-mist/20 rounded-xl p-4">
               <p className="text-gray-500 text-sm">{t("noUpcomingDeliveries")}</p>
             </div>
           </div>
@@ -110,7 +110,7 @@ export default function AccountTabs({ userId, userEmail }) {
             ) : (
               <ul className="space-y-3">
                 {orders.slice(0, 3).map((order) => (
-                  <li key={order._id} className="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+                  <li key={order._id} className="flex items-center justify-between p-3 bg-brand-mist/20 rounded-xl">
                     <div>
                       <p className="font-medium text-gray-900">Order #{order._id.slice(-6)}</p>
                       <p className="text-sm text-gray-500">{new Date(order.createdAt).toLocaleDateString()}</p>
@@ -118,7 +118,7 @@ export default function AccountTabs({ userId, userEmail }) {
                     <span className={`px-3 py-1 rounded-full text-sm font-medium ${
                       order.status === "paid" ? "bg-green-100 text-green-800" :
                       order.status === "pending" ? "bg-yellow-100 text-yellow-800" :
-                      "bg-gray-100 text-gray-800"
+                      "bg-brand-mist/40 text-brand-primary"
                     }`}>
                       {order.status}
                     </span>
@@ -138,7 +138,7 @@ export default function AccountTabs({ userId, userEmail }) {
             <div className={`p-4 rounded-xl mb-4 ${
               isWithinFreshSwapWindow() 
                 ? "bg-green-50 border border-green-200" 
-                : "bg-gray-50 border border-gray-200"
+                : "bg-brand-mist/20 border border-brand-mint/20"
             }`}>
               <p className={`text-sm ${isWithinFreshSwapWindow() ? "text-green-700" : "text-gray-500"}`}>
                 {isWithinFreshSwapWindow() 
@@ -162,7 +162,7 @@ export default function AccountTabs({ userId, userEmail }) {
             ) : (
               <ul className="space-y-3">
                 {replacements.map((req) => (
-                  <li key={req._id} className="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+                  <li key={req._id} className="flex items-center justify-between p-3 bg-brand-mist/20 rounded-xl">
                     <div>
                       <p className="font-medium text-gray-900">Week of {new Date(req.weekStartDate).toLocaleDateString()}</p>
                       <p className="text-sm text-gray-500">Requested {new Date(req.createdAt).toLocaleDateString()}</p>
@@ -171,7 +171,7 @@ export default function AccountTabs({ userId, userEmail }) {
                       req.status === "approved" ? "bg-green-100 text-green-800" :
                       req.status === "applied" ? "bg-blue-100 text-blue-800" :
                       req.status === "pending" ? "bg-yellow-100 text-yellow-800" :
-                      "bg-gray-100 text-gray-800"
+                      "bg-brand-mist/40 text-brand-primary"
                     }`}>
                       {req.status}
                     </span>
@@ -197,7 +197,7 @@ export default function AccountTabs({ userId, userEmail }) {
             ) : (
               <ul className="space-y-3">
                 {supportRequests.map((req) => (
-                  <li key={req._id} className="p-4 bg-gray-50 rounded-xl">
+                  <li key={req._id} className="p-4 bg-brand-mist/20 rounded-xl">
                     <div className="flex items-center justify-between mb-2">
                       <span className="font-medium text-gray-900 capitalize">{req.type}</span>
                       <span className={`px-3 py-1 rounded-full text-sm font-medium ${

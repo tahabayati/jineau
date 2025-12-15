@@ -13,13 +13,29 @@
   --font-body: var(--font-inter);
 }
 
-/* Base styles for glassmorphism theme - Dark Blue-Green */
+:root {
+  /* Transition timing tokens */
+  --transition-micro: 150ms;
+  --transition-fast: 200ms;
+  --transition-normal: 300ms;
+  --transition-slow: 500ms;
+  --transition-slower: 800ms;
+
+  /* Hover/active helpers */
+  --hover-primary: #5A9690;
+  --hover-mint: #9ECFD4;
+  --hover-gold: #f4d98c;
+  --active-primary: #014d45;
+  --active-mint: #5A9690;
+
+  /* Focus ring */
+  --focus-ring: rgba(112, 178, 178, 0.4);
+  --focus-ring-offset: rgba(112, 178, 178, 0.1);
+}
+
+/* Base styles for flat design theme - Clean Dark */
 body {
-  background: 
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(1, 107, 97, 0.15) 0%, transparent 50%),
-    radial-gradient(ellipse 60% 40% at 100% 0%, rgba(110, 140, 251, 0.1) 0%, transparent 40%),
-    radial-gradient(ellipse 50% 30% at 0% 100%, rgba(90, 150, 144, 0.12) 0%, transparent 40%),
-    linear-gradient(180deg, #050d14 0%, #081620 30%, #0a1a28 60%, #071218 100%);
+  background: linear-gradient(180deg, #050d14 0%, #081620 50%, #0a1a28 100%);
   color: var(--color-foreground);
   font-family: var(--font-body), system-ui, sans-serif;
   min-height: 100vh;
@@ -27,6 +43,18 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading), serif;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--color-brand-mint);
+  outline-offset: 3px;
+  box-shadow: 
+    0 0 0 4px var(--focus-ring-offset),
+    0 0 20px var(--focus-ring);
 }
 
 ::selection {
@@ -39,41 +67,27 @@ h1, h2, h3, h4, h5, h6 {
   outline-offset: 2px;
 }
 
-/* Glassmorphism utilities */
+/* Flat design utilities */
 .glass {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--color-brand-primary);
+  border: 1px solid rgba(112, 178, 178, 0.2);
 }
 
 .glass-strong {
-  background: rgba(255, 255, 255, 0.06);
-  backdrop-filter: blur(40px);
-  -webkit-backdrop-filter: blur(40px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--color-brand-primary);
+  border: 1px solid rgba(112, 178, 178, 0.25);
 }
 
 .glass-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 
-    0 8px 32px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform, box-shadow, background, border-color;
+  background: var(--color-brand-primary);
+  border: 2px solid rgba(112, 178, 178, 0.2);
+  transition: all 0.3s ease;
 }
 
 .glass-card:hover {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.04) 100%);
-  border-color: rgba(255, 255, 255, 0.15);
-  transform: translateY(-10px) scale(1.02);
-  box-shadow: 
-    0 28px 56px rgba(0, 0, 0, 0.6),
-    0 0 80px rgba(112, 178, 178, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  background: var(--color-brand-secondary);
+  border-color: rgba(112, 178, 178, 0.4);
+  transform: translateY(-2px);
 }
 
 /* Professional smooth animations with advanced easing */
@@ -399,6 +413,31 @@ html {
   transform: translateY(-3px) scale(1.02);
 }
 
+.btn-loading {
+  position: relative;
+  color: transparent !important;
+  pointer-events: none;
+}
+
+.btn-loading::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 9999px;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 /* Link transitions - smoother */
 a {
   transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -423,5 +462,20 @@ html {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .glass-card:hover {
+    transform: none;
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .btn-glow:hover {
+    transform: none;
+    box-shadow: none;
   }
 }

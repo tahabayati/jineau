@@ -31,7 +31,7 @@ export default function MyPage() {
           title="Our Story"
           subtitle="Learn about our mission and values"
         >
-          <div className="glass-card rounded-3xl p-8">
+          <div className="bg-gray-800/50 border border-white/10 rounded-3xl p-8">
             <p className="text-white/70">Your content here...</p>
           </div>
         </StandardSection>
@@ -87,7 +87,7 @@ export default function CustomPage() {
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Section header */}
             <div className="text-center mb-16">
-              <span className="inline-block glass px-5 py-2.5 rounded-full text-brand-mint text-sm font-medium mb-6 tracking-wide">
+              <span className="inline-block bg-gray-800/80 border border-white/20 px-5 py-2.5 rounded-full text-brand-mint text-sm font-medium mb-6 tracking-wide">
                 Section Badge
               </span>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
@@ -121,7 +121,7 @@ export default function CustomPage() {
   subtitle="Our commitment to quality and sustainability"
 >
   <div className="max-w-4xl mx-auto">
-    <div className="glass-card rounded-3xl p-8">
+    <div className="bg-gray-800/80 border border-white/20-card rounded-3xl p-8">
       <p className="text-white/70 text-lg leading-relaxed">
         Your paragraph content here...
       </p>
@@ -209,7 +209,7 @@ export default function CustomPage() {
 
   <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div className="text-center mb-16">
-      <span className="inline-block glass px-5 py-2.5 rounded-full text-brand-mint text-sm font-medium mb-6 tracking-wide">
+      <span className="inline-block bg-gray-800/80 border border-white/20 px-5 py-2.5 rounded-full text-brand-mint text-sm font-medium mb-6 tracking-wide">
         Pricing
       </span>
       <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
@@ -221,7 +221,7 @@ export default function CustomPage() {
       {plans.map((plan, index) => (
         <div
           key={plan.name}
-          className={`relative glass-card rounded-3xl p-8 ${
+          className={`relative bg-gray-800/80 border border-white/20-card rounded-3xl p-8 ${
             index === 1 
               ? 'border-brand-gold/30 md:scale-105 glow-gold' 
               : ''
@@ -245,7 +245,7 @@ export default function CustomPage() {
             className={`block w-full py-4 rounded-full font-semibold text-center transition-all duration-500 ${
               index === 1
                 ? 'bg-gradient-to-r from-brand-gold to-amber-400 text-gray-900 hover:shadow-[0_0_40px_rgba(233,196,106,0.4)] hover:scale-105'
-                : 'glass text-white hover:bg-white/10 hover:scale-105'
+                : 'bg-gray-800/80 border border-white/20 text-white hover:bg-white/10 hover:scale-105'
             }`}
           >
             Choose {plan.name}
@@ -296,7 +296,7 @@ const MyIcon = () => (
 ```jsx
 <Link
   href="/shop"
-  className="inline-flex items-center justify-center gap-3 px-10 py-5 glass text-white font-semibold rounded-full transition-all duration-500 hover:bg-white/10 hover:scale-105"
+  className="inline-flex items-center justify-center gap-3 px-10 py-5 bg-gray-800/80 border border-white/20 text-white font-semibold rounded-full transition-all duration-500 hover:bg-white/10 hover:scale-105"
 >
   Shop Now
 </Link>
@@ -337,7 +337,7 @@ const MyIcon = () => (
 2. **Consistent spacing**: Use `mb-16` or `mb-20` for section headers
 3. **Max width**: Always use `max-w-7xl mx-auto` for content containers
 4. **Padding**: Use `px-4 sm:px-6 lg:px-8` for responsive horizontal padding
-5. **Glass cards**: Always use `glass-card` class for content containers
+5. **Flat cards**: Always use `bg-gray-800/80 border border-white/20` class for content containers
 6. **Hover effects**: Use `group` class and `group-hover:` utilities
 7. **Animations**: Add `animationDelay` to stagger effects
 8. **Badge colors**: Match badge color to section theme (mint, gold, mist, etc.)
@@ -371,7 +371,7 @@ export default function ExamplePage() {
           title="Section Title"
           subtitle="Section description"
         >
-          <div className="glass-card rounded-3xl p-8">
+          <div className="bg-gray-800/80 border border-white/20-card rounded-3xl p-8">
             <p className="text-white/70">Content here...</p>
           </div>
         </StandardSection>
@@ -396,6 +396,7 @@ export default function ExamplePage() {
 ```
 
 This template ensures consistency with the home page design while allowing flexibility for page-specific content.
+
 
 
 

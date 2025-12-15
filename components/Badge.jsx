@@ -1,6 +1,6 @@
 export default function Badge({ children, variant = "default", className = "" }) {
   const variants = {
-    default: "bg-gray-100 text-gray-800",
+    default: "bg-brand-mist/30 text-brand-primary",
     mint: "bg-brand-mint/20 text-brand-primary border border-brand-mint/40",
     gold: "bg-brand-gold/20 text-amber-800 border border-brand-gold/40",
     mist: "bg-brand-mist/20 text-brand-secondary border border-brand-mist/40",
@@ -9,7 +9,7 @@ export default function Badge({ children, variant = "default", className = "" })
 
   return (
     <span
-      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${variants[variant]} ${className}`}
+      className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-brand-mint/20 will-change-transform ${variants[variant]} ${className}`}
     >
       {children}
     </span>

@@ -20,7 +20,7 @@ export default function GiftOneSection({
           <button
             onClick={() => onToggle(!enabled)}
             className={`w-12 h-6 rounded-full transition-colors relative ${
-              enabled ? "bg-brand-primary" : "bg-gray-300"
+              enabled ? "bg-brand-primary" : "bg-brand-secondary/40"
             }`}
           >
             <span

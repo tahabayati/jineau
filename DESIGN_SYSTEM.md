@@ -73,36 +73,33 @@ This document analyzes the home page design patterns and provides a reusable des
 
 ---
 
-## Glassmorphism System
+## Flat Design System
 
-### Glass Effect Classes
+### Flat Effect Classes
 
-#### `.glass` - Light glass effect
+#### `.glass` - Light flat effect
 ```css
-background: rgba(255, 255, 255, 0.03);
-backdrop-filter: blur(20px);
-border: 1px solid rgba(255, 255, 255, 0.08);
+background: var(--color-background);
+border: 1px solid rgba(255, 255, 255, 0.1);
 ```
 **Use for**: Badges, small UI elements, subtle backgrounds
 
-#### `.glass-strong` - Stronger glass effect
+#### `.glass-strong` - Stronger flat effect
 ```css
-background: rgba(255, 255, 255, 0.06);
-backdrop-filter: blur(40px);
-border: 1px solid rgba(255, 255, 255, 0.1);
+background: var(--color-background);
+border: 1px solid rgba(255, 255, 255, 0.15);
 ```
 **Use for**: Headers when scrolled, important containers
 
-#### `.glass-card` - Card glass effect
+#### `.glass-card` - Card flat effect
 ```css
-background: linear-gradient(135deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0.02) 100%);
-backdrop-filter: blur(24px);
-border: 1px solid rgba(255, 255, 255, 0.08);
-box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+background: var(--color-background);
+border: 2px solid rgba(255, 255, 255, 0.1);
+transition: all 0.3s ease;
 ```
 **Use for**: Feature cards, product cards, content containers
 
-**Hover effect**: Automatically lifts up (`translateY(-8px)`) and increases glow
+**Hover effect**: Subtle background and border color changes
 
 ---
 
@@ -551,7 +548,8 @@ When creating a new page, ensure:
 
 ---
 
-This design system ensures consistency across all pages while maintaining the elegant, modern glassmorphism aesthetic of the Jineau brand.
+This design system ensures consistency across all pages while maintaining the clean, modern flat design aesthetic of the Jineau brand.
+
 
 
 

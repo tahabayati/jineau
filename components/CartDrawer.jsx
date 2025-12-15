@@ -48,7 +48,7 @@ export default function CartDrawer() {
           ) : (
             <ul className="space-y-4">
               {items.map((item) => (
-                <li key={item.slug} className="flex gap-4 p-3 bg-gray-50 rounded-xl">
+                <li key={item.slug} className="flex gap-4 p-3 bg-brand-mist/20 rounded-xl">
                   <div className="w-16 h-16 bg-brand-mint/30 rounded-lg flex items-center justify-center flex-shrink-0">
                     <span className="text-2xl">{item.type === "microgreen" ? "🌱" : "💧"}</span>
                   </div>
@@ -58,14 +58,14 @@ export default function CartDrawer() {
                     <div className="flex items-center gap-2 mt-2">
                       <button
                         onClick={() => updateQuantity(item.slug, item.quantity - 1)}
-                        className="w-7 h-7 bg-white border border-gray-200 rounded-full flex items-center justify-center hover:bg-gray-100"
+                        className="w-7 h-7 bg-white border border-brand-mint/30 rounded-full flex items-center justify-center hover:bg-brand-mist/30"
                       >
                         -
                       </button>
                       <span className="w-8 text-center font-medium">{item.quantity}</span>
                       <button
                         onClick={() => updateQuantity(item.slug, item.quantity + 1)}
-                        className="w-7 h-7 bg-white border border-gray-200 rounded-full flex items-center justify-center hover:bg-gray-100"
+                        className="w-7 h-7 bg-white border border-brand-mint/30 rounded-full flex items-center justify-center hover:bg-brand-mist/30"
                       >
                         +
                       </button>
@@ -91,7 +91,7 @@ export default function CartDrawer() {
         </div>
 
         {items.length > 0 && (
-          <div className="border-t border-gray-200 p-4 bg-gray-50">
+          <div className="border-t border-brand-mint/20 p-4 bg-brand-mist/20">
             <div className="space-y-2 mb-4">
               <div className="flex justify-between text-sm">
                 <span className="text-gray-600">{t("subtotal")}</span>

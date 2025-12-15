@@ -171,7 +171,7 @@ export default function Hero({
            {/* Right side - Text content */}
            <div className="relative text-center lg:text-left">
             {/* Badge */}
-            <div className={`inline-flex items-center gap-3 glass px-6 py-3 rounded-full mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '0.4s' }}>
+            <div className={`inline-flex items-center gap-3 bg-brand-primary/80 border border-brand-mint/30 px-6 py-3 rounded-full mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '0.4s' }}>
               <span className="relative flex h-2.5 w-2.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-mint opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-mint"></span>
@@ -189,8 +189,8 @@ export default function Hero({
               <span className="text-white/70 text-2xl md:text-3xl lg:text-4xl font-medium mt-4 block">Fresh Microgreens, Pure Living</span>
             </h1>
 
-            {/* Subtitle with glass background */}
-            <div className={`glass rounded-2xl p-6 max-w-xl mb-8 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '0.8s' }}>
+            {/* Subtitle with flat background */}
+            <div className={`bg-brand-primary/60 border border-brand-mint/20 rounded-2xl p-6 max-w-xl mb-8 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '0.8s' }}>
               <p className="text-base md:text-lg text-white/70 leading-relaxed">
                 {subtitle}
               </p>
@@ -213,7 +213,7 @@ export default function Hero({
               {secondaryCta && (
                 <Link
                   href={secondaryCta.href}
-                  className="group inline-flex items-center justify-center gap-3 px-10 py-5 glass text-white font-semibold rounded-full transition-all duration-500 hover:bg-white/10 hover:scale-105"
+                  className="group inline-flex items-center justify-center gap-3 px-10 py-5 bg-brand-secondary border border-brand-mint/30 text-white font-semibold rounded-full transition-all duration-300 hover:bg-brand-mint hover:border-brand-mint/50"
                 >
                   <span>{secondaryCta.label}</span>
                   <svg className="w-5 h-5 group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">

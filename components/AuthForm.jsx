@@ -134,7 +134,7 @@ export default function AuthForm({ mode = "login" }) {
       <button
         type="button"
         onClick={handleGoogleSignIn}
-        className="w-full flex items-center justify-center gap-3 px-4 py-3 border border-gray-300 rounded-xl text-gray-700 font-medium hover:bg-gray-50 transition-colors"
+        className="w-full flex items-center justify-center gap-3 px-4 py-3 border border-brand-mint/30 rounded-xl text-brand-primary font-medium hover:bg-brand-mist/20 transition-colors"
       >
         <svg className="w-5 h-5" viewBox="0 0 24 24">
           <path
