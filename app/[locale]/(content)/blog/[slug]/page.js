@@ -142,9 +142,17 @@ export default async function BlogPostPage({ params }) {
                   </h2>
                 )
               }
+              // Replace "Jineau" with gradient text
+              const parts = paragraph.split(/(Jineau|jineau)/gi)
               return (
                 <p key={i} className="text-gray-600 mb-4">
-                  {paragraph}
+                  {parts.map((part, j) => 
+                    /^Jineau$/i.test(part) ? (
+                      <span key={j} className="gradient-text font-bold">{part}</span>
+                    ) : (
+                      part
+                    )
+                  )}
                 </p>
               )
             })}

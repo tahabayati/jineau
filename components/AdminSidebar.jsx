@@ -23,7 +23,7 @@ export default function AdminSidebar() {
           <div className="w-8 h-8 bg-brand-primary rounded-full flex items-center justify-center">
             <span className="text-white font-bold text-sm">J</span>
           </div>
-          <span className="font-bold text-brand-primary">Jineau Admin</span>
+          <span className="font-bold"><span className="gradient-text">Jineau</span> <span className="text-brand-primary">Admin</span></span>
         </Link>
       </div>
 

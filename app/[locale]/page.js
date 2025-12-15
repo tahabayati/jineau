@@ -192,7 +192,17 @@ export default async function HomePage() {
                 Our Philosophy
               </span>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 drop-shadow-xl">
-                {t("whatIsJineau")}
+                {t("whatIsJineau")
+                  .split(/(Jineau|jineau)/i)
+                  .map((part, i) =>
+                    /^(Jineau|jineau)$/i.test(part) ? (
+                      <span key={i} className="gradient-text">
+                        {part}
+                      </span>
+                    ) : (
+                      <span key={i}>{part}</span>
+                    )
+                  )}
               </h2>
               <p className="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed drop-shadow-lg">
                 {t("jineauDescription")}
@@ -288,7 +298,17 @@ export default async function HomePage() {
                 Our Difference
               </span>
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 drop-shadow-xl">
-                {t("whyJineau")}
+                {t("whyJineau")
+                  .split(/(Jineau|jineau)/i)
+                  .map((part, i) =>
+                    /^(Jineau|jineau)$/i.test(part) ? (
+                      <span key={i} className="gradient-text">
+                        {part}
+                      </span>
+                    ) : (
+                      <span key={i}>{part}</span>
+                    )
+                  )}
               </h2>
               <p className="text-xl text-white/90 max-w-2xl mx-auto leading-relaxed drop-shadow-lg">
                 {t("whyJineauSubtitle")}

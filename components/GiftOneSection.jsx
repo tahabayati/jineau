@@ -3,6 +3,18 @@
 import { useTranslations } from "next-intl"
 import { regionConfig } from "@/lib/config"
 
+// Helper function to highlight "Jineau" with gradient text
+const highlightJineau = (text) => {
+  const parts = text.split(/(Jineau|jineau)/gi)
+  return parts.map((part, i) => 
+    /^Jineau$/i.test(part) ? (
+      <span key={i} className="gradient-text font-bold">{part}</span>
+    ) : (
+      part
+    )
+  )
+}
+
 export default function GiftOneSection({
   enabled,
   onToggle,
@@ -51,7 +63,7 @@ export default function GiftOneSection({
                   className="mt-1 w-4 h-4 text-brand-primary focus:ring-brand-primary"
                 />
                 <div>
-                  <span className="font-medium text-gray-900">{t("letJineauChoose")}</span>
+                  <span className="font-medium text-gray-900">{highlightJineau(t("letJineauChoose"))}</span>
                   <p className="text-sm text-gray-500">We'll select an active senior center in {regionConfig.deliveryRegion}</p>
                 </div>
               </label>

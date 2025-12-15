@@ -169,7 +169,7 @@ export default function Footer({ locale }) {
         <div className="mt-16 pt-8 border-t border-white/10">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-sm text-white/40">
-              © {new Date().getFullYear()} Jineau. {t("allRightsReserved")}
+              © {new Date().getFullYear()} <span className="gradient-text font-bold">Jineau</span>. {t("allRightsReserved")}
             </p>
             <div className="flex gap-6">
               <Link href="/privacy" className="text-sm text-white/40 hover:text-white transition-colors">

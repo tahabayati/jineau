@@ -39,7 +39,7 @@ export default async function AboutPage() {
             {t("title")}
           </h1>
           <p className="text-xl text-gray-600 leading-relaxed">
-            Jineau combines "Jin" (ژین) — Kurdish for life — with "Eau" — French for water. Together, they form "Water of Life."
+            <span className="gradient-text font-bold">Jineau</span> combines "Jin" (ژین) — Kurdish for life — with "Eau" — French for water. Together, they form "Water of Life."
           </p>
         </div>
       </section>
@@ -63,7 +63,7 @@ export default async function AboutPage() {
             </div>
             <div className="text-center">
               <div className="w-24 h-24 bg-brand-primary rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
-                <span className="text-xl font-bold text-white">Jineau</span>
+                <span className="text-xl font-bold gradient-text">Jineau</span>
               </div>
               <h3 className="font-bold text-xl text-gray-900 mb-2">Water of Life</h3>
               <p className="text-gray-600">Our philosophy</p>
