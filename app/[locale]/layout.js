@@ -8,7 +8,6 @@ import Header from "@/components/Header"
 import Footer from "@/components/Footer"
 import CartProvider from "@/components/CartProvider"
 import CartDrawer from "@/components/CartDrawer"
-import AuroraBackground from "@/components/AuroraBackground"
 import { generateOrganizationSchema } from "@/lib/seo"
 
 const inter = Inter({
@@ -108,8 +107,8 @@ export default async function LocaleLayout({ children, params }) {
         className={`antialiased min-h-screen flex flex-col ${
           isRtl ? "text-right" : ""
         }`}
+        suppressHydrationWarning
       >
-        <AuroraBackground variant="default" />
         <NextIntlClientProvider messages={messages}>
           <CartProvider>
             <Header locale={locale} />
