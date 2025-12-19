@@ -6,6 +6,9 @@ import ReplacementRequest from "@/models/ReplacementRequest"
 import SupportRequest from "@/models/SupportRequest"
 import { Link } from "@/i18n/routing"
 
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
+
 async function getStats() {
   await dbConnect()
   

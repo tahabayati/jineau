@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation"
 import dbConnect from "@/lib/mongodb"
 import Product from "@/models/Product"
+import Category from "@/models/Category"
 import { Link } from "@/i18n/routing"
 import Button from "@/components/Button"
 import Badge from "@/components/Badge"
@@ -8,6 +9,9 @@ import ProductCard from "@/components/ProductCard"
 import AddToCartButton from "@/components/AddToCartButton"
 import { generateProductSchema } from "@/lib/seo"
 import { brandName } from "@/data/siteCopy"
+
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
 
 async function getProduct(slug) {
   await dbConnect()

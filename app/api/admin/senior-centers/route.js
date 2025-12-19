@@ -4,6 +4,8 @@ import dbConnect from "@/lib/mongodb"
 import User from "@/models/User"
 import SeniorCenter from "@/models/SeniorCenter"
 
+export const runtime = 'nodejs'
+
 async function isAdmin() {
   const session = await auth()
   if (!session) return false

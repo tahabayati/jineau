@@ -7,6 +7,8 @@ import GiftDelivery from "@/models/GiftDelivery"
 import SeniorCenter from "@/models/SeniorCenter"
 import { getShippingFee, shippingConfig } from "@/lib/config"
 
+export const runtime = 'nodejs'
+
 export async function POST(request) {
   try {
     const session = await auth()

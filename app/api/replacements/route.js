@@ -4,6 +4,8 @@ import dbConnect from "@/lib/mongodb"
 import ReplacementRequest from "@/models/ReplacementRequest"
 import { freshSwapConfig } from "@/lib/config"
 
+export const runtime = 'nodejs'
+
 export async function GET() {
   try {
     const session = await auth()

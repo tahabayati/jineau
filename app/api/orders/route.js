@@ -3,6 +3,8 @@ import { auth } from "@/lib/auth"
 import dbConnect from "@/lib/mongodb"
 import Order from "@/models/Order"
 
+export const runtime = 'nodejs'
+
 export async function GET() {
   try {
     const session = await auth()

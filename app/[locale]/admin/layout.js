@@ -4,6 +4,9 @@ import dbConnect from "@/lib/mongodb"
 import User from "@/models/User"
 import AdminSidebar from "@/components/AdminSidebar"
 
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
+
 export const metadata = {
   title: "Admin Dashboard | Jineau",
 }

@@ -165,14 +165,14 @@ export default async function HomePage() {
         />
 
         {/* What is Jineau - Glassmorphism Section */}
-        <section className="relative py-24 md:py-32 overflow-hidden">
+        <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Section header */}
-            <div className="text-center mb-20">
-              <span className="inline-block glass px-5 py-2.5 rounded-full text-brand-mint text-sm font-medium mb-6 tracking-wide">
+            <div className="text-center mb-12 md:mb-20">
+              <span className="inline-block glass px-4 py-2 md:px-5 md:py-2.5 rounded-full text-brand-mint text-xs md:text-sm font-medium mb-4 md:mb-6 tracking-wide">
                 Our Philosophy
               </span>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 drop-shadow-xl">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 drop-shadow-xl px-2">
                 {t("whatIsJineau")
                   .split(/(Jineau|jineau)/i)
                   .map((part, i) =>
@@ -185,53 +185,53 @@ export default async function HomePage() {
                     )
                   )}
               </h2>
-              <p className="text-xl text-white/90 max-w-3xl mx-auto leading-relaxed drop-shadow-lg">
+              <p className="text-base sm:text-lg md:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed drop-shadow-lg px-2">
                 {t("jineauDescription")}
               </p>
             </div>
 
             {/* Name meaning cards */}
-            <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-4 mb-24 relative">
+            <div className="flex flex-col lg:flex-row items-center justify-center gap-6 md:gap-8 lg:gap-4 mb-12 md:mb-16 lg:mb-24 relative">
               {/* Jin card */}
-              <div className="glass-card rounded-3xl p-8 text-center w-full max-w-xs group">
-                <div className="w-24 h-24 mx-auto mb-4 relative">
+              <div className="glass-card rounded-2xl md:rounded-3xl p-6 md:p-8 text-center w-full max-w-xs group">
+                <div className="w-20 h-20 md:w-24 md:h-24 mx-auto mb-3 md:mb-4 relative">
                   <div className="absolute inset-0 bg-gradient-to-br from-brand-mint to-brand-primary rounded-full opacity-30" />
                   <div className="relative w-full h-full bg-gradient-to-br from-brand-mint/20 to-brand-primary/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-white/10 group-hover:border-white/20 transition-all duration-300">
-                    <span className="text-3xl font-bold text-white drop-shadow-md">Jin</span>
+                    <span className="text-2xl md:text-3xl font-bold text-white drop-shadow-md">Jin</span>
                   </div>
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-2">{t("jinMeaning")}</h3>
-                <p className="text-brand-mist/80">{t("kurdish")} - ژین</p>
+                <h3 className="text-xl md:text-2xl font-bold text-white mb-1 md:mb-2">{t("jinMeaning")}</h3>
+                <p className="text-sm md:text-base text-brand-mist/80">{t("kurdish")} - ژین</p>
               </div>
 
               {/* Plus sign */}
-              <div className="text-5xl text-brand-gold/40 font-extralight">+</div>
+              <div className="text-3xl md:text-5xl text-brand-gold/40 font-extralight">+</div>
 
               {/* Eau card */}
-              <div className="glass-card rounded-3xl p-8 text-center w-full max-w-xs group">
-                <div className="w-24 h-24 mx-auto mb-4 relative">
+              <div className="glass-card rounded-2xl md:rounded-3xl p-6 md:p-8 text-center w-full max-w-xs group">
+                <div className="w-20 h-20 md:w-24 md:h-24 mx-auto mb-3 md:mb-4 relative">
                   <div className="absolute inset-0 bg-gradient-to-br from-brand-mist to-brand-blue rounded-full opacity-30" />
                   <div className="relative w-full h-full bg-gradient-to-br from-brand-mist/20 to-brand-blue/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-white/10 group-hover:border-white/20 transition-all duration-300">
-                    <span className="text-3xl font-bold text-white drop-shadow-md">Eau</span>
+                    <span className="text-2xl md:text-3xl font-bold text-white drop-shadow-md">Eau</span>
                   </div>
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-2">{t("eauMeaning")}</h3>
-                <p className="text-brand-mist/80">{t("french")}</p>
+                <h3 className="text-xl md:text-2xl font-bold text-white mb-1 md:mb-2">{t("eauMeaning")}</h3>
+                <p className="text-sm md:text-base text-brand-mist/80">{t("french")}</p>
               </div>
 
               {/* Equals sign */}
-              <div className="text-5xl text-brand-gold/40 font-extralight">=</div>
+              <div className="text-3xl md:text-5xl text-brand-gold/40 font-extralight">=</div>
 
               {/* Jineau card */}
-              <div className="glass-card rounded-3xl p-8 text-center w-full max-w-xs group">
-                <div className="w-24 h-24 mx-auto mb-4 relative">
+              <div className="glass-card rounded-2xl md:rounded-3xl p-6 md:p-8 text-center w-full max-w-xs group">
+                <div className="w-20 h-20 md:w-24 md:h-24 mx-auto mb-3 md:mb-4 relative">
                   <div className="absolute inset-0 bg-gradient-to-br from-brand-gold via-brand-mint to-brand-primary rounded-full opacity-40" />
                   <div className="relative w-full h-full bg-gradient-to-br from-brand-gold/20 via-brand-mint/20 to-brand-primary/20 rounded-full flex items-center justify-center backdrop-blur-sm border border-white/10 group-hover:border-white/20 transition-all duration-300">
-                    <span className="text-2xl font-bold gradient-text drop-shadow-md">Jineau</span>
+                    <span className="text-xl md:text-2xl font-bold gradient-text drop-shadow-md">Jineau</span>
                   </div>
                 </div>
-                <h3 className="text-2xl font-bold gradient-text mb-2 drop-shadow-sm">{t("waterOfLife")}</h3>
-                <p className="text-white/70">{t("ourPhilosophy")}</p>
+                <h3 className="text-xl md:text-2xl font-bold gradient-text mb-1 md:mb-2 drop-shadow-sm">{t("waterOfLife")}</h3>
+                <p className="text-sm md:text-base text-white/70">{t("ourPhilosophy")}</p>
               </div>
 
               {/* Beaver character illustration in yellow heart */}
@@ -249,18 +249,20 @@ export default async function HomePage() {
             </div>
 
             {/* Elements grid */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
               {elements.map((element, index) => (
                 <div
                   key={element.name}
-                  className="glass-card rounded-2xl p-6 text-center group cursor-pointer"
+                  className="glass-card rounded-xl md:rounded-2xl p-4 md:p-6 text-center group cursor-pointer"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
-                  <div className={`w-16 h-16 mx-auto mb-4 bg-gradient-to-br ${element.gradient} rounded-2xl flex items-center justify-center text-white shadow-lg transition-transform duration-300 group-hover:scale-110`}>
-                    {element.icon}
+                  <div className={`w-12 h-12 md:w-16 md:h-16 mx-auto mb-3 md:mb-4 bg-gradient-to-br ${element.gradient} rounded-xl md:rounded-2xl flex items-center justify-center text-white shadow-lg transition-transform duration-300 group-hover:scale-110`}>
+                    <div className="scale-75 md:scale-100">
+                      {element.icon}
+                    </div>
                   </div>
-                  <h4 className="text-lg font-semibold text-white mb-1 group-hover:text-brand-gold transition-colors duration-300 drop-shadow-md">{element.name}</h4>
-                  <p className="text-sm text-white/75">{element.desc}</p>
+                  <h4 className="text-sm md:text-lg font-semibold text-white mb-1 group-hover:text-brand-gold transition-colors duration-300 drop-shadow-md">{element.name}</h4>
+                  <p className="text-xs md:text-sm text-white/75">{element.desc}</p>
                 </div>
               ))}
             </div>
@@ -268,13 +270,13 @@ export default async function HomePage() {
         </section>
 
         {/* Why Jineau - Features Section */}
-        <section className="relative py-24 md:py-32 overflow-hidden">
+        <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16 relative">
-              <span className="inline-block glass px-5 py-2.5 rounded-full text-brand-gold text-sm font-medium mb-6 tracking-wide">
+            <div className="text-center mb-10 md:mb-16 relative">
+              <span className="inline-block glass px-4 py-2 md:px-5 md:py-2.5 rounded-full text-brand-gold text-xs md:text-sm font-medium mb-4 md:mb-6 tracking-wide">
                 Our Difference
               </span>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 drop-shadow-xl">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 drop-shadow-xl px-2">
                 {t("whyJineau")
                   .split(/(Jineau|jineau)/i)
                   .map((part, i) =>
@@ -287,7 +289,7 @@ export default async function HomePage() {
                     )
                   )}
               </h2>
-              <p className="text-xl text-white/90 max-w-2xl mx-auto leading-relaxed drop-shadow-lg">
+              <p className="text-base sm:text-lg md:text-xl text-white/90 max-w-2xl mx-auto leading-relaxed drop-shadow-lg px-2">
                 {t("whyJineauSubtitle")}
               </p>
               
@@ -326,19 +328,21 @@ export default async function HomePage() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
               {translatedDifferentiators.map((feature, index) => (
                 <div
                   key={index}
-                  className="glass-card rounded-3xl p-8 group"
+                  className="glass-card rounded-2xl md:rounded-3xl p-6 md:p-8 group"
                 >
-                  <div className="w-14 h-14 mb-6 bg-gradient-to-br from-brand-mint/30 to-brand-primary/30 rounded-2xl flex items-center justify-center text-brand-mint border border-white/10 transition-transform duration-300 group-hover:scale-110">
-                    {featureIcons[feature.icon] || <SparklesIcon />}
+                  <div className="w-12 h-12 md:w-14 md:h-14 mb-4 md:mb-6 bg-gradient-to-br from-brand-mint/30 to-brand-primary/30 rounded-xl md:rounded-2xl flex items-center justify-center text-brand-mint border border-white/10 transition-transform duration-300 group-hover:scale-110">
+                    <div className="scale-90 md:scale-100">
+                      {featureIcons[feature.icon] || <SparklesIcon />}
+                    </div>
                   </div>
-                  <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-brand-gold transition-colors duration-300 drop-shadow-md">
+                  <h3 className="text-lg md:text-xl font-semibold text-white mb-2 md:mb-3 group-hover:text-brand-gold transition-colors duration-300 drop-shadow-md">
                     {feature.title}
                   </h3>
-                  <p className="text-white/80 leading-relaxed">
+                  <p className="text-sm md:text-base text-white/80 leading-relaxed">
                     {feature.description}
                   </p>
                 </div>
@@ -348,16 +352,16 @@ export default async function HomePage() {
         </section>
 
         {/* Subscription Plans */}
-        <section className="relative py-24 md:py-32 overflow-hidden">
+        <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16 relative">
-              <span className="inline-block glass px-5 py-2.5 rounded-full text-brand-mint text-sm font-medium mb-6 tracking-wide">
+            <div className="text-center mb-10 md:mb-16 relative">
+              <span className="inline-block glass px-4 py-2 md:px-5 md:py-2.5 rounded-full text-brand-mint text-xs md:text-sm font-medium mb-4 md:mb-6 tracking-wide">
                 Simple Pricing
               </span>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 drop-shadow-xl">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 drop-shadow-xl px-2">
                 {t("subscriptionsMadeSimple")}
               </h2>
-              <p className="text-xl text-white/90 max-w-2xl mx-auto leading-relaxed drop-shadow-lg">
+              <p className="text-base sm:text-lg md:text-xl text-white/90 max-w-2xl mx-auto leading-relaxed drop-shadow-lg px-2">
                 {t("subscriptionDescription")}
               </p>
               
@@ -375,35 +379,35 @@ export default async function HomePage() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto">
               {subscription.plans.map((plan, index) => (
                 <div
                   key={plan.name}
-                  className={`relative glass-card rounded-3xl p-8 ${
+                  className={`relative glass-card rounded-2xl md:rounded-3xl p-6 md:p-8 ${
                     index === 1 
                       ? 'border-brand-gold/30 md:scale-105 glow-gold' 
                       : ''
                   }`}
                 >
                   {index === 1 && (
-                    <div className="absolute -top-4 left-1/2 -translate-x-1/2">
-                      <span className="bg-gradient-to-r from-brand-gold to-amber-400 text-gray-900 text-sm font-bold px-5 py-1.5 rounded-full shadow-lg">
+                    <div className="absolute -top-3 md:-top-4 left-1/2 -translate-x-1/2">
+                      <span className="bg-gradient-to-r from-brand-gold to-amber-400 text-gray-900 text-xs md:text-sm font-bold px-4 py-1 md:px-5 md:py-1.5 rounded-full shadow-lg">
                         Most Popular
                       </span>
                     </div>
                   )}
 
-                <h3 className="text-2xl font-bold text-white mb-2 drop-shadow-md">{plan.name}</h3>
-                <p className="text-white/70 mb-8">{plan.description}</p>
+                <h3 className="text-xl md:text-2xl font-bold text-white mb-1 md:mb-2 drop-shadow-md">{plan.name}</h3>
+                <p className="text-sm md:text-base text-white/70 mb-6 md:mb-8">{plan.description}</p>
                   
-                  <div className="mb-8">
-                    <span className="text-6xl font-bold gradient-text drop-shadow-lg">{plan.packs}</span>
-                    <span className="text-white/75 ml-2 text-lg">packs/week</span>
+                  <div className="mb-6 md:mb-8">
+                    <span className="text-5xl md:text-6xl font-bold gradient-text drop-shadow-lg">{plan.packs}</span>
+                    <span className="text-white/75 ml-2 text-base md:text-lg">packs/week</span>
                   </div>
 
                   <Link
                     href="/subscribe"
-                    className={`block w-full py-4 rounded-full font-semibold text-center transition-all duration-500 ${
+                    className={`block w-full py-3 md:py-4 rounded-full font-semibold text-sm md:text-base text-center transition-all duration-500 ${
                       index === 1
                         ? 'bg-gradient-to-r from-brand-gold to-amber-400 text-gray-900 hover:shadow-[0_0_40px_rgba(233,196,106,0.4)] hover:scale-105'
                         : 'glass text-white hover:bg-white/10 hover:scale-105'
@@ -418,16 +422,16 @@ export default async function HomePage() {
         </section>
 
         {/* Who We Grow For */}
-        <section className="relative py-24 md:py-32 overflow-hidden">
+        <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16 relative">
-              <span className="inline-block glass px-5 py-2.5 rounded-full text-brand-mist text-sm font-medium mb-6 tracking-wide">
+            <div className="text-center mb-10 md:mb-16 relative">
+              <span className="inline-block glass px-4 py-2 md:px-5 md:py-2.5 rounded-full text-brand-mist text-xs md:text-sm font-medium mb-4 md:mb-6 tracking-wide">
                 For Everyone
               </span>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 drop-shadow-xl">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 drop-shadow-xl px-2">
                 {t("whoWeGrowFor")}
               </h2>
-              <p className="text-xl text-white/90 max-w-2xl mx-auto leading-relaxed drop-shadow-lg">
+              <p className="text-base sm:text-lg md:text-xl text-white/90 max-w-2xl mx-auto leading-relaxed drop-shadow-lg px-2">
                 {t("whoWeGrowForSubtitle")}
               </p>
               
@@ -445,20 +449,22 @@ export default async function HomePage() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
               {audiences.map((audience) => (
                 <Link
                   key={audience.title}
                   href={audience.href}
-                  className="glass-card rounded-3xl p-8 text-center group"
+                  className="glass-card rounded-2xl md:rounded-3xl p-6 md:p-8 text-center group"
                 >
-                  <div className={`w-20 h-20 mx-auto mb-6 bg-gradient-to-br ${audience.gradient} rounded-3xl flex items-center justify-center text-white shadow-xl transition-transform duration-300 group-hover:scale-110`}>
-                    {audience.icon}
+                  <div className={`w-16 h-16 md:w-20 md:h-20 mx-auto mb-4 md:mb-6 bg-gradient-to-br ${audience.gradient} rounded-2xl md:rounded-3xl flex items-center justify-center text-white shadow-xl transition-transform duration-300 group-hover:scale-110`}>
+                    <div className="scale-90 md:scale-100">
+                      {audience.icon}
+                    </div>
                   </div>
-                  <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-brand-gold transition-colors duration-300 drop-shadow-md">
+                  <h3 className="text-base md:text-xl font-semibold text-white mb-1 md:mb-2 group-hover:text-brand-gold transition-colors duration-300 drop-shadow-md">
                     {audience.title}
                   </h3>
-                  <p className="text-white/75">{audience.tagline}</p>
+                  <p className="text-sm md:text-base text-white/75">{audience.tagline}</p>
                 </Link>
               ))}
             </div>
@@ -466,16 +472,16 @@ export default async function HomePage() {
         </section>
 
         {/* Testimonials */}
-        <section className="relative py-24 md:py-32 overflow-hidden">
+        <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16 relative">
-              <span className="inline-block glass px-5 py-2.5 rounded-full text-brand-gold text-sm font-medium mb-6 tracking-wide">
+            <div className="text-center mb-10 md:mb-16 relative">
+              <span className="inline-block glass px-4 py-2 md:px-5 md:py-2.5 rounded-full text-brand-gold text-xs md:text-sm font-medium mb-4 md:mb-6 tracking-wide">
                 Testimonials
               </span>
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 drop-shadow-xl">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 drop-shadow-xl px-2">
                 {t("testimonials")}
               </h2>
-              <p className="text-xl text-white/90 max-w-2xl mx-auto leading-relaxed drop-shadow-lg">
+              <p className="text-base sm:text-lg md:text-xl text-white/90 max-w-2xl mx-auto leading-relaxed drop-shadow-lg px-2">
                 {t("testimonialsSubtitle")}
               </p>
               
@@ -493,24 +499,24 @@ export default async function HomePage() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
               {testimonials.slice(0, 3).map((testimonial, index) => (
-                <div key={index} className="glass-card rounded-3xl p-8">
-                  <div className="flex items-center gap-1 mb-6">
+                <div key={index} className="glass-card rounded-2xl md:rounded-3xl p-6 md:p-8">
+                  <div className="flex items-center gap-1 mb-4 md:mb-6">
                     {[...Array(5)].map((_, i) => (
-                      <svg key={i} className="w-5 h-5 text-brand-gold" fill="currentColor" viewBox="0 0 20 20">
+                      <svg key={i} className="w-4 h-4 md:w-5 md:h-5 text-brand-gold" fill="currentColor" viewBox="0 0 20 20">
                         <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                       </svg>
                     ))}
                   </div>
-                  <p className="text-white/85 mb-8 italic leading-relaxed text-lg drop-shadow-sm">"{testimonial.quote}"</p>
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-brand-mint to-brand-primary rounded-full flex items-center justify-center shadow-lg">
-                      <span className="text-white font-bold">{testimonial.author.charAt(0)}</span>
+                  <p className="text-white/85 mb-6 md:mb-8 italic leading-relaxed text-sm md:text-lg drop-shadow-sm">"{testimonial.quote}"</p>
+                  <div className="flex items-center gap-3 md:gap-4">
+                    <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-to-br from-brand-mint to-brand-primary rounded-full flex items-center justify-center shadow-lg flex-shrink-0">
+                      <span className="text-white font-bold text-sm md:text-base">{testimonial.author.charAt(0)}</span>
                     </div>
                     <div>
-                      <p className="text-white font-semibold">{testimonial.author}</p>
-                      <p className="text-white/40 text-sm">{testimonial.location}</p>
+                      <p className="text-white font-semibold text-sm md:text-base">{testimonial.author}</p>
+                      <p className="text-white/40 text-xs md:text-sm">{testimonial.location}</p>
                     </div>
                   </div>
                 </div>
@@ -520,29 +526,29 @@ export default async function HomePage() {
         </section>
 
         {/* Final CTA */}
-        <section className="relative py-24 md:py-32 overflow-hidden">
+        <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
           <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div className="glass-strong rounded-[48px] p-12 md:p-20">
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 drop-shadow-xl">
+            <div className="glass-strong rounded-3xl md:rounded-[48px] p-8 md:p-12 lg:p-20">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 md:mb-8 drop-shadow-xl px-2">
                 {t("readyToTransform")}
               </h2>
-              <p className="text-xl text-white/85 mb-12 max-w-2xl mx-auto leading-relaxed drop-shadow-lg">
+              <p className="text-base sm:text-lg md:text-xl text-white/85 mb-8 md:mb-12 max-w-2xl mx-auto leading-relaxed drop-shadow-lg px-2">
                 {t("ctaSubtitle")}
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
                 <Link
                   href="/subscribe"
-                  className="group inline-flex items-center justify-center gap-3 px-10 py-5 bg-gradient-to-r from-brand-mint to-brand-primary text-white font-semibold rounded-full transition-all duration-500 hover:shadow-[0_0_60px_rgba(112,178,178,0.5)] hover:scale-105"
+                  className="group inline-flex items-center justify-center gap-2 md:gap-3 px-8 py-4 md:px-10 md:py-5 bg-gradient-to-r from-brand-mint to-brand-primary text-white font-semibold text-sm md:text-base rounded-full transition-all duration-500 hover:shadow-[0_0_60px_rgba(112,178,178,0.5)] hover:scale-105"
                 >
                   {tCommon("startSubscription")}
-                  <svg className="w-5 h-5 group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </Link>
                 <Link
                   href="/shop"
-                  className="inline-flex items-center justify-center gap-3 px-10 py-5 glass text-white font-semibold rounded-full transition-all duration-500 hover:bg-white/10 hover:scale-105"
+                  className="inline-flex items-center justify-center gap-2 md:gap-3 px-8 py-4 md:px-10 md:py-5 glass text-white font-semibold text-sm md:text-base rounded-full transition-all duration-500 hover:bg-white/10 hover:scale-105"
                 >
                   {tCommon("shopMicrogreens")}
                 </Link>

@@ -4,6 +4,8 @@ import dbConnect from "@/lib/mongodb"
 import User from "@/models/User"
 import SupportRequest from "@/models/SupportRequest"
 
+export const runtime = 'nodejs'
+
 async function isAdmin() {
   const session = await auth()
   if (!session) return false

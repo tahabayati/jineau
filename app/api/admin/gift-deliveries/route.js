@@ -4,6 +4,8 @@ import dbConnect from "@/lib/mongodb"
 import User from "@/models/User"
 import GiftDelivery from "@/models/GiftDelivery"
 
+export const runtime = 'nodejs'
+
 async function isAdmin() {
   const session = await auth()
   if (!session) return false
