@@ -131,7 +131,7 @@ export default function SubscriptionPicker({ onSelect }) {
       />
 
       <div className="bg-gradient-to-r from-brand-mist/30 to-brand-mint/20 rounded-xl p-6 border border-brand-mist/40">
-        <h4 className="font-semibold text-gray-900 mb-3">{t("whatsIncluded")}:</h4>
+        <h4 className="font-semibold text-gray-900 mb-3">{t("whatsIncluded")}</h4>
         <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
           {[
             t("freshEveryFriday"),

@@ -120,8 +120,8 @@ export default function Header({ locale }) {
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
       scrolled
-        ? 'bg-brand-primary/98 backdrop-blur-md border-b border-brand-mint/30 shadow-lg shadow-black/20'
-        : 'bg-transparent'
+        ? 'bg-black/35 backdrop-blur-xl border-b border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.3)]'
+        : 'bg-gradient-to-b from-black/20 to-transparent backdrop-blur-sm'
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
@@ -143,26 +143,28 @@ export default function Header({ locale }) {
               <Link
                 key={link.href}
                 href={link.href}
-                className="px-4 py-2 text-white/90 hover:text-white font-medium transition-all duration-300 rounded-lg hover:bg-brand-mint/20 hover:border-b-2 hover:border-brand-mint"
+                className="px-4 py-2 text-white/90 hover:text-white font-medium transition-all duration-300 rounded-lg hover:bg-white/10 hover:backdrop-blur-sm relative group"
               >
                 {link.label}
+                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-transparent via-brand-mint to-transparent group-hover:w-full transition-all duration-300" />
               </Link>
             ))}
 
             <div className="relative group">
-              <button className="px-4 py-2 text-white/90 hover:text-white font-medium transition-all duration-300 rounded-lg hover:bg-brand-mint/20 hover:border-b-2 hover:border-brand-mint flex items-center gap-1">
+              <button className="px-4 py-2 text-white/90 hover:text-white font-medium transition-all duration-300 rounded-lg hover:bg-white/10 hover:backdrop-blur-sm flex items-center gap-1 relative">
                 {t("forYou")}
                 <svg className="w-4 h-4 transition-transform duration-300 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
+                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-transparent via-brand-mint to-transparent group-hover:w-full transition-all duration-300" />
               </button>
 
-              <div className="absolute top-full left-0 mt-2 w-56 bg-brand-primary/98 backdrop-blur-md border border-brand-mint/30 rounded-xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-xl">
+              <div className="absolute top-full left-0 mt-2 w-56 bg-black/40 backdrop-blur-xl border border-white/15 rounded-xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
                 {audienceLinks.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="block px-4 py-3 text-white/90 hover:text-white hover:bg-brand-mint/20 transition-all duration-200 first:rounded-t-xl last:rounded-b-xl"
+                    className="block px-4 py-3 text-white/90 hover:text-white hover:bg-white/10 transition-all duration-200 first:rounded-t-xl last:rounded-b-xl"
                   >
                     {link.label}
                   </Link>
@@ -172,9 +174,10 @@ export default function Header({ locale }) {
 
             <Link
               href="/login"
-              className="px-4 py-2 text-white/90 hover:text-white font-medium transition-all duration-300 rounded-lg hover:bg-brand-mint/20 hover:border-b-2 hover:border-brand-mint"
+              className="px-4 py-2 text-white/90 hover:text-white font-medium transition-all duration-300 rounded-lg hover:bg-white/10 hover:backdrop-blur-sm relative group"
             >
               {tCommon("account")}
+              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-transparent via-brand-mint to-transparent group-hover:w-full transition-all duration-300" />
             </Link>
           </nav>
 
@@ -198,7 +201,7 @@ export default function Header({ locale }) {
                       setTimeout(() => setShowSearchResults(false), 200)
                     }}
                     placeholder="Search..."
-                    className="w-[180px] px-3 py-2 pl-9 pr-9 bg-brand-secondary/40 border border-brand-mint/30 rounded-full text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-brand-mint/50 focus:border-brand-mint focus:bg-brand-secondary/60 transition-all text-sm"
+                    className="w-[180px] px-3 py-2 pl-9 pr-9 bg-black/30 backdrop-blur-md border border-white/15 rounded-full text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-brand-mint/50 focus:border-white/30 focus:bg-black/40 transition-all text-sm"
                     autoFocus
                   />
                   <svg
@@ -300,7 +303,7 @@ export default function Header({ locale }) {
                     setShowMobileSearch(true)
                     setTimeout(() => searchInputRef.current?.focus(), 100)
                   }}
-                  className="p-2.5 text-white/90 hover:text-white hover:bg-brand-mint/20 rounded-full transition-all duration-300"
+                  className="p-2.5 text-white/90 hover:text-white hover:bg-white/10 backdrop-blur-sm rounded-full transition-all duration-300"
                   aria-label="Search"
                 >
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -341,7 +344,7 @@ export default function Header({ locale }) {
             
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden relative p-2.5 text-white/90 hover:text-white hover:bg-brand-mint/20 rounded-full transition-all duration-300 group"
+              className="lg:hidden relative p-2.5 text-white/90 hover:text-white hover:bg-white/10 backdrop-blur-sm rounded-full transition-all duration-300 group"
               aria-label="Toggle menu"
             >
               <div className="relative w-6 h-5 flex flex-col justify-between">
@@ -368,7 +371,7 @@ export default function Header({ locale }) {
         {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="lg:hidden">
-            <div className="bg-brand-primary/98 backdrop-blur-md rounded-xl mt-3 mb-4 overflow-hidden border border-brand-mint/30 shadow-xl">
+            <div className="bg-black/40 backdrop-blur-xl rounded-xl mt-3 mb-4 overflow-hidden border border-white/15 shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
               {/* Navigation Menu */}
               <nav className="flex flex-col">
                 {/* Main Links */}
@@ -380,7 +383,7 @@ export default function Header({ locale }) {
                     <Link
                       key={link.href}
                       href={link.href}
-                      className="flex items-center gap-3 px-3 py-3 rounded-lg text-white/90 hover:text-white hover:bg-brand-mint/20 transition-all duration-200 group"
+                      className="flex items-center gap-3 px-3 py-3 rounded-lg text-white/90 hover:text-white hover:bg-white/10 transition-all duration-200 group"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       <span className="font-medium">{link.label}</span>
@@ -410,7 +413,7 @@ export default function Header({ locale }) {
                     <Link
                       key={link.href}
                       href={link.href}
-                      className="flex items-center gap-3 px-3 py-3 rounded-lg text-white/80 hover:text-white hover:bg-brand-mint/20 transition-all duration-200 group"
+                      className="flex items-center gap-3 px-3 py-3 rounded-lg text-white/80 hover:text-white hover:bg-white/10 transition-all duration-200 group"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       <span>{link.label}</span>

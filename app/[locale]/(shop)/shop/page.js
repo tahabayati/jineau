@@ -18,39 +18,42 @@ export async function generateMetadata({ params }) {
 }
 
 async function getProducts(category, sort) {
-  await dbConnect()
-  
-  const query = { active: true }
-  
-  if (category && category !== "all") {
-    // Match either category slug or type
-    query.$or = [
-      { type: category.replace("s", "") },
-      { "category.slug": category }
-    ]
+  try {
+    await dbConnect()
+    
+    const query = { active: true }
+    
+    if (category && category !== "all") {
+      query.$or = [
+        { type: category.replace("s", "") },
+        { "category.slug": category }
+      ]
+    }
+
+    let sortOption = { createdAt: -1 }
+    if (sort === "price-low") {
+      sortOption = { price: 1 }
+    } else if (sort === "price-high") {
+      sortOption = { price: -1 }
+    }
+
+    const products = await Product.find(query)
+      .populate("category")
+      .sort(sortOption)
+      .lean()
+
+    return products.map(p => ({
+      ...p,
+      _id: p._id.toString(),
+      category: p.category ? {
+        ...p.category,
+        _id: p.category._id.toString()
+      } : null
+    }))
+  } catch (error) {
+    console.error("Error fetching products:", error)
+    return []
   }
-
-  let sortOption = { createdAt: -1 }
-  if (sort === "price-low") {
-    sortOption = { price: 1 }
-  } else if (sort === "price-high") {
-    sortOption = { price: -1 }
-  }
-
-  const products = await Product.find(query)
-    .populate("category")
-    .sort(sortOption)
-    .lean()
-
-  // Transform MongoDB documents to plain objects with string IDs
-  return products.map(p => ({
-    ...p,
-    _id: p._id.toString(),
-    category: p.category ? {
-      ...p.category,
-      _id: p.category._id.toString()
-    } : null
-  }))
 }
 
 export default async function ShopPage({ searchParams }) {

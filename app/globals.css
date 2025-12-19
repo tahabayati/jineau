@@ -33,9 +33,9 @@
   --focus-ring-offset: rgba(112, 178, 178, 0.1);
 }
 
-/* Base styles for flat design theme - Clean Dark */
+/* Base styles */
 body {
-  background: linear-gradient(180deg, #050d14 0%, #081620 50%, #0a1a28 100%);
+  background: transparent;
   color: var(--color-foreground);
   font-family: var(--font-body), system-ui, sans-serif;
   min-height: 100vh;
@@ -67,27 +67,52 @@ textarea:focus-visible {
   outline-offset: 2px;
 }
 
-/* Flat design utilities */
+/* Glass morphism utilities */
 .glass {
-  background: var(--color-brand-primary);
-  border: 1px solid rgba(112, 178, 178, 0.2);
+  background: rgba(0, 0, 0, 0.28);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .glass-strong {
-  background: var(--color-brand-primary);
-  border: 1px solid rgba(112, 178, 178, 0.25);
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 .glass-card {
-  background: var(--color-brand-primary);
-  border: 2px solid rgba(112, 178, 178, 0.2);
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 2px solid rgba(255, 255, 255, 0.1);
   transition: all 0.3s ease;
 }
 
 .glass-card:hover {
-  background: var(--color-brand-secondary);
-  border-color: rgba(112, 178, 178, 0.4);
+  background: rgba(0, 0, 0, 0.4);
+  border-color: rgba(255, 255, 255, 0.2);
   transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+@supports not (backdrop-filter: blur(12px)) {
+  .glass {
+    background: rgba(1, 107, 97, 0.85);
+  }
+  
+  .glass-strong {
+    background: rgba(1, 107, 97, 0.9);
+  }
+  
+  .glass-card {
+    background: rgba(1, 107, 97, 0.88);
+  }
+  
+  .glass-card:hover {
+    background: rgba(90, 150, 144, 0.9);
+  }
 }
 
 /* Professional smooth animations with advanced easing */

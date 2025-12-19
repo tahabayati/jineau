@@ -3,6 +3,7 @@ import Hero from "@/components/Hero"
 import { Link } from "@/i18n/routing"
 import { differentiators, testimonials, subscription } from "@/data/siteCopy"
 import Image from "next/image"
+import AuroraBackground from "@/components/AuroraBackground"
 
 // SVG Icon Components
 const WaterIcon = () => (
@@ -152,22 +153,8 @@ export default async function HomePage() {
   ]
 
   return (
-    <div 
-      className="min-h-screen relative"
-      style={{
-        background: 'linear-gradient(135deg, #5A9A9B 0%, #6FA8AA 50%, #5A9A9B 100%)',
-        backgroundSize: '200% 200%',
-        animation: 'gradient-flow 20s ease infinite'
-      }}
-    >
-      {/* Global background overlay - more subtle */}
-      <div className="fixed inset-0 pointer-events-none" style={{ zIndex: 0 }}>
-        <div className="absolute top-0 left-0 w-full h-full aurora opacity-20" />
-        <div className="absolute top-1/4 -left-20 w-[600px] h-[600px] bg-white/5 rounded-full blur-[150px] animate-breathe" />
-        <div className="absolute bottom-1/4 -right-20 w-[500px] h-[500px] bg-white/5 rounded-full blur-[120px] animate-breathe" style={{ animationDelay: '-4s' }} />
-        <div className="absolute top-3/4 left-1/3 w-[400px] h-[400px] bg-white/4 rounded-full blur-[100px] animate-breathe" style={{ animationDelay: '-2s' }} />
-      </div>
-
+    <div className="min-h-screen relative">
+      <AuroraBackground variant="home" />
       <div className="relative z-10">
         <Hero
           title={t("heroTitle")}
@@ -179,12 +166,6 @@ export default async function HomePage() {
 
         {/* What is Jineau - Glassmorphism Section */}
         <section className="relative py-24 md:py-32 overflow-hidden">
-          {/* Section background elements */}
-          <div className="absolute inset-0">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-brand-mint/15 to-transparent rounded-full blur-[100px]" />
-            <div className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-brand-gold/10 to-transparent rounded-full blur-[80px]" />
-          </div>
-
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Section header */}
             <div className="text-center mb-20">
@@ -288,10 +269,6 @@ export default async function HomePage() {
 
         {/* Why Jineau - Features Section */}
         <section className="relative py-24 md:py-32 overflow-hidden">
-          <div className="absolute inset-0">
-            <div className="absolute top-1/2 left-0 w-[700px] h-[700px] bg-gradient-to-r from-brand-primary/12 to-transparent rounded-full blur-[150px] -translate-y-1/2" />
-          </div>
-
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16 relative">
               <span className="inline-block glass px-5 py-2.5 rounded-full text-brand-gold text-sm font-medium mb-6 tracking-wide">
@@ -372,11 +349,6 @@ export default async function HomePage() {
 
         {/* Subscription Plans */}
         <section className="relative py-24 md:py-32 overflow-hidden">
-          <div className="absolute inset-0">
-            <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-gradient-to-tl from-brand-gold/12 to-transparent rounded-full blur-[120px]" />
-            <div className="absolute top-0 left-1/4 w-[400px] h-[400px] bg-gradient-to-br from-brand-blue/10 to-transparent rounded-full blur-[100px]" />
-          </div>
-
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16 relative">
               <span className="inline-block glass px-5 py-2.5 rounded-full text-brand-mint text-sm font-medium mb-6 tracking-wide">
@@ -447,10 +419,6 @@ export default async function HomePage() {
 
         {/* Who We Grow For */}
         <section className="relative py-24 md:py-32 overflow-hidden">
-          <div className="absolute inset-0">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-gradient-radial from-brand-primary/8 to-transparent rounded-full blur-[150px]" />
-          </div>
-
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16 relative">
               <span className="inline-block glass px-5 py-2.5 rounded-full text-brand-mist text-sm font-medium mb-6 tracking-wide">
@@ -499,10 +467,6 @@ export default async function HomePage() {
 
         {/* Testimonials */}
         <section className="relative py-24 md:py-32 overflow-hidden">
-          <div className="absolute inset-0">
-            <div className="absolute top-0 right-1/4 w-[500px] h-[500px] bg-gradient-to-bl from-brand-gold/10 to-transparent rounded-full blur-[120px]" />
-          </div>
-
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16 relative">
               <span className="inline-block glass px-5 py-2.5 rounded-full text-brand-gold text-sm font-medium mb-6 tracking-wide">
@@ -557,11 +521,6 @@ export default async function HomePage() {
 
         {/* Final CTA */}
         <section className="relative py-24 md:py-32 overflow-hidden">
-          <div className="absolute inset-0">
-            <div className="absolute inset-0 bg-gradient-to-r from-brand-primary/15 via-brand-mint/8 to-brand-blue/15" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1200px] bg-gradient-radial from-brand-mint/10 to-transparent rounded-full blur-[200px] animate-breathe" />
-          </div>
-
           <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div className="glass-strong rounded-[48px] p-12 md:p-20">
               <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 drop-shadow-xl">

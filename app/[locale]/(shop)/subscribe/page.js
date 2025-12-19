@@ -37,7 +37,30 @@ export default async function SubscribePage() {
 
   return (
     <div className="py-12 md:py-20">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-0 z-10"
+        >
+          <img
+            src="/jineau-home-images/1-09.svg"
+            alt=""
+            className="absolute w-24 md:w-32 -top-10 -left-12 opacity-90 drop-shadow-lg"
+            style={{ animation: "float 12s ease-in-out infinite" }}
+          />
+          <img
+            src="/jineau-home-images/1-09.svg"
+            alt=""
+            className="absolute w-20 md:w-28 top-6 right-4 opacity-85 drop-shadow-md"
+            style={{ animation: "float 14s ease-in-out infinite", animationDelay: "1.5s" }}
+          />
+          <img
+            src="/jineau-home-images/1-09.svg"
+            alt=""
+            className="absolute w-20 md:w-28 -bottom-14 left-8 opacity-85 drop-shadow-md"
+            style={{ animation: "float 16s ease-in-out infinite", animationDelay: "3s" }}
+          />
+        </div>
         <SectionTitle
           title={t("title")}
           subtitle={t("subtitle")}
@@ -54,7 +77,7 @@ export default async function SubscribePage() {
           <FeatureList features={subscriptionFeatures} columns={3} />
         </div>
 
-        <div className="bg-gradient-to-br from-brand-mist/30 via-white to-brand-gold/10 rounded-2xl p-8 border border-brand-mist/30">
+        <div className="bg-linear-to-br from-brand-mist/30 via-white to-brand-gold/10 rounded-2xl p-8 border border-brand-mist/30">
           <h2 className="text-xl font-bold text-gray-900 mb-6 text-center">
             {t("howItWorks")}
           </h2>

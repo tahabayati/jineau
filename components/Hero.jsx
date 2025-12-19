@@ -50,94 +50,36 @@ export default function Hero({
 
   return (
     <section className="relative min-h-screen overflow-hidden flex items-center justify-center">
-      {/* Animated gradient background - matching home page gradient */}
-      <div className="absolute inset-0" style={{
-        background: 'linear-gradient(135deg, #5A9A9B 0%, #6FA8AA 50%, #5A9A9B 100%)',
-        backgroundSize: '200% 200%',
-        animation: 'gradient-flow 20s ease infinite'
-      }}>
-        {/* Large morphing orbs - smoother animations */}
-        <div 
-          className="absolute w-[900px] h-[900px] bg-gradient-to-br from-brand-primary/20 to-brand-mint/10 rounded-full blur-[150px] animate-breathe"
-          style={{ 
-            top: '5%', 
-            left: '-15%',
-            transform: `translate(${mousePosition.x * 0.008}px, ${mousePosition.y * 0.008}px)`,
-            willChange: 'transform'
+      {/* Decorative seedling illustrations */}
+      {[
+        { size: 100, top: '15%', left: '8%', opacity: 0.3 },
+        { size: 80, top: '25%', left: '5%', opacity: 0.25 },
+        { size: 90, top: '60%', left: '10%', opacity: 0.3 },
+        { size: 95, top: '20%', right: '8%', opacity: 0.3 },
+        { size: 85, top: '65%', right: '12%', opacity: 0.25 },
+      ].map((seedling, index) => (
+        <div
+          key={index}
+          className="absolute pointer-events-none"
+          style={{
+            width: `${seedling.size}px`,
+            height: `${seedling.size}px`,
+            top: seedling.top,
+            left: seedling.left,
+            right: seedling.right,
+            opacity: seedling.opacity,
+            zIndex: 1,
           }}
-        />
-        <div 
-          className="absolute w-[700px] h-[700px] bg-gradient-to-br from-brand-blue/15 to-brand-mist/8 rounded-full blur-[130px] animate-breathe"
-          style={{ 
-            bottom: '-5%', 
-            right: '-10%',
-            animationDelay: '-4s',
-            transform: `translate(${-mousePosition.x * 0.012}px, ${-mousePosition.y * 0.012}px)`,
-            willChange: 'transform'
-          }}
-        />
-        <div 
-          className="absolute w-[500px] h-[500px] bg-gradient-to-br from-brand-gold/10 to-brand-mint/5 rounded-full blur-[100px] animate-breathe"
-          style={{ 
-            top: '40%', 
-            left: '40%',
-            animationDelay: '-2s',
-            transform: `translate(-50%, -50%) translate(${mousePosition.x * 0.006}px, ${mousePosition.y * 0.006}px)`,
-            willChange: 'transform'
-          }}
-        />
-        
-        {/* Floating particles - smaller and subtler */}
-        {[...Array(30)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute rounded-full"
-            style={{
-              width: Math.random() * 4 + 1 + 'px',
-              height: Math.random() * 4 + 1 + 'px',
-              background: i % 3 === 0 ? 'rgba(112, 178, 178, 0.4)' : i % 3 === 1 ? 'rgba(233, 196, 106, 0.3)' : 'rgba(110, 140, 251, 0.3)',
-              top: Math.random() * 100 + '%',
-              left: Math.random() * 100 + '%',
-              animation: `float ${8 + Math.random() * 6}s ease-in-out infinite`,
-              animationDelay: `${Math.random() * 8}s`,
-            }}
+        >
+          <Image 
+            src="/jineau-home-images/1-07.svg" 
+            alt="" 
+            width={seedling.size} 
+            height={seedling.size}
+            className="w-full h-full"
           />
-        ))}
-
-        {/* Aurora effect layer */}
-        <div className="absolute inset-0 aurora opacity-20" style={{ zIndex: 1 }} />
-        
-        {/* 5 seedling illustrations - 1-07.svg around hero (no animation) */}
-        {[
-          { size: 100, top: '15%', left: '8%', opacity: 0.6 },
-          { size: 80, top: '25%', left: '5%', opacity: 0.5 },
-          { size: 90, top: '60%', left: '10%', opacity: 0.6 },
-          { size: 95, top: '20%', right: '8%', opacity: 0.6 },
-          { size: 85, top: '65%', right: '12%', opacity: 0.5 },
-        ].map((seedling, index) => (
-          <div
-            key={index}
-            className="absolute pointer-events-none"
-            style={{
-              width: `${seedling.size}px`,
-              height: `${seedling.size}px`,
-              top: seedling.top,
-              left: seedling.left,
-              right: seedling.right,
-              opacity: seedling.opacity,
-              zIndex: 2,
-            }}
-          >
-            <Image 
-              src="/jineau-home-images/1-07.svg" 
-              alt="" 
-              width={seedling.size} 
-              height={seedling.size}
-              className="w-full h-full"
-            />
-          </div>
-        ))}
-      </div>
+        </div>
+      ))}
 
       {/* Main content */}
       <div className="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
@@ -171,12 +113,12 @@ export default function Hero({
            {/* Right side - Text content */}
            <div className="relative text-center lg:text-left">
             {/* Badge */}
-            <div className={`inline-flex items-center gap-3 bg-brand-primary/80 border border-brand-mint/30 px-6 py-3 rounded-full mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '0.4s' }}>
+            <div className={`inline-flex items-center gap-3 bg-black/30 backdrop-blur-sm border border-white/20 px-6 py-3 rounded-full mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '0.4s' }}>
               <span className="relative flex h-2.5 w-2.5">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-mint opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-mint"></span>
               </span>
-              <span className="text-white/70 text-sm font-medium tracking-widest uppercase">Farm Fresh • Delivered Weekly</span>
+              <span className="text-white/85 text-sm font-medium tracking-widest uppercase">Farm Fresh • Delivered Weekly</span>
             </div>
 
             {/* Main heading with gradient */}
@@ -189,9 +131,9 @@ export default function Hero({
               <span className="text-white/70 text-2xl md:text-3xl lg:text-4xl font-medium mt-4 block">Fresh Microgreens, Pure Living</span>
             </h1>
 
-            {/* Subtitle with flat background */}
-            <div className={`bg-brand-primary/60 border border-brand-mint/20 rounded-2xl p-6 max-w-xl mb-8 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '0.8s' }}>
-              <p className="text-base md:text-lg text-white/70 leading-relaxed">
+            {/* Subtitle with glass surface */}
+            <div className={`bg-black/30 backdrop-blur-sm border border-white/10 rounded-2xl p-6 max-w-xl mb-8 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '0.8s' }}>
+              <p className="text-base md:text-lg text-white/85 leading-relaxed">
                 {subtitle}
               </p>
             </div>
@@ -213,7 +155,7 @@ export default function Hero({
               {secondaryCta && (
                 <Link
                   href={secondaryCta.href}
-                  className="group inline-flex items-center justify-center gap-3 px-10 py-5 bg-brand-secondary border border-brand-mint/30 text-white font-semibold rounded-full transition-all duration-300 hover:bg-brand-mint hover:border-brand-mint/50"
+                  className="group inline-flex items-center justify-center gap-3 px-10 py-5 bg-black/30 backdrop-blur-sm border border-white/20 text-white font-semibold rounded-full transition-all duration-300 hover:bg-white/10 hover:border-white/30"
                 >
                   <span>{secondaryCta.label}</span>
                   <svg className="w-5 h-5 group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -242,20 +184,6 @@ export default function Hero({
         </div>
       </div>
 
-      {/* Wavy lines pattern at bottom - 1-06.svg behind hero */}
-      <div className="absolute bottom-0 left-0 right-0 h-64 pointer-events-none" style={{ zIndex: 1 }}>
-        <Image 
-          src="/jineau-home-images/1-06.svg" 
-          alt="" 
-          width={1920} 
-          height={481}
-          className="w-full h-full object-cover opacity-60"
-          style={{ objectPosition: 'top' }}
-        />
-      </div>
-      
-      {/* Bottom gradient fade - seamless transition to home page gradient */}
-      <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-[#5A9A9B] via-[#5A9A9B]/80 to-transparent pointer-events-none" style={{ zIndex: 2 }} />
 
       {/* Scroll indicator */}
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
