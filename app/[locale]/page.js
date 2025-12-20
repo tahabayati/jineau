@@ -4,6 +4,7 @@ import { Link } from "@/i18n/routing"
 import { differentiators, testimonials, subscription } from "@/data/siteCopy"
 import Image from "next/image"
 import AuroraBackground from "@/components/AuroraBackground"
+import { generateWebSiteSchema } from "@/lib/seo"
 
 // SVG Icon Components
 const WaterIcon = () => (
@@ -124,10 +125,29 @@ const featureIcons = {
   shield: <ShieldCheckIcon />,
 }
 
-export default async function HomePage() {
+export async function generateMetadata({ params }) {
+  const { locale } = await params
+  const baseUrl = "https://jineau.ca"
+  
+  return {
+    alternates: {
+      canonical: `${baseUrl}/${locale}`,
+      languages: {
+        "en": `${baseUrl}/en`,
+        "fr": `${baseUrl}/fr`,
+        "fa": `${baseUrl}/fa`,
+      },
+    },
+  }
+}
+
+export default async function HomePage({ params }) {
+  const { locale } = await params
   const t = await getTranslations("home")
   const tFeatures = await getTranslations("features")
   const tCommon = await getTranslations("common")
+  
+  const websiteSchema = generateWebSiteSchema(locale)
 
   const translatedDifferentiators = [
     { ...differentiators[0], title: tFeatures("filteredAirWater"), description: tFeatures("filteredAirWaterDesc") },
@@ -153,10 +173,17 @@ export default async function HomePage() {
   ]
 
   return (
-    <div className="min-h-screen relative">
-      <AuroraBackground variant="home" />
-      <div className="relative z-10">
-        <Hero
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(websiteSchema),
+        }}
+      />
+      <div className="min-h-screen relative overflow-x-hidden">
+        <AuroraBackground variant="home" />
+        <div className="relative z-10">
+          <Hero
           title={t("heroTitle")}
           subtitle={t("heroSubtitle")}
           primaryCta={{ href: "/subscribe", label: tCommon("startSubscription") }}
@@ -235,14 +262,15 @@ export default async function HomePage() {
               </div>
 
               {/* Beaver character illustration in yellow heart */}
-              <div className="absolute -right-20 top-1/2 -translate-y-1/2 hidden xl:block">
+              <div className="absolute -right-20 top-1/2 -translate-y-1/2 hidden xl:block" aria-hidden="true">
                 <div className="relative w-48 h-48">
                   <Image 
                     src="/jineau-home-images/1-07.svg" 
-                    alt="Beaver mascot" 
+                    alt="" 
                     width={192} 
                     height={192}
                     className="w-full h-full"
+                    loading="lazy"
                   />
                 </div>
               </div>
@@ -294,15 +322,16 @@ export default async function HomePage() {
               </p>
               
               {/* Mortar and pestle icon with decorative shapes */}
-              <div className="absolute left-0 top-1/2 -translate-y-1/2 hidden lg:block">
+              <div className="absolute left-0 top-1/2 -translate-y-1/2 hidden lg:block" aria-hidden="true">
                 <div className="relative w-64 h-64">
                   <div className="absolute inset-0 flex items-center justify-center">
                     <Image 
                       src="/jineau-home-images/1-08.svg" 
-                      alt="Mortar and pestle" 
+                      alt="" 
                       width={256} 
                       height={256}
                       className="w-full h-full opacity-90"
+                      loading="lazy"
                     />
                   </div>
                   {/* Decorative star shapes */}
@@ -313,6 +342,7 @@ export default async function HomePage() {
                       width={64} 
                       height={64}
                       className="w-full h-full opacity-70"
+                      loading="lazy"
                     />
                   </div>
                   <div className="absolute -bottom-10 -right-10 w-20 h-20 animate-float" style={{ animationDelay: '-2s' }}>
@@ -322,6 +352,7 @@ export default async function HomePage() {
                       width={80} 
                       height={80}
                       className="w-full h-full opacity-70"
+                      loading="lazy"
                     />
                   </div>
                 </div>
@@ -366,48 +397,49 @@ export default async function HomePage() {
               </p>
               
               {/* Bowl with growth lines icon */}
-              <div className="absolute left-0 top-1/2 -translate-y-1/2 hidden lg:block">
+              <div className="absolute left-0 top-1/2 -translate-y-1/2 hidden lg:block" aria-hidden="true">
                 <div className="relative w-56 h-56">
                   <Image 
                     src="/jineau-home-images/1-15.svg" 
-                    alt="Subscription bowl" 
+                    alt="" 
                     width={224} 
                     height={224}
                     className="w-full h-full opacity-90"
+                    loading="lazy"
                   />
                 </div>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto items-stretch">
               {subscription.plans.map((plan, index) => (
                 <div
                   key={plan.name}
-                  className={`relative glass-card rounded-2xl md:rounded-3xl p-6 md:p-8 ${
+                  className={`relative glass-card rounded-2xl md:rounded-3xl p-6 md:p-8 flex flex-col ${
                     index === 1 
-                      ? 'border-brand-gold/30 md:scale-105 glow-gold' 
+                      ? 'border-brand-gold/30 md:scale-105 glow-gold mt-4 md:mt-0' 
                       : ''
                   }`}
                 >
                   {index === 1 && (
-                    <div className="absolute -top-3 md:-top-4 left-1/2 -translate-x-1/2">
+                    <div className="absolute -top-3 md:-top-4 left-1/2 -translate-x-1/2 z-10 whitespace-nowrap">
                       <span className="bg-gradient-to-r from-brand-gold to-amber-400 text-gray-900 text-xs md:text-sm font-bold px-4 py-1 md:px-5 md:py-1.5 rounded-full shadow-lg">
                         Most Popular
                       </span>
                     </div>
                   )}
 
-                <h3 className="text-xl md:text-2xl font-bold text-white mb-1 md:mb-2 drop-shadow-md">{plan.name}</h3>
-                <p className="text-sm md:text-base text-white/70 mb-6 md:mb-8">{plan.description}</p>
+                  <h3 className={`text-xl md:text-2xl font-bold text-white mb-1 md:mb-2 drop-shadow-md ${index === 1 ? 'pt-2' : ''}`}>{plan.name}</h3>
+                  <p className="text-sm md:text-base text-white/70 mb-6 md:mb-8">{plan.description}</p>
                   
-                  <div className="mb-6 md:mb-8">
+                  <div className="mb-6 md:mb-8 flex-grow">
                     <span className="text-5xl md:text-6xl font-bold gradient-text drop-shadow-lg">{plan.packs}</span>
                     <span className="text-white/75 ml-2 text-base md:text-lg">packs/week</span>
                   </div>
 
                   <Link
                     href="/subscribe"
-                    className={`block w-full py-3 md:py-4 rounded-full font-semibold text-sm md:text-base text-center transition-all duration-500 ${
+                    className={`block w-full py-3 md:py-4 rounded-full font-semibold text-sm md:text-base text-center transition-all duration-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-mint focus-visible:ring-offset-2 focus-visible:ring-offset-transparent ${
                       index === 1
                         ? 'bg-gradient-to-r from-brand-gold to-amber-400 text-gray-900 hover:shadow-[0_0_40px_rgba(233,196,106,0.4)] hover:scale-105'
                         : 'glass text-white hover:bg-white/10 hover:scale-105'
@@ -436,14 +468,15 @@ export default async function HomePage() {
               </p>
               
               {/* Beaver character next to pot */}
-              <div className="absolute right-0 top-1/2 -translate-y-1/2 hidden xl:block">
+              <div className="absolute right-0 top-1/2 -translate-y-1/2 hidden xl:block" aria-hidden="true">
                 <div className="relative w-64 h-64">
                   <Image 
                     src="/jineau-home-images/11.png" 
-                    alt="Beaver with pot" 
+                    alt="" 
                     width={256} 
                     height={256}
                     className="w-full h-full"
+                    loading="lazy"
                   />
                 </div>
               </div>
@@ -486,14 +519,15 @@ export default async function HomePage() {
               </p>
               
               {/* Beaver character in heart saying HI */}
-              <div className="absolute left-0 top-1/2 -translate-y-1/2 hidden lg:block">
+              <div className="absolute left-0 top-1/2 -translate-y-1/2 hidden lg:block" aria-hidden="true">
                 <div className="relative w-56 h-56">
                   <Image 
                     src="/jineau-home-images/14.png" 
-                    alt="Beaver mascot" 
+                    alt="" 
                     width={224} 
                     height={224}
                     className="w-full h-full"
+                    loading="lazy"
                   />
                 </div>
               </div>
@@ -539,16 +573,16 @@ export default async function HomePage() {
               <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
                 <Link
                   href="/subscribe"
-                  className="group inline-flex items-center justify-center gap-2 md:gap-3 px-8 py-4 md:px-10 md:py-5 bg-gradient-to-r from-brand-mint to-brand-primary text-white font-semibold text-sm md:text-base rounded-full transition-all duration-500 hover:shadow-[0_0_60px_rgba(112,178,178,0.5)] hover:scale-105"
+                  className="group inline-flex items-center justify-center gap-2 md:gap-3 px-8 py-4 md:px-10 md:py-5 bg-gradient-to-r from-brand-mint to-brand-primary text-white font-semibold text-sm md:text-base rounded-full transition-all duration-500 hover:shadow-[0_0_60px_rgba(112,178,178,0.5)] hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-mint focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
                 >
                   {tCommon("startSubscription")}
-                  <svg className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </Link>
                 <Link
                   href="/shop"
-                  className="inline-flex items-center justify-center gap-2 md:gap-3 px-8 py-4 md:px-10 md:py-5 glass text-white font-semibold text-sm md:text-base rounded-full transition-all duration-500 hover:bg-white/10 hover:scale-105"
+                  className="inline-flex items-center justify-center gap-2 md:gap-3 px-8 py-4 md:px-10 md:py-5 glass text-white font-semibold text-sm md:text-base rounded-full transition-all duration-500 hover:bg-white/10 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-mint focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
                 >
                   {tCommon("shopMicrogreens")}
                 </Link>
@@ -556,7 +590,8 @@ export default async function HomePage() {
             </div>
           </div>
         </section>
+        </div>
       </div>
-    </div>
+    </>
   )
 }

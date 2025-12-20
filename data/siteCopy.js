@@ -194,7 +194,7 @@ export const seoKeywords = [
 
 export const contactInfo = {
   email: "hello@jineau.ca",
-  phone: "(514) 555-0123",
+  phone: null,
   address: `${regionConfig.companyLocation}, ${regionConfig.province}`,
   socialMedia: {
     instagram: "https://instagram.com/jineaufarm",

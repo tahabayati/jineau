@@ -28,6 +28,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }) {
   const { locale } = await params
+  const baseUrl = "https://jineau.ca"
 
   const titles = {
     en: "Jineau - The Water of Life | Fresh Microgreens & Hydrosols",
@@ -50,10 +51,19 @@ export async function generateMetadata({ params }) {
     keywords: ["microgreens", "hydrosols", "Montreal", "Montérégie", "pesticide-free", "fresh greens", "subscription"],
     authors: [{ name: "Jineau" }],
     creator: "Jineau",
+    metadataBase: new URL(baseUrl),
+    alternates: {
+      canonical: `${baseUrl}/${locale}`,
+      languages: {
+        "en": `${baseUrl}/en`,
+        "fr": `${baseUrl}/fr`,
+        "fa": `${baseUrl}/fa`,
+      },
+    },
     openGraph: {
       type: "website",
       locale: locale === "fa" ? "fa_IR" : locale === "fr" ? "fr_CA" : "en_CA",
-      url: "https://jineau.ca",
+      url: `${baseUrl}/${locale}`,
       siteName: "Jineau",
       title: titles[locale] || titles.en,
       description: descriptions[locale] || descriptions.en,
@@ -111,8 +121,14 @@ export default async function LocaleLayout({ children, params }) {
       >
         <NextIntlClientProvider messages={messages}>
           <CartProvider>
+            <a 
+              href="#main-content" 
+              className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-brand-primary focus:text-white focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-mint"
+            >
+              Skip to main content
+            </a>
             <Header locale={locale} />
-            <main className="flex-grow">{children}</main>
+            <main id="main-content" className="flex-grow">{children}</main>
             <Footer locale={locale} />
             <CartDrawer />
           </CartProvider>

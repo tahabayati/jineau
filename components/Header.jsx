@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useCallback } from "react"
 import { useTranslations } from "next-intl"
 import { Link, usePathname, useRouter } from "@/i18n/routing"
 import { useCart } from "./CartProvider"
@@ -9,6 +9,7 @@ import Image from "next/image"
 
 export default function Header({ locale }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [forYouDropdownOpen, setForYouDropdownOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
   const [searchResults, setSearchResults] = useState([])
@@ -17,10 +18,46 @@ export default function Header({ locale }) {
   const [showMobileSearch, setShowMobileSearch] = useState(false)
   const searchRef = useRef(null)
   const searchInputRef = useRef(null)
+  const forYouDropdownRef = useRef(null)
+  const forYouButtonRef = useRef(null)
   const t = useTranslations("nav")
   const tCommon = useTranslations("common")
   const router = useRouter()
   const { itemCount, openCart } = useCart()
+
+  const closeForYouDropdown = useCallback(() => {
+    setForYouDropdownOpen(false)
+  }, [])
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        if (forYouDropdownOpen) {
+          closeForYouDropdown()
+          forYouButtonRef.current?.focus()
+        }
+        if (mobileMenuOpen) {
+          setMobileMenuOpen(false)
+        }
+      }
+    }
+
+    const handleClickOutside = (e) => {
+      if (forYouDropdownOpen && forYouDropdownRef.current && !forYouDropdownRef.current.contains(e.target)) {
+        closeForYouDropdown()
+      }
+    }
+
+    document.addEventListener("keydown", handleKeyDown)
+    document.addEventListener("click", handleClickOutside)
+    document.addEventListener("touchstart", handleClickOutside)
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown)
+      document.removeEventListener("click", handleClickOutside)
+      document.removeEventListener("touchstart", handleClickOutside)
+    }
+  }, [forYouDropdownOpen, mobileMenuOpen, closeForYouDropdown])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -125,20 +162,21 @@ export default function Header({ locale }) {
     }`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 md:h-20">
-          <Link href="/" className="flex items-center gap-3 group">
+          <Link href="/" className="flex items-center gap-3 group" aria-label="Jineau - Go to homepage">
             <div className="relative w-10 h-10 flex items-center justify-center">
               <Image 
                 src="/jineauLogo.svg" 
-                alt="Jineau Logo" 
+                alt="" 
                 width={40} 
                 height={40}
                 className="w-full h-full transition-transform duration-300 group-hover:scale-110"
+                aria-hidden="true"
               />
             </div>
-            <span className="text-xl md:text-2xl font-bold gradient-text hidden sm:block transition-all duration-300 group-hover:scale-105">Jineau</span>
+            <span className="text-xl md:text-2xl font-bold gradient-text hidden sm:block transition-all duration-300 group-hover:scale-105" aria-hidden="true">Jineau</span>
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-2">
+          <nav className="hidden lg:flex items-center gap-2" aria-label="Main navigation">
             {mainLinks.map((link) => (
               <Link
                 key={link.href}
@@ -150,21 +188,40 @@ export default function Header({ locale }) {
               </Link>
             ))}
 
-            <div className="relative group">
-              <button className="px-4 py-2 text-white/90 hover:text-white font-medium transition-all duration-300 rounded-lg hover:bg-white/10 hover:backdrop-blur-sm flex items-center gap-1 relative">
+            <div className="relative" ref={forYouDropdownRef}>
+              <button
+                ref={forYouButtonRef}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  setForYouDropdownOpen(!forYouDropdownOpen)
+                }}
+                onMouseEnter={() => setForYouDropdownOpen(true)}
+                onMouseLeave={() => setForYouDropdownOpen(false)}
+                aria-expanded={forYouDropdownOpen}
+                aria-haspopup="true"
+                className="px-4 py-2 text-white/90 hover:text-white font-medium transition-all duration-300 rounded-lg hover:bg-white/10 hover:backdrop-blur-sm flex items-center gap-1 relative"
+              >
                 {t("forYou")}
-                <svg className="w-4 h-4 transition-transform duration-300 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className={`w-4 h-4 transition-transform duration-300 ${forYouDropdownOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                 </svg>
-                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-transparent via-brand-mint to-transparent group-hover:w-full transition-all duration-300" />
+                <span className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-gradient-to-r from-transparent via-brand-mint to-transparent transition-all duration-300 ${forYouDropdownOpen ? 'w-full' : 'w-0'}`} aria-hidden="true" />
               </button>
 
-              <div className="absolute top-full left-0 mt-2 w-56 bg-black/40 backdrop-blur-xl border border-white/15 rounded-xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
+              <div 
+                className={`absolute top-full left-0 mt-2 w-56 bg-black/40 backdrop-blur-xl border border-white/15 rounded-xl py-2 shadow-[0_8px_32px_rgba(0,0,0,0.4)] transition-all duration-300 ${forYouDropdownOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}
+                onMouseEnter={() => setForYouDropdownOpen(true)}
+                onMouseLeave={() => setForYouDropdownOpen(false)}
+                role="menu"
+                aria-label="For You submenu"
+              >
                 {audienceLinks.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="block px-4 py-3 text-white/90 hover:text-white hover:bg-white/10 transition-all duration-200 first:rounded-t-xl last:rounded-b-xl"
+                    onClick={() => setForYouDropdownOpen(false)}
+                    className="block px-4 py-3 text-white/90 hover:text-white hover:bg-white/10 transition-all duration-200 first:rounded-t-xl last:rounded-b-xl focus-visible:outline-none focus-visible:bg-white/10"
+                    role="menuitem"
                   >
                     {link.label}
                   </Link>
@@ -344,10 +401,12 @@ export default function Header({ locale }) {
             
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden relative p-2.5 text-white/90 hover:text-white hover:bg-white/10 backdrop-blur-sm rounded-full transition-all duration-300 group"
-              aria-label="Toggle menu"
+              className="lg:hidden relative p-2.5 text-white/90 hover:text-white hover:bg-white/10 backdrop-blur-sm rounded-full transition-all duration-300 group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-mint"
+              aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-menu"
             >
-              <div className="relative w-6 h-5 flex flex-col justify-between">
+              <div className="relative w-6 h-5 flex flex-col justify-between" aria-hidden="true">
                 <span
                   className={`block h-0.5 w-full bg-current rounded-full transition-all duration-300 ${
                     mobileMenuOpen ? "rotate-45 translate-y-2" : ""
@@ -370,10 +429,10 @@ export default function Header({ locale }) {
 
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden">
+          <div className="lg:hidden" id="mobile-menu">
             <div className="bg-black/40 backdrop-blur-xl rounded-xl mt-3 mb-4 overflow-hidden border border-white/15 shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
               {/* Navigation Menu */}
-              <nav className="flex flex-col">
+              <nav className="flex flex-col" aria-label="Mobile navigation">
                 {/* Main Links */}
                 <div className="px-4 py-2">
                   <div className="text-xs font-semibold text-white/40 uppercase tracking-wider mb-2 px-2">
