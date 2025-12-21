@@ -31,13 +31,13 @@ export default function GiftOneSection({
         <div className="flex-shrink-0 mt-1">
           <button
             onClick={() => onToggle(!enabled)}
-            className={`w-12 h-6 rounded-full transition-colors relative ${
+            className={`w-12 h-6 rounded-full transition-colors relative overflow-hidden ${
               enabled ? "bg-brand-primary" : "bg-brand-secondary/40"
             }`}
           >
             <span
               className={`absolute top-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform ${
-                enabled ? "translate-x-6" : "translate-x-0.5"
+                enabled ? "translate-x-[1.375rem]" : "translate-x-0.5"
               }`}
             />
           </button>
