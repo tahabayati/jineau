@@ -10,6 +10,14 @@ const nextConfig = {
         hostname: "**",
       },
     ],
+    formats: ['image/avif', 'image/webp'],
+  },
+  reactStrictMode: true,
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
+  experimental: {
+    optimizeCss: true,
   },
 }
 

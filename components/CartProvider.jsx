@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, useContext, useState, useEffect } from "react"
+import { createContext, useContext, useState, useEffect, useMemo, useCallback } from "react"
 import { getShippingFee } from "@/lib/config"
 
 const CartContext = createContext()
@@ -36,7 +36,7 @@ export default function CartProvider({ children }) {
     }
   }, [items, isLoaded])
 
-  const addItem = (product, quantity = 1) => {
+  const addItem = useCallback((product, quantity = 1) => {
     setItems((prev) => {
       const existing = prev.find((item) => item.slug === product.slug)
       if (existing) {
@@ -49,15 +49,15 @@ export default function CartProvider({ children }) {
       return [...prev, { ...product, quantity }]
     })
     setIsOpen(true)
-  }
+  }, [])
 
-  const removeItem = (slug) => {
+  const removeItem = useCallback((slug) => {
     setItems((prev) => prev.filter((item) => item.slug !== slug))
-  }
+  }, [])
 
-  const updateQuantity = (slug, quantity) => {
+  const updateQuantity = useCallback((slug, quantity) => {
     if (quantity <= 0) {
-      removeItem(slug)
+      setItems((prev) => prev.filter((item) => item.slug !== slug))
       return
     }
     setItems((prev) =>
@@ -65,22 +65,22 @@ export default function CartProvider({ children }) {
         item.slug === slug ? { ...item, quantity } : item
       )
     )
-  }
+  }, [])
 
-  const clearCart = () => {
+  const clearCart = useCallback(() => {
     setItems([])
-  }
+  }, [])
 
-  const openCart = () => setIsOpen(true)
-  const closeCart = () => setIsOpen(false)
-  const toggleCart = () => setIsOpen((prev) => !prev)
+  const openCart = useCallback(() => setIsOpen(true), [])
+  const closeCart = useCallback(() => setIsOpen(false), [])
+  const toggleCart = useCallback(() => setIsOpen((prev) => !prev), [])
 
-  const itemCount = items.reduce((sum, item) => sum + item.quantity, 0)
-  const subtotal = items.reduce((sum, item) => sum + item.price * item.quantity, 0)
-  const shippingFee = getShippingFee(subtotal)
-  const total = subtotal + shippingFee
+  const itemCount = useMemo(() => items.reduce((sum, item) => sum + item.quantity, 0), [items])
+  const subtotal = useMemo(() => items.reduce((sum, item) => sum + item.price * item.quantity, 0), [items])
+  const shippingFee = useMemo(() => getShippingFee(subtotal), [subtotal])
+  const total = useMemo(() => subtotal + shippingFee, [subtotal, shippingFee])
 
-  const value = {
+  const value = useMemo(() => ({
     items,
     isOpen,
     isLoaded,
@@ -95,7 +95,7 @@ export default function CartProvider({ children }) {
     openCart,
     closeCart,
     toggleCart,
-  }
+  }), [items, isOpen, isLoaded, itemCount, subtotal, shippingFee, total, addItem, removeItem, updateQuantity, clearCart, openCart, closeCart, toggleCart])
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>
 }

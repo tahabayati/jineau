@@ -1,13 +1,13 @@
 "use client"
 
-import { useState, useEffect, useRef, useCallback } from "react"
+import { useState, useEffect, useRef, useCallback, memo } from "react"
 import { useTranslations } from "next-intl"
 import { Link, usePathname, useRouter } from "@/i18n/routing"
 import { useCart } from "./CartProvider"
 import LanguageSwitcher from "./LanguageSwitcher"
 import Image from "next/image"
 
-export default function Header({ locale }) {
+function Header({ locale }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [forYouDropdownOpen, setForYouDropdownOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -48,9 +48,9 @@ export default function Header({ locale }) {
       }
     }
 
-    document.addEventListener("keydown", handleKeyDown)
-    document.addEventListener("click", handleClickOutside)
-    document.addEventListener("touchstart", handleClickOutside)
+    document.addEventListener("keydown", handleKeyDown, { passive: true })
+    document.addEventListener("click", handleClickOutside, { passive: true })
+    document.addEventListener("touchstart", handleClickOutside, { passive: true })
 
     return () => {
       document.removeEventListener("keydown", handleKeyDown)
@@ -60,14 +60,21 @@ export default function Header({ locale }) {
   }, [forYouDropdownOpen, mobileMenuOpen, closeForYouDropdown])
 
   useEffect(() => {
+    let ticking = false
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20)
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          setScrolled(window.scrollY > 20)
+          ticking = false
+        })
+        ticking = true
+      }
     }
-    window.addEventListener("scroll", handleScroll)
+    window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  // Search functionality
+  // Search functionality with debounce
   useEffect(() => {
     const searchProducts = async () => {
       if (searchQuery.trim().length < 2) {
@@ -92,36 +99,30 @@ export default function Header({ locale }) {
       }
     }
 
-    const timeoutId = setTimeout(searchProducts, 300)
+    const timeoutId = setTimeout(searchProducts, 400)
     return () => clearTimeout(timeoutId)
   }, [searchQuery])
 
-  // Close search results when clicking outside
+  // Close search results and mobile menu when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (searchRef.current && !searchRef.current.contains(event.target)) {
         setShowSearchResults(false)
       }
-    }
-
-    document.addEventListener("mousedown", handleClickOutside)
-    return () => document.removeEventListener("mousedown", handleClickOutside)
-  }, [])
-  
-  // Close mobile menu when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      const header = event.target.closest('header')
-      if (!header && mobileMenuOpen) {
-        setMobileMenuOpen(false)
+      
+      if (mobileMenuOpen) {
+        const header = event.target.closest('header')
+        if (!header) {
+          setMobileMenuOpen(false)
+        }
       }
     }
 
-    if (mobileMenuOpen) {
-      document.addEventListener("click", handleClickOutside)
-      return () => document.removeEventListener("click", handleClickOutside)
+    if (showSearchResults || mobileMenuOpen) {
+      document.addEventListener("mousedown", handleClickOutside, { passive: true })
+      return () => document.removeEventListener("mousedown", handleClickOutside)
     }
-  }, [mobileMenuOpen])
+  }, [showSearchResults, mobileMenuOpen])
 
   const handleSearchSubmit = (e) => {
     e.preventDefault()
@@ -547,3 +548,5 @@ export default function Header({ locale }) {
     </header>
   )
 }
+
+export default memo(Header)

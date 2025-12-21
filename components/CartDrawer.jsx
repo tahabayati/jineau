@@ -1,11 +1,12 @@
 "use client"
 
+import { memo } from "react"
 import { useCart } from "./CartProvider"
 import { useTranslations } from "next-intl"
 import Button from "./Button"
 import { shippingConfig } from "@/lib/config"
 
-export default function CartDrawer() {
+function CartDrawer() {
   const t = useTranslations("cart")
   const { items, isOpen, closeCart, subtotal, shippingFee, total, updateQuantity, removeItem } = useCart()
 
@@ -126,7 +127,9 @@ export default function CartDrawer() {
           </div>
         )}
       </div>
-    </>
+      </>
   )
 }
+
+export default memo(CartDrawer)
 

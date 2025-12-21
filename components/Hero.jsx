@@ -1,10 +1,10 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, memo } from "react"
 import { Link } from "@/i18n/routing"
 import Image from "next/image"
 
-export default function Hero({
+function Hero({
   title,
   subtitle,
   primaryCta,
@@ -14,7 +14,9 @@ export default function Hero({
   const [isVisible, setIsVisible] = useState(false)
 
   useEffect(() => {
-    setIsVisible(true)
+    // Use setTimeout to batch state update after initial render
+    const timer = setTimeout(() => setIsVisible(true), 50)
+    return () => clearTimeout(timer)
   }, [])
 
   return (
@@ -187,3 +189,5 @@ export default function Hero({
     </section>
   )
 }
+
+export default memo(Hero)

@@ -115,23 +115,15 @@ textarea:focus-visible {
   }
 }
 
-/* Professional smooth animations with advanced easing */
+/* Performance-optimized animations */
 @keyframes float {
   0%, 100% { 
-    transform: translateY(0) translateX(0) rotate(0deg) scale(1); 
+    transform: translate3d(0, 0, 0); 
     opacity: 0.8;
   }
-  25% { 
-    transform: translateY(-12px) translateX(4px) rotate(1deg) scale(1.01); 
-    opacity: 0.9;
-  }
   50% { 
-    transform: translateY(-20px) translateX(-2px) rotate(-0.5deg) scale(1.02); 
+    transform: translate3d(0, -15px, 0); 
     opacity: 1;
-  }
-  75% { 
-    transform: translateY(-8px) translateX(2px) rotate(0.5deg) scale(1.01); 
-    opacity: 0.9;
   }
 }
 
@@ -139,12 +131,10 @@ textarea:focus-visible {
   0%, 100% { 
     opacity: 0.4; 
     transform: scale(1);
-    filter: blur(0px);
   }
   50% { 
     opacity: 0.75; 
-    transform: scale(1.12);
-    filter: blur(2px);
+    transform: scale(1.05);
   }
 }
 
@@ -156,19 +146,9 @@ textarea:focus-visible {
 @keyframes morph {
   0%, 100% { 
     border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; 
-    transform: scale(1);
-  }
-  25% { 
-    border-radius: 40% 60% 50% 50% / 40% 50% 60% 50%; 
-    transform: scale(1.02);
   }
   50% { 
     border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; 
-    transform: scale(1.05);
-  }
-  75% { 
-    border-radius: 50% 40% 60% 50% / 60% 40% 50% 50%; 
-    transform: scale(1.02);
   }
 }
 
@@ -186,13 +166,11 @@ textarea:focus-visible {
 @keyframes breathe {
   0%, 100% { 
     opacity: 0.4; 
-    transform: scale(1) translateY(0);
-    filter: blur(0px);
+    transform: scale(1);
   }
   50% { 
     opacity: 0.75; 
-    transform: scale(1.18) translateY(-10px);
-    filter: blur(1px);
+    transform: scale(1.08);
   }
 }
 
@@ -249,66 +227,54 @@ textarea:focus-visible {
   }
 }
 
-/* Smooth animation classes with professional easing */
+/* Performance-optimized animation classes */
 .animate-float {
-  animation: float 12s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-  will-change: transform, opacity;
+  animation: float 12s ease-in-out infinite;
 }
 
 .animate-float-delayed {
-  animation: float 12s cubic-bezier(0.4, 0, 0.2, 1) 3s infinite;
-  will-change: transform, opacity;
+  animation: float 12s ease-in-out 3s infinite;
 }
 
 .animate-pulse-glow {
-  animation: pulse-glow 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  will-change: transform, opacity, filter;
+  animation: pulse-glow 8s ease-in-out infinite;
 }
 
 .animate-morph {
-  animation: morph 16s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-  will-change: transform, border-radius;
+  animation: morph 16s ease-in-out infinite;
 }
 
 .animate-rotate-slow {
   animation: rotate-slow 50s linear infinite;
-  will-change: transform;
 }
 
 .animate-gradient-flow {
   background-size: 200% 200%;
-  animation: gradient-flow 10s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-  will-change: background-position;
+  animation: gradient-flow 10s ease-in-out infinite;
 }
 
 .animate-breathe {
-  animation: breathe 10s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  will-change: transform, opacity, filter;
+  animation: breathe 10s ease-in-out infinite;
 }
 
 .animate-fade-in-up {
-  animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  will-change: transform, opacity;
+  animation: fadeInUp 0.6s ease-out forwards;
 }
 
 .animate-fade-in {
-  animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  will-change: opacity;
+  animation: fadeIn 0.6s ease-out forwards;
 }
 
 .animate-slide-in-left {
-  animation: slideInFromLeft 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  will-change: transform, opacity;
+  animation: slideInFromLeft 0.6s ease-out forwards;
 }
 
 .animate-slide-in-right {
-  animation: slideInFromRight 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  will-change: transform, opacity;
+  animation: slideInFromRight 0.6s ease-out forwards;
 }
 
 .animate-scale-in {
-  animation: scaleIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-  will-change: transform, opacity;
+  animation: scaleIn 0.5s ease-out forwards;
 }
 
 /* Gradient text with smooth animation */
@@ -318,8 +284,7 @@ textarea:focus-visible {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: gradient-flow 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-  will-change: background-position;
+  animation: gradient-flow 8s ease-in-out infinite;
 }
 
 .gradient-text-gold {
@@ -338,8 +303,7 @@ textarea:focus-visible {
     rgba(255, 255, 255, 0) 100%
   );
   background-size: 200% 100%;
-  animation: shimmer 5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-  will-change: background-position;
+  animation: shimmer 5s ease-in-out infinite;
 }
 
 /* Glow effects */
@@ -359,14 +323,13 @@ textarea:focus-visible {
   text-shadow: 0 0 40px rgba(112, 178, 178, 0.5);
 }
 
-/* Icon container hover effect - smoother */
+/* Icon container hover effect */
 .icon-container {
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform;
+  transition: transform 0.3s ease;
 }
 
 .icon-container:hover {
-  transform: scale(1.12) rotate(5deg);
+  transform: scale(1.1);
 }
 
 /* Mesh gradient backgrounds */
@@ -379,7 +342,7 @@ textarea:focus-visible {
     radial-gradient(at 0% 100%, rgba(1, 107, 97, 0.12) 0px, transparent 50%);
 }
 
-/* Aurora effect - smoother */
+/* Aurora effect */
 .aurora {
   background: linear-gradient(
     45deg,
@@ -390,8 +353,7 @@ textarea:focus-visible {
     rgba(1, 107, 97, 0.1) 100%
   );
   background-size: 400% 400%;
-  animation: gradient-flow 25s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-  will-change: background-position;
+  animation: gradient-flow 25s ease-in-out infinite;
 }
 
 /* Noise texture overlay */
@@ -404,9 +366,9 @@ textarea:focus-visible {
   pointer-events: none;
 }
 
-/* Scrollbar styling */
+/* Scrollbar styling with smooth interaction */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -414,28 +376,45 @@ textarea:focus-visible {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(112, 178, 178, 0.2);
-  border-radius: 3px;
+  background: rgba(112, 178, 178, 0.3);
+  border-radius: 4px;
+  transition: background 0.2s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(112, 178, 178, 0.4);
+  background: rgba(112, 178, 178, 0.5);
 }
 
-/* Smooth scroll */
+::-webkit-scrollbar-thumb:active {
+  background: rgba(112, 178, 178, 0.7);
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(112, 178, 178, 0.3) rgba(255, 255, 255, 0.02);
+}
+
+/* Enhanced smooth scroll */
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 5rem; /* Account for fixed header */
 }
 
-/* Button hover states - smoother */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Button hover states */
 .btn-glow {
-  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  will-change: transform, box-shadow;
+  transition: all 0.3s ease;
 }
 
 .btn-glow:hover {
-  box-shadow: 0 0 50px rgba(112, 178, 178, 0.5);
-  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 0 40px rgba(112, 178, 178, 0.4);
+  transform: translateY(-2px);
 }
 
 .btn-loading {
@@ -463,14 +442,14 @@ html {
   }
 }
 
-/* Link transitions - smoother */
+/* Link transitions */
 a {
-  transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: color 0.2s ease;
 }
 
-/* Smooth scroll behavior */
-html {
-  scroll-behavior: smooth;
+/* Optimized scrollbar for smooth experience */
+* {
+  scroll-margin-top: 5rem; /* Ensures anchors scroll to visible position below header */
 }
 
 /* Performance optimizations */

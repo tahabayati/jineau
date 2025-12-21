@@ -1,6 +1,8 @@
 "use client"
 
-export default function AuroraBackground({ variant = "default" }) {
+import { memo } from "react"
+
+function AuroraBackground({ variant = "default" }) {
   const isHome = variant === "home"
   const isVivid = variant === "vivid"
   
@@ -12,23 +14,16 @@ export default function AuroraBackground({ variant = "default" }) {
       <div className="aurora-blob aurora-blob-1" />
       <div className="aurora-blob aurora-blob-2" />
       <div className="aurora-blob aurora-blob-3" />
-      <div className="aurora-blob aurora-blob-4" />
-      <div className="aurora-blob aurora-blob-5" />
-      <div className="aurora-blob aurora-blob-6" />
-      <div className="aurora-ribbon aurora-ribbon-1" />
-      <div className="aurora-ribbon aurora-ribbon-2" />
       <div className="aurora-highlight" />
-      <div className="aurora-shimmer" />
       <div className="aurora-noise" />
       
       <style jsx>{`
         .aurora-background-wrapper {
           --aurora-base: #061a0f;
           --aurora-opacity: 0.32;
-          --aurora-blur: 90px;
-          --aurora-saturation: 1.1;
+          --aurora-blur: 60px;
+          --aurora-saturation: 1.05;
           --aurora-brightness: 1;
-          --aurora-motion: 1;
           
           position: fixed;
           inset: 0;
@@ -36,20 +31,22 @@ export default function AuroraBackground({ variant = "default" }) {
           overflow: hidden;
           pointer-events: none;
           background: linear-gradient(180deg, #061a0f 0%, #071c12 30%, #082818 60%, #071c12 100%);
+          transform: translateZ(0);
+          backface-visibility: hidden;
         }
 
         .aurora-home {
           --aurora-opacity: 0.38;
-          --aurora-blur: 95px;
-          --aurora-saturation: 1.15;
-          --aurora-brightness: 1.05;
+          --aurora-blur: 65px;
+          --aurora-saturation: 1.08;
+          --aurora-brightness: 1.02;
         }
 
         .aurora-vivid {
           --aurora-opacity: 0.45;
-          --aurora-blur: 100px;
-          --aurora-saturation: 1.2;
-          --aurora-brightness: 1.1;
+          --aurora-blur: 70px;
+          --aurora-saturation: 1.1;
+          --aurora-brightness: 1.05;
         }
 
         .aurora-blob {
@@ -58,7 +55,8 @@ export default function AuroraBackground({ variant = "default" }) {
           filter: blur(var(--aurora-blur)) saturate(var(--aurora-saturation)) brightness(var(--aurora-brightness));
           opacity: var(--aurora-opacity);
           mix-blend-mode: screen;
-          will-change: transform, opacity;
+          transform: translateZ(0);
+          backface-visibility: hidden;
         }
 
         .aurora-blob-1 {
@@ -67,7 +65,7 @@ export default function AuroraBackground({ variant = "default" }) {
           background: radial-gradient(circle, #2dd4bf 0%, #14b8a6 30%, #0d9488 50%, transparent 75%);
           top: -15%;
           left: -10%;
-          animation: auroraDrift1 32s ease-in-out infinite;
+          animation: auroraDrift1 40s ease-in-out infinite;
         }
 
         .aurora-blob-2 {
@@ -76,7 +74,7 @@ export default function AuroraBackground({ variant = "default" }) {
           background: radial-gradient(circle, #34d399 0%, #10b981 25%, #059669 45%, transparent 70%);
           top: 15%;
           right: -12%;
-          animation: auroraDrift2 38s ease-in-out infinite;
+          animation: auroraDrift2 45s ease-in-out infinite;
         }
 
         .aurora-blob-3 {
@@ -85,72 +83,7 @@ export default function AuroraBackground({ variant = "default" }) {
           background: radial-gradient(circle, #10b981 0%, #059669 35%, #047857 55%, transparent 78%);
           bottom: 5%;
           left: 18%;
-          animation: auroraDrift3 29s ease-in-out infinite;
-        }
-
-        .aurora-blob-4 {
-          width: 650px;
-          height: 650px;
-          background: radial-gradient(circle, #22c55e 0%, #16a34a 30%, #15803d 50%, transparent 73%);
-          top: 45%;
-          right: 20%;
-          animation: auroraDrift4 35s ease-in-out infinite, auroraPulse 8s ease-in-out infinite;
-        }
-
-        .aurora-blob-5 {
-          width: 750px;
-          height: 750px;
-          background: radial-gradient(circle, #4ade80 0%, #22c55e 28%, #16a34a 48%, transparent 72%);
-          bottom: -8%;
-          right: 8%;
-          animation: auroraDrift5 34s ease-in-out infinite;
-        }
-
-        .aurora-blob-6 {
-          width: 550px;
-          height: 550px;
-          background: radial-gradient(circle, #2dd4bf 0%, #14b8a6 32%, #0d9488 52%, transparent 76%);
-          top: 60%;
-          left: 35%;
-          animation: auroraDrift6 31s ease-in-out infinite, auroraPulse 12s ease-in-out infinite -4s;
-        }
-
-        .aurora-ribbon {
-          position: absolute;
-          inset: 0;
-          opacity: calc(var(--aurora-opacity) * 0.6);
-          mix-blend-mode: screen;
-          will-change: background-position;
-        }
-
-        .aurora-ribbon-1 {
-          background: linear-gradient(
-            135deg,
-            transparent 0%,
-            #10b98120 15%,
-            #14b8a630 30%,
-            #22c55e25 45%,
-            transparent 60%,
-            #34d39918 75%,
-            transparent 90%
-          );
-          background-size: 300% 300%;
-          animation: auroraRibbonFlow 45s ease-in-out infinite;
-        }
-
-        .aurora-ribbon-2 {
-          background: linear-gradient(
-            -45deg,
-            transparent 0%,
-            #2dd4bf18 20%,
-            transparent 35%,
-            #14b8a622 50%,
-            #10b98125 65%,
-            transparent 80%,
-            #22c55e20 95%
-          );
-          background-size: 250% 250%;
-          animation: auroraRibbonFlow 52s ease-in-out infinite reverse;
+          animation: auroraDrift3 38s ease-in-out infinite;
         }
 
         .aurora-highlight {
@@ -164,21 +97,6 @@ export default function AuroraBackground({ variant = "default" }) {
           opacity: calc(var(--aurora-opacity) * 0.7);
         }
 
-        .aurora-shimmer {
-          position: absolute;
-          inset: 0;
-          background: repeating-linear-gradient(
-            90deg,
-            transparent 0px,
-            rgba(255, 255, 255, 0.02) 2px,
-            transparent 4px,
-            transparent 8px
-          );
-          opacity: 0.15;
-          animation: auroraShimmer 25s linear infinite;
-          will-change: background-position;
-        }
-
         .aurora-noise {
           position: absolute;
           inset: 0;
@@ -189,159 +107,55 @@ export default function AuroraBackground({ variant = "default" }) {
 
         @keyframes auroraDrift1 {
           0%, 100% {
-            transform: translate(0, 0) scale(1) rotate(0deg);
+            transform: translate(0, 0) scale(1);
           }
-          25% {
-            transform: translate(20%, 25%) scale(1.18) rotate(12deg);
+          33% {
+            transform: translate(10%, 15%) scale(1.08);
           }
-          50% {
-            transform: translate(-15%, 35%) scale(0.88) rotate(-8deg);
-          }
-          75% {
-            transform: translate(18%, -18%) scale(1.12) rotate(10deg);
+          66% {
+            transform: translate(-8%, 12%) scale(0.95);
           }
         }
 
         @keyframes auroraDrift2 {
           0%, 100% {
-            transform: translate(0, 0) scale(1) rotate(0deg);
+            transform: translate(0, 0) scale(1);
           }
-          30% {
-            transform: translate(-22%, 18%) scale(1.15) rotate(-15deg);
+          33% {
+            transform: translate(-12%, 10%) scale(1.05);
           }
-          60% {
-            transform: translate(16%, -25%) scale(0.82) rotate(11deg);
-          }
-          85% {
-            transform: translate(-16%, 12%) scale(1.1) rotate(-7deg);
+          66% {
+            transform: translate(8%, -12%) scale(0.92);
           }
         }
 
         @keyframes auroraDrift3 {
           0%, 100% {
-            transform: translate(0, 0) scale(1) rotate(0deg);
-          }
-          20% {
-            transform: translate(25%, -16%) scale(1.2) rotate(18deg);
-          }
-          55% {
-            transform: translate(-18%, 22%) scale(0.8) rotate(-12deg);
-          }
-          80% {
-            transform: translate(14%, -12%) scale(1.14) rotate(8deg);
-          }
-        }
-
-        @keyframes auroraDrift4 {
-          0%, 100% {
-            transform: translate(0, 0) scale(1) rotate(0deg);
-          }
-          35% {
-            transform: translate(-25%, -22%) scale(0.86) rotate(-18deg);
-          }
-          65% {
-            transform: translate(22%, 25%) scale(1.2) rotate(14deg);
-          }
-          90% {
-            transform: translate(-16%, -15%) scale(1.05) rotate(-10deg);
-          }
-        }
-
-        @keyframes auroraDrift5 {
-          0%, 100% {
-            transform: translate(0, 0) scale(1) rotate(0deg);
-          }
-          28% {
-            transform: translate(18%, -30%) scale(1.14) rotate(20deg);
-          }
-          58% {
-            transform: translate(-25%, 18%) scale(0.84) rotate(-15deg);
-          }
-          82% {
-            transform: translate(16%, -12%) scale(1.1) rotate(12deg);
-          }
-        }
-
-        @keyframes auroraDrift6 {
-          0%, 100% {
-            transform: translate(0, 0) scale(1) rotate(0deg);
+            transform: translate(0, 0) scale(1);
           }
           33% {
-            transform: translate(-20%, 22%) scale(1.16) rotate(-14deg);
+            transform: translate(12%, -10%) scale(1.1);
           }
           66% {
-            transform: translate(20%, -20%) scale(0.84) rotate(16deg);
-          }
-        }
-
-        @keyframes auroraPulse {
-          0%, 100% {
-            opacity: var(--aurora-opacity);
-          }
-          50% {
-            opacity: calc(var(--aurora-opacity) * 1.3);
-          }
-        }
-
-        @keyframes auroraRibbonFlow {
-          0% {
-            background-position: 0% 0%;
-          }
-          50% {
-            background-position: 100% 100%;
-          }
-          100% {
-            background-position: 0% 0%;
-          }
-        }
-
-        @keyframes auroraShimmer {
-          0% {
-            background-position: 0 0;
-          }
-          100% {
-            background-position: 1000px 0;
+            transform: translate(-10%, 12%) scale(0.9);
           }
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .aurora-blob,
-          .aurora-ribbon,
-          .aurora-shimmer {
-            animation: none !important;
-          }
-          
           .aurora-blob {
-            filter: blur(50px) saturate(1) brightness(1);
+            animation: none !important;
+            filter: blur(40px) saturate(1) brightness(1);
             opacity: 0.15;
-          }
-          
-          .aurora-ribbon {
-            opacity: 0.08;
-          }
-          
-          .aurora-shimmer {
-            display: none;
           }
         }
 
         @media (max-width: 768px) {
           .aurora-background-wrapper {
-            --aurora-blur: 70px;
-            --aurora-opacity: 0.28;
+            --aurora-blur: 50px;
+            --aurora-opacity: 0.25;
           }
           
-          .aurora-blob-4,
-          .aurora-blob-5,
-          .aurora-blob-6 {
-            display: none;
-          }
-          
-          .aurora-ribbon {
-            opacity: calc(var(--aurora-opacity) * 0.4);
-          }
-          
-          .aurora-shimmer {
+          .aurora-blob-3 {
             display: none;
           }
         }
@@ -349,4 +163,6 @@ export default function AuroraBackground({ variant = "default" }) {
     </div>
   )
 }
+
+export default memo(AuroraBackground)
 

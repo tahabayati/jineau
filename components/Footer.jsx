@@ -1,12 +1,13 @@
 "use client"
 
+import { memo } from "react"
 import { useTranslations } from "next-intl"
 import { Link } from "@/i18n/routing"
 import { contactInfo } from "@/data/siteCopy"
 import { regionConfig } from "@/lib/config"
 import Image from "next/image"
 
-export default function Footer({ locale }) {
+function Footer({ locale }) {
   const t = useTranslations("footer")
   const tNav = useTranslations("nav")
 
@@ -187,3 +188,5 @@ export default function Footer({ locale }) {
     </footer>
   )
 }
+
+export default memo(Footer)
