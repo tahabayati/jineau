@@ -10,6 +10,7 @@ import CartProvider from "@/components/CartProvider"
 import CartDrawer from "@/components/CartDrawer"
 import ScrollToTop from "@/components/ScrollToTop"
 import SmoothScrollInit from "@/components/SmoothScrollInit"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import { generateOrganizationSchema } from "@/lib/seo"
 
 const inter = Inter({
@@ -135,6 +136,7 @@ export default async function LocaleLayout({ children, params }) {
             <Footer locale={locale} />
             <CartDrawer />
             <ScrollToTop />
+            <SpeedInsights />
           </CartProvider>
         </NextIntlClientProvider>
       </body>
