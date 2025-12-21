@@ -120,7 +120,9 @@
     "letJineauChoose": "Laissez Jineau choisir un centre pour aînés en Montérégie",
     "specifyCenter": "Je veux spécifier un centre pour aînés moi-même",
     "centerName": "Nom du Centre",
-    "centerAddress": "Adresse du Centre"
+    "centerAddress": "Adresse du Centre",
+    "enableGiftOne": "Activer Achetez-en Un Offrez-en Un",
+    "disableGiftOne": "Désactiver Achetez-en Un Offrez-en Un"
   },
   "cart": {
     "title": "Votre Panier",

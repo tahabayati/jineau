@@ -75,38 +75,41 @@ export default function SubscriptionPicker({ onSelect }) {
 
   return (
     <div className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-5">
         {plans.map((plan) => (
           <button
             key={plan.id}
             onClick={() => setSelectedPlan(plan.id)}
-            className={`relative p-6 rounded-2xl border-2 text-left transition-all ${
+            aria-label={`Select ${plan.name} plan`}
+            className={`relative p-5 md:p-6 pt-7 md:pt-8 rounded-2xl border-2 text-left transition-all h-full flex flex-col ${
               selectedPlan === plan.id
-                ? "border-brand-primary bg-brand-primary/5 shadow-lg"
-                : "border-gray-200 hover:border-brand-secondary bg-white"
+                ? "border-brand-primary bg-brand-primary/5 shadow-lg scale-[1.02]"
+                : "border-gray-200 hover:border-brand-secondary hover:shadow-md bg-white"
             }`}
           >
             {plan.popular && (
-              <Badge variant="gold" className="absolute -top-3 left-4">
+              <Badge variant="gold" className="absolute -top-2.5 left-1/2 -translate-x-1/2 whitespace-nowrap">
                 Most Popular
               </Badge>
             )}
 
-            <h3 className="font-bold text-xl text-gray-900 mb-1">{plan.name}</h3>
-            <p className="text-sm text-gray-600 mb-4">{plan.description}</p>
+            <div className="flex-1">
+              <h3 className="font-bold text-xl text-gray-900 mb-1.5">{plan.name}</h3>
+              <p className="text-sm text-gray-600 mb-4 min-h-[2.5rem]">{plan.description}</p>
 
-            <div className="flex items-baseline gap-1 mb-2">
-              <span className="text-3xl font-bold text-brand-primary">
-                ${plan.price.toFixed(2)}
-              </span>
-              <span className="text-gray-500">/week</span>
+              <div className="flex items-baseline gap-1 mb-2">
+                <span className="text-3xl md:text-4xl font-bold text-brand-primary">
+                  ${plan.price.toFixed(2)}
+                </span>
+                <span className="text-gray-500 text-sm">/week</span>
+              </div>
+
+              <p className="text-sm text-gray-500 mb-4">
+                {plan.packs} packs · ${plan.pricePerPack.toFixed(2)} each
+              </p>
             </div>
 
-            <p className="text-sm text-gray-500">
-              {plan.packs} packs · ${plan.pricePerPack.toFixed(2)} each
-            </p>
-
-            <div className={`mt-4 w-6 h-6 rounded-full border-2 flex items-center justify-center ${
+            <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all ${
               selectedPlan === plan.id
                 ? "border-brand-primary bg-brand-primary"
                 : "border-gray-300"
@@ -130,9 +133,9 @@ export default function SubscriptionPicker({ onSelect }) {
         onCustomCenterChange={setCustomCenter}
       />
 
-      <div className="bg-gradient-to-r from-brand-mist/30 to-brand-mint/20 rounded-xl p-6 border border-brand-mist/40">
-        <h4 className="font-semibold text-gray-900 mb-3">{t("whatsIncluded")}</h4>
-        <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
+      <div className="bg-gradient-to-r from-brand-mist/30 to-brand-mint/20 rounded-xl p-4 sm:p-6 border border-brand-mist/40">
+        <h4 className="font-semibold text-gray-900 mb-4">{t("whatsIncluded")}</h4>
+        <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
           {[
             t("freshEveryFriday"),
             t("freeDelivery"),
@@ -141,11 +144,11 @@ export default function SubscriptionPicker({ onSelect }) {
             t("priorityHarvest"),
             t("exclusiveRecipes"),
           ].map((benefit, index) => (
-            <li key={index} className="flex items-center gap-2 text-gray-700">
-              <svg className="w-5 h-5 text-brand-primary flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <li key={index} className="flex items-start gap-2.5 text-gray-700 text-sm">
+              <svg className="w-5 h-5 text-brand-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
               </svg>
-              {benefit}
+              <span className="leading-relaxed">{benefit}</span>
             </li>
           ))}
         </ul>
@@ -154,13 +157,14 @@ export default function SubscriptionPicker({ onSelect }) {
       <Button
         onClick={handleSubscribe}
         size="lg"
-        className="w-full"
+        className="w-full text-sm sm:text-base"
         disabled={isLoading}
+        aria-label={`Start subscription for $${plans.find((p) => p.id === selectedPlan)?.price.toFixed(2)} per week`}
       >
         {isLoading ? "Processing..." : `${t("startWeeklySubscription")} - $${plans.find((p) => p.id === selectedPlan)?.price.toFixed(2)}/week`}
       </Button>
 
-      <p className="text-center text-sm text-gray-500">
+      <p className="text-center text-sm text-gray-500 px-4">
         {t("orderCutoffNote")}
       </p>
     </div>

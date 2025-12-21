@@ -26,25 +26,26 @@ export default function GiftOneSection({
   const t = useTranslations("subscribe")
 
   return (
-    <div className="bg-gradient-to-r from-brand-gold/20 to-brand-gold/5 rounded-xl p-6 border border-brand-gold/30">
-      <div className="flex items-start gap-4">
-        <div className="flex-shrink-0 mt-1">
+    <div className="bg-gradient-to-r from-brand-gold/20 to-brand-gold/5 rounded-xl p-4 sm:p-6 border border-brand-gold/30 overflow-hidden">
+      <div className="flex items-start gap-3 sm:gap-4">
+        <div className="shrink-0 pt-0.5">
           <button
             onClick={() => onToggle(!enabled)}
-            className={`w-12 h-6 rounded-full transition-colors relative overflow-hidden ${
-              enabled ? "bg-brand-primary" : "bg-brand-secondary/40"
+            aria-label={enabled ? t("disableGiftOne") : t("enableGiftOne")}
+            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-primary ${
+              enabled ? "bg-brand-primary" : "bg-gray-300"
             }`}
           >
             <span
-              className={`absolute top-0.5 w-5 h-5 bg-white rounded-full shadow transition-transform ${
-                enabled ? "translate-x-[1.375rem]" : "translate-x-0.5"
+              className={`inline-block h-4 w-4 rounded-full bg-white shadow-md transition-transform duration-300 ${
+                enabled ? "translate-x-6" : "translate-x-1"
               }`}
             />
           </button>
         </div>
-        <div className="flex-1">
-          <h4 className="font-bold text-gray-900 mb-1 flex items-center gap-2">
-            {t("buyOneGiftOne")}
+        <div className="flex-1 min-w-0">
+          <h4 className="font-bold text-gray-900 mb-1 flex items-center gap-2 flex-wrap">
+            <span>{t("buyOneGiftOne")}</span>
             <span className="text-2xl">🎁</span>
           </h4>
           <p className="text-sm text-gray-600 mb-4">
@@ -52,59 +53,61 @@ export default function GiftOneSection({
           </p>
 
           {enabled && (
-            <div className="space-y-4 pt-4 border-t border-brand-gold/30">
-              <label className="flex items-start gap-3 cursor-pointer">
+            <div className="space-y-3 sm:space-y-4 pt-4 border-t border-brand-gold/30">
+              <label className="flex items-start gap-3 cursor-pointer group">
                 <input
                   type="radio"
                   name="giftType"
                   value="default-center"
                   checked={giftType === "default-center"}
                   onChange={(e) => onTypeChange(e.target.value)}
-                  className="mt-1 w-4 h-4 text-brand-primary focus:ring-brand-primary"
+                  className="mt-1 w-4 h-4 text-brand-primary focus:ring-brand-primary focus:ring-offset-2"
                 />
-                <div>
-                  <span className="font-medium text-gray-900">{highlightJineau(t("letJineauChoose"))}</span>
-                  <p className="text-sm text-gray-500">We'll select an active senior center in {regionConfig.deliveryRegion}</p>
+                <div className="flex-1 min-w-0">
+                  <span className="font-medium text-gray-900 block">{highlightJineau(t("letJineauChoose"))}</span>
+                  <p className="text-sm text-gray-500 mt-0.5">We'll select an active senior center in {regionConfig.deliveryRegion}</p>
                 </div>
               </label>
 
-              <label className="flex items-start gap-3 cursor-pointer">
+              <label className="flex items-start gap-3 cursor-pointer group">
                 <input
                   type="radio"
                   name="giftType"
                   value="custom-center"
                   checked={giftType === "custom-center"}
                   onChange={(e) => onTypeChange(e.target.value)}
-                  className="mt-1 w-4 h-4 text-brand-primary focus:ring-brand-primary"
+                  className="mt-1 w-4 h-4 text-brand-primary focus:ring-brand-primary focus:ring-offset-2"
                 />
-                <div>
-                  <span className="font-medium text-gray-900">{t("specifyCenter")}</span>
+                <div className="flex-1 min-w-0">
+                  <span className="font-medium text-gray-900 block">{t("specifyCenter")}</span>
                 </div>
               </label>
 
               {giftType === "custom-center" && (
-                <div className="ml-7 space-y-3">
+                <div className="ml-0 sm:ml-7 space-y-3 pt-2">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label htmlFor="centerName" className="block text-sm font-medium text-gray-700 mb-1.5">
                       {t("centerName")}
                     </label>
                     <input
+                      id="centerName"
                       type="text"
                       value={customCenter.name}
                       onChange={(e) => onCustomCenterChange({ ...customCenter, name: e.target.value })}
-                      className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-primary focus:border-transparent"
+                      className="w-full px-3 py-2.5 text-sm rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-shadow"
                       placeholder="Senior Center Name"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label htmlFor="centerAddress" className="block text-sm font-medium text-gray-700 mb-1.5">
                       {t("centerAddress")}
                     </label>
                     <input
+                      id="centerAddress"
                       type="text"
                       value={customCenter.address}
                       onChange={(e) => onCustomCenterChange({ ...customCenter, address: e.target.value })}
-                      className="w-full px-3 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-primary focus:border-transparent"
+                      className="w-full px-3 py-2.5 text-sm rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-primary focus:border-transparent transition-shadow"
                       placeholder="Full address"
                     />
                   </div>

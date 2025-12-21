@@ -120,7 +120,9 @@
     "letJineauChoose": "Let Jineau choose a senior center in Montérégie",
     "specifyCenter": "I want to specify a senior center myself",
     "centerName": "Center Name",
-    "centerAddress": "Center Address"
+    "centerAddress": "Center Address",
+    "enableGiftOne": "Enable Buy One Gift One",
+    "disableGiftOne": "Disable Buy One Gift One"
   },
   "cart": {
     "title": "Your Cart",
