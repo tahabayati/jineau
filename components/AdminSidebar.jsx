@@ -10,6 +10,7 @@ export default function AdminSidebar() {
 
   const links = [
     { href: "/admin", label: t("title"), icon: "📊" },
+    { href: "/admin/site-content", label: "Site Content", icon: "📝" },
     { href: "/admin/senior-centers", label: t("seniorCenters"), icon: "🏠" },
     { href: "/admin/gift-deliveries", label: t("giftDeliveries"), icon: "🎁" },
     { href: "/admin/replacement-requests", label: t("replacementRequests"), icon: "🔄" },

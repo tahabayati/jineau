@@ -36,6 +36,9 @@ const ReplacementRequestSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Order",
     },
+    adminNotes: {
+      type: String,
+    },
   },
   {
     timestamps: true,

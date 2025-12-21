@@ -192,10 +192,10 @@ export default async function HomePage({ params }) {
         />
 
         {/* What is Jineau - Glassmorphism Section */}
-        <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
+        <section className="relative py-8 md:py-12 lg:py-16 overflow-hidden">
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Section header */}
-            <div className="text-center mb-12 md:mb-20">
+            <div className="text-center mb-8 md:mb-12">
               <span className="inline-block glass px-4 py-2 md:px-5 md:py-2.5 rounded-full text-brand-mint text-xs md:text-sm font-medium mb-4 md:mb-6 tracking-wide">
                 Our Philosophy
               </span>
@@ -218,7 +218,7 @@ export default async function HomePage({ params }) {
             </div>
 
             {/* Name meaning cards */}
-            <div className="flex flex-col lg:flex-row items-center justify-center gap-6 md:gap-8 lg:gap-4 mb-12 md:mb-16 lg:mb-24 relative">
+            <div className="flex flex-col lg:flex-row items-center justify-center gap-6 md:gap-8 lg:gap-4 mb-8 md:mb-12 lg:mb-16 relative">
               {/* Jin card */}
               <div className="glass-card rounded-2xl md:rounded-3xl p-6 md:p-8 text-center w-full max-w-xs group">
                 <div className="w-20 h-20 md:w-24 md:h-24 mx-auto mb-3 md:mb-4 relative">
@@ -298,9 +298,40 @@ export default async function HomePage({ params }) {
         </section>
 
         {/* Why Jineau - Features Section */}
-        <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
+        <section className="relative py-8 md:py-12 lg:py-16">
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-10 md:mb-16 relative">
+            {/* Background decorative images - positioned behind content */}
+            <div className="absolute top-10 right-0 w-20 h-20 md:w-28 md:h-28 lg:w-32 lg:h-32 animate-float z-0 pointer-events-none opacity-30" style={{ animationDelay: '0s' }} aria-hidden="true">
+              <div className="w-full h-full drop-shadow-[0_0_15px_rgba(233,196,106,0.15)]">
+                <img 
+                  src="/jineau-home-images/1-09.svg" 
+                  alt="" 
+                  className="w-full h-full"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+            <div className="absolute top-1/2 left-0 -translate-y-1/2 w-16 h-16 md:w-24 md:h-24 lg:w-28 lg:h-28 animate-float z-0 pointer-events-none opacity-25" style={{ animationDelay: '-1.5s' }} aria-hidden="true">
+              <div className="w-full h-full drop-shadow-[0_0_15px_rgba(233,196,106,0.12)]">
+                <img 
+                  src="/jineau-home-images/1-09.svg" 
+                  alt="" 
+                  className="w-full h-full"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+            <div className="absolute bottom-10 left-1/4 w-24 h-24 md:w-32 md:h-32 lg:w-36 lg:h-36 animate-float z-0 pointer-events-none opacity-30" style={{ animationDelay: '-3s' }} aria-hidden="true">
+              <div className="w-full h-full drop-shadow-[0_0_15px_rgba(233,196,106,0.15)]">
+                <img 
+                  src="/jineau-home-images/1-09.svg" 
+                  alt="" 
+                  className="w-full h-full"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+            <div className="text-center mb-8 md:mb-12 relative z-10">
               <span className="inline-block glass px-4 py-2 md:px-5 md:py-2.5 rounded-full text-brand-gold text-xs md:text-sm font-medium mb-4 md:mb-6 tracking-wide">
                 Our Difference
               </span>
@@ -337,7 +368,7 @@ export default async function HomePage({ params }) {
                   {/* Decorative star shapes */}
                   <div className="absolute -top-10 -left-10 w-16 h-16 animate-float">
                     <Image 
-                      src="/jineau-home-images/1-09.svg" 
+                      src="/jineau-home-images/1-10.svg" 
                       alt="" 
                       width={64} 
                       height={64}
@@ -359,7 +390,7 @@ export default async function HomePage({ params }) {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 relative z-10">
               {translatedDifferentiators.map((feature, index) => (
                 <div
                   key={index}
@@ -383,9 +414,22 @@ export default async function HomePage({ params }) {
         </section>
 
         {/* Subscription Plans */}
-        <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
+        <section className="relative py-8 md:py-12 lg:py-16 overflow-hidden">
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-10 md:mb-16 relative">
+            {/* Background decorative image */}
+            <div className="absolute top-20 right-10 w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 animate-float z-0 pointer-events-none opacity-20" style={{ animationDelay: '-1s' }} aria-hidden="true">
+              <div className="w-full h-full drop-shadow-[0_0_15px_rgba(233,196,106,0.12)]">
+                <Image 
+                  src="/jineau-home-images/1-07.svg" 
+                  alt="" 
+                  width={192} 
+                  height={192}
+                  className="w-full h-full"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+            <div className="text-center mb-8 md:mb-12 relative z-10">
               <span className="inline-block glass px-4 py-2 md:px-5 md:py-2.5 rounded-full text-brand-mint text-xs md:text-sm font-medium mb-4 md:mb-6 tracking-wide">
                 Simple Pricing
               </span>
@@ -411,7 +455,7 @@ export default async function HomePage({ params }) {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto items-stretch">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto items-stretch relative z-10">
               {subscription.plans.map((plan, index) => (
                 <div
                   key={plan.name}
@@ -454,9 +498,34 @@ export default async function HomePage({ params }) {
         </section>
 
         {/* Who We Grow For */}
-        <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
+        <section className="relative py-8 md:py-12 lg:py-16 overflow-hidden">
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-10 md:mb-16 relative">
+            {/* Background decorative images */}
+            <div className="absolute top-10 left-10 w-24 h-24 md:w-32 md:h-32 lg:w-36 lg:h-36 animate-float z-0 pointer-events-none opacity-25" style={{ animationDelay: '-2s' }} aria-hidden="true">
+              <div className="w-full h-full drop-shadow-[0_0_15px_rgba(233,196,106,0.12)]">
+                <Image 
+                  src="/jineau-home-images/1-07.svg" 
+                  alt="" 
+                  width={144} 
+                  height={144}
+                  className="w-full h-full"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+            <div className="absolute bottom-20 left-1/4 w-28 h-28 md:w-36 md:h-36 lg:w-40 lg:h-40 animate-float z-0 pointer-events-none opacity-20" style={{ animationDelay: '-0.5s' }} aria-hidden="true">
+              <div className="w-full h-full drop-shadow-[0_0_15px_rgba(233,196,106,0.10)]">
+                <Image 
+                  src="/jineau-home-images/1-07.svg" 
+                  alt="" 
+                  width={160} 
+                  height={160}
+                  className="w-full h-full"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+            <div className="text-center mb-8 md:mb-12 relative z-10">
               <span className="inline-block glass px-4 py-2 md:px-5 md:py-2.5 rounded-full text-brand-mist text-xs md:text-sm font-medium mb-4 md:mb-6 tracking-wide">
                 For Everyone
               </span>
@@ -482,7 +551,7 @@ export default async function HomePage({ params }) {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 relative z-10">
               {audiences.map((audience) => (
                 <Link
                   key={audience.title}
@@ -505,9 +574,22 @@ export default async function HomePage({ params }) {
         </section>
 
         {/* Testimonials */}
-        <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
+        <section className="relative py-8 md:py-12 lg:py-16 overflow-hidden">
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-10 md:mb-16 relative">
+            {/* Background decorative image */}
+            <div className="absolute top-1/2 right-10 -translate-y-1/2 w-36 h-36 md:w-44 md:h-44 lg:w-52 lg:h-52 animate-float z-0 pointer-events-none opacity-18" style={{ animationDelay: '-2.5s' }} aria-hidden="true">
+              <div className="w-full h-full drop-shadow-[0_0_15px_rgba(233,196,106,0.10)]">
+                <Image 
+                  src="/jineau-home-images/1-07.svg" 
+                  alt="" 
+                  width={208} 
+                  height={208}
+                  className="w-full h-full"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+            <div className="text-center mb-8 md:mb-12 relative z-10">
               <span className="inline-block glass px-4 py-2 md:px-5 md:py-2.5 rounded-full text-brand-gold text-xs md:text-sm font-medium mb-4 md:mb-6 tracking-wide">
                 Testimonials
               </span>
@@ -533,7 +615,7 @@ export default async function HomePage({ params }) {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 relative z-10">
               {testimonials.slice(0, 3).map((testimonial, index) => (
                 <div key={index} className="glass-card rounded-2xl md:rounded-3xl p-6 md:p-8">
                   <div className="flex items-center gap-1 mb-4 md:mb-6">
@@ -560,9 +642,34 @@ export default async function HomePage({ params }) {
         </section>
 
         {/* Final CTA */}
-        <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden">
+        <section className="relative py-8 md:py-12 lg:py-16 overflow-hidden">
           <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div className="glass-strong rounded-3xl md:rounded-[48px] p-8 md:p-12 lg:p-20">
+            {/* Background decorative images */}
+            <div className="absolute top-10 left-1/4 w-28 h-28 md:w-36 md:h-36 lg:w-40 lg:h-40 animate-float z-0 pointer-events-none opacity-22" style={{ animationDelay: '-1.5s' }} aria-hidden="true">
+              <div className="w-full h-full drop-shadow-[0_0_15px_rgba(233,196,106,0.12)]">
+                <Image 
+                  src="/jineau-home-images/1-07.svg" 
+                  alt="" 
+                  width={160} 
+                  height={160}
+                  className="w-full h-full"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+            <div className="absolute bottom-10 right-1/4 w-32 h-32 md:w-40 md:h-40 lg:w-44 lg:h-44 animate-float z-0 pointer-events-none opacity-20" style={{ animationDelay: '-3s' }} aria-hidden="true">
+              <div className="w-full h-full drop-shadow-[0_0_15px_rgba(233,196,106,0.10)]">
+                <Image 
+                  src="/jineau-home-images/1-07.svg" 
+                  alt="" 
+                  width={176} 
+                  height={176}
+                  className="w-full h-full"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+            <div className="glass-strong rounded-3xl md:rounded-[48px] p-8 md:p-12 lg:p-20 relative z-10">
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 md:mb-8 drop-shadow-xl px-2">
                 {t("readyToTransform")}
               </h2>
