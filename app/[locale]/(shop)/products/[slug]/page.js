@@ -6,6 +6,7 @@ import { Link } from "@/i18n/routing"
 import Button from "@/components/Button"
 import Badge from "@/components/Badge"
 import ProductCard from "@/components/ProductCard"
+import ProductGallery from "@/components/ProductGallery"
 import AddToCartButton from "@/components/AddToCartButton"
 import { generateProductSchema } from "@/lib/seo"
 import { brandName } from "@/data/siteCopy"
@@ -87,21 +88,23 @@ export default async function ProductPage({ params }) {
           </nav>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            <div className="aspect-square bg-gradient-to-br from-brand-mint/30 to-brand-mist/40 rounded-3xl flex items-center justify-center shadow-lg">
-              <div className="w-48 h-48 rounded-full bg-gradient-to-br from-brand-mint to-brand-mist flex items-center justify-center shadow-xl">
-                <span className="text-8xl">
-                  {product.type === "microgreen" ? "🌱" : "💧"}
-                </span>
-              </div>
-            </div>
+            <ProductGallery 
+              images={product.gallery || []} 
+              productName={product.name}
+            />
 
             <div>
-              <div className="flex flex-wrap gap-2 mb-4">
+              <div className="flex flex-wrap gap-2 mb-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
                 <Badge variant="mint">
-                  {product.type === "microgreen" ? "Microgreen" : "Hydrosol"}
+                  {product.type === "microgreen" ? "🌱 Microgreen" : "💧 Hydrosol"}
                 </Badge>
                 {product.isSubscriptionEligible && (
-                  <Badge variant="gold">Subscribe & Save</Badge>
+                  <Badge variant="gold">✨ Subscribe & Save</Badge>
+                )}
+                {product.inStock ? (
+                  <Badge variant="success">In Stock</Badge>
+                ) : (
+                  <Badge variant="default">Out of Stock</Badge>
                 )}
                 {product.tags?.map((tag) => (
                   <Badge key={tag} variant="default">{tag}</Badge>
@@ -116,8 +119,11 @@ export default async function ProductPage({ params }) {
                 {product.shortDescription}
               </p>
 
-              <div className="text-4xl font-bold text-brand-primary mb-6">
-                ${product.price.toFixed(2)} CAD
+              <div className="flex items-baseline gap-2 mb-6">
+                <span className="text-4xl font-bold text-brand-primary">
+                  ${product.price.toFixed(2)}
+                </span>
+                <span className="text-lg text-gray-500">CAD</span>
               </div>
 
               <p className="text-gray-600 mb-6 leading-relaxed">
@@ -189,8 +195,9 @@ export default async function ProductPage({ params }) {
           </div>
 
           {relatedProducts.length > 0 && (
-            <div className="mt-20">
-              <h2 className="text-2xl font-bold text-gray-900 mb-8">You Might Also Like</h2>
+            <div className="mt-20 pt-12 border-t border-gray-200">
+              <h2 className="text-3xl font-bold text-gray-900 mb-2 text-center">You Might Also Like</h2>
+              <p className="text-gray-600 text-center mb-8">Discover more fresh microgreens and hydrosols</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                 {relatedProducts.map((p) => (
                   <ProductCard key={p.slug} product={p} />

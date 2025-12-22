@@ -57,11 +57,11 @@ export async function POST() {
       subscriptionPlans.map((plan) => ({
         name: plan.name,
         slug: plan.slug,
-        packs: plan.packs,
-        price: plan.price,
+        packsPerWeek: plan.packs,
+        pricePerWeek: plan.price,
         description: plan.description,
         stripePriceId: plan.stripePriceId,
-        isActive: true,
+        active: true,
       }))
     )
 
