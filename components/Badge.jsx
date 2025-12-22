@@ -5,6 +5,7 @@ export default function Badge({ children, variant = "default", className = "" })
     gold: "bg-gradient-to-r from-amber-400 to-yellow-500 text-white font-semibold shadow-md",
     mist: "bg-brand-mist/20 text-brand-secondary border border-brand-mist/40",
     primary: "bg-brand-primary text-white",
+  category: "bg-[#CBC3E3] text-brand-primary border border-[#CBC3E3]/60",
   }
 
   return (

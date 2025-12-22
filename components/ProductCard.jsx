@@ -23,7 +23,7 @@ export default function ProductCard({ product }) {
 
       <div className="p-5">
         <div className="flex items-start justify-between gap-2 mb-3">
-          <Badge variant="mint" className="transition-transform duration-300 hover:scale-105">
+          <Badge variant="category" className="transition-transform duration-300 hover:scale-105">
             {product.type === "microgreen" ? t("microgreen") : t("hydrosol")}
           </Badge>
           {product.isSubscriptionEligible && (
@@ -44,7 +44,7 @@ export default function ProductCard({ product }) {
         </p>
 
         <div className="flex items-center justify-between">
-          <span className="text-xl font-bold gradient-text">
+          <span className="inline-flex items-center text-xl font-semibold text-white bg-brand-primary px-3 py-1 rounded-full shadow-sm">
             ${product.price.toFixed(2)}
           </span>
           <AddToCartButton product={product} />

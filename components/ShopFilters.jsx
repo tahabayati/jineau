@@ -29,7 +29,7 @@ export default function ShopFilters({ category, sort }) {
           className={`px-4 py-2 rounded-full text-sm font-medium transition-all shadow-sm ${
             category === "microgreens"
               ? "bg-brand-primary text-white shadow-md"
-              : "bg-white text-gray-700 hover:bg-brand-mist/30 border border-gray-200"
+              : "bg-[#CBC3E3] text-gray-700 hover:bg-[#CBC3E3]/90 border border-gray-200"
           }`}
         >
           {t("microgreens")}
@@ -39,7 +39,7 @@ export default function ShopFilters({ category, sort }) {
           className={`px-4 py-2 rounded-full text-sm font-medium transition-all shadow-sm ${
             category === "hydrosols"
               ? "bg-brand-primary text-white shadow-md"
-              : "bg-white text-gray-700 hover:bg-brand-mist/30 border border-gray-200"
+              : "bg-[#CBC3E3] text-gray-700 hover:bg-[#CBC3E3]/90 border border-gray-200"
           }`}
         >
           {t("hydrosols")}
@@ -47,11 +47,11 @@ export default function ShopFilters({ category, sort }) {
       </div>
 
       <div className="flex items-center gap-2">
-        <span className="text-sm text-gray-500">{t("sortBy")}:</span>
+        <span className="text-sm text-slate-700">{t("sortBy")}:</span>
         <select
           value={sort}
           onChange={handleSortChange}
-          className="px-3 py-2 rounded-lg border border-gray-200 text-sm focus:ring-2 focus:ring-brand-primary focus:border-transparent bg-white shadow-sm"
+          className="px-3 py-2 rounded-lg border border-gray-200 text-sm text-slate-800 focus:ring-2 focus:ring-brand-primary focus:border-transparent bg-white shadow-sm"
         >
           <option value="recommended">{t("recommended")}</option>
           <option value="price-low">{t("priceLowToHigh")}</option>
