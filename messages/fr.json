@@ -100,7 +100,11 @@
     "elementEarth": "Terre",
     "elementEarthDesc": "Milieu de culture biologique",
     "elementLight": "Lumière",
-    "elementLightDesc": "Spectre optimisé"
+    "elementLightDesc": "Spectre optimisé",
+    "shopFresh": "Sélections Fraîches",
+    "featuredProducts": "Produits Vedettes",
+    "featuredProductsSubtitle": "Micropousses et hydrolats triés sur le volet, récoltés frais pour vous.",
+    "shopMore": "Voir Tous les Produits"
   },
   "shop": {
     "title": "Magasiner Micropousses & Hydrolats Frais",

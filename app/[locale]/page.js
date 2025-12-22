@@ -1,10 +1,13 @@
 import { getTranslations } from "next-intl/server"
 import Hero from "@/components/Hero"
+import FeaturedProducts from "@/components/FeaturedProducts"
 import { Link } from "@/i18n/routing"
 import { differentiators, testimonials, subscription } from "@/data/siteCopy"
 import Image from "next/image"
 import AuroraBackground from "@/components/AuroraBackground"
 import { generateWebSiteSchema } from "@/lib/seo"
+import dbConnect from "@/lib/mongodb"
+import Product from "@/models/Product"
 
 // SVG Icon Components
 const WaterIcon = () => (
@@ -125,6 +128,29 @@ const featureIcons = {
   shield: <ShieldCheckIcon />,
 }
 
+async function getFeaturedProducts() {
+  try {
+    await dbConnect()
+    const products = await Product.find({ active: true })
+      .sort({ createdAt: -1 })
+      .limit(4)
+      .lean()
+    
+    return products.map(p => ({
+      _id: p._id.toString(),
+      name: p.name,
+      slug: p.slug,
+      type: p.type,
+      price: p.price,
+      shortDescription: p.shortDescription,
+      isSubscriptionEligible: p.isSubscriptionEligible,
+    }))
+  } catch (error) {
+    console.error("Error fetching featured products:", error)
+    return []
+  }
+}
+
 export async function generateMetadata({ params }) {
   const { locale } = await params
   const baseUrl = "https://jineau.ca"
@@ -148,6 +174,7 @@ export default async function HomePage({ params }) {
   const tCommon = await getTranslations("common")
   
   const websiteSchema = generateWebSiteSchema(locale)
+  const featuredProducts = await getFeaturedProducts()
 
   const translatedDifferentiators = [
     { ...differentiators[0], title: tFeatures("filteredAirWater"), description: tFeatures("filteredAirWaterDesc") },
@@ -190,6 +217,9 @@ export default async function HomePage({ params }) {
           secondaryCta={{ href: "/how-it-works", label: tCommon("learnMore") }}
           showMascot={true}
         />
+
+        {/* Featured Products Section */}
+        <FeaturedProducts products={featuredProducts} />
 
         {/* What is Jineau - Glassmorphism Section */}
         <section className="relative py-8 md:py-12 lg:py-16 overflow-hidden">

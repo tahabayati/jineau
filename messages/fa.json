@@ -100,7 +100,11 @@
     "elementEarth": "خاک",
     "elementEarthDesc": "محیط کشت ارگانیک",
     "elementLight": "نور",
-    "elementLightDesc": "طیف بهینه‌سازی شده"
+    "elementLightDesc": "طیف بهینه‌سازی شده",
+    "shopFresh": "انتخاب‌های تازه",
+    "featuredProducts": "محصولات ویژه",
+    "featuredProductsSubtitle": "میکروگرین و هیدروسول‌های دست‌چین شده، تازه برداشت شده برای شما.",
+    "shopMore": "مشاهده همه محصولات"
   },
   "shop": {
     "title": "خرید میکروگرین و هیدروسول تازه",

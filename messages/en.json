@@ -100,7 +100,11 @@
     "elementEarth": "Earth",
     "elementEarthDesc": "Organic growing medium",
     "elementLight": "Light",
-    "elementLightDesc": "Optimized spectrum"
+    "elementLightDesc": "Optimized spectrum",
+    "shopFresh": "Fresh Picks",
+    "featuredProducts": "Featured Products",
+    "featuredProductsSubtitle": "Hand-picked microgreens and hydrosols, harvested fresh for you.",
+    "shopMore": "Shop All Products"
   },
   "shop": {
     "title": "Shop Fresh Microgreens & Hydrosols",
