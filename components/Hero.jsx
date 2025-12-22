@@ -58,31 +58,17 @@ function Hero({
       <div className="relative z-20 flex-1 flex items-center w-full px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 pb-8">
         <div className="max-w-7xl mx-auto w-full">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center">
-            {/* Left side - Microgreens image */}
+            {/* Left side - Microgreens video */}
             <div className={`relative flex flex-col items-center lg:items-start order-2 lg:order-1 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '0.2s' }}>
               <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-none">
-                {/* SVG background layer */}
-                <div className="absolute -bottom-4 sm:-bottom-8 left-1/2 -translate-x-1/2 w-[105%] z-0" aria-hidden="true">
-                  <Image 
-                    src="/jineau-home-images/1-02.svg" 
-                    alt="" 
-                    width={400} 
-                    height={200}
-                    className="w-full h-auto opacity-70"
-                    loading="lazy"
-                  />
-                </div>
-                
-                {/* Main microgreens bowl image */}
-                <div className="relative z-10">
-                  <Image 
-                    src="/jineau-home-images/1 (1).png" 
-                    alt="Fresh bowl of colorful microgreens including sunflower, radish, and pea shoots ready to eat" 
-                    width={600} 
-                    height={600}
-                    sizes="(max-width: 640px) 280px, (max-width: 768px) 384px, (max-width: 1024px) 448px, 600px"
-                    className="w-full h-auto rounded-2xl sm:rounded-3xl shadow-2xl"
-                    priority
+                <div className="relative w-full pt-[100%] rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden bg-black/40">
+                  <video
+                    className="absolute inset-0 w-full h-full object-cover"
+                    src="/Microgreens Timelapse compressed.mp4"
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
                   />
                 </div>
               </div>

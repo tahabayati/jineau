@@ -1,3 +1,4 @@
+import Image from "next/image"
 import Button from "./Button"
 import MarmotMascot from "./MarmotMascot"
 
@@ -18,6 +19,38 @@ export default function CTASection({
             </div>
           </div>
         )}
+
+        {/* Microgreens feature visual moved from Hero */}
+        <div className="flex justify-center mb-8">
+          <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md">
+            {/* SVG background layer */}
+            <div
+              className="absolute -bottom-4 sm:-bottom-8 left-1/2 -translate-x-1/2 w-[105%] z-0"
+              aria-hidden="true"
+            >
+              <Image
+                src="/jineau-home-images/1-02.svg"
+                alt=""
+                width={400}
+                height={200}
+                className="w-full h-auto opacity-70"
+                loading="lazy"
+              />
+            </div>
+
+            {/* Main microgreens bowl image */}
+            <div className="relative z-10">
+              <Image
+                src="/jineau-home-images/1 (1).png"
+                alt="Fresh bowl of colorful microgreens including sunflower, radish, and pea shoots ready to eat"
+                width={600}
+                height={600}
+                className="w-full h-auto rounded-2xl sm:rounded-3xl shadow-2xl"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
 
         <h2 className="text-3xl md:text-4xl font-bold mb-4">
           {title}
