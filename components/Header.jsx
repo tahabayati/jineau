@@ -258,7 +258,7 @@ function Header({ locale }) {
                       // Delay to allow clicks on suggestions
                       setTimeout(() => setShowSearchResults(false), 200)
                     }}
-                    placeholder="Search..."
+                    placeholder={t("searchPlaceholder")}
                     className="w-[180px] px-3 py-2 pl-9 pr-9 bg-black/30 backdrop-blur-md border border-white/15 rounded-full text-white placeholder:text-white/50 focus:outline-none focus:ring-2 focus:ring-brand-mint/50 focus:border-white/30 focus:bg-black/40 transition-all text-sm"
                     autoFocus
                   />
@@ -349,7 +349,7 @@ function Header({ locale }) {
                               d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                             />
                           </svg>
-                          View all results
+                          {t("viewAllResults")}
                         </button>
                       )}
                     </div>
@@ -437,7 +437,7 @@ function Header({ locale }) {
                 {/* Main Links */}
                 <div className="px-4 py-2">
                   <div className="text-xs font-semibold text-white/40 uppercase tracking-wider mb-2 px-2">
-                    Menu
+                    {t("menu")}
                   </div>
                   {mainLinks.map((link) => (
                     <Link

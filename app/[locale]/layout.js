@@ -1,7 +1,9 @@
 import { Inter, Playfair_Display } from "next/font/google"
+import localFont from "next/font/local"
 import { NextIntlClientProvider } from "next-intl"
 import { getMessages } from "next-intl/server"
 import { notFound } from "next/navigation"
+import { headers } from "next/headers"
 import { routing } from "@/i18n/routing"
 import "../globals.css"
 import Header from "@/components/Header"
@@ -22,6 +24,28 @@ const inter = Inter({
 const playfair = Playfair_Display({
   variable: "--font-playfair",
   subsets: ["latin"],
+  display: "swap",
+})
+
+// Abar fonts for Persian (Farsi) - beautiful Persian typography
+const abarRegular = localFont({
+  src: "../../public/font/Abar-Fonts/AbarMid-Regular.ttf",
+  variable: "--font-abar",
+  weight: "400",
+  display: "swap",
+})
+
+const abarBold = localFont({
+  src: "../../public/font/Abar-Fonts/AbarMid-Bold.ttf",
+  variable: "--font-abar-bold",
+  weight: "700",
+  display: "swap",
+})
+
+const abarHeading = localFont({
+  src: "../../public/font/Abar-Fonts/AbarHigh-Bold.ttf",
+  variable: "--font-abar-heading",
+  weight: "700",
   display: "swap",
 })
 
@@ -106,8 +130,18 @@ export default async function LocaleLayout({ children, params }) {
   const organizationSchema = generateOrganizationSchema()
   const isRtl = locale === "fa"
 
+  // Check if we're on an admin route to hide Header/Footer
+  const headersList = await headers()
+  const pathname = headersList.get("x-pathname") || headersList.get("x-invoke-path") || ""
+  const isAdminRoute = pathname.includes("/admin")
+
+  // Build font classes based on locale
+  const fontClasses = isRtl 
+    ? `${abarRegular.variable} ${abarBold.variable} ${abarHeading.variable} ${inter.variable} ${playfair.variable}` 
+    : `${inter.variable} ${playfair.variable}`
+
   return (
-    <html lang={locale} dir={isRtl ? "rtl" : "ltr"} className={`${inter.variable} ${playfair.variable}`}>
+    <html lang={locale} dir={isRtl ? "rtl" : "ltr"} className={fontClasses} data-locale={locale}>
       <head>
         <script
           type="application/ld+json"
@@ -125,17 +159,19 @@ export default async function LocaleLayout({ children, params }) {
         <NextIntlClientProvider messages={messages}>
           <CartProvider>
             <SmoothScrollInit />
-            <a 
-              href="#main-content" 
-              className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-brand-primary focus:text-white focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-mint"
-            >
-              Skip to main content
-            </a>
-            <Header locale={locale} />
-            <main id="main-content" className="flex-grow">{children}</main>
-            <Footer locale={locale} />
-            <CartDrawer />
-            <ScrollToTop />
+            {!isAdminRoute && (
+              <a 
+                href="#main-content" 
+                className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-brand-primary focus:text-white focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-mint"
+              >
+                Skip to main content
+              </a>
+            )}
+            {!isAdminRoute && <Header locale={locale} />}
+            <main id="main-content" className={isAdminRoute ? "" : "flex-grow"}>{children}</main>
+            {!isAdminRoute && <Footer locale={locale} />}
+            {!isAdminRoute && <CartDrawer />}
+            {!isAdminRoute && <ScrollToTop />}
             <SpeedInsights />
           </CartProvider>
         </NextIntlClientProvider>

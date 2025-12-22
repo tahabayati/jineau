@@ -159,17 +159,17 @@ export default async function HomePage({ params }) {
   ]
 
   const elements = [
-    { name: "Water", icon: <WaterIcon />, desc: "Pure filtered water", gradient: "from-cyan-400/80 to-blue-500/80" },
-    { name: "Air", icon: <AirIcon />, desc: "Triple-filtered air", gradient: "from-sky-400/80 to-teal-400/80" },
-    { name: "Earth", icon: <SeedlingIcon />, desc: "Organic growing medium", gradient: "from-emerald-400/80 to-green-500/80" },
-    { name: "Light", icon: <SunIcon />, desc: "Optimized spectrum", gradient: "from-amber-400/80 to-yellow-400/80" },
+    { name: t("elementWater"), icon: <WaterIcon />, desc: t("elementWaterDesc"), gradient: "from-cyan-400/80 to-blue-500/80" },
+    { name: t("elementAir"), icon: <AirIcon />, desc: t("elementAirDesc"), gradient: "from-sky-400/80 to-teal-400/80" },
+    { name: t("elementEarth"), icon: <SeedlingIcon />, desc: t("elementEarthDesc"), gradient: "from-emerald-400/80 to-green-500/80" },
+    { name: t("elementLight"), icon: <SunIcon />, desc: t("elementLightDesc"), gradient: "from-amber-400/80 to-yellow-400/80" },
   ]
 
   const audiences = [
-    { title: "Health-Conscious", tagline: "Nutrient-dense greens", href: "/for-wellness", icon: <HeartPulseIcon />, gradient: "from-emerald-500 to-teal-500" },
-    { title: "Families & Kids", tagline: "Easy family nutrition", href: "/for-families", icon: <FamilyIcon />, gradient: "from-rose-500 to-pink-500" },
-    { title: "Chefs & Restaurants", tagline: "Culinary excellence", href: "/for-chefs", icon: <ChefHatIcon />, gradient: "from-amber-500 to-orange-500" },
-    { title: "Wellness Practitioners", tagline: "Plant-based aromatics", href: "/for-wellness", icon: <LotusIcon />, gradient: "from-violet-500 to-purple-500" },
+    { title: t("healthConscious"), tagline: t("nutrientDenseGreens"), href: "/for-wellness", icon: <HeartPulseIcon />, gradient: "from-emerald-500 to-teal-500" },
+    { title: t("familiesAndKids"), tagline: t("easyFamilyNutrition"), href: "/for-families", icon: <FamilyIcon />, gradient: "from-rose-500 to-pink-500" },
+    { title: t("chefsAndRestaurants"), tagline: t("culinaryExcellence"), href: "/for-chefs", icon: <ChefHatIcon />, gradient: "from-amber-500 to-orange-500" },
+    { title: t("wellnessPractitioners"), tagline: t("plantBasedAromatics"), href: "/for-wellness", icon: <LotusIcon />, gradient: "from-violet-500 to-purple-500" },
   ]
 
   return (
@@ -197,7 +197,7 @@ export default async function HomePage({ params }) {
             {/* Section header */}
             <div className="text-center mb-8 md:mb-12">
               <span className="inline-block glass px-4 py-2 md:px-5 md:py-2.5 rounded-full text-brand-mint text-xs md:text-sm font-medium mb-4 md:mb-6 tracking-wide">
-                Our Philosophy
+                {t("ourPhilosophy")}
               </span>
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 drop-shadow-xl px-2">
                 {t("whatIsJineau")
@@ -333,7 +333,7 @@ export default async function HomePage({ params }) {
             </div>
             <div className="text-center mb-8 md:mb-12 relative z-10">
               <span className="inline-block glass px-4 py-2 md:px-5 md:py-2.5 rounded-full text-brand-gold text-xs md:text-sm font-medium mb-4 md:mb-6 tracking-wide">
-                Our Difference
+                {t("ourDifference")}
               </span>
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 drop-shadow-xl px-2">
                 {t("whyJineau")
@@ -431,7 +431,7 @@ export default async function HomePage({ params }) {
             </div>
             <div className="text-center mb-8 md:mb-12 relative z-10">
               <span className="inline-block glass px-4 py-2 md:px-5 md:py-2.5 rounded-full text-brand-mint text-xs md:text-sm font-medium mb-4 md:mb-6 tracking-wide">
-                Simple Pricing
+                {t("simplePricing")}
               </span>
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 drop-shadow-xl px-2">
                 {t("subscriptionsMadeSimple")}
@@ -468,7 +468,7 @@ export default async function HomePage({ params }) {
                   {index === 1 && (
                     <div className="absolute -top-3 md:-top-4 left-1/2 -translate-x-1/2 z-10 whitespace-nowrap">
                       <span className="bg-gradient-to-r from-brand-gold to-amber-400 text-gray-900 text-xs md:text-sm font-bold px-4 py-1 md:px-5 md:py-1.5 rounded-full shadow-lg">
-                        Most Popular
+                        {t("mostPopular")}
                       </span>
                     </div>
                   )}
@@ -478,7 +478,7 @@ export default async function HomePage({ params }) {
                   
                   <div className="mb-6 md:mb-8 flex-grow">
                     <span className="text-5xl md:text-6xl font-bold gradient-text drop-shadow-lg">{plan.packs}</span>
-                    <span className="text-white/75 ml-2 text-base md:text-lg">packs/week</span>
+                    <span className="text-white/75 ml-2 text-base md:text-lg">{t("packsPerWeek")}</span>
                   </div>
 
                   <Link
@@ -489,7 +489,7 @@ export default async function HomePage({ params }) {
                         : 'glass text-white hover:bg-white/10 hover:scale-105'
                     }`}
                   >
-                    Choose {plan.name}
+                    {t("choosePlan")} {plan.name}
                   </Link>
                 </div>
               ))}
@@ -527,7 +527,7 @@ export default async function HomePage({ params }) {
             </div>
             <div className="text-center mb-8 md:mb-12 relative z-10">
               <span className="inline-block glass px-4 py-2 md:px-5 md:py-2.5 rounded-full text-brand-mist text-xs md:text-sm font-medium mb-4 md:mb-6 tracking-wide">
-                For Everyone
+                {t("forEveryone")}
               </span>
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 drop-shadow-xl px-2">
                 {t("whoWeGrowFor")}
@@ -591,7 +591,7 @@ export default async function HomePage({ params }) {
             </div>
             <div className="text-center mb-8 md:mb-12 relative z-10">
               <span className="inline-block glass px-4 py-2 md:px-5 md:py-2.5 rounded-full text-brand-gold text-xs md:text-sm font-medium mb-4 md:mb-6 tracking-wide">
-                Testimonials
+                {t("testimonialsLabel")}
               </span>
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 drop-shadow-xl px-2">
                 {t("testimonials")}

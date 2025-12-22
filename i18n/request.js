@@ -13,6 +13,10 @@ export default getRequestConfig(async ({ requestLocale }) => {
     locale = "en"
   }
 
+  // Load translations from JSON files
+  // Note: Admin can manage translations via /admin/translations
+  // After editing, use the Export feature to download updated JSON files
+  // Then replace the files in /messages/ folder
   const jsonMessages = (await import(`../messages/${locale}.json`)).default
   
   return {

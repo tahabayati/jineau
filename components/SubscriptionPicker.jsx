@@ -42,10 +42,12 @@ export default function SubscriptionPicker({ onSelect }) {
   const [giftOneEnabled, setGiftOneEnabled] = useState(false)
   const [giftOneType, setGiftOneType] = useState("default-center")
   const [customCenter, setCustomCenter] = useState({ name: "", address: "" })
+  const [error, setError] = useState("")
   const t = useTranslations("subscribe")
 
   const handleSubscribe = async () => {
     setIsLoading(true)
+    setError("")
     const plan = plans.find((p) => p.id === selectedPlan)
     
     try {
@@ -60,14 +62,21 @@ export default function SubscriptionPicker({ onSelect }) {
           customCenter: giftOneType === "custom-center" ? customCenter : null,
         }),
       })
-      
+
       const data = await response.json()
-      
+
+      if (!response.ok) {
+        throw new Error(data.error || "Subscription checkout failed")
+      }
+
       if (data.url) {
         window.location.href = data.url
+      } else {
+        throw new Error("No checkout URL returned from Stripe")
       }
     } catch (error) {
       console.error("Checkout error:", error)
+      setError(error.message || "Something went wrong starting your subscription. Please try again.")
     } finally {
       setIsLoading(false)
     }
@@ -132,6 +141,12 @@ export default function SubscriptionPicker({ onSelect }) {
         customCenter={customCenter}
         onCustomCenterChange={setCustomCenter}
       />
+
+      {error && (
+        <div className="bg-red-50 border border-red-200 text-red-700 rounded-xl px-4 py-3 text-sm">
+          {error}
+        </div>
+      )}
 
       <div className="bg-gradient-to-r from-brand-mist/30 to-brand-mint/20 rounded-xl p-4 sm:p-6 border border-brand-mist/40">
         <h4 className="font-semibold text-gray-900 mb-4">{t("whatsIncluded")}</h4>

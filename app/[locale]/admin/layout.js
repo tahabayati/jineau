@@ -1,4 +1,3 @@
-import { redirect } from "next/navigation"
 import { cookies } from "next/headers"
 import AdminSidebar from "@/components/AdminSidebar"
 
@@ -15,12 +14,13 @@ async function checkAdminAuth() {
   return adminSession?.value === 'authenticated'
 }
 
-export default async function AdminLayout({ children, params }) {
-  const { locale } = await params
+export default async function AdminLayout({ children }) {
   const isAuthenticated = await checkAdminAuth()
 
+  // If not authenticated, render children without layout (for login page)
+  // The middleware handles the redirect for protected routes
   if (!isAuthenticated) {
-    redirect(`/${locale}/admin/login`)
+    return <>{children}</>
   }
 
   return (

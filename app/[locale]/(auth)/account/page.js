@@ -12,7 +12,7 @@ export async function generateMetadata({ params }) {
   return { title: titles[locale] || titles.en }
 }
 
-export default async function AccountPage() {
+export default async function AccountPage({ searchParams }) {
   const session = await auth()
 
   if (!session) {
@@ -44,7 +44,11 @@ export default async function AccountPage() {
           </div>
         </div>
 
-        <AccountTabs userId={session.user.id} userEmail={session.user.email} />
+        <AccountTabs
+          userId={session.user.id}
+          userEmail={session.user.email}
+          paymentSuccess={searchParams?.success === "true"}
+        />
       </div>
     </div>
   )

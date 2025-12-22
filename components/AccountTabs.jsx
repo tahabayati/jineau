@@ -8,7 +8,7 @@ import ReplacementRequestForm from "./ReplacementRequestForm"
 import SupportRequestForm from "./SupportRequestForm"
 import { isWithinFreshSwapWindow, freshSwapConfig } from "@/lib/config"
 
-export default function AccountTabs({ userId, userEmail }) {
+export default function AccountTabs({ userId, userEmail, paymentSuccess = false }) {
   const [activeTab, setActiveTab] = useState("overview")
   const [orders, setOrders] = useState([])
   const [replacements, setReplacements] = useState([])
@@ -47,20 +47,46 @@ export default function AccountTabs({ userId, userEmail }) {
 
   return (
     <div>
-      <div className="flex flex-wrap gap-2 mb-6 bg-white p-2 rounded-xl shadow-sm border border-gray-100">
-        {tabs.map((tab) => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
-            className={`px-4 py-2 rounded-lg font-medium transition-all ${
-              activeTab === tab.id
-                ? "bg-brand-primary text-white shadow-md"
-                : "text-gray-600 hover:bg-brand-mist/20"
-            }`}
-          >
-            {tab.label}
-          </button>
-        ))}
+      <div className="space-y-4 mb-6">
+        {paymentSuccess && (
+          <div className="w-full bg-green-50 border border-green-200 text-green-800 px-4 py-3 rounded-xl flex items-center gap-3">
+            <svg
+              className="w-5 h-5 flex-shrink-0"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+            <div className="text-sm">
+              <p className="font-semibold">Payment successful</p>
+              <p className="text-green-700">
+                Thank you! Your payment was processed and your order will appear below shortly.
+              </p>
+            </div>
+          </div>
+        )}
+
+        <div className="flex flex-wrap gap-2 bg-white p-2 rounded-xl shadow-sm border border-gray-100">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                activeTab === tab.id
+                  ? "bg-brand-primary text-white shadow-md"
+                  : "text-gray-600 hover:bg-brand-mist/20"
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
       </div>
 
       {activeTab === "overview" && (

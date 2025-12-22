@@ -11,6 +11,9 @@
   --color-foreground: #f0faf8;
   --font-heading: var(--font-playfair);
   --font-body: var(--font-inter);
+  --font-persian: var(--font-abar);
+  --font-persian-bold: var(--font-abar-bold);
+  --font-persian-heading: var(--font-abar-heading);
 }
 
 :root {
@@ -43,6 +46,128 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading), serif;
+}
+
+/* Persian (Farsi) RTL styles with Abar font */
+html[dir="rtl"] body {
+  font-family: var(--font-persian), 'Tahoma', 'Arial', sans-serif;
+  line-height: 1.8;
+  letter-spacing: 0;
+}
+
+html[dir="rtl"] h1,
+html[dir="rtl"] h2,
+html[dir="rtl"] h3,
+html[dir="rtl"] h4,
+html[dir="rtl"] h5,
+html[dir="rtl"] h6 {
+  font-family: var(--font-persian-heading), 'Tahoma', sans-serif;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+html[dir="rtl"] strong,
+html[dir="rtl"] b {
+  font-family: var(--font-persian-bold), 'Tahoma', sans-serif;
+}
+
+/* Better text rendering for Persian */
+html[dir="rtl"] {
+  text-align: right;
+  direction: rtl;
+}
+
+html[dir="rtl"] body {
+  text-align: right;
+  direction: rtl;
+}
+
+html[dir="rtl"] p,
+html[dir="rtl"] span,
+html[dir="rtl"] div,
+html[dir="rtl"] li,
+html[dir="rtl"] a,
+html[dir="rtl"] label,
+html[dir="rtl"] input,
+html[dir="rtl"] textarea,
+html[dir="rtl"] button,
+html[dir="rtl"] h1,
+html[dir="rtl"] h2,
+html[dir="rtl"] h3,
+html[dir="rtl"] h4,
+html[dir="rtl"] h5,
+html[dir="rtl"] h6 {
+  font-family: var(--font-persian), 'Tahoma', 'Arial', sans-serif;
+  text-align: right;
+  direction: rtl;
+}
+
+/* RTL layout adjustments */
+html[dir="rtl"] .flex-row {
+  flex-direction: row-reverse;
+}
+
+/* RTL text alignment overrides - base classes */
+html[dir="rtl"] .text-left {
+  text-align: right !important;
+}
+
+html[dir="rtl"] .text-right {
+  text-align: left !important;
+}
+
+/* Ensure text-center stays centered in RTL */
+html[dir="rtl"] .text-center {
+  text-align: center !important;
+}
+
+/* RTL responsive text alignment - use attribute selector for Tailwind responsive classes */
+html[dir="rtl"] [class*=":text-left"]:not([class*="text-center"]) {
+  text-align: right !important;
+}
+
+html[dir="rtl"] [class*=":text-right"]:not([class*="text-center"]) {
+  text-align: left !important;
+}
+
+/* RTL text alignment for common containers */
+html[dir="rtl"] article,
+html[dir="rtl"] section,
+html[dir="rtl"] aside,
+html[dir="rtl"] header,
+html[dir="rtl"] footer,
+html[dir="rtl"] main,
+html[dir="rtl"] nav {
+  text-align: right;
+  direction: rtl;
+}
+
+/* RTL for form elements */
+html[dir="rtl"] input[type="text"],
+html[dir="rtl"] input[type="email"],
+html[dir="rtl"] input[type="password"],
+html[dir="rtl"] input[type="search"],
+html[dir="rtl"] textarea,
+html[dir="rtl"] select {
+  text-align: right;
+  direction: rtl;
+}
+
+html[dir="rtl"] .mr-auto {
+  margin-right: 0;
+  margin-left: auto;
+}
+
+html[dir="rtl"] .ml-auto {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+/* Persian number display */
+html[dir="rtl"] .price,
+html[dir="rtl"] [data-number] {
+  direction: ltr;
+  display: inline-block;
 }
 
 button:focus-visible,

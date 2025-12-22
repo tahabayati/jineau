@@ -10,11 +10,12 @@ import Image from "next/image"
 function Footer({ locale }) {
   const t = useTranslations("footer")
   const tNav = useTranslations("nav")
+  const tShop = useTranslations("shop")
 
   const shopLinks = [
     { href: "/shop", label: t("allProducts") },
-    { href: "/shop?category=microgreens", label: "Microgreens" },
-    { href: "/shop?category=hydrosols", label: "Hydrosols" },
+    { href: "/shop?category=microgreens", label: tShop("microgreensCategory") },
+    { href: "/shop?category=hydrosols", label: tShop("hydrosolsCategory") },
     { href: "/subscribe", label: t("subscriptions") },
   ]
 

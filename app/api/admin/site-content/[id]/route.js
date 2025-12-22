@@ -1,20 +1,16 @@
 import { NextResponse } from "next/server"
 import { revalidateTag, revalidatePath } from "next/cache"
-import { auth } from "@/lib/auth"
+import { cookies } from "next/headers"
 import dbConnect from "@/lib/mongodb"
-import User from "@/models/User"
 import SiteContent from "@/models/SiteContent"
 import { getPathsToRevalidate } from "@/lib/revalidation"
 
 export const runtime = 'nodejs'
 
 async function isAdmin() {
-  const session = await auth()
-  if (!session) return false
-  
-  await dbConnect()
-  const user = await User.findById(session.user.id)
-  return user?.isAdmin === true
+  const cookieStore = await cookies()
+  const adminSession = cookieStore.get('admin_session')
+  return adminSession?.value === 'authenticated'
 }
 
 export async function PUT(request, { params }) {
@@ -23,7 +19,6 @@ export async function PUT(request, { params }) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
     }
 
-    const session = await auth()
     const { id } = await params
     const data = await request.json()
     
@@ -52,7 +47,6 @@ export async function PUT(request, { params }) {
         group: data.meta?.group || "",
         label: data.meta?.label || "",
       },
-      updatedBy: session.user.id,
     }
 
     const item = await SiteContent.findByIdAndUpdate(id, updateData, { new: true })

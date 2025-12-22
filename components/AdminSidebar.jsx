@@ -25,6 +25,7 @@ export default function AdminSidebar() {
 
   const links = [
     { href: "/admin", label: t("title"), icon: "📊" },
+    { href: "/admin/translations", label: "Translations", icon: "🌐" },
     { href: "/admin/site-content", label: "Site Content", icon: "📝" },
     { href: "/admin/senior-centers", label: t("seniorCenters"), icon: "🏠" },
     { href: "/admin/gift-deliveries", label: t("giftDeliveries"), icon: "🎁" },
@@ -33,7 +34,7 @@ export default function AdminSidebar() {
   ]
 
   return (
-    <aside className="w-64 min-h-screen bg-white border-r border-gray-200 shadow-sm">
+    <aside className="relative w-64 min-h-screen bg-white border-r border-gray-200 shadow-sm flex flex-col">
       <div className="p-4 border-b border-gray-200">
         <Link href="/" className="flex items-center gap-2">
           <div className="w-8 h-8 bg-brand-primary rounded-full flex items-center justify-center">
@@ -43,7 +44,7 @@ export default function AdminSidebar() {
         </Link>
       </div>
 
-      <nav className="p-4 space-y-1">
+      <nav className="p-4 space-y-1 flex-1">
         {links.map((link) => {
           const isActive = pathname.endsWith(link.href) || 
             (link.href === "/admin" && pathname.match(/\/admin$/))
@@ -65,7 +66,7 @@ export default function AdminSidebar() {
         })}
       </nav>
 
-      <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200 space-y-2">
+      <div className="mt-auto p-4 border-t border-gray-200 space-y-2">
         <button
           onClick={handleLogout}
           disabled={loggingOut}

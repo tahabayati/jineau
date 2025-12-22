@@ -1,18 +1,14 @@
 import { NextResponse } from "next/server"
-import { auth } from "@/lib/auth"
+import { cookies } from "next/headers"
 import dbConnect from "@/lib/mongodb"
-import User from "@/models/User"
 import ReplacementRequest from "@/models/ReplacementRequest"
 
 export const runtime = 'nodejs'
 
 async function isAdmin() {
-  const session = await auth()
-  if (!session) return false
-  
-  await dbConnect()
-  const user = await User.findById(session.user.id)
-  return user?.isAdmin === true
+  const cookieStore = await cookies()
+  const adminSession = cookieStore.get('admin_session')
+  return adminSession?.value === 'authenticated'
 }
 
 export async function GET(request) {
