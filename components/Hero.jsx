@@ -69,6 +69,8 @@ function Hero({
                     loop
                     muted
                     playsInline
+                    preload="auto"
+                    poster="/jineau-home-images/1 (1).png"
                   />
                 </div>
               </div>
