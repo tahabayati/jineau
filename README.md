@@ -54,6 +54,11 @@ NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_...
 # Google OAuth (optional)
 GOOGLE_CLIENT_ID=your-google-client-id
 GOOGLE_CLIENT_SECRET=your-google-client-secret
+
+# Admin Password
+# Set a secure password for accessing the admin panel
+# Session expires after 24 hours
+ADMIN_PASSWORD=your-secure-admin-password
 ```
 
 ### Installation
@@ -106,16 +111,22 @@ curl -X POST http://localhost:3000/api/seed
 ## Key Features
 
 ### Buy One, Gift One
+
 Subscribers can donate a second box to senior centers in Montérégie.
 
 ### Fresh Swap Guarantee
+
 Subscription customers can request free replacements for unopened products (max 2/month).
 
 ### Admin Dashboard
+
+- Simple password-based authentication (set via `ADMIN_PASSWORD` env var)
+- Session expires after 24 hours
 - Manage senior centers
 - View gift deliveries
 - Process replacement requests
 - Handle support tickets
+- Access at `/admin` (any locale)
 
 ## Localization
 

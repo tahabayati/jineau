@@ -1,12 +1,27 @@
 "use client"
 
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 import { Link } from "@/i18n/routing"
 import { useTranslations } from "next-intl"
+import { useState } from "react"
 
 export default function AdminSidebar() {
   const pathname = usePathname()
+  const router = useRouter()
   const t = useTranslations("admin")
+  const [loggingOut, setLoggingOut] = useState(false)
+
+  const handleLogout = async () => {
+    setLoggingOut(true)
+    try {
+      await fetch('/api/admin/logout', { method: 'POST' })
+      router.push('/admin/login')
+      router.refresh()
+    } catch (error) {
+      console.error('Logout error:', error)
+      setLoggingOut(false)
+    }
+  }
 
   const links = [
     { href: "/admin", label: t("title"), icon: "📊" },
@@ -50,10 +65,20 @@ export default function AdminSidebar() {
         })}
       </nav>
 
-      <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200">
+      <div className="absolute bottom-0 left-0 right-0 p-4 border-t border-gray-200 space-y-2">
+        <button
+          onClick={handleLogout}
+          disabled={loggingOut}
+          className="w-full flex items-center gap-2 text-gray-600 hover:text-red-600 text-sm py-2 px-3 rounded-lg hover:bg-red-50 transition-colors disabled:opacity-50"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+          </svg>
+          {loggingOut ? 'Logging out...' : 'Logout'}
+        </button>
         <Link
           href="/"
-          className="flex items-center gap-2 text-gray-600 hover:text-brand-primary text-sm"
+          className="flex items-center gap-2 text-gray-600 hover:text-brand-primary text-sm py-2 px-3 rounded-lg hover:bg-brand-mist/20 transition-colors"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />

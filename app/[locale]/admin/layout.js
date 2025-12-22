@@ -1,7 +1,5 @@
 import { redirect } from "next/navigation"
-import { auth } from "@/lib/auth"
-import dbConnect from "@/lib/mongodb"
-import User from "@/models/User"
+import { cookies } from "next/headers"
 import AdminSidebar from "@/components/AdminSidebar"
 
 export const runtime = 'nodejs'
@@ -11,20 +9,18 @@ export const metadata = {
   title: "Admin Dashboard | Jineau",
 }
 
-async function checkAdmin() {
-  const session = await auth()
-  if (!session) return false
-  
-  await dbConnect()
-  const user = await User.findById(session.user.id)
-  return user?.isAdmin === true
+async function checkAdminAuth() {
+  const cookieStore = await cookies()
+  const adminSession = cookieStore.get('admin_session')
+  return adminSession?.value === 'authenticated'
 }
 
-export default async function AdminLayout({ children }) {
-  const isAdmin = await checkAdmin()
+export default async function AdminLayout({ children, params }) {
+  const { locale } = await params
+  const isAuthenticated = await checkAdminAuth()
 
-  if (!isAdmin) {
-    redirect("/login")
+  if (!isAuthenticated) {
+    redirect(`/${locale}/admin/login`)
   }
 
   return (
