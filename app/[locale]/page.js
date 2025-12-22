@@ -540,11 +540,11 @@ export default async function HomePage({ params }) {
               <div className="absolute right-0 top-1/2 -translate-y-1/2 hidden xl:block" aria-hidden="true">
                 <div className="relative w-64 h-64">
                   <Image 
-                    src="/jineau-home-images/11.png" 
+                    src="/jineau-home-images/fredie_shopping_microgreens.png" 
                     alt="" 
                     width={256} 
                     height={256}
-                    className="w-full h-full"
+                    className="w-full h-full object-contain"
                     loading="lazy"
                   />
                 </div>
@@ -604,11 +604,11 @@ export default async function HomePage({ params }) {
               <div className="absolute left-0 top-1/2 -translate-y-1/2 hidden lg:block" aria-hidden="true">
                 <div className="relative w-56 h-56">
                   <Image 
-                    src="/jineau-home-images/14.png" 
+                    src="/jineau-home-images/hi_head_image.png" 
                     alt="" 
                     width={224} 
                     height={224}
-                    className="w-full h-full"
+                    className="w-full h-full object-contain"
                     loading="lazy"
                   />
                 </div>
@@ -715,7 +715,7 @@ export default async function HomePage({ params }) {
                   <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start">
                     <Link
                       href="/subscribe"
-                      className="group inline-flex items-center justify-center gap-2 md:gap-3 px-8 py-4 md:px-10 md:py-5 bg-gradient-to-r from-brand-mint to-brand-primary text-white font-semibold text-sm md:text-base rounded-full transition-all duration-500 hover:shadow-[0_0_60px_rgba(112,178,178,0.5)] hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-mint focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                      className="group inline-flex items-center justify-center gap-2 md:gap-3 px-8 py-4 md:px-10 md:py-5 bg-gradient-to-r from-brand-mint to-brand-primary text-white font-semibold text-sm md:text-base rounded-full transition-all duration-500 hover:shadow-[0_0_60px_rgba(112,178,178,0.5)] hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-mint focus-visible:ring-offset-2 focus-visible:ring-offset-transparent whitespace-nowrap"
                     >
                       {tCommon("startSubscription")}
                       <svg className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -724,7 +724,7 @@ export default async function HomePage({ params }) {
                     </Link>
                     <Link
                       href="/shop"
-                      className="inline-flex items-center justify-center gap-2 md:gap-3 px-8 py-4 md:px-10 md:py-5 glass text-white font-semibold text-sm md:text-base rounded-full transition-all duration-500 hover:bg-white/10 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-mint focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
+                      className="inline-flex items-center justify-center gap-2 md:gap-3 px-8 py-4 md:px-10 md:py-5 glass text-white font-semibold text-sm md:text-base rounded-full transition-all duration-500 hover:bg-white/10 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-mint focus-visible:ring-offset-2 focus-visible:ring-offset-transparent whitespace-nowrap"
                     >
                       {tCommon("shopMicrogreens")}
                     </Link>
