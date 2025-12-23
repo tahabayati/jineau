@@ -36,10 +36,10 @@ export default function ProductCard({ product }) {
           </div>
         ) : (
           <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-brand-mint/10 to-brand-primary/10">
-            <div className="w-32 h-32 rounded-full bg-gradient-to-br from-brand-mint/30 to-brand-primary/30 flex items-center justify-center shadow-lg transition-all duration-500 group-hover:scale-110 group-hover:shadow-[0_0_40px_rgba(112,178,178,0.3)]">
-              <span className="text-4xl">{product.type === "microgreen" ? "🌱" : "💧"}</span>
-            </div>
+          <div className="w-32 h-32 rounded-full bg-gradient-to-br from-brand-mint/30 to-brand-primary/30 flex items-center justify-center shadow-lg transition-all duration-500 group-hover:scale-110 group-hover:shadow-[0_0_40px_rgba(112,178,178,0.3)]">
+            <span className="text-4xl">{product.type === "microgreen" ? "🌱" : "💧"}</span>
           </div>
+        </div>
         )}
       </Link>
 

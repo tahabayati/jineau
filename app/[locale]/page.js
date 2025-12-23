@@ -144,6 +144,8 @@ async function getFeaturedProducts() {
       price: p.price,
       shortDescription: p.shortDescription,
       isSubscriptionEligible: p.isSubscriptionEligible,
+      // Include gallery so home page cards can show real images
+      gallery: Array.isArray(p.gallery) ? p.gallery : [],
     }))
   } catch (error) {
     console.error("Error fetching featured products:", error)
