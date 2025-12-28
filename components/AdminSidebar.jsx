@@ -34,13 +34,13 @@ export default function AdminSidebar() {
   ]
 
   return (
-    <aside className="relative w-64 min-h-screen bg-white border-r border-gray-200 shadow-sm flex flex-col">
-      <div className="p-4 border-b border-gray-200">
+    <aside className="relative w-64 min-h-screen glass-card border-r border-white/10 shadow-sm flex flex-col">
+      <div className="p-4 border-b border-white/10">
         <Link href="/" className="flex items-center gap-2">
-          <div className="w-8 h-8 bg-brand-primary rounded-full flex items-center justify-center">
+          <div className="w-8 h-8 bg-gradient-to-br from-brand-mint to-brand-primary rounded-full flex items-center justify-center">
             <span className="text-white font-bold text-sm">J</span>
           </div>
-          <span className="font-bold"><span className="gradient-text">Jineau</span> <span className="text-brand-primary">Admin</span></span>
+          <span className="font-bold"><span className="gradient-text">Jineau</span> <span className="text-brand-mint">Admin</span></span>
         </Link>
       </div>
 
@@ -55,8 +55,8 @@ export default function AdminSidebar() {
               href={link.href}
               className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-colors ${
                 isActive
-                  ? "bg-brand-primary text-white"
-                  : "text-gray-700 hover:bg-brand-mist/20"
+                  ? "bg-gradient-to-r from-brand-mint to-brand-primary text-white"
+                  : "text-white/80 hover:bg-white/10 hover:text-white"
               }`}
             >
               <span className="text-lg">{link.icon}</span>
@@ -66,11 +66,11 @@ export default function AdminSidebar() {
         })}
       </nav>
 
-      <div className="mt-auto p-4 border-t border-gray-200 space-y-2">
+      <div className="mt-auto p-4 border-t border-white/10 space-y-2">
         <button
           onClick={handleLogout}
           disabled={loggingOut}
-          className="w-full flex items-center gap-2 text-gray-600 hover:text-red-600 text-sm py-2 px-3 rounded-lg hover:bg-red-50 transition-colors disabled:opacity-50"
+          className="w-full flex items-center gap-2 text-white/80 hover:text-red-400 text-sm py-2 px-3 rounded-lg hover:bg-red-500/20 transition-colors disabled:opacity-50"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
@@ -79,7 +79,7 @@ export default function AdminSidebar() {
         </button>
         <Link
           href="/"
-          className="flex items-center gap-2 text-gray-600 hover:text-brand-primary text-sm py-2 px-3 rounded-lg hover:bg-brand-mist/20 transition-colors"
+          className="flex items-center gap-2 text-white/80 hover:text-brand-mint text-sm py-2 px-3 rounded-lg hover:bg-white/10 transition-colors"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />

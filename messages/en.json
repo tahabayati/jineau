@@ -22,7 +22,9 @@
     "delete": "Delete",
     "loading": "Loading...",
     "error": "Error",
-    "success": "Success"
+    "success": "Success",
+    "inStock": "In Stock",
+    "outOfStock": "Out of Stock"
   },
   "nav": {
     "shop": "Shop",
@@ -406,6 +408,88 @@
     "type": "Type",
     "message": "Message",
     "createdAt": "Created At"
+  },
+  "products": {
+    "sunflower-microgreens": {
+      "name": "Sunflower Microgreens",
+      "shortDescription": "Nutty and crunchy sunflower greens.",
+      "description": "Our sunflower microgreens offer a delightful nutty flavor with a satisfying crunch. Rich in vitamins A, B, D, and E, plus essential fatty acids. Perfect for salads, sandwiches, and smoothies. Clean with our high-tech technology, ready to eat straight from the pack.",
+      "usage": "Add to salads, sandwiches, wraps, or blend into smoothies. Great as a garnish for soups and rice bowls.",
+      "storage": "Keep sealed in the refrigerator on the top shelf. Enjoy within 6-10 days for best freshness.",
+      "allergenNote": "Grown in a facility that handles sunflower seeds."
+    },
+    "pea-shoots": {
+      "name": "Pea Shoots",
+      "shortDescription": "Sweet and tender pea tendrils.",
+      "description": "Delicate pea shoots with a sweet, mild flavor that kids love. High in vitamin C and fiber. Their tender texture makes them perfect for salads and as a garnish. Clean with our high-tech technology, no washing required.",
+      "usage": "Perfect raw in salads or lightly sautéed. Add to stir-fries in the last minute of cooking.",
+      "storage": "Store in the original container on the top shelf of your refrigerator. Best within 6-8 days.",
+      "allergenNote": "Grown in a facility that handles pea seeds."
+    },
+    "radish-microgreens": {
+      "name": "Radish Microgreens",
+      "shortDescription": "Spicy and vibrant red-stemmed greens.",
+      "description": "Bold, peppery radish microgreens with beautiful red stems. Packed with vitamins A, B, C, E and K. Adds a colorful punch to any dish. Clean with our high-tech technology, ready to enjoy immediately.",
+      "usage": "Top tacos, sandwiches, and sushi. Use as a garnish for soups and appetizers for a spicy kick.",
+      "storage": "Keep refrigerated in the original container. Consume within 7-10 days.",
+      "allergenNote": "Grown in a facility that handles radish seeds."
+    },
+    "broccoli-microgreens": {
+      "name": "Broccoli Microgreens",
+      "shortDescription": "Mild and nutrient-dense supergreens.",
+      "description": "Mild-flavored broccoli microgreens contain up to 40x more sulforaphane than mature broccoli. Excellent for those seeking maximum nutrition with minimal taste impact. Clean with our high-tech technology.",
+      "usage": "Blend into smoothies, add to salads, or top avocado toast. Mix into dips for hidden nutrition.",
+      "storage": "Refrigerate immediately. Best consumed within 5-7 days of delivery.",
+      "allergenNote": "Grown in a facility that handles broccoli seeds."
+    },
+    "mixed-microgreens": {
+      "name": "Mixed Microgreens",
+      "shortDescription": "Chef's blend of seasonal varieties.",
+      "description": "A curated mix of our best microgreens, selected for complementary flavors and visual appeal. The blend changes seasonally to feature our freshest varieties. Perfect for those who want variety. Clean with our high-tech technology.",
+      "usage": "Use as a complete salad base or topping for any dish. The variety of flavors works with almost any cuisine.",
+      "storage": "Keep sealed and refrigerated. Consume within 6-8 days for optimal freshness.",
+      "allergenNote": "Grown in a facility that handles various seeds."
+    },
+    "basil-microgreens": {
+      "name": "Basil Microgreens",
+      "shortDescription": "Aromatic Italian basil in micro form.",
+      "description": "Concentrated basil flavor in delicate microgreen form. Intensely aromatic with the classic Italian basil taste you love. Perfect for caprese salads, pasta, and Mediterranean dishes. Clean with our high-tech technology.",
+      "usage": "Add to pasta, pizza, salads, and sandwiches. Use as garnish for soups and appetizers.",
+      "storage": "Store refrigerated. Best used within 5-7 days while most aromatic.",
+      "allergenNote": "Grown in a facility that handles basil seeds."
+    },
+    "arugula-microgreens": {
+      "name": "Arugula Microgreens",
+      "shortDescription": "Peppery and vibrant green microgreens.",
+      "description": "Bold, peppery arugula microgreens with a distinctive zesty flavor. Rich in vitamins K, A, and C. Perfect for adding a spicy kick to salads, pizzas, and sandwiches. Clean with our high-tech technology, ready to eat.",
+      "usage": "Add to salads, pizza, sandwiches, and pasta dishes. Great as a garnish for soups and appetizers.",
+      "storage": "Keep sealed in the refrigerator on the top shelf. Enjoy within 6-10 days for best freshness.",
+      "allergenNote": "Grown in a facility that handles arugula seeds."
+    },
+    "pea-shoot-hydrosol": {
+      "name": "Pea Shoot Hydrosol",
+      "shortDescription": "Fresh, green aromatic mist.",
+      "description": "Distilled from our surplus pea shoots, this hydrosol captures the fresh, green essence of spring. Use as a facial mist, room spray, or in wellness rituals. 100% plant-based with no synthetic additives.",
+      "usage": "Mist on face for a refreshing boost, use as a room spray, or add to linen for a clean scent.",
+      "storage": "Store in a cool, dark place. Best used within 6 months of opening.",
+      "safetyNote": "For external use only. Patch test before broad application."
+    },
+    "sunflower-hydrosol": {
+      "name": "Sunflower Hydrosol",
+      "shortDescription": "Warm, nutty aromatic water.",
+      "description": "Created from our sunflower microgreen surplus, this hydrosol has a subtle, warm aroma. Perfect for self-care routines and creating a cozy atmosphere. Zero waste, 100% natural.",
+      "usage": "Use as a gentle facial toner, body mist, or room freshener. Pairs well with meditation and yoga.",
+      "storage": "Keep away from direct sunlight. Refrigerate after opening for extended freshness.",
+      "safetyNote": "External use only. Not for consumption. Consult a practitioner if pregnant."
+    },
+    "basil-hydrosol": {
+      "name": "Basil Hydrosol",
+      "shortDescription": "Herbaceous and uplifting mist.",
+      "description": "Our basil hydrosol captures the bright, herbaceous essence of fresh basil. An uplifting aromatic experience for body and space. Distilled in small batches from surplus microgreens.",
+      "usage": "Spritz as a facial mist, use in aromatherapy, or spray on linens for an herbal scent.",
+      "storage": "Store in a cool, dark place. Use within 6 months for best aromatic quality.",
+      "safetyNote": "For external use only. Keep out of eyes. Patch test recommended."
+    }
   }
 }
 

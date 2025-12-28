@@ -35,47 +35,47 @@ export default async function AdminDashboard() {
 
   return (
     <div>
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">{t("title")}</h1>
+      <h1 className="text-3xl md:text-4xl font-bold text-white mb-6 md:mb-8 drop-shadow-xl">{t("title")}</h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-8">
         {cards.map((card) => (
           <Link
             key={card.label}
             href={card.href}
-            className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
+            className="glass-card rounded-2xl md:rounded-3xl p-6 md:p-8 hover:scale-105 transition-all duration-300 group"
           >
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-3xl">{card.icon}</span>
-              <span className="text-3xl font-bold text-brand-primary">{card.value}</span>
+            <div className="flex items-center justify-between mb-2 md:mb-4">
+              <span className="text-3xl md:text-4xl">{card.icon}</span>
+              <span className="text-3xl md:text-4xl font-bold gradient-text drop-shadow-lg">{card.value}</span>
             </div>
-            <p className="text-gray-600 font-medium">{card.label}</p>
+            <p className="text-white/90 font-medium text-sm md:text-base group-hover:text-brand-gold transition-colors">{card.label}</p>
           </Link>
         ))}
       </div>
 
-      <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
-        <h2 className="text-lg font-bold text-gray-900 mb-4">Quick Actions</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="glass-card rounded-2xl md:rounded-3xl p-6 md:p-8">
+        <h2 className="text-xl md:text-2xl font-bold text-white mb-4 md:mb-6 drop-shadow-md">Quick Actions</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
           <Link
             href="/admin/senior-centers"
-            className="p-4 bg-brand-mist/20 rounded-lg text-center hover:bg-brand-mist/30 transition-colors"
+            className="glass rounded-xl md:rounded-2xl p-4 md:p-6 text-center hover:bg-white/10 transition-all duration-300 hover:scale-105 group"
           >
-            <span className="text-2xl mb-2 block">➕</span>
-            <span className="text-sm font-medium text-gray-700">Add Senior Center</span>
+            <span className="text-2xl md:text-3xl mb-2 md:mb-3 block">{t("addCenter") ? "➕" : "➕"}</span>
+            <span className="text-sm md:text-base font-medium text-white/90 group-hover:text-brand-gold transition-colors">Add Senior Center</span>
           </Link>
           <Link
             href="/admin/replacement-requests"
-            className="p-4 bg-brand-gold/20 rounded-lg text-center hover:bg-brand-gold/30 transition-colors"
+            className="glass rounded-xl md:rounded-2xl p-4 md:p-6 text-center hover:bg-white/10 transition-all duration-300 hover:scale-105 group"
           >
-            <span className="text-2xl mb-2 block">📋</span>
-            <span className="text-sm font-medium text-gray-700">Review Pending Replacements</span>
+            <span className="text-2xl md:text-3xl mb-2 md:mb-3 block">📋</span>
+            <span className="text-sm md:text-base font-medium text-white/90 group-hover:text-brand-gold transition-colors">Review Pending Replacements</span>
           </Link>
           <Link
             href="/admin/support-requests"
-            className="p-4 bg-brand-mint/20 rounded-lg text-center hover:bg-brand-mint/30 transition-colors"
+            className="glass rounded-xl md:rounded-2xl p-4 md:p-6 text-center hover:bg-white/10 transition-all duration-300 hover:scale-105 group"
           >
-            <span className="text-2xl mb-2 block">📩</span>
-            <span className="text-sm font-medium text-gray-700">View Open Tickets</span>
+            <span className="text-2xl md:text-3xl mb-2 md:mb-3 block">📩</span>
+            <span className="text-sm md:text-base font-medium text-white/90 group-hover:text-brand-gold transition-colors">View Open Tickets</span>
           </Link>
         </div>
       </div>

@@ -111,7 +111,7 @@ export default function SiteContentPage() {
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">Site Content</h1>
+        <h1 className="text-2xl md:text-3xl font-bold text-white drop-shadow-xl">Site Content</h1>
         <Button onClick={() => { setShowForm(true); setEditingId(null); resetForm() }}>
           Create New Content
         </Button>
@@ -123,12 +123,12 @@ export default function SiteContentPage() {
           placeholder="Search by key or label..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary"
+          className="flex-1 px-3 py-2 glass border border-white/20 rounded-lg focus:ring-2 focus:ring-brand-mint text-white placeholder-white/50"
         />
         <select
           value={groupFilter}
           onChange={(e) => setGroupFilter(e.target.value)}
-          className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary"
+          className="px-3 py-2 glass border border-white/20 rounded-lg focus:ring-2 focus:ring-brand-mint text-white"
         >
           <option value="">All Groups</option>
           {uniqueGroups.map((group) => (
@@ -138,52 +138,52 @@ export default function SiteContentPage() {
       </div>
 
       {showForm && (
-        <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 mb-6">
-          <h2 className="text-lg font-bold text-gray-900 mb-4">
+        <div className="glass-card rounded-2xl md:rounded-3xl p-6 md:p-8 mb-6">
+          <h2 className="text-lg md:text-xl font-bold text-white mb-4 md:mb-6 drop-shadow-md">
             {editingId ? "Edit Content" : "Create New Content"}
           </h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Key</label>
+                <label className="block text-sm font-medium text-white/90 mb-1">Key</label>
                 <input
                   type="text"
                   value={formData.key}
                   onChange={(e) => setFormData({ ...formData, key: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary"
+                  className="w-full px-3 py-2 glass border border-white/20 rounded-lg focus:ring-2 focus:ring-brand-mint text-white placeholder-white/50"
                   required
                   disabled={editingId}
                   placeholder="e.g., home.hero.title"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Type</label>
+                <label className="block text-sm font-medium text-white/90 mb-1">Type</label>
                 <select
                   value={formData.type}
                   onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary"
+                  className="w-full px-3 py-2 glass border border-white/20 rounded-lg focus:ring-2 focus:ring-brand-mint text-white"
                 >
                   <option value="text">Text</option>
                   <option value="markdown">Markdown</option>
                 </select>
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Group</label>
+                <label className="block text-sm font-medium text-white/90 mb-1">Group</label>
                 <input
                   type="text"
                   value={formData.meta.group}
                   onChange={(e) => setFormData({ ...formData, meta: { ...formData.meta, group: e.target.value } })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary"
+                  className="w-full px-3 py-2 glass border border-white/20 rounded-lg focus:ring-2 focus:ring-brand-mint text-white placeholder-white/50"
                   placeholder="e.g., home, footer"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Label</label>
+                <label className="block text-sm font-medium text-white/90 mb-1">Label</label>
                 <input
                   type="text"
                   value={formData.meta.label}
                   onChange={(e) => setFormData({ ...formData, meta: { ...formData.meta, label: e.target.value } })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary"
+                  className="w-full px-3 py-2 glass border border-white/20 rounded-lg focus:ring-2 focus:ring-brand-mint text-white placeholder-white/50"
                   placeholder="Human readable description"
                 />
               </div>
@@ -191,12 +191,12 @@ export default function SiteContentPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">English (EN)</label>
+                <label className="block text-sm font-medium text-white/90 mb-1">English (EN)</label>
                 {formData.type === "markdown" ? (
                   <textarea
                     value={formData.value.en}
                     onChange={(e) => setFormData({ ...formData, value: { ...formData.value, en: e.target.value } })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary"
+                    className="w-full px-3 py-2 glass border border-white/20 rounded-lg focus:ring-2 focus:ring-brand-mint text-white placeholder-white/50"
                     rows={6}
                   />
                 ) : (
@@ -204,17 +204,17 @@ export default function SiteContentPage() {
                     type="text"
                     value={formData.value.en}
                     onChange={(e) => setFormData({ ...formData, value: { ...formData.value, en: e.target.value } })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary"
+                    className="w-full px-3 py-2 glass border border-white/20 rounded-lg focus:ring-2 focus:ring-brand-mint text-white placeholder-white/50"
                   />
                 )}
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">French (FR)</label>
+                <label className="block text-sm font-medium text-white/90 mb-1">French (FR)</label>
                 {formData.type === "markdown" ? (
                   <textarea
                     value={formData.value.fr}
                     onChange={(e) => setFormData({ ...formData, value: { ...formData.value, fr: e.target.value } })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary"
+                    className="w-full px-3 py-2 glass border border-white/20 rounded-lg focus:ring-2 focus:ring-brand-mint text-white placeholder-white/50"
                     rows={6}
                   />
                 ) : (
@@ -222,17 +222,17 @@ export default function SiteContentPage() {
                     type="text"
                     value={formData.value.fr}
                     onChange={(e) => setFormData({ ...formData, value: { ...formData.value, fr: e.target.value } })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary"
+                    className="w-full px-3 py-2 glass border border-white/20 rounded-lg focus:ring-2 focus:ring-brand-mint text-white placeholder-white/50"
                   />
                 )}
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Persian (FA)</label>
+                <label className="block text-sm font-medium text-white/90 mb-1">Persian (FA)</label>
                 {formData.type === "markdown" ? (
                   <textarea
                     value={formData.value.fa}
                     onChange={(e) => setFormData({ ...formData, value: { ...formData.value, fa: e.target.value } })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary"
+                    className="w-full px-3 py-2 glass border border-white/20 rounded-lg focus:ring-2 focus:ring-brand-mint text-white placeholder-white/50"
                     rows={6}
                     dir="rtl"
                   />
@@ -241,7 +241,7 @@ export default function SiteContentPage() {
                     type="text"
                     value={formData.value.fa}
                     onChange={(e) => setFormData({ ...formData, value: { ...formData.value, fa: e.target.value } })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary"
+                    className="w-full px-3 py-2 glass border border-white/20 rounded-lg focus:ring-2 focus:ring-brand-mint text-white placeholder-white/50"
                     dir="rtl"
                   />
                 )}
@@ -258,47 +258,47 @@ export default function SiteContentPage() {
         </div>
       )}
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+      <div className="glass-card rounded-2xl md:rounded-3xl overflow-hidden">
         <table className="w-full">
-          <thead className="bg-gray-50">
+          <thead className="bg-white/5">
             <tr>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-600">Key</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-600">Label</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-600">Group</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-600">Type</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-600">Values</th>
-              <th className="px-4 py-3 text-right text-sm font-medium text-gray-600">Actions</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-white/90">Key</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-white/90">Label</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-white/90">Group</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-white/90">Type</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-white/90">Values</th>
+              <th className="px-4 py-3 text-right text-sm font-medium text-white/90">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100">
+          <tbody className="divide-y divide-white/10">
             {loading ? (
-              <tr><td colSpan={6} className="px-4 py-8 text-center text-gray-500">Loading...</td></tr>
+              <tr><td colSpan={6} className="px-4 py-8 text-center text-white/70">Loading...</td></tr>
             ) : items.length === 0 ? (
-              <tr><td colSpan={6} className="px-4 py-8 text-center text-gray-500">No content found</td></tr>
+              <tr><td colSpan={6} className="px-4 py-8 text-center text-white/70">No content found</td></tr>
             ) : items.map((item) => (
-              <tr key={item._id} className="hover:bg-gray-50">
-                <td className="px-4 py-3 font-mono text-sm text-gray-900">{item.key}</td>
-                <td className="px-4 py-3 text-gray-600">{item.meta?.label || "-"}</td>
+              <tr key={item._id} className="hover:bg-white/5 transition-colors">
+                <td className="px-4 py-3 font-mono text-sm text-white">{item.key}</td>
+                <td className="px-4 py-3 text-white/80">{item.meta?.label || "-"}</td>
                 <td className="px-4 py-3">
                   {item.meta?.group && (
-                    <span className="px-2 py-1 bg-brand-mist/20 text-brand-primary text-xs rounded">
+                    <span className="px-2 py-1 glass text-brand-mint text-xs rounded">
                       {item.meta.group}
                     </span>
                   )}
                 </td>
-                <td className="px-4 py-3 text-gray-600 capitalize">{item.type}</td>
+                <td className="px-4 py-3 text-white/80 capitalize">{item.type}</td>
                 <td className="px-4 py-3">
                   <div className="flex gap-1">
-                    {item.value?.en && <span className="px-2 py-0.5 bg-blue-100 text-blue-800 text-xs rounded">EN</span>}
-                    {item.value?.fr && <span className="px-2 py-0.5 bg-green-100 text-green-800 text-xs rounded">FR</span>}
-                    {item.value?.fa && <span className="px-2 py-0.5 bg-purple-100 text-purple-800 text-xs rounded">FA</span>}
+                    {item.value?.en && <span className="px-2 py-0.5 bg-blue-500/30 text-blue-300 text-xs rounded">EN</span>}
+                    {item.value?.fr && <span className="px-2 py-0.5 bg-green-500/30 text-green-300 text-xs rounded">FR</span>}
+                    {item.value?.fa && <span className="px-2 py-0.5 bg-purple-500/30 text-purple-300 text-xs rounded">FA</span>}
                   </div>
                 </td>
                 <td className="px-4 py-3 text-right">
-                  <button onClick={() => handleEdit(item)} className="text-brand-primary hover:underline mr-3">
+                  <button onClick={() => handleEdit(item)} className="text-brand-mint hover:text-brand-gold transition-colors mr-3">
                     Edit
                   </button>
-                  <button onClick={() => handleDelete(item._id)} className="text-red-600 hover:underline">
+                  <button onClick={() => handleDelete(item._id)} className="text-red-400 hover:text-red-300 transition-colors">
                     Delete
                   </button>
                 </td>

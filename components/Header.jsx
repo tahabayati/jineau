@@ -22,6 +22,7 @@ function Header({ locale }) {
   const forYouButtonRef = useRef(null)
   const t = useTranslations("nav")
   const tCommon = useTranslations("common")
+  const tProducts = useTranslations("products")
   const router = useRouter()
   const { itemCount, openCart } = useCart()
 
@@ -155,6 +156,11 @@ function Header({ locale }) {
     { href: "/for-wellness", label: t("forWellness") },
   ]
 
+  // Apply smaller font size and reduced padding for French to prevent menu items from wrapping
+  const navTextSize = locale === 'fr' ? 'text-xs' : ''
+  const navPadding = locale === 'fr' ? 'px-2 py-2' : 'px-4 py-2'
+  const navGap = locale === 'fr' ? 'gap-1' : 'gap-2'
+
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
       scrolled
@@ -177,12 +183,12 @@ function Header({ locale }) {
             <span className="text-xl md:text-2xl font-bold gradient-text hidden sm:block transition-all duration-300 group-hover:scale-105" aria-hidden="true">Jineau</span>
           </Link>
 
-          <nav className="hidden lg:flex items-center gap-2" aria-label="Main navigation">
+          <nav className={`hidden lg:flex items-center ${navGap}`} aria-label="Main navigation">
             {mainLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="px-4 py-2 text-white/90 hover:text-white font-medium transition-all duration-300 rounded-lg hover:bg-white/10 hover:backdrop-blur-sm relative group"
+                className={`${navPadding} text-white/90 hover:text-white font-medium transition-all duration-300 rounded-lg hover:bg-white/10 hover:backdrop-blur-sm relative group ${navTextSize}`}
               >
                 {link.label}
                 <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-transparent via-brand-mint to-transparent group-hover:w-full transition-all duration-300" />
@@ -200,7 +206,7 @@ function Header({ locale }) {
                 onMouseLeave={() => setForYouDropdownOpen(false)}
                 aria-expanded={forYouDropdownOpen}
                 aria-haspopup="true"
-                className="px-4 py-2 text-white/90 hover:text-white font-medium transition-all duration-300 rounded-lg hover:bg-white/10 hover:backdrop-blur-sm flex items-center gap-1 relative"
+                className={`${navPadding} text-white/90 hover:text-white font-medium transition-all duration-300 rounded-lg hover:bg-white/10 hover:backdrop-blur-sm flex items-center gap-1 relative ${navTextSize}`}
               >
                 {t("forYou")}
                 <svg className={`w-4 h-4 transition-transform duration-300 ${forYouDropdownOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -221,7 +227,7 @@ function Header({ locale }) {
                     key={link.href}
                     href={link.href}
                     onClick={() => setForYouDropdownOpen(false)}
-                    className="block px-4 py-3 text-white/90 hover:text-white hover:bg-white/10 transition-all duration-200 first:rounded-t-xl last:rounded-b-xl focus-visible:outline-none focus-visible:bg-white/10"
+                    className={`block px-4 py-3 text-white/90 hover:text-white hover:bg-white/10 transition-all duration-200 first:rounded-t-xl last:rounded-b-xl focus-visible:outline-none focus-visible:bg-white/10 ${navTextSize}`}
                     role="menuitem"
                   >
                     {link.label}
@@ -232,7 +238,7 @@ function Header({ locale }) {
 
             <Link
               href="/login"
-              className="px-4 py-2 text-white/90 hover:text-white font-medium transition-all duration-300 rounded-lg hover:bg-white/10 hover:backdrop-blur-sm relative group"
+              className={`${navPadding} text-white/90 hover:text-white font-medium transition-all duration-300 rounded-lg hover:bg-white/10 hover:backdrop-blur-sm relative group ${navTextSize}`}
             >
               {tCommon("account")}
               <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-transparent via-brand-mint to-transparent group-hover:w-full transition-all duration-300" />
@@ -305,11 +311,11 @@ function Header({ locale }) {
                         >
                           <div className="flex-1">
                             <div className="text-white font-medium group-hover:text-brand-gold transition-colors text-sm">
-                              {product.name}
+                              {tProducts(`${product.slug}.name`) || product.name}
                             </div>
-                            {product.shortDescription && (
+                            {(tProducts(`${product.slug}.shortDescription`) || product.shortDescription) && (
                               <div className="text-white/50 text-xs mt-1 line-clamp-1">
-                                {product.shortDescription}
+                                {tProducts(`${product.slug}.shortDescription`) || product.shortDescription}
                               </div>
                             )}
                             <div className="text-brand-gold text-xs font-semibold mt-1">

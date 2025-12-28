@@ -7,6 +7,7 @@ import SectionTitle from "@/components/SectionTitle"
 import ShopFilters from "@/components/ShopFilters"
 import { shippingConfig, deliveryConfig } from "@/lib/config"
 import { Link } from "@/i18n/routing"
+import { getTranslatedProduct } from "@/lib/productTranslations"
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -66,12 +67,16 @@ async function getProducts(category, sort) {
 export default async function ShopPage({ searchParams }) {
   const t = await getTranslations("shop")
   const tDelivery = await getTranslations("delivery")
+  const tProducts = await getTranslations("products")
   const resolvedParams = await searchParams
   const category = resolvedParams?.category || "all"
   const sort = resolvedParams?.sort || "recommended"
 
   const result = await getProducts(category, sort)
-  const filteredProducts = result.data
+  // Translate all products
+  const filteredProducts = result.data.map((product) =>
+    getTranslatedProduct(tProducts, product)
+  )
   const hasError = !result.success
 
   return (

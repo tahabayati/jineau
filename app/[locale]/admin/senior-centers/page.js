@@ -86,53 +86,53 @@ export default function SeniorCentersPage() {
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-gray-900">{t("seniorCenters")}</h1>
+        <h1 className="text-2xl md:text-3xl font-bold text-white drop-shadow-xl">{t("seniorCenters")}</h1>
         <Button onClick={() => setShowForm(true)}>{t("addCenter")}</Button>
       </div>
 
       {showForm && (
-        <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 mb-6">
-          <h2 className="text-lg font-bold text-gray-900 mb-4">
+        <div className="glass-card rounded-2xl md:rounded-3xl p-6 md:p-8 mb-6">
+          <h2 className="text-lg md:text-xl font-bold text-white mb-4 md:mb-6 drop-shadow-md">
             {editingId ? t("editCenter") : t("addCenter")}
           </h2>
           <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">{t("centerName")}</label>
+              <label className="block text-sm font-medium text-white/90 mb-1">{t("centerName")}</label>
               <input
                 type="text"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary"
+                className="w-full px-3 py-2 glass border border-white/20 rounded-lg focus:ring-2 focus:ring-brand-mint text-white placeholder-white/50"
                 required
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">{t("address")}</label>
+              <label className="block text-sm font-medium text-white/90 mb-1">{t("address")}</label>
               <input
                 type="text"
                 value={formData.addressLine1}
                 onChange={(e) => setFormData({ ...formData, addressLine1: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary"
+                className="w-full px-3 py-2 glass border border-white/20 rounded-lg focus:ring-2 focus:ring-brand-mint text-white placeholder-white/50"
                 required
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">{t("city")}</label>
+              <label className="block text-sm font-medium text-white/90 mb-1">{t("city")}</label>
               <input
                 type="text"
                 value={formData.city}
                 onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary"
+                className="w-full px-3 py-2 glass border border-white/20 rounded-lg focus:ring-2 focus:ring-brand-mint text-white placeholder-white/50"
                 required
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">{t("postalCode")}</label>
+              <label className="block text-sm font-medium text-white/90 mb-1">{t("postalCode")}</label>
               <input
                 type="text"
                 value={formData.postalCode}
                 onChange={(e) => setFormData({ ...formData, postalCode: e.target.value })}
-                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-primary"
+                className="w-full px-3 py-2 glass border border-white/20 rounded-lg focus:ring-2 focus:ring-brand-mint text-white placeholder-white/50"
               />
             </div>
             <div className="flex items-center gap-2">
@@ -141,9 +141,9 @@ export default function SeniorCentersPage() {
                 id="active"
                 checked={formData.active}
                 onChange={(e) => setFormData({ ...formData, active: e.target.checked })}
-                className="w-4 h-4 text-brand-primary focus:ring-brand-primary"
+                className="w-4 h-4 text-brand-mint focus:ring-brand-mint"
               />
-              <label htmlFor="active" className="text-sm text-gray-700">{t("active")}</label>
+              <label htmlFor="active" className="text-sm text-white/90">{t("active")}</label>
             </div>
             <div className="flex gap-2 md:col-span-2">
               <Button type="submit">{editingId ? "Update" : "Create"}</Button>
@@ -155,37 +155,37 @@ export default function SeniorCentersPage() {
         </div>
       )}
 
-      <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+      <div className="glass-card rounded-2xl md:rounded-3xl overflow-hidden">
         <table className="w-full">
-          <thead className="bg-gray-50">
+          <thead className="bg-white/5">
             <tr>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-600">{t("centerName")}</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-600">{t("address")}</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-600">{t("city")}</th>
-              <th className="px-4 py-3 text-left text-sm font-medium text-gray-600">{t("active")}</th>
-              <th className="px-4 py-3 text-right text-sm font-medium text-gray-600">Actions</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-white/90">{t("centerName")}</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-white/90">{t("address")}</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-white/90">{t("city")}</th>
+              <th className="px-4 py-3 text-left text-sm font-medium text-white/90">{t("active")}</th>
+              <th className="px-4 py-3 text-right text-sm font-medium text-white/90">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100">
+          <tbody className="divide-y divide-white/10">
             {loading ? (
-              <tr><td colSpan={5} className="px-4 py-8 text-center text-gray-500">Loading...</td></tr>
+              <tr><td colSpan={5} className="px-4 py-8 text-center text-white/70">Loading...</td></tr>
             ) : centers.length === 0 ? (
-              <tr><td colSpan={5} className="px-4 py-8 text-center text-gray-500">No centers found</td></tr>
+              <tr><td colSpan={5} className="px-4 py-8 text-center text-white/70">No centers found</td></tr>
             ) : centers.map((center) => (
-              <tr key={center._id} className="hover:bg-gray-50">
-                <td className="px-4 py-3 font-medium text-gray-900">{center.name}</td>
-                <td className="px-4 py-3 text-gray-600">{center.addressLine1}</td>
-                <td className="px-4 py-3 text-gray-600">{center.city}</td>
+              <tr key={center._id} className="hover:bg-white/5 transition-colors">
+                <td className="px-4 py-3 font-medium text-white">{center.name}</td>
+                <td className="px-4 py-3 text-white/80">{center.addressLine1}</td>
+                <td className="px-4 py-3 text-white/80">{center.city}</td>
                 <td className="px-4 py-3">
                   <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                    center.active ? "bg-green-100 text-green-800" : "bg-gray-100 text-gray-800"
+                    center.active ? "bg-green-500/30 text-green-300" : "bg-gray-500/30 text-gray-300"
                   }`}>
                     {center.active ? "Active" : "Inactive"}
                   </span>
                 </td>
                 <td className="px-4 py-3 text-right">
-                  <button onClick={() => handleEdit(center)} className="text-brand-primary hover:underline mr-3">Edit</button>
-                  <button onClick={() => handleDelete(center._id)} className="text-red-600 hover:underline">Delete</button>
+                  <button onClick={() => handleEdit(center)} className="text-brand-mint hover:text-brand-gold transition-colors mr-3">Edit</button>
+                  <button onClick={() => handleDelete(center._id)} className="text-red-400 hover:text-red-300 transition-colors">Delete</button>
                 </td>
               </tr>
             ))}

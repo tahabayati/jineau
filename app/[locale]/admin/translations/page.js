@@ -213,8 +213,8 @@ export default function TranslationsPage() {
       {/* Header */}
       <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-6">
         <div>
-          <h1 className="text-2xl font-bold text-gray-800">🌐 Translations</h1>
-          <p className="text-gray-600 text-sm mt-1">
+          <h1 className="text-2xl md:text-3xl font-bold text-white drop-shadow-xl">🌐 Translations</h1>
+          <p className="text-white/80 text-sm md:text-base mt-1">
             Manage all website translations for English, French, and Persian
           </p>
         </div>
@@ -222,21 +222,21 @@ export default function TranslationsPage() {
         <div className="flex flex-wrap gap-2">
           <button
             onClick={() => setShowCreateModal(true)}
-            className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors"
+            className="px-4 py-2 bg-gradient-to-r from-brand-mint to-brand-primary text-white rounded-lg hover:shadow-[0_0_40px_rgba(112,178,178,0.5)] transition-all"
           >
             ➕ Add Translation
           </button>
           
           <div className="relative group">
-            <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+            <button className="px-4 py-2 glass text-white rounded-lg hover:bg-white/10 transition-all">
               📥 Export
             </button>
-            <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-10">
+            <div className="absolute right-0 mt-2 w-48 glass-strong rounded-lg shadow-lg border border-white/20 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-10">
               {LOCALES.map((locale) => (
                 <button
                   key={locale.code}
                   onClick={() => handleExport(locale.code)}
-                  className="block w-full px-4 py-2 text-left hover:bg-gray-50 first:rounded-t-lg last:rounded-b-lg"
+                  className="block w-full px-4 py-2 text-left text-white/90 hover:bg-white/10 hover:text-white first:rounded-t-lg last:rounded-b-lg transition-colors"
                 >
                   {locale.flag} {locale.name}
                 </button>
@@ -248,25 +248,25 @@ export default function TranslationsPage() {
       
       {/* Alerts */}
       {error && (
-        <div className="mb-4 p-4 bg-red-50 border border-red-200 text-red-700 rounded-lg flex items-center justify-between">
+        <div className="mb-4 p-4 bg-red-500/20 border border-red-500/50 text-red-300 rounded-lg flex items-center justify-between">
           <span>{error}</span>
-          <button onClick={() => setError(null)} className="text-red-700 hover:text-red-900">✕</button>
+          <button onClick={() => setError(null)} className="text-red-300 hover:text-red-200">✕</button>
         </div>
       )}
       
       {success && (
-        <div className="mb-4 p-4 bg-green-50 border border-green-200 text-green-700 rounded-lg flex items-center justify-between">
+        <div className="mb-4 p-4 bg-green-500/20 border border-green-500/50 text-green-300 rounded-lg flex items-center justify-between">
           <span>{success}</span>
-          <button onClick={() => setSuccess(null)} className="text-green-700 hover:text-green-900">✕</button>
+          <button onClick={() => setSuccess(null)} className="text-green-300 hover:text-green-200">✕</button>
         </div>
       )}
       
       {/* Seed Status Card */}
-      <div className="mb-6 p-4 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-lg">
+      <div className="mb-6 p-4 glass-card rounded-xl md:rounded-2xl">
         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
           <div>
-            <h3 className="font-semibold text-amber-800">📦 Import from JSON Files</h3>
-            <p className="text-sm text-amber-700 mt-1">
+            <h3 className="font-semibold text-white">📦 Import from JSON Files</h3>
+            <p className="text-sm text-white/80 mt-1">
               {seedStatus ? (
                 <>
                   Database has <strong>{seedStatus.dbCount}</strong> translations. 
@@ -282,14 +282,14 @@ export default function TranslationsPage() {
             <button
               onClick={() => handleSeed(false)}
               disabled={seeding}
-              className="px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 disabled:opacity-50 transition-colors"
+              className="px-4 py-2 bg-gradient-to-r from-brand-gold to-amber-400 text-gray-900 rounded-lg hover:shadow-[0_0_40px_rgba(233,196,106,0.5)] disabled:opacity-50 transition-all font-semibold"
             >
               {seeding ? "Importing..." : "Import New Only"}
             </button>
             <button
               onClick={() => handleSeed(true)}
               disabled={seeding}
-              className="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-50 transition-colors"
+              className="px-4 py-2 bg-red-500/80 text-white rounded-lg hover:bg-red-500 disabled:opacity-50 transition-colors font-semibold"
             >
               Overwrite All
             </button>
@@ -304,13 +304,13 @@ export default function TranslationsPage() {
           placeholder="Search translations..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+          className="flex-1 px-4 py-2 glass border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-mint text-white placeholder-white/50"
         />
         
         <select
           value={selectedNamespace}
           onChange={(e) => setSelectedNamespace(e.target.value)}
-          className="px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+          className="px-4 py-2 glass border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-mint text-white"
         >
           <option value="">All Namespaces</option>
           {namespaces.map((ns) => (
@@ -320,69 +320,69 @@ export default function TranslationsPage() {
       </div>
       
       {/* Translations Table */}
-      <div className="bg-white rounded-lg shadow overflow-hidden">
+      <div className="glass-card rounded-2xl md:rounded-3xl overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
-            <thead className="bg-gray-50 border-b">
+            <thead className="bg-white/5 border-b border-white/10">
               <tr>
-                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-4 py-3 text-left text-xs font-medium text-white/90 uppercase tracking-wider">
                   Namespace / Key
                 </th>
-                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-4 py-3 text-left text-xs font-medium text-white/90 uppercase tracking-wider">
                   🇬🇧 English
                 </th>
-                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-4 py-3 text-left text-xs font-medium text-white/90 uppercase tracking-wider">
                   🇫🇷 Français
                 </th>
-                <th className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-4 py-3 text-left text-xs font-medium text-white/90 uppercase tracking-wider">
                   🇮🇷 فارسی
                 </th>
-                <th className="px-4 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th className="px-4 py-3 text-right text-xs font-medium text-white/90 uppercase tracking-wider">
                   Actions
                 </th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-gray-200">
+            <tbody className="divide-y divide-white/10">
               {loading ? (
                 <tr>
-                  <td colSpan={5} className="px-4 py-8 text-center text-gray-500">
+                  <td colSpan={5} className="px-4 py-8 text-center text-white/70">
                     Loading translations...
                   </td>
                 </tr>
               ) : translations.length === 0 ? (
                 <tr>
-                  <td colSpan={5} className="px-4 py-8 text-center text-gray-500">
+                  <td colSpan={5} className="px-4 py-8 text-center text-white/70">
                     No translations found. Click "Import New Only" to import from JSON files.
                   </td>
                 </tr>
               ) : (
                 translations.map((t) => (
-                  <tr key={t._id} className="hover:bg-gray-50">
+                  <tr key={t._id} className="hover:bg-white/5 transition-colors">
                     <td className="px-4 py-3">
-                      <span className="inline-block px-2 py-1 text-xs font-medium bg-gray-100 text-gray-700 rounded mr-2">
+                      <span className="inline-block px-2 py-1 text-xs font-medium glass text-white/90 rounded mr-2">
                         {t.namespace}
                       </span>
-                      <span className="text-sm font-mono text-gray-900">{t.key}</span>
+                      <span className="text-sm font-mono text-white">{t.key}</span>
                     </td>
-                    <td className="px-4 py-3 text-sm text-gray-700 max-w-xs truncate" title={t.values.en}>
-                      {t.values.en || <span className="text-gray-400 italic">Empty</span>}
+                    <td className="px-4 py-3 text-sm text-white/80 max-w-xs truncate" title={t.values.en}>
+                      {t.values.en || <span className="text-white/40 italic">Empty</span>}
                     </td>
-                    <td className="px-4 py-3 text-sm text-gray-700 max-w-xs truncate" title={t.values.fr}>
-                      {t.values.fr || <span className="text-gray-400 italic">Empty</span>}
+                    <td className="px-4 py-3 text-sm text-white/80 max-w-xs truncate" title={t.values.fr}>
+                      {t.values.fr || <span className="text-white/40 italic">Empty</span>}
                     </td>
-                    <td className="px-4 py-3 text-sm text-gray-700 max-w-xs truncate" dir="rtl" title={t.values.fa}>
-                      {t.values.fa || <span className="text-gray-400 italic">Empty</span>}
+                    <td className="px-4 py-3 text-sm text-white/80 max-w-xs truncate" dir="rtl" title={t.values.fa}>
+                      {t.values.fa || <span className="text-white/40 italic">Empty</span>}
                     </td>
                     <td className="px-4 py-3 text-right">
                       <button
                         onClick={() => handleEdit(t)}
-                        className="text-blue-600 hover:text-blue-800 mr-3"
+                        className="text-brand-mint hover:text-brand-gold transition-colors mr-3"
                       >
                         Edit
                       </button>
                       <button
                         onClick={() => handleDelete(t._id)}
-                        className="text-red-600 hover:text-red-800"
+                        className="text-red-400 hover:text-red-300 transition-colors"
                       >
                         Delete
                       </button>
@@ -397,34 +397,34 @@ export default function TranslationsPage() {
       
       {/* Edit Modal */}
       {editingTranslation && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="p-6">
-              <h2 className="text-xl font-bold mb-4">Edit Translation</h2>
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+          <div className="glass-strong rounded-2xl md:rounded-3xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="p-6 md:p-8">
+              <h2 className="text-xl md:text-2xl font-bold text-white mb-4 md:mb-6 drop-shadow-md">Edit Translation</h2>
               
               <form onSubmit={handleUpdate}>
-                <div className="grid grid-cols-2 gap-4 mb-4">
+                <div className="grid grid-cols-2 gap-4 mb-4 md:mb-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-white/90 mb-1">
                       Namespace
                     </label>
                     <input
                       type="text"
                       value={editForm.namespace}
                       onChange={(e) => setEditForm({ ...editForm, namespace: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                      className="w-full px-3 py-2 glass border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-mint text-white placeholder-white/50"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-white/90 mb-1">
                       Key
                     </label>
                     <input
                       type="text"
                       value={editForm.key}
                       onChange={(e) => setEditForm({ ...editForm, key: e.target.value })}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                      className="w-full px-3 py-2 glass border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-mint text-white placeholder-white/50"
                       required
                     />
                   </div>
@@ -432,7 +432,7 @@ export default function TranslationsPage() {
                 
                 {LOCALES.map((locale) => (
                   <div key={locale.code} className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-white/90 mb-1">
                       {locale.flag} {locale.name}
                     </label>
                     <textarea
@@ -443,13 +443,13 @@ export default function TranslationsPage() {
                       })}
                       rows={3}
                       dir={locale.rtl ? "rtl" : "ltr"}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                      className="w-full px-3 py-2 glass border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-mint text-white placeholder-white/50"
                     />
                   </div>
                 ))}
                 
-                <div className="mb-4">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                <div className="mb-4 md:mb-6">
+                  <label className="block text-sm font-medium text-white/90 mb-1">
                     Description (optional)
                   </label>
                   <input
@@ -457,7 +457,7 @@ export default function TranslationsPage() {
                     value={editForm.description}
                     onChange={(e) => setEditForm({ ...editForm, description: e.target.value })}
                     placeholder="Where is this translation used?"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-3 py-2 glass border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-mint text-white placeholder-white/50"
                   />
                 </div>
                 
@@ -465,13 +465,13 @@ export default function TranslationsPage() {
                   <button
                     type="button"
                     onClick={() => setEditingTranslation(null)}
-                    className="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+                    className="px-4 py-2 text-white/80 hover:bg-white/10 rounded-lg transition-colors"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors"
+                    className="px-4 py-2 bg-gradient-to-r from-brand-mint to-brand-primary text-white rounded-lg hover:shadow-[0_0_40px_rgba(112,178,178,0.5)] transition-all"
                   >
                     Save Changes
                   </button>
@@ -484,15 +484,15 @@ export default function TranslationsPage() {
       
       {/* Create Modal */}
       {showCreateModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-          <div className="bg-white rounded-lg shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <div className="p-6">
-              <h2 className="text-xl font-bold mb-4">Add New Translation</h2>
+        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+          <div className="glass-strong rounded-2xl md:rounded-3xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="p-6 md:p-8">
+              <h2 className="text-xl md:text-2xl font-bold text-white mb-4 md:mb-6 drop-shadow-md">Add New Translation</h2>
               
               <form onSubmit={handleCreate}>
-                <div className="grid grid-cols-2 gap-4 mb-4">
+                <div className="grid grid-cols-2 gap-4 mb-4 md:mb-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-white/90 mb-1">
                       Namespace
                     </label>
                     <input
@@ -500,12 +500,12 @@ export default function TranslationsPage() {
                       value={createForm.namespace}
                       onChange={(e) => setCreateForm({ ...createForm, namespace: e.target.value })}
                       placeholder="e.g., common, nav, home"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                      className="w-full px-3 py-2 glass border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-mint text-white placeholder-white/50"
                       required
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-white/90 mb-1">
                       Key
                     </label>
                     <input
@@ -513,7 +513,7 @@ export default function TranslationsPage() {
                       value={createForm.key}
                       onChange={(e) => setCreateForm({ ...createForm, key: e.target.value })}
                       placeholder="e.g., buttonLabel, pageTitle"
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                      className="w-full px-3 py-2 glass border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-mint text-white placeholder-white/50"
                       required
                     />
                   </div>
@@ -521,7 +521,7 @@ export default function TranslationsPage() {
                 
                 {LOCALES.map((locale) => (
                   <div key={locale.code} className="mb-4">
-                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                    <label className="block text-sm font-medium text-white/90 mb-1">
                       {locale.flag} {locale.name}
                     </label>
                     <textarea
@@ -532,13 +532,13 @@ export default function TranslationsPage() {
                       })}
                       rows={3}
                       dir={locale.rtl ? "rtl" : "ltr"}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                      className="w-full px-3 py-2 glass border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-mint text-white placeholder-white/50"
                     />
                   </div>
                 ))}
                 
-                <div className="mb-4">
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                <div className="mb-4 md:mb-6">
+                  <label className="block text-sm font-medium text-white/90 mb-1">
                     Description (optional)
                   </label>
                   <input
@@ -546,7 +546,7 @@ export default function TranslationsPage() {
                     value={createForm.description}
                     onChange={(e) => setCreateForm({ ...createForm, description: e.target.value })}
                     placeholder="Where is this translation used?"
-                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                    className="w-full px-3 py-2 glass border border-white/20 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-mint text-white placeholder-white/50"
                   />
                 </div>
                 
@@ -554,13 +554,13 @@ export default function TranslationsPage() {
                   <button
                     type="button"
                     onClick={() => setShowCreateModal(false)}
-                    className="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+                    className="px-4 py-2 text-white/80 hover:bg-white/10 rounded-lg transition-colors"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors"
+                    className="px-4 py-2 bg-gradient-to-r from-brand-mint to-brand-primary text-white rounded-lg hover:shadow-[0_0_40px_rgba(112,178,178,0.5)] transition-all"
                   >
                     Create Translation
                   </button>

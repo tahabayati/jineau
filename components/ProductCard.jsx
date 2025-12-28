@@ -9,7 +9,13 @@ import AddToCartButton from "./AddToCartButton"
 
 export default function ProductCard({ product }) {
   const t = useTranslations("product")
+  const tProducts = useTranslations("products")
   const tShop = useTranslations("shop")
+
+  // Get translated product fields with fallback
+  // Use the translation function directly with the full path
+  const productName = tProducts(`${product.slug}.name`) || product.name
+  const productShortDesc = tProducts(`${product.slug}.shortDescription`) || product.shortDescription
 
   return (
     <div className="group relative bg-brand-primary/50 rounded-3xl overflow-hidden transition-all duration-300 border border-brand-mint/20 hover:border-brand-mint/40 hover:bg-brand-secondary/60 hover:shadow-2xl hover:shadow-brand-mint/20 hover:-translate-y-1">
@@ -20,7 +26,7 @@ export default function ProductCard({ product }) {
           <div className="relative w-full h-full bg-white">
             <Image
               src={product.gallery[0]}
-              alt={product.name}
+              alt={productName}
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-110"
               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
@@ -57,12 +63,12 @@ export default function ProductCard({ product }) {
 
         <Link href={`/products/${product.slug}`}>
           <h3 className="font-semibold text-lg text-white mb-1 transition-colors duration-300 group-hover:text-brand-gold">
-            {product.name}
+            {productName}
           </h3>
         </Link>
 
         <p className="text-sm text-white/60 mb-3 line-clamp-2">
-          {product.shortDescription}
+          {productShortDesc}
         </p>
 
         <div className="flex items-center justify-between">

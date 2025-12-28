@@ -22,7 +22,9 @@
     "delete": "Supprimer",
     "loading": "Chargement...",
     "error": "Erreur",
-    "success": "Succès"
+    "success": "Succès",
+    "inStock": "En Stock",
+    "outOfStock": "Rupture de Stock"
   },
   "nav": {
     "shop": "Boutique",
@@ -406,5 +408,87 @@
     "type": "Type",
     "message": "Message",
     "createdAt": "Créé le"
+  },
+  "products": {
+    "sunflower-microgreens": {
+      "name": "Micropousses de Tournesol",
+      "shortDescription": "Verdure de tournesol croquante et noisette.",
+      "description": "Nos micropousses de tournesol offrent une saveur noisette délicieuse avec un croquant satisfaisant. Riches en vitamines A, B, D et E, plus des acides gras essentiels. Parfait pour les salades, sandwiches et smoothies. Propre avec notre technologie haute technologie, prêt à manger directement de l'emballage.",
+      "usage": "Ajoutez aux salades, sandwiches, wraps ou mélangez dans des smoothies. Excellent comme garniture pour les soupes et les bols de riz.",
+      "storage": "Gardez scellé au réfrigérateur sur l'étagère du haut. Profitez dans les 6-10 jours pour une fraîcheur optimale.",
+      "allergenNote": "Cultivé dans une installation qui manipule des graines de tournesol."
+    },
+    "pea-shoots": {
+      "name": "Pousses de Pois",
+      "shortDescription": "Vrilles de pois douces et tendres.",
+      "description": "Délicates pousses de pois avec une saveur douce et légère que les enfants adorent. Riches en vitamine C et en fibres. Leur texture tendre les rend parfaites pour les salades et comme garniture. Propre avec notre technologie haute technologie, aucun lavage requis.",
+      "usage": "Parfait cru dans les salades ou légèrement sautées. Ajoutez aux sautés dans la dernière minute de cuisson.",
+      "storage": "Conservez dans le contenant d'origine sur l'étagère du haut de votre réfrigérateur. Meilleur dans les 6-8 jours.",
+      "allergenNote": "Cultivé dans une installation qui manipule des graines de pois."
+    },
+    "radish-microgreens": {
+      "name": "Micropousses de Radis",
+      "shortDescription": "Verdure à tiges rouges épicées et vibrantes.",
+      "description": "Micropousses de radis audacieuses et poivrées avec de belles tiges rouges. Remplies de vitamines A, B, C, E et K. Ajoute une touche colorée à tout plat. Propre avec notre technologie haute technologie, prêt à déguster immédiatement.",
+      "usage": "Garnissez les tacos, sandwiches et sushis. Utilisez comme garniture pour les soupes et apéritifs pour une touche épicée.",
+      "storage": "Gardez réfrigéré dans le contenant d'origine. Consommez dans les 7-10 jours.",
+      "allergenNote": "Cultivé dans une installation qui manipule des graines de radis."
+    },
+    "broccoli-microgreens": {
+      "name": "Micropousses de Brocoli",
+      "shortDescription": "Super-védures douces et riches en nutriments.",
+      "description": "Les micropousses de brocoli à saveur douce contiennent jusqu'à 40 fois plus de sulforaphane que le brocoli mature. Excellent pour ceux qui recherchent une nutrition maximale avec un impact de goût minimal. Propre avec notre technologie haute technologie.",
+      "usage": "Mélangez dans des smoothies, ajoutez aux salades ou garnissez des toasts à l'avocat. Mélangez dans des trempettes pour une nutrition cachée.",
+      "storage": "Réfrigérez immédiatement. Meilleur consommé dans les 5-7 jours suivant la livraison.",
+      "allergenNote": "Cultivé dans une installation qui manipule des graines de brocoli."
+    },
+    "mixed-microgreens": {
+      "name": "Micropousses Mélangées",
+      "shortDescription": "Mélange du chef de variétés saisonnières.",
+      "description": "Un mélange sélectionné de nos meilleures micropousses, choisies pour leurs saveurs complémentaires et leur attrait visuel. Le mélange change selon les saisons pour présenter nos variétés les plus fraîches. Parfait pour ceux qui veulent de la variété. Propre avec notre technologie haute technologie.",
+      "usage": "Utilisez comme base de salade complète ou garniture pour tout plat. La variété de saveurs fonctionne avec presque toutes les cuisines.",
+      "storage": "Gardez scellé et réfrigéré. Consommez dans les 6-8 jours pour une fraîcheur optimale.",
+      "allergenNote": "Cultivé dans une installation qui manipule diverses graines."
+    },
+    "basil-microgreens": {
+      "name": "Micropousses de Basilic",
+      "shortDescription": "Basilic italien aromatique en forme micro.",
+      "description": "Saveur de basilic concentrée sous forme délicate de micropousse. Intensément aromatique avec le goût classique de basilic italien que vous aimez. Parfait pour les salades caprese, pâtes et plats méditerranéens. Propre avec notre technologie haute technologie.",
+      "usage": "Ajoutez aux pâtes, pizza, salades et sandwiches. Utilisez comme garniture pour les soupes et apéritifs.",
+      "storage": "Conservez réfrigéré. Meilleur utilisé dans les 5-7 jours tout en étant le plus aromatique.",
+      "allergenNote": "Cultivé dans une installation qui manipule des graines de basilic."
+    },
+    "arugula-microgreens": {
+      "name": "Micropousses de Roquette",
+      "shortDescription": "Micropousses vertes épicées et vibrantes.",
+      "description": "Micropousses de roquette audacieuses et poivrées avec une saveur épicée distinctive. Riches en vitamines K, A et C. Parfait pour ajouter une touche épicée aux salades, pizzas et sandwiches. Propre avec notre technologie haute technologie, prêt à manger.",
+      "usage": "Ajoutez aux salades, pizza, sandwiches et plats de pâtes. Excellent comme garniture pour les soupes et apéritifs.",
+      "storage": "Gardez scellé au réfrigérateur sur l'étagère du haut. Profitez dans les 6-10 jours pour une fraîcheur optimale.",
+      "allergenNote": "Cultivé dans une installation qui manipule des graines de roquette."
+    },
+    "pea-shoot-hydrosol": {
+      "name": "Hydrolat de Pousses de Pois",
+      "shortDescription": "Brumisation aromatique fraîche et verte.",
+      "description": "Distillé à partir de nos surplus de pousses de pois, cet hydrolat capture l'essence fraîche et verte du printemps. Utilisez comme brume faciale, spray d'ambiance ou dans les rituels de bien-être. 100% à base de plantes sans additifs synthétiques.",
+      "usage": "Vaporisez sur le visage pour un boost rafraîchissant, utilisez comme spray d'ambiance ou ajoutez au linge pour un parfum propre.",
+      "storage": "Conservez dans un endroit frais et sombre. Meilleur utilisé dans les 6 mois suivant l'ouverture.",
+      "safetyNote": "Pour usage externe uniquement. Test cutané recommandé avant application large."
+    },
+    "sunflower-hydrosol": {
+      "name": "Hydrolat de Tournesol",
+      "shortDescription": "Eau aromatique chaude et noisette.",
+      "description": "Créé à partir de nos surplus de micropousses de tournesol, cet hydrolat a une odeur subtile et chaude. Parfait pour les routines de soins personnels et créer une atmosphère chaleureuse. Zéro déchet, 100% naturel.",
+      "usage": "Utilisez comme tonique facial doux, brume corporelle ou rafraîchisseur d'ambiance. S'accorde bien avec la méditation et le yoga.",
+      "storage": "Éloignez-vous de la lumière directe du soleil. Réfrigérez après ouverture pour une fraîcheur prolongée.",
+      "safetyNote": "Usage externe uniquement. Ne pas consommer. Consultez un praticien si vous êtes enceinte."
+    },
+    "basil-hydrosol": {
+      "name": "Hydrolat de Basilic",
+      "shortDescription": "Brumisation herbacée et revigorante.",
+      "description": "Notre hydrolat de basilic capture l'essence brillante et herbacée du basilic frais. Une expérience aromatique revigorante pour le corps et l'espace. Distillé en petits lots à partir de micropousses excédentaires.",
+      "usage": "Vaporisez comme brume faciale, utilisez en aromathérapie ou vaporisez sur le linge pour un parfum herbacé.",
+      "storage": "Conservez dans un endroit frais et sombre. Utilisez dans les 6 mois pour la meilleure qualité aromatique.",
+      "safetyNote": "Pour usage externe uniquement. Évitez les yeux. Test cutané recommandé."
+    }
   }
 }

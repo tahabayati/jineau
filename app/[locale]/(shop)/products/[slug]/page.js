@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation"
+import { getTranslations } from "next-intl/server"
 import dbConnect from "@/lib/mongodb"
 import Product from "@/models/Product"
 import Category from "@/models/Category"
@@ -10,6 +11,7 @@ import ProductGallery from "@/components/ProductGallery"
 import AddToCartButton from "@/components/AddToCartButton"
 import { generateProductSchema } from "@/lib/seo"
 import { brandName } from "@/data/siteCopy"
+import { getTranslatedProduct } from "@/lib/productTranslations"
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -41,6 +43,7 @@ async function getRelatedProducts(type, excludeSlug) {
 }
 
 export async function generateMetadata({ params }) {
+  const { locale } = await params
   const { slug } = await params
   const product = await getProduct(slug)
 
@@ -48,17 +51,22 @@ export async function generateMetadata({ params }) {
     return { title: "Product Not Found" }
   }
 
+  const t = await getTranslations("products")
+  const tProduct = await getTranslations("product")
+  const translatedProduct = getTranslatedProduct(t, product)
+
   return {
-    title: `${product.name} - Fresh ${product.type === "microgreen" ? "Microgreens" : "Hydrosol"}`,
-    description: product.description,
+    title: `${translatedProduct.name} - Fresh ${product.type === "microgreen" ? tProduct("microgreen") : tProduct("hydrosol")}`,
+    description: translatedProduct.description,
     openGraph: {
-      title: `${product.name} | ${brandName}`,
-      description: product.shortDescription,
+      title: `${translatedProduct.name} | ${brandName}`,
+      description: translatedProduct.shortDescription,
     },
   }
 }
 
 export default async function ProductPage({ params }) {
+  const { locale } = await params
   const { slug } = await params
   const product = await getProduct(slug)
 
@@ -66,7 +74,20 @@ export default async function ProductPage({ params }) {
     notFound()
   }
 
+  // Get translations
+  const t = await getTranslations("products")
+  const tProduct = await getTranslations("product")
+  const tCommon = await getTranslations("common")
+  const tShop = await getTranslations("shop")
+  const tHome = await getTranslations("home")
+
+  // Get translated product
+  const translatedProduct = getTranslatedProduct(t, product)
+
   const relatedProducts = await getRelatedProducts(product.type, product.slug)
+  const translatedRelatedProducts = relatedProducts.map((p) =>
+    getTranslatedProduct(t, p)
+  )
 
   const productSchema = generateProductSchema(product)
 
@@ -80,91 +101,91 @@ export default async function ProductPage({ params }) {
       <div className="py-12 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <nav className="flex items-center gap-2 text-sm text-gray-500 mb-8">
-            <Link href="/" className="hover:text-brand-primary">Home</Link>
+            <Link href="/" className="hover:text-brand-primary">{tCommon("brandName")}</Link>
             <span>/</span>
-            <Link href="/shop" className="hover:text-brand-primary">Shop</Link>
+            <Link href="/shop" className="hover:text-brand-primary">{tShop("shop")}</Link>
             <span>/</span>
-            <span className="text-gray-900">{product.name}</span>
+            <span className="text-gray-900">{translatedProduct.name}</span>
           </nav>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <ProductGallery 
-              images={product.gallery || []} 
-              productName={product.name}
+              images={translatedProduct.gallery || []} 
+              productName={translatedProduct.name}
             />
 
             <div>
               <div className="flex flex-wrap gap-2 mb-4 animate-in fade-in slide-in-from-bottom-4 duration-500">
                 <Badge variant="mint">
-                  {product.type === "microgreen" ? "🌱 Microgreen" : "💧 Hydrosol"}
+                  {translatedProduct.type === "microgreen" ? `🌱 ${tProduct("microgreen")}` : `💧 ${tProduct("hydrosol")}`}
                 </Badge>
-                {product.isSubscriptionEligible && (
-                  <Badge variant="gold">✨ Subscribe & Save</Badge>
+                {translatedProduct.isSubscriptionEligible && (
+                  <Badge variant="gold">✨ {tShop("subscribeAndSave")}</Badge>
                 )}
-                {product.inStock ? (
-                  <Badge variant="success">In Stock</Badge>
+                {translatedProduct.inStock ? (
+                  <Badge variant="success">{tCommon("inStock") || "In Stock"}</Badge>
                 ) : (
-                  <Badge variant="default">Out of Stock</Badge>
+                  <Badge variant="default">{tCommon("outOfStock") || "Out of Stock"}</Badge>
                 )}
-                {product.tags?.map((tag) => (
+                {translatedProduct.tags?.map((tag) => (
                   <Badge key={tag} variant="default">{tag}</Badge>
                 ))}
               </div>
 
               <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
-                {product.name}
+                {translatedProduct.name}
               </h1>
 
               <p className="text-lg text-brand-secondary mb-4">
-                {product.shortDescription}
+                {translatedProduct.shortDescription}
               </p>
 
               <div className="flex items-baseline gap-2 mb-6">
                 <span className="text-4xl font-bold text-brand-primary">
-                  ${product.price.toFixed(2)}
+                  ${translatedProduct.price.toFixed(2)}
                 </span>
                 <span className="text-lg text-gray-500">CAD</span>
               </div>
 
               <p className="text-gray-600 mb-6 leading-relaxed">
-                {product.description}
+                {translatedProduct.description}
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <AddToCartButton product={product} size="lg" showText />
-                {product.isSubscriptionEligible && (
+                <AddToCartButton product={translatedProduct} size="lg" showText />
+                {translatedProduct.isSubscriptionEligible && (
                   <Button href="/subscribe" variant="secondary" size="lg">
-                    Subscribe Weekly
+                    {tCommon("subscribeWeekly") || "Subscribe Weekly"}
                   </Button>
                 )}
               </div>
 
               <div className="border-t border-gray-200 pt-6 space-y-4">
-                {product.usage && (
+                {translatedProduct.usage && (
                   <div className="bg-brand-mist/10 rounded-xl p-4">
-                    <h3 className="font-semibold text-gray-900 mb-1">How to Use</h3>
-                    <p className="text-gray-600 text-sm">{product.usage}</p>
+                    <h3 className="font-semibold text-gray-900 mb-1">{tProduct("howToUse")}</h3>
+                    <p className="text-gray-600 text-sm">{translatedProduct.usage}</p>
                   </div>
                 )}
 
-                {product.storage && (
+                {translatedProduct.storage && (
                   <div className="bg-brand-mint/10 rounded-xl p-4">
-                    <h3 className="font-semibold text-gray-900 mb-1">Storage</h3>
-                    <p className="text-gray-600 text-sm">{product.storage}</p>
+                    <h3 className="font-semibold text-gray-900 mb-1">{tProduct("storage")}</h3>
+                    <p className="text-gray-600 text-sm">{translatedProduct.storage}</p>
                   </div>
                 )}
 
-                {product.safetyNote && (
+                {translatedProduct.safetyNote && (
                   <div className="bg-amber-50 rounded-xl p-4 border border-amber-200">
-                    <h3 className="font-semibold text-amber-800 mb-1">Safety Note</h3>
-                    <p className="text-amber-700 text-sm">{product.safetyNote}</p>
+                    <h3 className="font-semibold text-amber-800 mb-1">{tProduct("safetyNote")}</h3>
+                    <p className="text-amber-700 text-sm">{translatedProduct.safetyNote}</p>
                   </div>
                 )}
 
-                {product.allergenNote && (
+                {translatedProduct.allergenNote && (
                   <div className="bg-red-50 rounded-xl p-4 border border-red-200">
-                    <h3 className="font-semibold text-red-800 mb-1">Allergen Info</h3>
-                    <p className="text-red-700 text-sm">{product.allergenNote}</p>
+                    <h3 className="font-semibold text-red-800 mb-1">{tProduct("allergenInfo")}</h3>
+                    <p className="text-red-700 text-sm">{translatedProduct.allergenNote}</p>
                   </div>
                 )}
               </div>
@@ -194,12 +215,12 @@ export default async function ProductPage({ params }) {
             </div>
           </div>
 
-          {relatedProducts.length > 0 && (
+          {translatedRelatedProducts.length > 0 && (
             <div className="mt-20 pt-12 border-t border-gray-200">
-              <h2 className="text-3xl font-bold text-gray-900 mb-2 text-center">You Might Also Like</h2>
-              <p className="text-gray-600 text-center mb-8">Discover more fresh microgreens and hydrosols</p>
+              <h2 className="text-3xl font-bold text-gray-900 mb-2 text-center">{tProduct("youMightAlsoLike")}</h2>
+              <p className="text-gray-600 text-center mb-8">{tHome("shopMore") || "Discover more fresh microgreens and hydrosols"}</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {relatedProducts.map((p) => (
+                {translatedRelatedProducts.map((p) => (
                   <ProductCard key={p.slug} product={p} />
                 ))}
               </div>

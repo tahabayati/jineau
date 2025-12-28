@@ -22,6 +22,7 @@ const DropletIcon = () => (
 // Product card with unique home page aesthetic
 function FeaturedProductCard({ product, index }) {
   const t = useTranslations("product")
+  const tProducts = useTranslations("products")
   const [isHovered, setIsHovered] = useState(false)
   
   const gradients = [
@@ -87,7 +88,7 @@ function FeaturedProductCard({ product, index }) {
                 <>
                   <Image
                     src={product.gallery[0]}
-                    alt={product.name}
+                    alt={tProducts(`${product.slug}.name`) || product.name}
                     fill
                     className="relative object-cover rounded-full transition-transform duration-500 group-hover:scale-110"
                     sizes="(max-width: 768px) 60vw, 20vw"
@@ -120,13 +121,13 @@ function FeaturedProductCard({ product, index }) {
         <div className="relative p-6 pt-2 flex-grow flex flex-col">
           {/* Product name with gradient underline on hover */}
           <h3 className="relative text-lg md:text-xl font-bold text-white mb-2 transition-colors duration-300 group-hover:text-brand-gold">
-            {product.name}
+            {tProducts(`${product.slug}.name`) || product.name}
             <span className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-brand-gold to-brand-mint transition-all duration-500 ${isHovered ? "w-full" : "w-0"}`} />
           </h3>
 
           {/* Short description */}
           <p className="text-sm text-white/60 mb-4 line-clamp-2 leading-relaxed flex-grow">
-            {product.shortDescription}
+            {tProducts(`${product.slug}.shortDescription`) || product.shortDescription}
           </p>
 
           {/* Price and action row */}

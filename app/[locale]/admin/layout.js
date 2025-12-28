@@ -1,5 +1,6 @@
 import { cookies } from "next/headers"
 import AdminSidebar from "@/components/AdminSidebar"
+import AuroraBackground from "@/components/AuroraBackground"
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -24,8 +25,9 @@ export default async function AdminLayout({ children }) {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100">
-      <div className="flex">
+    <div className="min-h-screen relative overflow-x-hidden">
+      <AuroraBackground variant="home" />
+      <div className="relative z-10 flex">
         <AdminSidebar />
         <main className="flex-1 p-6 md:p-8">{children}</main>
       </div>
