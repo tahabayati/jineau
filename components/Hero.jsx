@@ -80,13 +80,28 @@ function Hero({
 
             {/* Right side - Text content */}
             <div className="relative text-center lg:text-left order-1 lg:order-2">
-              {/* Badge */}
-              <div className={`inline-flex items-center gap-2 bg-black/30 backdrop-blur-sm border border-white/20 px-3 py-1.5 sm:px-5 sm:py-2.5 rounded-full mb-3 sm:mb-5 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '0.4s' }}>
-                <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2" aria-hidden="true">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-mint opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 sm:h-2 sm:w-2 bg-brand-mint"></span>
-                </span>
-                <span className="text-white/85 text-[10px] sm:text-xs font-medium tracking-wider uppercase">{t("farmFresh")}</span>
+              {/* Badge and Mascot Container */}
+              <div className={`flex items-center justify-center lg:justify-start gap-3 sm:gap-4 mb-3 sm:mb-5 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '0.4s' }}>
+                {/* Badge */}
+                <div className="relative inline-flex items-center gap-2 bg-black/30 backdrop-blur-sm border border-white/20 px-3 py-1.5 sm:px-5 sm:py-2.5 rounded-full">
+                  <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2" aria-hidden="true">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-mint opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-1.5 w-1.5 sm:h-2 sm:w-2 bg-brand-mint"></span>
+                  </span>
+                  <span className="text-white/85 text-[10px] sm:text-xs font-medium tracking-wider uppercase">{t("farmFresh")}</span>
+                </div>
+
+                {/* Marmot Mascot - Fixed size, no stretching */}
+                <div className="relative flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28">
+                  <Image 
+                    src="/jineau-home-images/marmot-mascot-thumbsup.webp" 
+                    alt="Freddie the Marmot" 
+                    width={112} 
+                    height={112}
+                    className="w-full h-full object-contain"
+                    priority
+                  />
+                </div>
               </div>
 
               {/* Main heading */}
