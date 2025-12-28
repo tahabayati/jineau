@@ -59,14 +59,14 @@ function CartDrawer() {
                     <div className="flex items-center gap-2 mt-2">
                       <button
                         onClick={() => updateQuantity(item.slug, item.quantity - 1)}
-                        className="w-7 h-7 bg-white border border-brand-mint/30 rounded-full flex items-center justify-center hover:bg-brand-mist/30"
+                        className="w-7 h-7 bg-white border border-brand-mint/30 rounded-full flex items-center justify-center hover:bg-brand-mist/30 text-brand-primary font-semibold"
                       >
                         -
                       </button>
                       <span className="w-8 text-center font-medium">{item.quantity}</span>
                       <button
                         onClick={() => updateQuantity(item.slug, item.quantity + 1)}
-                        className="w-7 h-7 bg-white border border-brand-mint/30 rounded-full flex items-center justify-center hover:bg-brand-mist/30"
+                        className="w-7 h-7 bg-white border border-brand-mint/30 rounded-full flex items-center justify-center hover:bg-brand-mist/30 text-brand-primary font-semibold"
                       >
                         +
                       </button>
