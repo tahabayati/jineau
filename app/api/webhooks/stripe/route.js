@@ -3,7 +3,10 @@ import { headers } from "next/headers"
 import { getStripe } from "@/lib/stripe"
 import dbConnect from "@/lib/mongodb"
 import Order from "@/models/Order"
+import User from "@/models/User"
 import GiftDelivery from "@/models/GiftDelivery"
+
+export const runtime = 'nodejs'
 
 export async function POST(request) {
   const body = await request.text()
@@ -13,8 +16,11 @@ export async function POST(request) {
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET
 
   if (!webhookSecret) {
-    console.log("Webhook secret not configured, skipping verification")
-    return NextResponse.json({ received: true })
+    console.error("STRIPE_WEBHOOK_SECRET not configured, rejecting webhook")
+    return NextResponse.json(
+      { error: "Webhook secret not configured" },
+      { status: 500 }
+    )
   }
 
   let event
@@ -32,13 +38,19 @@ export async function POST(request) {
 
   console.log("Received Stripe event:", event.type)
 
-  switch (event.type) {
-    case "checkout.session.completed": {
-      const session = event.data.object
-      console.log("Checkout completed:", session.id)
+  try {
+    await dbConnect()
 
-      try {
-        await dbConnect()
+    switch (event.type) {
+      case "checkout.session.completed": {
+        const session = event.data.object
+        console.log("Checkout completed:", session.id)
+
+        const existingOrder = await Order.findOne({ stripeSessionId: session.id })
+        if (existingOrder) {
+          console.log("Order already exists for session:", session.id)
+          return NextResponse.json({ received: true })
+        }
 
         const {
           amount_total,
@@ -47,11 +59,12 @@ export async function POST(request) {
           mode,
           id: stripeSessionId,
           subscription,
+          customer: customerId,
         } = session
 
         const orderData = {
           user: metadata?.userId || undefined,
-          items: [], // Line items can be expanded later if needed
+          items: [],
           subtotal: (amount_total || 0) / 100,
           shippingFee: 0,
           total: (amount_total || 0) / 100,
@@ -67,47 +80,140 @@ export async function POST(request) {
         const order = await Order.create(orderData)
         console.log("Order created from Stripe session:", order._id)
 
-        // If a Gift One delivery was created earlier and linked via metadata, we could
-        // connect it here in the future. For now we just ensure orders exist for admin.
-      } catch (err) {
-        console.error("Error creating order from Stripe session:", err)
+        if (mode === "subscription" && subscription && metadata?.userId) {
+          await User.findByIdAndUpdate(metadata.userId, {
+            activeSubscription: order._id,
+            stripeCustomerId: typeof customerId === "string" ? customerId : undefined,
+          })
+          console.log("User subscription linked:", metadata.userId)
+        }
+
+        if (typeof customerId === "string" && metadata?.userId) {
+          await User.findByIdAndUpdate(metadata.userId, {
+            stripeCustomerId: customerId,
+          })
+        }
+
+        break
       }
-      break
+
+      case "customer.subscription.created": {
+        const subscription = event.data.object
+        console.log("Subscription created:", subscription.id)
+
+        if (subscription.customer) {
+          const user = await User.findOne({ stripeCustomerId: subscription.customer })
+          if (user) {
+            const order = await Order.findOne({ stripeSubscriptionId: subscription.id })
+            if (order) {
+              await User.findByIdAndUpdate(user._id, {
+                activeSubscription: order._id,
+              })
+              console.log("User subscription linked on creation:", user._id)
+            }
+          }
+        }
+
+        break
+      }
+
+      case "customer.subscription.updated": {
+        const subscription = event.data.object
+        console.log("Subscription updated:", subscription.id)
+
+        if (subscription.customer) {
+          const user = await User.findOne({ stripeCustomerId: subscription.customer })
+          if (user) {
+            const order = await Order.findOne({ stripeSubscriptionId: subscription.id })
+            if (order) {
+              const isActive = subscription.status === "active" || subscription.status === "trialing"
+              if (isActive) {
+                await User.findByIdAndUpdate(user._id, {
+                  activeSubscription: order._id,
+                })
+                await Order.findByIdAndUpdate(order._id, {
+                  status: subscription.status === "trialing" ? "paid" : "paid",
+                })
+              } else {
+                await Order.findByIdAndUpdate(order._id, {
+                  status: subscription.status === "canceled" ? "cancelled" : "pending",
+                })
+              }
+              console.log("User subscription updated:", user._id, "status:", subscription.status)
+            }
+          }
+        }
+
+        break
+      }
+
+      case "customer.subscription.deleted": {
+        const subscription = event.data.object
+        console.log("Subscription cancelled:", subscription.id)
+
+        if (subscription.customer) {
+          const user = await User.findOne({ stripeCustomerId: subscription.customer })
+          if (user) {
+            await User.findByIdAndUpdate(user._id, {
+              activeSubscription: null,
+            })
+            const order = await Order.findOne({ stripeSubscriptionId: subscription.id })
+            if (order) {
+              await Order.findByIdAndUpdate(order._id, {
+                status: "cancelled",
+              })
+            }
+            console.log("User subscription cancelled:", user._id)
+          }
+        }
+
+        break
+      }
+
+      case "invoice.paid": {
+        const invoice = event.data.object
+        console.log("Invoice paid:", invoice.id)
+
+        if (invoice.subscription) {
+          const order = await Order.findOne({ stripeSubscriptionId: invoice.subscription })
+          if (order) {
+            await Order.findByIdAndUpdate(order._id, {
+              status: "paid",
+            })
+            console.log("Subscription order marked as paid:", order._id)
+          }
+        }
+
+        break
+      }
+
+      case "invoice.payment_failed": {
+        const invoice = event.data.object
+        console.error("Invoice payment failed:", invoice.id, "customer:", invoice.customer)
+
+        if (invoice.subscription) {
+          const order = await Order.findOne({ stripeSubscriptionId: invoice.subscription })
+          if (order) {
+            await Order.findByIdAndUpdate(order._id, {
+              status: "pending",
+            })
+            console.log("Subscription order marked as pending due to payment failure:", order._id)
+          }
+        }
+
+        break
+      }
+
+      default:
+        console.log("Unhandled event type:", event.type)
     }
 
-    case "customer.subscription.created": {
-      const subscription = event.data.object
-      console.log("Subscription created:", subscription.id)
-      break
-    }
-
-    case "customer.subscription.updated": {
-      const subscription = event.data.object
-      console.log("Subscription updated:", subscription.id)
-      break
-    }
-
-    case "customer.subscription.deleted": {
-      const subscription = event.data.object
-      console.log("Subscription cancelled:", subscription.id)
-      break
-    }
-
-    case "invoice.paid": {
-      const invoice = event.data.object
-      console.log("Invoice paid:", invoice.id)
-      break
-    }
-
-    case "invoice.payment_failed": {
-      const invoice = event.data.object
-      console.log("Invoice payment failed:", invoice.id)
-      break
-    }
-
-    default:
-      console.log("Unhandled event type:", event.type)
+    return NextResponse.json({ received: true })
+  } catch (err) {
+    console.error("Error processing webhook:", err)
+    return NextResponse.json(
+      { error: "Webhook processing failed" },
+      { status: 500 }
+    )
   }
-
-  return NextResponse.json({ received: true })
 }
