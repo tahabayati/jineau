@@ -25,6 +25,7 @@ export default function AdminSidebar() {
 
   const links = [
     { href: "/admin", label: t("title"), icon: "📊" },
+    { href: "/admin/products", label: "Products", icon: "🛍️" },
     { href: "/admin/translations", label: "Translations", icon: "🌐" },
     { href: "/admin/site-content", label: "Site Content", icon: "📝" },
     { href: "/admin/users", label: "Users & Orders", icon: "👥" },
