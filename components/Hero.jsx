@@ -59,9 +59,9 @@ function Hero({
       {/* Main content - flex grow to push stats down */}
       <div className="relative z-20 flex-1 flex items-center w-full px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 pb-8">
         <div className="max-w-7xl mx-auto w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center rtl:lg:gap-12">
             {/* Left side - Microgreens video */}
-            <div className={`relative flex flex-col items-center lg:items-start order-2 lg:order-1 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '0.2s' }}>
+            <div className={`relative flex flex-col items-center lg:items-start rtl:lg:items-end order-2 lg:order-1 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '0.2s' }}>
               <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-none">
                 <div className="relative w-full pt-[100%] rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden bg-black/40">
                   <video
@@ -79,9 +79,9 @@ function Hero({
             </div>
 
             {/* Right side - Text content */}
-            <div className="relative text-center lg:text-left order-1 lg:order-2">
+            <div className="relative text-center lg:text-left rtl:lg:text-right order-1 lg:order-2">
               {/* Badge and Mascot Container */}
-              <div className={`flex items-center justify-center lg:justify-start gap-3 sm:gap-4 mb-3 sm:mb-5 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '0.4s' }}>
+              <div className={`flex items-center justify-center lg:justify-start rtl:lg:justify-end gap-3 sm:gap-4 mb-3 sm:mb-5 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '0.4s' }}>
                 {/* Badge */}
                 <div className="relative inline-flex items-center gap-2 bg-black/30 backdrop-blur-sm border border-white/20 px-3 py-1.5 sm:px-5 sm:py-2.5 rounded-full">
                   <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2" aria-hidden="true">
@@ -114,14 +114,14 @@ function Hero({
               </h1>
 
               {/* Subtitle */}
-              <div className={`bg-black/30 backdrop-blur-sm border border-white/10 rounded-xl sm:rounded-2xl p-3 sm:p-5 max-w-xl mx-auto lg:mx-0 mb-4 sm:mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '0.8s' }}>
+              <div className={`bg-black/30 backdrop-blur-sm border border-white/10 rounded-xl sm:rounded-2xl p-3 sm:p-5 max-w-xl mx-auto lg:mx-0 rtl:lg:ml-auto rtl:lg:mr-0 mb-4 sm:mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '0.8s' }}>
                 <p className="text-xs sm:text-sm md:text-base text-white/85 leading-relaxed">
                   {subtitle}
                 </p>
               </div>
 
               {/* CTA buttons */}
-              <div className={`flex flex-col sm:flex-row gap-2.5 sm:gap-4 justify-center lg:justify-start ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '1s' }}>
+              <div className={`flex flex-col sm:flex-row gap-2.5 sm:gap-4 justify-center lg:justify-start rtl:lg:justify-end ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '1s' }}>
                 {primaryCta && (
                   <Link
                     href={primaryCta.href}
