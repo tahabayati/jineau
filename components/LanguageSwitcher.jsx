@@ -1,7 +1,7 @@
 "use client"
 
 import { usePathname, useRouter } from "@/i18n/routing"
-import { useState } from "react"
+import { useState, useTransition } from "react"
 
 const languages = [
   { code: "en", label: "EN", name: "English" },
@@ -11,14 +11,35 @@ const languages = [
 
 export default function LanguageSwitcher({ locale }) {
   const [isOpen, setIsOpen] = useState(false)
+  const [isPending, startTransition] = useTransition()
   const pathname = usePathname()
   const router = useRouter()
 
   const currentLang = languages.find((l) => l.code === locale) || languages[0]
 
   const handleChange = (newLocale) => {
-    router.replace(pathname, { locale: newLocale })
+    if (newLocale === locale) {
+      setIsOpen(false)
+      return
+    }
+
     setIsOpen(false)
+    
+    // Use startTransition for better handling of navigation
+    startTransition(() => {
+      try {
+        // Ensure pathname is valid (use '/' as fallback)
+        const targetPath = pathname || '/'
+        // Use push instead of replace for more reliable navigation
+        router.push(targetPath, { locale: newLocale })
+      } catch (error) {
+        console.error("Error changing locale:", error)
+        // Fallback to full page navigation if router fails
+        const currentPath = window.location.pathname
+        const pathWithoutLocale = currentPath.replace(/^\/(en|fr|fa)/, '') || '/'
+        window.location.href = `/${newLocale}${pathWithoutLocale === '/' ? '' : pathWithoutLocale}${window.location.search}`
+      }
+    })
   }
 
   return (
@@ -26,7 +47,8 @@ export default function LanguageSwitcher({ locale }) {
       <button
         onClick={() => setIsOpen(!isOpen)}
         onBlur={() => setTimeout(() => setIsOpen(false), 150)}
-        className="flex items-center gap-1.5 px-3 py-2 text-sm font-semibold text-white/90 hover:text-white bg-white/5 hover:bg-white/10 backdrop-blur-sm rounded-lg transition-all duration-300 border border-white/10 hover:border-brand-mint/30 hover:shadow-[0_0_15px_rgba(112,178,178,0.3)]"
+        disabled={isPending}
+        className="flex items-center gap-1.5 px-3 py-2 text-sm font-semibold text-white/90 hover:text-white bg-white/5 hover:bg-white/10 backdrop-blur-sm rounded-lg transition-all duration-300 border border-white/10 hover:border-brand-mint/30 hover:shadow-[0_0_15px_rgba(112,178,178,0.3)] disabled:opacity-50 disabled:cursor-not-allowed"
         aria-label={`Current language: ${currentLang.name}. Click to change language.`}
         aria-expanded={isOpen}
         aria-haspopup="true"
@@ -46,11 +68,12 @@ export default function LanguageSwitcher({ locale }) {
             <button
               key={lang.code}
               onClick={() => handleChange(lang.code)}
+              disabled={isPending || lang.code === locale}
               className={`w-full px-4 py-2.5 text-left rtl:text-right text-sm font-medium transition-all duration-200 flex items-center justify-between group ${
                 lang.code === locale 
-                  ? "text-brand-mint bg-brand-mint/10 border-l-2 border-brand-mint" 
+                  ? "text-brand-mint bg-brand-mint/10 border-l-2 border-brand-mint cursor-default" 
                   : "text-white/80 hover:text-white hover:bg-white/10"
-              }`}
+              } ${isPending ? "opacity-50 cursor-not-allowed" : ""}`}
             >
               <span className={`${lang.code === locale ? "font-semibold" : ""}`}>{lang.name}</span>
               {lang.code === locale && (
