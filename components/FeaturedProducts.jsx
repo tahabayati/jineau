@@ -23,6 +23,7 @@ const DropletIcon = () => (
 function FeaturedProductCard({ product, index }) {
   const t = useTranslations("product")
   const tProducts = useTranslations("products")
+  const tShop = useTranslations("shop")
   const [isHovered, setIsHovered] = useState(false)
   
   const gradients = [
@@ -137,7 +138,7 @@ function FeaturedProductCard({ product, index }) {
                 ${product.price.toFixed(2)}
               </span>
               {product.isSubscriptionEligible && (
-                <span className="text-xs text-brand-gold/80">Subscribe & Save</span>
+                <span className="text-xs text-brand-gold/80">{tShop("subscribeAndSave")}</span>
               )}
             </div>
             

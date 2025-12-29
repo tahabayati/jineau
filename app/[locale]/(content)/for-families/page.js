@@ -23,10 +23,10 @@ export default async function ForFamiliesPage() {
   ]
 
   const lunchboxIdeas = [
-    "Roll microgreens in mini wraps with cream cheese",
-    "Top peanut butter sandwiches with pea shoots",
-    "Mix into rice or pasta salads for color",
-    "Blend into smoothies for hidden nutrients",
+    t("lunchboxIdea1"),
+    t("lunchboxIdea2"),
+    t("lunchboxIdea3"),
+    t("lunchboxIdea4"),
   ]
 
   return (

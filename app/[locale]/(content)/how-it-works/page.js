@@ -14,6 +14,7 @@ export async function generateMetadata({ params }) {
 
 export default async function HowItWorksPage() {
   const t = await getTranslations("howItWorks")
+  const tHome = await getTranslations("home")
   const tCommon = await getTranslations("common")
 
   const steps = [
@@ -210,10 +211,10 @@ export default async function HowItWorksPage() {
           <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div className="glass-strong rounded-3xl md:rounded-[48px] p-6 sm:p-8 md:p-10 lg:p-14 relative z-10">
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 drop-shadow-xl px-2">
-                Ready to Start Your Subscription?
+                {tHome("readyToStartSubscription")}
               </h2>
               <p className="text-sm sm:text-base md:text-lg text-white/85 mb-7 md:mb-9 max-w-xl mx-auto leading-relaxed drop-shadow-lg px-2">
-                Join families across {regionConfig.deliveryRegion} getting fresh microgreens every {deliveryConfig.deliveryDay}.
+                {tHome("readyToStartSubscriptionDesc")}
               </p>
               
               <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">

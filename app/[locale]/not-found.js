@@ -2,8 +2,10 @@ import Image from "next/image"
 import AuroraBackground from "@/components/AuroraBackground"
 import Button from "@/components/Button"
 import { Link } from "@/i18n/routing"
+import { getTranslations } from "next-intl/server"
 
-export default function NotFound() {
+export default async function NotFound() {
+  const t = await getTranslations("notFound")
   return (
     <main className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Aurora Background */}
@@ -25,61 +27,60 @@ export default function NotFound() {
 
           {/* 404 Heading */}
           <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold mb-4 gradient-text">
-            404
+            {t("title")}
           </h1>
 
           {/* Message */}
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-heading text-brand-mist mb-4">
-            Oops! Page Not Found
+            {t("heading")}
           </h2>
           
           <p className="text-base sm:text-lg text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed">
-            Looks like Freddie the Marmot couldn&apos;t find the page you&apos;re looking for. 
-            It might have been moved or doesn&apos;t exist.
+            {t("description")}
           </p>
 
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button href="/" variant="primary" size="lg">
-              Go Back Home
+              {t("goBackHome")}
             </Button>
             <Button href="/shop" variant="outline" size="lg">
-              Visit Shop
+              {t("visitShop")}
             </Button>
           </div>
 
           {/* Additional Help Links */}
           <div className="mt-12 pt-8 border-t border-brand-mint/20">
             <p className="text-sm text-gray-400 mb-4">
-              Need help? Try these popular pages:
+              {t("needHelp")}
             </p>
             <div className="flex flex-wrap gap-3 justify-center">
               <Link 
                 href="/about" 
                 className="text-brand-mint hover:text-brand-mist transition-colors text-sm underline underline-offset-4"
               >
-                About Us
+                {t("aboutUs")}
               </Link>
               <span className="text-gray-600">•</span>
               <Link 
                 href="/how-it-works" 
                 className="text-brand-mint hover:text-brand-mist transition-colors text-sm underline underline-offset-4"
               >
-                How It Works
+                {t("howItWorks")}
               </Link>
               <span className="text-gray-600">•</span>
               <Link 
                 href="/faq" 
                 className="text-brand-mint hover:text-brand-mist transition-colors text-sm underline underline-offset-4"
               >
-                FAQ
+                {t("faq")}
               </Link>
               <span className="text-gray-600">•</span>
               <Link 
                 href="/account" 
                 className="text-brand-mint hover:text-brand-mist transition-colors text-sm underline underline-offset-4"
               >
-                My Account
+                {t("myAccount")}
               </Link>
             </div>
           </div>

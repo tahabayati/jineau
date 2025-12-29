@@ -11,29 +11,29 @@ import GiftOneSection from "./GiftOneSection"
 const plans = [
   {
     id: 3,
-    name: "Starter",
+    nameKey: "planStarter",
     packs: 3,
     price: 18.99,
     pricePerPack: 6.33,
-    description: "Perfect for individuals or couples",
+    descriptionKey: "planStarterDesc",
     popular: false,
   },
   {
     id: 5,
-    name: "Family",
+    nameKey: "planFamily",
     packs: 5,
     price: 29.99,
     pricePerPack: 6.00,
-    description: "Ideal for small families",
+    descriptionKey: "planFamilyDesc",
     popular: true,
   },
   {
     id: 7,
-    name: "Chef",
+    nameKey: "planChef",
     packs: 7,
     price: 39.99,
     pricePerPack: 5.71,
-    description: "Best value for green enthusiasts",
+    descriptionKey: "planChefDesc",
     popular: false,
   },
 ]
@@ -48,6 +48,7 @@ export default function SubscriptionPicker({ onSelect }) {
   const [customCenter, setCustomCenter] = useState({ name: "", address: "" })
   const [error, setError] = useState("")
   const t = useTranslations("subscribe")
+  const tHome = useTranslations("home")
 
   // Redirect to login if not authenticated when trying to subscribe
   const handleSubscribe = async () => {
@@ -111,7 +112,7 @@ export default function SubscriptionPicker({ onSelect }) {
           <button
             key={plan.id}
             onClick={() => setSelectedPlan(plan.id)}
-            aria-label={`Select ${plan.name} plan`}
+            aria-label={`Select ${tHome(plan.nameKey)} plan`}
             className={`relative p-5 md:p-6 pt-7 md:pt-8 rounded-2xl border-2 text-left transition-all h-full flex flex-col ${
               selectedPlan === plan.id
                 ? "border-brand-primary bg-brand-primary/5 shadow-lg scale-[1.02]"
@@ -120,13 +121,13 @@ export default function SubscriptionPicker({ onSelect }) {
           >
             {plan.popular && (
               <Badge variant="gold" className="absolute -top-2.5 left-1/2 -translate-x-1/2 whitespace-nowrap">
-                Most Popular
+                {tHome("mostPopular")}
               </Badge>
             )}
 
             <div className="flex-1">
-              <h3 className="font-bold text-xl text-gray-900 mb-1.5">{plan.name}</h3>
-              <p className="text-sm text-gray-600 mb-4 min-h-[2.5rem]">{plan.description}</p>
+              <h3 className="font-bold text-xl text-gray-900 mb-1.5">{tHome(plan.nameKey)}</h3>
+              <p className="text-sm text-gray-600 mb-4 min-h-[2.5rem]">{tHome(plan.descriptionKey)}</p>
 
               <div className="flex items-baseline gap-1 mb-2">
                 <span className="text-3xl md:text-4xl font-bold text-brand-primary">
@@ -136,7 +137,7 @@ export default function SubscriptionPicker({ onSelect }) {
               </div>
 
               <p className="text-sm text-gray-500 mb-4">
-                {plan.packs} packs · ${plan.pricePerPack.toFixed(2)} each
+                {plan.packs} {plan.packs === 1 ? tHome("pack") : tHome("packs")} · ${plan.pricePerPack.toFixed(2)} {tHome("each")}
               </p>
             </div>
 

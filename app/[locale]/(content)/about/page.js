@@ -188,17 +188,24 @@ export default async function AboutPage() {
             </div>
             <div className="glass-card rounded-2xl md:rounded-3xl p-6 md:p-8 mb-8 md:mb-12">
               <p className="text-white/90 leading-relaxed text-base md:text-lg mb-8 md:mb-10">
-                {brandStory.mission}
+                {t("missionText") || brandStory.mission}
               </p>
 
               <h3 className="text-2xl md:text-3xl font-bold text-white mb-6 md:mb-8 drop-shadow-md">{t("ourValues")}</h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-                {brandStory.values.map((value) => (
-                  <div key={value} className="flex items-center gap-3 md:gap-4 glass rounded-xl md:rounded-2xl p-4 md:p-5">
+                {[
+                  t("valueWaterEfficient"),
+                  t("valuePesticideFree"),
+                  t("valueZeroWaste"),
+                  t("valueKurdishPersian"),
+                  t("valueModernScience"),
+                  t("valueFarmDirect"),
+                ].map((value, index) => (
+                  <div key={index} className="flex items-center gap-3 md:gap-4 glass rounded-xl md:rounded-2xl p-4 md:p-5">
                     <svg className="w-6 h-6 md:w-7 md:h-7 text-brand-gold flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
-                    <span className="text-white/90 text-sm md:text-base">{value}</span>
+                    <span className="text-white/90 text-sm md:text-base">{value || brandStory.values[index]}</span>
                   </div>
                 ))}
               </div>
@@ -230,7 +237,7 @@ export default async function AboutPage() {
                 {t("whatMakesUsDifferent")}
               </h2>
               <p className="text-base sm:text-lg md:text-xl text-white/90 max-w-2xl mx-auto leading-relaxed drop-shadow-lg px-2">
-                We combine ancient wisdom with modern technology.
+                {t("combineWisdomTechnology")}
               </p>
             </div>
 
@@ -296,10 +303,10 @@ export default async function AboutPage() {
           <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div className="glass-strong rounded-3xl md:rounded-[48px] p-6 sm:p-8 md:p-10 lg:p-14 relative z-10">
               <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 drop-shadow-xl px-2">
-                Ready to Taste the Difference?
+                {t("readyToTasteDifference")}
               </h2>
               <p className="text-sm sm:text-base md:text-lg text-white/85 mb-7 md:mb-9 max-w-xl mx-auto leading-relaxed drop-shadow-lg px-2">
-                Join families in {regionConfig.deliveryRegion} enjoying the freshest microgreens every week.
+                {t("readyToTasteDifferenceDesc")}
               </p>
               
               <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">

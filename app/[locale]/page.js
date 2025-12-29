@@ -505,8 +505,12 @@ export default async function HomePage({ params }) {
                     </div>
                   )}
 
-                  <h3 className={`text-xl md:text-2xl font-bold text-white mb-1 md:mb-2 drop-shadow-md ${index === 1 ? 'pt-2' : ''}`}>{plan.name}</h3>
-                  <p className="text-sm md:text-base text-white/70 mb-6 md:mb-8">{plan.description}</p>
+                  <h3 className={`text-xl md:text-2xl font-bold text-white mb-1 md:mb-2 drop-shadow-md ${index === 1 ? 'pt-2' : ''}`}>
+                    {index === 0 ? t("planStarter") : index === 1 ? t("planFamily") : t("planChef")}
+                  </h3>
+                  <p className="text-sm md:text-base text-white/70 mb-6 md:mb-8">
+                    {index === 0 ? t("planStarterDesc") : index === 1 ? t("planFamilyDesc") : t("planChefDesc")}
+                  </p>
                   
                   <div className="mb-6 md:mb-8 flex-grow">
                     <span className="text-5xl md:text-6xl font-bold gradient-text drop-shadow-lg">{plan.packs}</span>
@@ -521,7 +525,7 @@ export default async function HomePage({ params }) {
                         : 'glass text-white hover:bg-white/10 hover:scale-105'
                     }`}
                   >
-                    {t("choosePlan")} {plan.name}
+                    {t("choosePlan")} {index === 0 ? t("planStarter") : index === 1 ? t("planFamily") : t("planChef")}
                   </Link>
                 </div>
               ))}

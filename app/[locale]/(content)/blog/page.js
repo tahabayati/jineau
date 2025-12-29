@@ -3,6 +3,10 @@ import { Link } from "@/i18n/routing"
 import MarmotMascot from "@/components/MarmotMascot"
 import AuroraBackground from "@/components/AuroraBackground"
 import Image from "next/image"
+import dbConnect from "@/lib/mongodb"
+import BlogPost from "@/models/BlogPost"
+
+export const runtime = 'nodejs'
 
 export async function generateMetadata({ params }) {
   const { locale } = await params
@@ -10,58 +14,31 @@ export async function generateMetadata({ params }) {
   return { title: titles[locale] || titles.en }
 }
 
-const blogPosts = [
-  {
-    slug: "how-to-use-microgreens-daily",
-    title: "How to Use Microgreens Daily",
-    excerpt: "Simple ways to add nutrient-dense microgreens to every meal of the day.",
-    date: "2024-01-15",
-    category: "Recipes",
-    readTime: "5 min",
-  },
-  {
-    slug: "5-fast-recipes-under-5-minutes",
-    title: "5 Fast Recipes Under 5 Minutes",
-    excerpt: "Quick and delicious recipes featuring our fresh microgreens for busy people.",
-    date: "2024-01-10",
-    category: "Recipes",
-    readTime: "4 min",
-  },
-  {
-    slug: "high-tech-farming",
-    title: "Behind the Scenes: High-Tech Farming",
-    excerpt: "Learn how advanced clean technology keeps your greens safe and ready to eat.",
-    date: "2024-01-05",
-    category: "Farm Life",
-    readTime: "6 min",
-  },
-  {
-    slug: "microgreens-vs-sprouts",
-    title: "Microgreens vs Sprouts: What's the Difference?",
-    excerpt: "A comprehensive guide to understanding the difference between these two superfoods.",
-    date: "2024-01-01",
-    category: "Education",
-    readTime: "4 min",
-  },
-  {
-    slug: "storing-microgreens-properly",
-    title: "How to Store Microgreens Properly",
-    excerpt: "Keep your microgreens fresh for up to 10 days with these storage tips.",
-    date: "2023-12-28",
-    category: "Tips",
-    readTime: "3 min",
-  },
-  {
-    slug: "health-benefits-of-microgreens",
-    title: "The Science Behind Microgreen Nutrition",
-    excerpt: "Research shows microgreens contain 4-40x more nutrients than mature vegetables.",
-    date: "2023-12-20",
-    category: "Health",
-    readTime: "7 min",
-  },
-]
+async function getBlogPosts(locale) {
+  try {
+    await dbConnect()
+    const posts = await BlogPost.find({ published: true })
+      .sort({ publishedDate: -1 })
+      .lean()
+    
+    return posts.map(post => ({
+      slug: post.slug,
+      title: post.title?.[locale] || post.title?.en || "",
+      excerpt: post.excerpt?.[locale] || post.excerpt?.en || "",
+      category: post.category?.[locale] || post.category?.en || "",
+      date: post.publishedDate,
+      readTime: post.readTime || "5 min",
+      imageUrl: post.imageUrl || null,
+    }))
+  } catch (error) {
+    console.error("Error fetching blog posts:", error)
+    return []
+  }
+}
 
-export default async function BlogPage() {
+export default async function BlogPage({ params }) {
+  const { locale } = await params
+  const blogPosts = await getBlogPosts(locale)
   const t = await getTranslations("blog")
   const tCommon = await getTranslations("common")
 
@@ -152,7 +129,7 @@ export default async function BlogPage() {
                     </h2>
                     <p className="text-white/75 text-sm md:text-base mb-4 md:mb-6">{post.excerpt}</p>
                     <time className="text-xs md:text-sm text-white/50">
-                      {new Date(post.date).toLocaleDateString("en-CA", {
+                      {new Date(post.date).toLocaleDateString(locale === "fa" ? "fa-IR" : locale === "fr" ? "fr-CA" : "en-CA", {
                         year: "numeric",
                         month: "long",
                         day: "numeric",
