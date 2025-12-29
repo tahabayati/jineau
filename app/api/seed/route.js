@@ -49,6 +49,7 @@ export async function POST() {
         allergenNote: p.allergenNote,
         tags: p.tags,
         isSubscriptionEligible: p.isSubscriptionEligible,
+        active: true,
         inStock: true,
       }))
     )

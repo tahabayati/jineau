@@ -44,10 +44,15 @@ export async function GET(request) {
       ]
     }
 
+    // Log query for debugging
+    console.log("Admin products query:", JSON.stringify(query))
+    
     const products = await Product.find(query)
       .populate("category")
       .sort({ createdAt: -1 })
       .lean()
+    
+    console.log(`Found ${products.length} products in database`)
 
     // Fetch translations for each product
     const productsWithTranslations = await Promise.all(
@@ -94,7 +99,11 @@ export async function GET(request) {
     return NextResponse.json(productsWithTranslations)
   } catch (error) {
     console.error("Error fetching products:", error)
-    return NextResponse.json({ error: "Failed to fetch" }, { status: 500 })
+    console.error("Error stack:", error.stack)
+    return NextResponse.json({ 
+      error: "Failed to fetch products",
+      details: process.env.NODE_ENV === "development" ? error.message : undefined
+    }, { status: 500 })
   }
 }
 

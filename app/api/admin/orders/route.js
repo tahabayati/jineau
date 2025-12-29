@@ -32,6 +32,9 @@ export async function GET(request) {
       query.type = typeFilter
     }
 
+    // Log query for debugging
+    console.log("Admin orders query:", JSON.stringify(query))
+    
     // Fetch all orders with user information
     const orders = await Order.find(query)
       .populate('user', 'name email')
@@ -41,11 +44,17 @@ export async function GET(request) {
       .populate('giftOneCenterId', 'name')
       .sort({ createdAt: -1 })
       .lean()
+    
+    console.log(`Found ${orders.length} orders in database`)
 
     return NextResponse.json(orders)
   } catch (error) {
     console.error("Error fetching orders:", error)
-    return NextResponse.json({ error: "Failed to fetch orders" }, { status: 500 })
+    console.error("Error stack:", error.stack)
+    return NextResponse.json({ 
+      error: "Failed to fetch orders",
+      details: process.env.NODE_ENV === "development" ? error.message : undefined
+    }, { status: 500 })
   }
 }
 
