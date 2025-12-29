@@ -59,6 +59,18 @@ GOOGLE_CLIENT_SECRET=your-google-client-secret
 # Set a secure password for accessing the admin panel
 # Session expires after 24 hours
 ADMIN_PASSWORD=your-secure-admin-password
+
+# Meta Ads Tracking (optional)
+NEXT_PUBLIC_META_PIXEL_ID=your-meta-pixel-id
+META_CAPI_ACCESS_TOKEN=your-meta-conversions-api-access-token
+META_GRAPH_API_VERSION=v21.0
+
+# Google Analytics 4 (optional)
+NEXT_PUBLIC_GA_MEASUREMENT_ID=G-XXXXXXXXXX
+
+# Tracking Toggle (optional)
+# Set to "false" to disable all tracking (default: "true")
+NEXT_PUBLIC_TRACKING_ENABLED=true
 ```
 
 ### Installation
@@ -145,6 +157,64 @@ vercel
 ```
 
 Set environment variables in Vercel dashboard.
+
+## Analytics & Tracking
+
+The application includes EU-friendly consent management for Meta Ads and Google Analytics tracking.
+
+### Consent Management
+
+- Users are presented with a consent banner on first visit
+- Consent choices are stored in cookies and localStorage
+- Two consent types: Analytics (GA4) and Marketing (Meta Pixel)
+- Tracking scripts only load after consent is granted
+
+### Meta Ads Tracking
+
+- **Browser Pixel**: Tracks PageView and custom events via Meta Pixel
+- **Server-Side API**: Sends Purchase events via Meta Conversions API for better reliability
+- **Event Deduplication**: Uses shared event IDs between browser and server events
+
+### Google Analytics 4
+
+- Tracks page views on route changes
+- Only loads if analytics consent is granted
+
+### Environment Variables
+
+- `NEXT_PUBLIC_META_PIXEL_ID`: Your Meta Pixel ID
+- `META_CAPI_ACCESS_TOKEN`: Server-side access token for Conversions API (server-only)
+- `META_GRAPH_API_VERSION`: Meta Graph API version (default: v21.0, server-only)
+- `NEXT_PUBLIC_GA_MEASUREMENT_ID`: Your GA4 Measurement ID
+- `NEXT_PUBLIC_TRACKING_ENABLED`: Global toggle for all tracking (default: "true")
+
+### Testing Tracking
+
+1. **Marketing Consent Test**:
+   - Grant marketing consent via banner
+   - Verify `fbq` exists in browser console
+   - Check that PageView fires on route changes
+   - View events in Meta Events Manager (Test Events)
+
+2. **Analytics Consent Test**:
+   - Grant analytics consent via banner
+   - Verify `gtag` exists in browser console
+   - Check that page_view fires on route changes
+   - View events in GA4 Real-Time reports
+
+3. **Purchase Event Test**:
+   - Complete a test checkout
+   - Verify Purchase event appears in Meta Events Manager
+   - Check that event shows as "Server" source in Events Manager
+
+4. **Lead Event Test**:
+   - Submit a support request form
+   - Verify Lead event appears in Meta Events Manager
+   - Check that event is deduplicated (same event ID in browser and server)
+
+5. **Server Endpoint Test**:
+   - POST to `/api/meta/events` with valid payload
+   - Verify 200 response and event appears in Meta Events Manager
 
 ## License
 

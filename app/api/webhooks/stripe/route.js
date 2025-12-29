@@ -5,6 +5,7 @@ import dbConnect from "@/lib/mongodb"
 import Order from "@/models/Order"
 import User from "@/models/User"
 import GiftDelivery from "@/models/GiftDelivery"
+import { sendMetaServerEvent } from "@/lib/metaServerSide"
 
 export const runtime = 'nodejs'
 
@@ -93,6 +94,25 @@ export async function POST(request) {
             stripeCustomerId: customerId,
           })
         }
+
+        const eventId = `purchase_${stripeSessionId}_${Date.now()}`
+        const eventTime = Date.now()
+        const eventSourceUrl = session.success_url || ""
+
+        await sendMetaServerEvent(
+          "Purchase",
+          eventTime,
+          eventId,
+          eventSourceUrl,
+          {
+            value: (amount_total || 0) / 100,
+            currency: (currency || "cad").toUpperCase(),
+            content_type: mode === "subscription" ? "subscription" : "product",
+            content_ids: [],
+            num_items: 0,
+          },
+          {}
+        )
 
         break
       }

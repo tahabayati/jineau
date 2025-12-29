@@ -2,7 +2,11 @@
 
 import { useState } from "react"
 import { useTranslations } from "next-intl"
+import { usePathname } from "next/navigation"
 import Button from "./Button"
+import { metaTrackWithId } from "@/lib/metaBrowser"
+import { sendMetaServerEvent } from "@/lib/metaServer"
+import { metaGetEventId } from "@/lib/metaBrowser"
 
 export default function SupportRequestForm({ onSuccess }) {
   const [type, setType] = useState("issue")
@@ -11,6 +15,7 @@ export default function SupportRequestForm({ onSuccess }) {
   const [error, setError] = useState("")
   const [success, setSuccess] = useState(false)
   const t = useTranslations("account")
+  const pathname = usePathname()
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -32,6 +37,23 @@ export default function SupportRequestForm({ onSuccess }) {
       if (!res.ok) {
         throw new Error(data.error || "Failed to submit request")
       }
+
+      const eventId = metaGetEventId()
+      const eventTime = Date.now()
+      const eventSourceUrl = typeof window !== "undefined" ? window.location.href : pathname
+
+      metaTrackWithId("Lead", { content_name: "Support Request", content_category: type }, eventId)
+
+      await sendMetaServerEvent({
+        eventName: "Lead",
+        eventTime,
+        eventId,
+        eventSourceUrl,
+        customData: {
+          content_name: "Support Request",
+          content_category: type,
+        },
+      })
 
       setSuccess(true)
       setMessage("")

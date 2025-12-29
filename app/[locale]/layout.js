@@ -15,6 +15,9 @@ import SmoothScrollInit from "@/components/SmoothScrollInit"
 import SessionProviderWrapper from "@/components/SessionProviderWrapper"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { generateOrganizationSchema } from "@/lib/seo"
+import ConsentBanner from "@/app/components/ConsentBanner"
+import GA4 from "@/app/components/GA4"
+import MetaPixel from "@/app/components/MetaPixel"
 
 const inter = Inter({
   variable: "--font-inter",
@@ -175,6 +178,9 @@ export default async function LocaleLayout({ children, params }) {
               {!isAdminRoute && <CartDrawer />}
               {!isAdminRoute && <ScrollToTop />}
               <SpeedInsights />
+              <ConsentBanner />
+              <GA4 />
+              <MetaPixel />
             </CartProvider>
           </SessionProviderWrapper>
         </NextIntlClientProvider>
