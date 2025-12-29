@@ -37,6 +37,10 @@ export default function CartProvider({ children }) {
   }, [items, isLoaded])
 
   const addItem = useCallback((product, quantity = 1) => {
+    // Prevent adding out of stock items
+    if (product.inStock === false) {
+      return
+    }
     setItems((prev) => {
       const existing = prev.find((item) => item.slug === product.slug)
       if (existing) {

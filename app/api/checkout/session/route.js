@@ -9,6 +9,12 @@ import { getShippingFee, shippingConfig } from "@/lib/config"
 
 export const runtime = 'nodejs'
 
+if (typeof window === 'undefined') {
+  if (!process.env.NEXTAUTH_URL) {
+    throw new Error("NEXTAUTH_URL environment variable is not set. Please set it in your environment variables.")
+  }
+}
+
 export async function POST(request) {
   try {
     const session = await auth()
@@ -92,8 +98,8 @@ export async function POST(request) {
     const checkoutSession = await stripe.checkout.sessions.create({
       mode: checkoutMode,
       line_items: lineItems,
-      success_url: `${process.env.NEXTAUTH_URL}/account?success=true`,
-      cancel_url: `${process.env.NEXTAUTH_URL}/shop?canceled=true`,
+      success_url: `${process.env.NEXTAUTH_URL?.replace(/\/$/, '')}/account?success=true`,
+      cancel_url: `${process.env.NEXTAUTH_URL?.replace(/\/$/, '')}/shop?canceled=true`,
       customer_email: session?.user?.email,
       metadata: {
         userId: session?.user?.id || "",

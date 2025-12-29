@@ -10,17 +10,25 @@ import { sendMetaServerEvent } from "@/lib/metaServerSide"
 export const runtime = 'nodejs'
 
 export async function POST(request) {
+  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET
+
+  if (!webhookSecret || webhookSecret.trim() === '') {
+    console.error("STRIPE_WEBHOOK_SECRET not configured, rejecting webhook")
+    return NextResponse.json(
+      { error: "Webhook secret not configured. Please set STRIPE_WEBHOOK_SECRET environment variable." },
+      { status: 500 }
+    )
+  }
+
   const body = await request.text()
   const headersList = await headers()
   const signature = headersList.get("stripe-signature")
 
-  const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET
-
-  if (!webhookSecret) {
-    console.error("STRIPE_WEBHOOK_SECRET not configured, rejecting webhook")
+  if (!signature) {
+    console.error("Missing stripe-signature header")
     return NextResponse.json(
-      { error: "Webhook secret not configured" },
-      { status: 500 }
+      { error: "Missing stripe-signature header" },
+      { status: 400 }
     )
   }
 
@@ -32,7 +40,7 @@ export async function POST(request) {
   } catch (err) {
     console.error("Webhook signature verification failed:", err.message)
     return NextResponse.json(
-      { error: "Webhook signature verification failed" },
+      { error: `Webhook signature verification failed: ${err.message}` },
       { status: 400 }
     )
   }

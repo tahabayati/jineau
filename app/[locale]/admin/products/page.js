@@ -24,6 +24,7 @@ export default function ProductsPage() {
     image: "",
     gallery: [],
     price: 0,
+    volume: "",
     isSubscriptionEligible: false,
     tags: [],
     active: true,
@@ -122,6 +123,7 @@ export default function ProductsPage() {
       image: product.image || "",
       gallery: product.gallery || [],
       price: product.price || 0,
+      volume: product.volume || "",
       isSubscriptionEligible: product.isSubscriptionEligible || false,
       tags: product.tags || [],
       active: product.active !== undefined ? product.active : true,
@@ -309,6 +311,17 @@ export default function ProductsPage() {
                   className="w-full px-3 py-2 glass border border-white/20 rounded-lg focus:ring-2 focus:ring-brand-mint text-white placeholder-white/50"
                   required
                 />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-white/90 mb-1">Volume/Size</label>
+                <input
+                  type="text"
+                  value={formData.volume || ""}
+                  onChange={(e) => setFormData({ ...formData, volume: e.target.value })}
+                  className="w-full px-3 py-2 glass border border-white/20 rounded-lg focus:ring-2 focus:ring-brand-mint text-white placeholder-white/50"
+                  placeholder="e.g., 50g, 100ml, 1 pack"
+                />
+                <p className="text-xs text-white/60 mt-1">Displayed before price (e.g., "50g")</p>
               </div>
               <div>
                 <label className="block text-sm font-medium text-white/90 mb-1">Image Path</label>

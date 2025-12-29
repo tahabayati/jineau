@@ -37,6 +37,9 @@ const ProductSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    volume: {
+      type: String,
+    },
     isSubscriptionEligible: {
       type: Boolean,
       default: false,

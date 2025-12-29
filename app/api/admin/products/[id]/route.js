@@ -108,6 +108,7 @@ export async function PUT(request, { params }) {
       image: data.image !== undefined ? data.image : current.image,
       gallery: data.gallery !== undefined ? data.gallery : current.gallery,
       price: data.price !== undefined ? data.price : current.price,
+      volume: data.volume !== undefined ? data.volume : current.volume,
       isSubscriptionEligible: data.isSubscriptionEligible !== undefined ? data.isSubscriptionEligible : current.isSubscriptionEligible,
       tags: data.tags !== undefined ? data.tags : current.tags,
       active: data.active !== undefined ? data.active : current.active,

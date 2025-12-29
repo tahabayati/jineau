@@ -7,16 +7,36 @@ export default function AddToCartButton({ product, size = "sm", showText = false
   const { addItem } = useCart()
   const t = useTranslations("common")
 
+  const isOutOfStock = product.inStock === false
+
   const handleClick = (e) => {
     e.preventDefault()
     e.stopPropagation()
-    addItem(product)
+    if (!isOutOfStock) {
+      addItem(product)
+    }
   }
 
   const sizeClasses = {
     sm: "px-3 py-2 text-sm",
     md: "px-4 py-2.5 text-base",
     lg: "px-6 py-3 text-lg",
+  }
+
+  if (isOutOfStock) {
+    return (
+      <button
+        type="button"
+        disabled
+        className={`${sizeClasses[size]} flex items-center gap-2 rounded-full font-medium transition-all duration-300 bg-gray-400 text-white cursor-not-allowed opacity-60 shadow-sm`}
+      >
+        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+        </svg>
+        {showText && t("outOfStock")}
+        {!showText && <span className="sr-only">{t("outOfStock")}</span>}
+      </button>
+    )
   }
 
   return (

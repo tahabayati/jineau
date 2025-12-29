@@ -134,6 +134,9 @@ function FeaturedProductCard({ product, index }) {
           {/* Price and action row */}
           <div className="flex items-center justify-between mt-auto">
             <div className="flex flex-col">
+              {product.volume && (
+                <span className="text-xs text-white/70 mb-0.5">{product.volume}</span>
+              )}
               <span className="text-2xl md:text-3xl font-bold gradient-text">
                 ${product.price.toFixed(2)}
               </span>

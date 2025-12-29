@@ -11,6 +11,7 @@ export default function ProductCard({ product }) {
   const t = useTranslations("product")
   const tProducts = useTranslations("products")
   const tShop = useTranslations("shop")
+  const tCommon = useTranslations("common")
 
   // Get translated product fields with fallback
   // Use the translation function directly with the full path
@@ -54,11 +55,18 @@ export default function ProductCard({ product }) {
           <Badge variant="category" className="transition-transform duration-300 hover:scale-105">
             {product.type === "microgreen" ? t("microgreen") : t("hydrosol")}
           </Badge>
-          {product.isSubscriptionEligible && (
-            <Badge variant="gold" className="transition-transform duration-300 hover:scale-105">
-              {tShop("subscribeAndSave")}
-            </Badge>
-          )}
+          <div className="flex gap-1 flex-wrap justify-end">
+            {product.isSubscriptionEligible && (
+              <Badge variant="gold" className="transition-transform duration-300 hover:scale-105">
+                {tShop("subscribeAndSave")}
+              </Badge>
+            )}
+            {product.inStock === false && (
+              <Badge variant="default" className="transition-transform duration-300 hover:scale-105 bg-red-500/30 text-red-200">
+                {tCommon("outOfStock")}
+              </Badge>
+            )}
+          </div>
         </div>
 
         <Link href={`/products/${product.slug}`}>
@@ -72,9 +80,14 @@ export default function ProductCard({ product }) {
         </p>
 
         <div className="flex items-center justify-between">
-          <span className="inline-flex items-center text-xl font-semibold text-white bg-brand-primary px-3 py-1 rounded-full shadow-sm">
-            ${product.price.toFixed(2)}
-          </span>
+          <div className="flex flex-col">
+            {product.volume && (
+              <span className="text-xs text-white/70 mb-0.5">{product.volume}</span>
+            )}
+            <span className="inline-flex items-center text-xl font-semibold text-white bg-brand-primary px-3 py-1 rounded-full shadow-sm">
+              ${product.price.toFixed(2)}
+            </span>
+          </div>
           <AddToCartButton product={product} />
         </div>
       </div>
