@@ -12,6 +12,7 @@ import CartProvider from "@/components/CartProvider"
 import CartDrawer from "@/components/CartDrawer"
 import ScrollToTop from "@/components/ScrollToTop"
 import SmoothScrollInit from "@/components/SmoothScrollInit"
+import SessionProviderWrapper from "@/components/SessionProviderWrapper"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import { generateOrganizationSchema } from "@/lib/seo"
 
@@ -157,23 +158,25 @@ export default async function LocaleLayout({ children, params }) {
         suppressHydrationWarning
       >
         <NextIntlClientProvider messages={messages}>
-          <CartProvider>
-            <SmoothScrollInit />
-            {!isAdminRoute && (
-              <a 
-                href="#main-content" 
-                className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-brand-primary focus:text-white focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-mint"
-              >
-                Skip to main content
-              </a>
-            )}
-            {!isAdminRoute && <Header locale={locale} />}
-            <main id="main-content" className={isAdminRoute ? "" : "flex-grow"}>{children}</main>
-            {!isAdminRoute && <Footer locale={locale} />}
-            {!isAdminRoute && <CartDrawer />}
-            {!isAdminRoute && <ScrollToTop />}
-            <SpeedInsights />
-          </CartProvider>
+          <SessionProviderWrapper>
+            <CartProvider>
+              <SmoothScrollInit />
+              {!isAdminRoute && (
+                <a 
+                  href="#main-content" 
+                  className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-brand-primary focus:text-white focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-mint"
+                >
+                  Skip to main content
+                </a>
+              )}
+              {!isAdminRoute && <Header locale={locale} />}
+              <main id="main-content" className={isAdminRoute ? "" : "flex-grow"}>{children}</main>
+              {!isAdminRoute && <Footer locale={locale} />}
+              {!isAdminRoute && <CartDrawer />}
+              {!isAdminRoute && <ScrollToTop />}
+              <SpeedInsights />
+            </CartProvider>
+          </SessionProviderWrapper>
         </NextIntlClientProvider>
       </body>
     </html>

@@ -12,6 +12,12 @@ export const runtime = 'nodejs'
 export async function POST(request) {
   try {
     const session = await auth()
+    
+    // Require authentication
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: "Authentication required" }, { status: 401 })
+    }
+    
     const body = await request.json()
     const { items, mode, planSlug, giftOneEnabled, giftOneType, customCenter } = body
 

@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react"
 import { useTranslations } from "next-intl"
+import { useSession } from "next-auth/react"
+import { useRouter } from "@/i18n/routing"
 import { useCart } from "@/components/CartProvider"
 import { Link } from "@/i18n/routing"
 import Button from "@/components/Button"
@@ -11,9 +13,20 @@ import MarmotMascot from "@/components/MarmotMascot"
 export default function CheckoutPage() {
   const t = useTranslations("cart")
   const tCommon = useTranslations("common")
+  const { data: session, status } = useSession()
+  const router = useRouter()
+  const searchParams = useSearchParams()
   const { items, subtotal, shippingFee, total, isLoaded, clearCart } = useCart()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
+
+  // Redirect to login if not authenticated
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      const returnUrl = "/checkout"
+      router.push(`/login?callbackUrl=${encodeURIComponent(returnUrl)}`)
+    }
+  }, [status, router])
 
   const handleCheckout = async () => {
     if (items.length === 0) return
@@ -52,12 +65,18 @@ export default function CheckoutPage() {
     }
   }
 
-  if (!isLoaded) {
+  // Show loading while checking auth or loading cart
+  if (status === "loading" || !isLoaded) {
     return (
       <div className="py-12 md:py-20 min-h-[60vh] flex items-center justify-center">
         <div className="animate-pulse text-gray-500">{tCommon("loading")}</div>
       </div>
     )
+  }
+
+  // Don't render if not authenticated (will redirect)
+  if (status === "unauthenticated") {
+    return null
   }
 
   if (items.length === 0) {

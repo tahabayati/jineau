@@ -1,7 +1,9 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useTranslations } from "next-intl"
+import { useSession } from "next-auth/react"
+import { useRouter } from "@/i18n/routing"
 import Button from "./Button"
 import Badge from "./Badge"
 import GiftOneSection from "./GiftOneSection"
@@ -37,6 +39,8 @@ const plans = [
 ]
 
 export default function SubscriptionPicker({ onSelect }) {
+  const { data: session, status } = useSession()
+  const router = useRouter()
   const [selectedPlan, setSelectedPlan] = useState(5)
   const [isLoading, setIsLoading] = useState(false)
   const [giftOneEnabled, setGiftOneEnabled] = useState(false)
@@ -45,7 +49,19 @@ export default function SubscriptionPicker({ onSelect }) {
   const [error, setError] = useState("")
   const t = useTranslations("subscribe")
 
+  // Redirect to login if not authenticated when trying to subscribe
   const handleSubscribe = async () => {
+    // Check authentication first
+    if (status === "unauthenticated") {
+      const returnUrl = "/subscribe"
+      router.push(`/login?callbackUrl=${encodeURIComponent(returnUrl)}`)
+      return
+    }
+
+    if (status === "loading") {
+      return // Wait for auth check
+    }
+
     setIsLoading(true)
     setError("")
     const plan = plans.find((p) => p.id === selectedPlan)
@@ -66,6 +82,12 @@ export default function SubscriptionPicker({ onSelect }) {
       const data = await response.json()
 
       if (!response.ok) {
+        if (response.status === 401) {
+          // Not authenticated, redirect to login
+          const returnUrl = "/subscribe"
+          router.push(`/login?callbackUrl=${encodeURIComponent(returnUrl)}`)
+          return
+        }
         throw new Error(data.error || "Subscription checkout failed")
       }
 

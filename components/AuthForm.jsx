@@ -1,9 +1,10 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useTranslations } from "next-intl"
 import { signIn } from "next-auth/react"
 import { useRouter } from "@/i18n/routing"
+import { useSearchParams } from "next/navigation"
 import Button from "./Button"
 
 export default function AuthForm({ mode = "login" }) {
@@ -13,7 +14,11 @@ export default function AuthForm({ mode = "login" }) {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState("")
   const router = useRouter()
+  const searchParams = useSearchParams()
   const t = useTranslations("auth")
+
+  // Get callback URL from query params
+  const callbackUrl = searchParams?.get("callbackUrl") || "/account"
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -40,7 +45,8 @@ export default function AuthForm({ mode = "login" }) {
           redirect: false,
         })
 
-        router.push("/account")
+        // Redirect to callback URL or account page
+        router.push(callbackUrl)
       } else {
         const result = await signIn("credentials", {
           email,
@@ -52,7 +58,8 @@ export default function AuthForm({ mode = "login" }) {
           throw new Error("Invalid email or password")
         }
 
-        router.push("/account")
+        // Redirect to callback URL or account page
+        router.push(callbackUrl)
       }
     } catch (err) {
       setError(err.message)
@@ -62,7 +69,7 @@ export default function AuthForm({ mode = "login" }) {
   }
 
   const handleGoogleSignIn = () => {
-    signIn("google", { callbackUrl: "/account" })
+    signIn("google", { callbackUrl })
   }
 
   return (
