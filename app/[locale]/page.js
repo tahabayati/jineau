@@ -218,6 +218,7 @@ export default async function HomePage({ params }) {
           primaryCta={{ href: "/subscribe", label: tCommon("startSubscription") }}
           secondaryCta={{ href: "/how-it-works", label: tCommon("learnMore") }}
           showMascot={true}
+          locale={locale}
         />
 
         {/* Featured Products Section */}
@@ -385,7 +386,7 @@ export default async function HomePage({ params }) {
               </p>
               
               {/* Mortar and pestle icon with decorative shapes */}
-              <div className="absolute left-0 top-1/2 -translate-y-1/2 hidden lg:block" aria-hidden="true">
+              <div className={`absolute top-1/2 -translate-y-1/2 hidden lg:block ${locale === 'fa' ? 'right-0' : 'left-0'}`} aria-hidden="true">
                 <div className="relative w-64 h-64">
                   <div className="absolute inset-0 flex items-center justify-center">
                     <Image 
@@ -398,7 +399,7 @@ export default async function HomePage({ params }) {
                     />
                   </div>
                   {/* Decorative star shapes */}
-                  <div className="absolute -top-10 -left-10 w-16 h-16 animate-float">
+                  <div className={`absolute -top-10 w-16 h-16 animate-float ${locale === 'fa' ? '-right-10' : '-left-10'}`}>
                     <Image 
                       src="/jineau-home-images/1-10.svg" 
                       alt="" 
@@ -408,7 +409,7 @@ export default async function HomePage({ params }) {
                       loading="lazy"
                     />
                   </div>
-                  <div className="absolute -bottom-10 -right-10 w-20 h-20 animate-float" style={{ animationDelay: '-2s' }}>
+                  <div className={`absolute -bottom-10 w-20 h-20 animate-float ${locale === 'fa' ? '-left-10' : '-right-10'}`} style={{ animationDelay: '-2s' }}>
                     <Image 
                       src="/jineau-home-images/1-10.svg" 
                       alt="" 
@@ -473,7 +474,7 @@ export default async function HomePage({ params }) {
               </p>
               
               {/* Bowl with growth lines icon */}
-              <div className="absolute left-0 top-1/2 -translate-y-1/2 hidden lg:block" aria-hidden="true">
+              <div className={`absolute top-1/2 -translate-y-1/2 hidden lg:block ${locale === 'fa' ? 'right-0' : 'left-0'}`} aria-hidden="true">
                 <div className="relative w-56 h-56">
                   <Image 
                     src="/jineau-home-images/1-15.svg" 
@@ -561,7 +562,7 @@ export default async function HomePage({ params }) {
                 />
               </div>
             </div>
-            <div className="text-center mb-8 md:mb-12 relative z-10">
+            <div className={`text-center mb-8 md:mb-12 relative z-10 ${locale === 'fa' ? 'xl:pl-64' : 'xl:pr-64'}`}>
               <span className="inline-block glass px-4 py-2 md:px-5 md:py-2.5 rounded-full text-brand-mist text-xs md:text-sm font-medium mb-4 md:mb-6 tracking-wide">
                 {t("forEveryone")}
               </span>
@@ -573,7 +574,7 @@ export default async function HomePage({ params }) {
               </p>
               
               {/* Beaver character next to pot */}
-              <div className="absolute right-0 top-1/2 -translate-y-1/2 hidden xl:block" aria-hidden="true">
+              <div className={`absolute top-1/2 -translate-y-1/2 hidden xl:block ${locale === 'fa' ? 'left-0' : 'right-0'}`} aria-hidden="true">
                 <div className="relative w-64 h-64">
                   <Image 
                     src="/jineau-home-images/fredie_shopping_microgreens.png" 
@@ -637,7 +638,7 @@ export default async function HomePage({ params }) {
               </p>
               
               {/* Beaver character in heart saying HI */}
-              <div className="absolute left-0 top-1/2 -translate-y-1/2 hidden lg:block" aria-hidden="true">
+              <div className={`absolute top-1/2 -translate-y-1/2 hidden lg:block ${locale === 'fa' ? 'right-0' : 'left-0'}`} aria-hidden="true">
                 <div className="relative w-56 h-56">
                   <Image 
                     src="/jineau-home-images/hi_head_image.png" 
@@ -708,7 +709,7 @@ export default async function HomePage({ params }) {
             <div className="glass-strong rounded-3xl md:rounded-[48px] p-6 sm:p-8 md:p-10 lg:p-14 relative z-10">
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
                 {/* Left: Microgreens visual */}
-                <div className="flex justify-center lg:justify-start">
+                <div className={`flex justify-center ${locale === 'fa' ? 'lg:justify-end' : 'lg:justify-start'} ${locale === 'fa' ? 'lg:order-2' : 'lg:order-1'}`}>
                   <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md">
                     {/* SVG background layer */}
                     <div
@@ -740,21 +741,21 @@ export default async function HomePage({ params }) {
                 </div>
 
                 {/* Right: Text + CTAs */}
-                <div className="text-center lg:text-left">
+                <div className={`text-center ${locale === 'fa' ? 'lg:text-right' : 'lg:text-left'} ${locale === 'fa' ? 'lg:order-1' : 'lg:order-2'}`}>
                   <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 md:mb-6 drop-shadow-xl px-2 lg:px-0 leading-tight">
                     {t("readyToTransform")}
                   </h2>
-                  <p className="text-sm sm:text-base md:text-lg text-white/85 mb-7 md:mb-9 max-w-xl mx-auto lg:mx-0 leading-relaxed drop-shadow-lg px-2 lg:px-0">
+                  <p className={`text-sm sm:text-base md:text-lg text-white/85 mb-7 md:mb-9 max-w-xl mx-auto ${locale === 'fa' ? 'lg:mr-0' : 'lg:ml-0'} leading-relaxed drop-shadow-lg px-2 lg:px-0`}>
                     {t("ctaSubtitle")}
                   </p>
                   
-                  <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start">
+                  <div className={`flex flex-col sm:flex-row gap-3 md:gap-4 justify-center ${locale === 'fa' ? 'lg:justify-end' : 'lg:justify-start'}`}>
                     <Link
                       href="/subscribe"
                       className="group inline-flex items-center justify-center gap-2 md:gap-3 px-8 py-4 md:px-10 md:py-5 bg-gradient-to-r from-brand-mint to-brand-primary text-white font-semibold text-sm md:text-base rounded-full transition-all duration-500 hover:shadow-[0_0_60px_rgba(112,178,178,0.5)] hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-mint focus-visible:ring-offset-2 focus-visible:ring-offset-transparent whitespace-nowrap"
                     >
                       {tCommon("startSubscription")}
-                      <svg className="w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                      <svg className={`w-4 h-4 md:w-5 md:h-5 transition-transform duration-300 ${locale === 'fa' ? 'group-hover:-translate-x-1.5' : 'group-hover:translate-x-1.5'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" style={{ transform: locale === 'fa' ? 'scaleX(-1)' : 'none' }}>
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                       </svg>
                     </Link>

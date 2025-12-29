@@ -107,17 +107,6 @@ html[dir="rtl"] .flex-row {
   flex-direction: row-reverse;
 }
 
-/* RTL grid adjustments to prevent overlap */
-html[dir="rtl"] .grid {
-  direction: rtl;
-}
-
-/* Ensure grid items don't overlap in RTL and maintain proper spacing */
-html[dir="rtl"] .grid > * {
-  min-width: 0;
-  max-width: 100%;
-}
-
 /* RTL text alignment overrides - base classes */
 html[dir="rtl"] .text-left {
   text-align: right !important;

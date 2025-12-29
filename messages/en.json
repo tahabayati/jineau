@@ -106,7 +106,13 @@
     "shopFresh": "Fresh Picks",
     "featuredProducts": "Featured Products",
     "featuredProductsSubtitle": "Hand-picked microgreens and hydrosols, harvested fresh for you.",
-    "shopMore": "Shop All Products"
+    "shopMore": "Shop All Products",
+    "planStarter": "Starter",
+    "planFamily": "Family",
+    "planChef": "Chef",
+    "planStarterDesc": "Perfect for trying out microgreens",
+    "planFamilyDesc": "Ideal for families and regular use",
+    "planChefDesc": "Best value for frequent users"
   },
   "shop": {
     "title": "Shop Fresh Microgreens & Hydrosols",
@@ -408,6 +414,18 @@
     "type": "Type",
     "message": "Message",
     "createdAt": "Created At"
+  },
+  "notFound": {
+    "title": "404",
+    "heading": "Oops! Page Not Found",
+    "description": "The page you're looking for seems to have wandered off. Don't worry, even our marmot Freddie gets lost sometimes!",
+    "goBackHome": "Go Back Home",
+    "visitShop": "Visit Shop",
+    "needHelp": "Need help?",
+    "aboutUs": "About Us",
+    "howItWorks": "How It Works",
+    "faq": "FAQ",
+    "myAccount": "My Account"
   },
   "products": {
     "sunflower-microgreens": {

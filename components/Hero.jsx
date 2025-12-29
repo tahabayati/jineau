@@ -11,9 +11,11 @@ function Hero({
   primaryCta,
   secondaryCta,
   showMascot = false,
+  locale = "en",
 }) {
   const t = useTranslations("home")
   const [isVisible, setIsVisible] = useState(false)
+  const isRtl = locale === "fa"
 
   useEffect(() => {
     // Use setTimeout to batch state update after initial render
@@ -25,43 +27,48 @@ function Hero({
     <section className="relative min-h-[100svh] overflow-hidden flex flex-col">
       {/* Decorative seedling illustrations - hidden on mobile */}
       {[
-        { size: 100, top: '15%', left: '8%', opacity: 0.3 },
-        { size: 80, top: '25%', left: '5%', opacity: 0.25 },
-        { size: 90, top: '60%', left: '10%', opacity: 0.3 },
-        { size: 95, top: '20%', right: '8%', opacity: 0.3 },
-        { size: 85, top: '65%', right: '12%', opacity: 0.25 },
-      ].map((seedling, index) => (
-        <div
-          key={index}
-          className="absolute pointer-events-none hidden lg:block"
-          style={{
-            width: `${seedling.size}px`,
-            height: `${seedling.size}px`,
-            top: seedling.top,
-            left: seedling.left,
-            right: seedling.right,
-            opacity: seedling.opacity,
-            zIndex: 1,
-          }}
-          aria-hidden="true"
-        >
-          <Image 
-            src="/jineau-home-images/1-07.svg" 
-            alt="" 
-            width={seedling.size} 
-            height={seedling.size}
-            className="w-full h-full"
-            loading="lazy"
-          />
-        </div>
-      ))}
+        { size: 100, top: '15%', left: '8%', right: null, opacity: 0.3 },
+        { size: 80, top: '25%', left: '5%', right: null, opacity: 0.25 },
+        { size: 90, top: '60%', left: '10%', right: null, opacity: 0.3 },
+        { size: 95, top: '20%', left: null, right: '8%', opacity: 0.3 },
+        { size: 85, top: '65%', left: null, right: '12%', opacity: 0.25 },
+      ].map((seedling, index) => {
+        // Swap left/right for RTL
+        const leftPos = isRtl ? seedling.right : seedling.left
+        const rightPos = isRtl ? seedling.left : seedling.right
+        return (
+          <div
+            key={index}
+            className="absolute pointer-events-none hidden lg:block"
+            style={{
+              width: `${seedling.size}px`,
+              height: `${seedling.size}px`,
+              top: seedling.top,
+              left: leftPos,
+              right: rightPos,
+              opacity: seedling.opacity,
+              zIndex: 1,
+            }}
+            aria-hidden="true"
+          >
+            <Image 
+              src="/jineau-home-images/1-07.svg" 
+              alt="" 
+              width={seedling.size} 
+              height={seedling.size}
+              className="w-full h-full"
+              loading="lazy"
+            />
+          </div>
+        )
+      })}
 
       {/* Main content - flex grow to push stats down */}
       <div className="relative z-20 flex-1 flex items-center w-full px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 pb-8">
         <div className="max-w-7xl mx-auto w-full">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center rtl:lg:gap-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center">
             {/* Left side - Microgreens video */}
-            <div className={`relative flex flex-col items-center lg:items-start rtl:lg:items-end order-2 lg:order-1 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '0.2s' }}>
+            <div className={`relative flex flex-col items-center lg:items-start ${isRtl ? 'order-1 lg:order-2' : 'order-2 lg:order-1'} ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '0.2s' }}>
               <div className="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-none">
                 <div className="relative w-full pt-[100%] rounded-2xl sm:rounded-3xl shadow-2xl overflow-hidden bg-black/40">
                   <video
@@ -79,9 +86,9 @@ function Hero({
             </div>
 
             {/* Right side - Text content */}
-            <div className="relative text-center lg:text-left rtl:lg:text-right order-1 lg:order-2">
+            <div className={`relative text-center ${isRtl ? 'lg:text-right' : 'lg:text-left'} ${isRtl ? 'order-2 lg:order-1' : 'order-1 lg:order-2'}`}>
               {/* Badge and Mascot Container */}
-              <div className={`flex items-center justify-center lg:justify-start rtl:lg:justify-end gap-3 sm:gap-4 mb-3 sm:mb-5 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '0.4s' }}>
+              <div className={`flex items-center justify-center ${isRtl ? 'lg:justify-end' : 'lg:justify-start'} gap-3 sm:gap-4 mb-3 sm:mb-5 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '0.4s' }}>
                 {/* Badge */}
                 <div className="relative inline-flex items-center gap-2 bg-black/30 backdrop-blur-sm border border-white/20 px-3 py-1.5 sm:px-5 sm:py-2.5 rounded-full">
                   <span className="relative flex h-1.5 w-1.5 sm:h-2 sm:w-2" aria-hidden="true">
@@ -114,14 +121,14 @@ function Hero({
               </h1>
 
               {/* Subtitle */}
-              <div className={`bg-black/30 backdrop-blur-sm border border-white/10 rounded-xl sm:rounded-2xl p-3 sm:p-5 max-w-xl mx-auto lg:mx-0 rtl:lg:ml-auto rtl:lg:mr-0 mb-4 sm:mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '0.8s' }}>
+              <div className={`bg-black/30 backdrop-blur-sm border border-white/10 rounded-xl sm:rounded-2xl p-3 sm:p-5 max-w-xl mx-auto ${isRtl ? 'lg:mr-0' : 'lg:ml-0'} mb-4 sm:mb-6 ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '0.8s' }}>
                 <p className="text-xs sm:text-sm md:text-base text-white/85 leading-relaxed">
                   {subtitle}
                 </p>
               </div>
 
               {/* CTA buttons */}
-              <div className={`flex flex-col sm:flex-row gap-2.5 sm:gap-4 justify-center lg:justify-start rtl:lg:justify-end ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '1s' }}>
+              <div className={`flex flex-col sm:flex-row gap-2.5 sm:gap-4 justify-center ${isRtl ? 'lg:justify-end' : 'lg:justify-start'} ${isVisible ? 'animate-fade-in-up' : 'opacity-0'}`} style={{ animationDelay: '1s' }}>
                 {primaryCta && (
                   <Link
                     href={primaryCta.href}
@@ -129,7 +136,7 @@ function Hero({
                   >
                     <span className="absolute inset-0 bg-gradient-to-r from-brand-gold/80 to-brand-mint opacity-0 group-hover:opacity-100 transition-opacity duration-500" aria-hidden="true" />
                     <span className="relative">{primaryCta.label}</span>
-                    <svg className="relative w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <svg className={`relative w-4 h-4 transition-transform duration-300 ${isRtl ? 'group-hover:-translate-x-1' : 'group-hover:translate-x-1'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }}>
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
                   </Link>
@@ -140,7 +147,7 @@ function Hero({
                     className="group inline-flex items-center justify-center gap-2 px-5 py-3 sm:px-8 sm:py-4 bg-black/30 backdrop-blur-sm border border-white/20 text-white font-semibold text-sm sm:text-base rounded-full transition-all duration-300 hover:bg-white/10"
                   >
                     <span>{secondaryCta.label}</span>
-                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <svg className={`w-4 h-4 transition-transform duration-300 ${isRtl ? 'group-hover:-translate-x-1' : 'group-hover:translate-x-1'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true" style={{ transform: isRtl ? 'scaleX(-1)' : 'none' }}>
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                     </svg>
                   </Link>
