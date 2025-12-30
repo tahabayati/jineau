@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server"
 import Hero from "@/components/Hero"
 import FeaturedProducts from "@/components/FeaturedProducts"
+import PopupBanner from "@/components/PopupBanner"
 import { Link } from "@/i18n/routing"
 import { differentiators, testimonials, subscription } from "@/data/siteCopy"
 import Image from "next/image"
@@ -212,6 +213,7 @@ export default async function HomePage({ params }) {
       <div className="min-h-screen relative overflow-x-hidden">
         <AuroraBackground variant="home" />
         <div className="relative z-10">
+          <PopupBanner locale={locale} />
           <Hero
           title={t("heroTitle")}
           subtitle={t("heroSubtitle")}

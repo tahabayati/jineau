@@ -29,6 +29,7 @@ export default function AdminSidebar() {
     { href: "/admin/blog-posts", label: "Blog Posts", icon: "📰" },
     { href: "/admin/translations", label: "Translations", icon: "🌐" },
     { href: "/admin/site-content", label: "Site Content", icon: "📝" },
+    { href: "/admin/popups", label: "Popups", icon: "🔔" },
     { href: "/admin/users", label: "Users & Orders", icon: "👥" },
     { href: "/admin/orders", label: "All Orders", icon: "🛒" },
     { href: "/admin/senior-centers", label: t("seniorCenters"), icon: "🏠" },
