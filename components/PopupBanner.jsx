@@ -10,12 +10,32 @@ export default function PopupBanner({ locale = "en" }) {
   const t = useTranslations("common")
 
   useEffect(() => {
-    fetchPopup()
+    // Use requestIdleCallback for non-blocking fetch, fallback to setTimeout
+    const fetchWithDelay = () => {
+      fetchPopup()
+    }
+
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      requestIdleCallback(fetchWithDelay, { timeout: 2000 })
+    } else {
+      // Fallback: fetch after a short delay to not block initial render
+      setTimeout(fetchWithDelay, 100)
+    }
   }, [])
 
   const fetchPopup = async () => {
     try {
-      const res = await fetch("/api/popup")
+      // Create abort controller for timeout
+      const controller = new AbortController()
+      const timeoutId = setTimeout(() => controller.abort(), 3000) // 3 second timeout
+      
+      const res = await fetch("/api/popup", {
+        signal: controller.signal,
+        cache: 'no-cache' // Don't cache to get fresh data
+      })
+      
+      clearTimeout(timeoutId)
+      
       if (res.ok) {
         const data = await res.json()
         if (data && data.text) {
@@ -23,13 +43,21 @@ export default function PopupBanner({ locale = "en" }) {
           const dismissedId = localStorage.getItem("jineau-popup-dismissed")
           if (dismissedId !== data._id) {
             setPopup(data)
-            // Show immediately with animation
-            setIsVisible(true)
+            // Small delay for smooth animation
+            requestAnimationFrame(() => {
+              setIsVisible(true)
+            })
           }
         }
       }
     } catch (error) {
-      console.error("Error fetching popup:", error)
+      // Silently fail - popup is not critical
+      if (error.name !== 'AbortError') {
+        // Only log in development
+        if (process.env.NODE_ENV === 'development') {
+          console.error("Error fetching popup:", error)
+        }
+      }
     }
   }
 
