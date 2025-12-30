@@ -94,6 +94,10 @@ export default function PopupBanner({ locale = "en" }) {
 
         {/* Content */}
         <div className={`pr-8 ${isRtl ? "text-right" : "text-left"}`}>
+          {/* Title with gradient animation */}
+          <h3 className="text-xs md:text-sm font-semibold gradient-text mb-2 drop-shadow-sm">
+            From Freddie:
+          </h3>
           <p
             className={`text-sm md:text-base font-medium text-white drop-shadow-md leading-relaxed ${
               isRtl ? "font-persian" : ""
@@ -103,9 +107,6 @@ export default function PopupBanner({ locale = "en" }) {
             {popupText}
           </p>
         </div>
-
-        {/* Decorative gradient accent */}
-        <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-brand-mint via-brand-gold to-brand-mint rounded-b-xl md:rounded-b-2xl" />
       </div>
     </div>
   )
