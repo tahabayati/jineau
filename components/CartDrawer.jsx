@@ -14,12 +14,14 @@ function CartDrawer() {
 
   return (
     <>
+      {/* Backdrop - subtle on mobile, darker on desktop */}
       <div
-        className="fixed inset-0 bg-black/50 z-40 transition-opacity"
+        className="fixed inset-0 bg-black/20 md:bg-black/50 z-40 transition-opacity"
         onClick={closeCart}
       />
 
-      <div className="fixed right-0 top-0 h-full w-full max-w-md bg-white shadow-2xl z-50 flex flex-col transform transition-transform rtl:right-auto rtl:left-0">
+      {/* Mobile Dropdown / Desktop Drawer */}
+      <div className="fixed right-2 md:right-0 top-16 md:top-0 h-auto max-h-[70vh] md:h-full w-[calc(100vw-1rem)] max-w-sm md:w-full md:max-w-md bg-white shadow-2xl z-50 flex flex-col transform transition-transform rounded-xl md:rounded-none rtl:right-auto rtl:left-2 md:rtl:left-0 md:border-l border-gray-200 overflow-hidden">
         <div className="flex items-center justify-between p-4 border-b border-gray-200 bg-brand-primary text-white">
           <h2 className="text-lg font-bold">{t("title")}</h2>
           <button
