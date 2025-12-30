@@ -159,7 +159,7 @@ async function getActivePopup() {
   try {
     await dbConnect()
     const popup = await Popup.findOne({ isActive: true })
-      .select('_id text')
+      .select('_id text shopButtonText subscribeButtonText signUpButtonText')
       .lean()
     
     if (!popup) {
@@ -169,6 +169,9 @@ async function getActivePopup() {
     return {
       _id: popup._id.toString(),
       text: popup.text,
+      shopButtonText: popup.shopButtonText,
+      subscribeButtonText: popup.subscribeButtonText,
+      signUpButtonText: popup.signUpButtonText,
     }
   } catch (error) {
     console.error("Error fetching popup:", error)

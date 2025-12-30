@@ -63,6 +63,21 @@ export async function POST(request) {
         fr: data.text?.fr || "",
         fa: data.text?.fa || "",
       },
+      shopButtonText: {
+        en: data.shopButtonText?.en || "Shop",
+        fr: data.shopButtonText?.fr || "Boutique",
+        fa: data.shopButtonText?.fa || "فروشگاه",
+      },
+      subscribeButtonText: {
+        en: data.subscribeButtonText?.en || "Subscribe",
+        fr: data.subscribeButtonText?.fr || "S'abonner",
+        fa: data.subscribeButtonText?.fa || "اشتراک",
+      },
+      signUpButtonText: {
+        en: data.signUpButtonText?.en || "Sign Up",
+        fr: data.signUpButtonText?.fr || "S'inscrire",
+        fa: data.signUpButtonText?.fa || "ثبت نام",
+      },
       isActive: data.isActive || false,
     })
 

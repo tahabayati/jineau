@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { useTranslations } from "next-intl"
+import { Link } from "@/i18n/routing"
 
 export default function PopupBanner({ locale = "en", popup: initialPopup = null }) {
   const [popup, setPopup] = useState(initialPopup)
@@ -26,7 +27,7 @@ export default function PopupBanner({ locale = "en", popup: initialPopup = null 
     setTimeout(() => {
       setIsVisible(false)
       setPopup(null)
-    }, 700) // Match animation duration
+    }, 300) // Match animation duration
   }
 
   // Don't render if no popup
@@ -34,6 +35,9 @@ export default function PopupBanner({ locale = "en", popup: initialPopup = null 
 
   // Get text for current locale, fallback to English
   const popupText = popup.text?.[locale] || popup.text?.en || ""
+  const shopButtonText = popup.shopButtonText?.[locale] || popup.shopButtonText?.en || "Shop"
+  const subscribeButtonText = popup.subscribeButtonText?.[locale] || popup.subscribeButtonText?.en || "Subscribe"
+  const signUpButtonText = popup.signUpButtonText?.[locale] || popup.signUpButtonText?.en || "Sign Up"
 
   // Don't show if no text available
   if (!popupText.trim()) return null
@@ -41,60 +45,97 @@ export default function PopupBanner({ locale = "en", popup: initialPopup = null 
   const isRtl = locale === "fa"
 
   return (
-    <div
-      className={`fixed ${
-        isRtl ? "left-4 top-28" : "right-4 top-28"
-      } z-50 max-w-xs sm:max-w-sm transition-all duration-700 ease-out ${
-        isClosing
-          ? "opacity-0 translate-x-full scale-95 pointer-events-none"
-          : isVisible
-          ? "opacity-100 translate-x-0 scale-100"
-          : "opacity-0 translate-x-full scale-95 pointer-events-none"
-      } ${isRtl ? "rtl:translate-x-full rtl:left-auto rtl:right-4" : ""}`}
-      role="alert"
-      aria-live="polite"
-    >
-      <div className="glass-card rounded-xl md:rounded-2xl p-4 shadow-2xl border border-brand-gold/40 relative backdrop-blur-md">
-        {/* Close Button */}
-        <button
-          onClick={handleClose}
-          className={`absolute top-2 ${
-            isRtl ? "left-2" : "right-2"
-          } w-6 h-6 flex items-center justify-center rounded-full glass hover:bg-white/20 transition-all duration-300 text-white/80 hover:text-brand-gold group`}
-          aria-label="Close popup"
-        >
-          <svg
-            className="w-4 h-4 transition-transform duration-300 group-hover:rotate-90"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
+    <>
+      {/* Backdrop */}
+      <div
+        className={`fixed inset-0 z-40 bg-black/60 backdrop-blur-sm transition-opacity duration-300 ${
+          isClosing || !isVisible
+            ? "opacity-0 pointer-events-none"
+            : "opacity-100"
+        }`}
+        onClick={handleClose}
+        aria-hidden="true"
+      />
 
-        {/* Content */}
-        <div className={`pr-8 ${isRtl ? "text-right" : "text-left"}`}>
-          {/* Title with gradient animation */}
-          <h3 className="text-xs md:text-sm font-semibold gradient-text mb-2 drop-shadow-sm">
-            From Freddie:
-          </h3>
-          <p
-            className={`text-sm md:text-base font-medium text-white drop-shadow-md leading-relaxed ${
-              isRtl ? "font-persian" : ""
-            }`}
-            dir={isRtl ? "rtl" : "ltr"}
+      {/* Popup */}
+      <div
+        className={`fixed inset-0 z-50 flex items-center justify-center p-4 transition-all duration-300 ${
+          isClosing
+            ? "opacity-0 scale-95 pointer-events-none"
+            : isVisible
+            ? "opacity-100 scale-100"
+            : "opacity-0 scale-95 pointer-events-none"
+        }`}
+        role="alert"
+        aria-live="polite"
+      >
+        <div className="glass-card rounded-2xl md:rounded-3xl p-6 md:p-8 lg:p-10 shadow-2xl border border-brand-gold/40 relative backdrop-blur-md w-full max-w-lg md:max-w-2xl">
+          {/* Close Button */}
+          <button
+            onClick={handleClose}
+            className={`absolute top-4 ${
+              isRtl ? "left-4" : "right-4"
+            } w-8 h-8 flex items-center justify-center rounded-full glass hover:bg-white/20 transition-all duration-300 text-white/80 hover:text-brand-gold group`}
+            aria-label="Close popup"
           >
-            {popupText}
-          </p>
+            <svg
+              className="w-5 h-5 transition-transform duration-300 group-hover:rotate-90"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M6 18L18 6M6 6l12 12"
+              />
+            </svg>
+          </button>
+
+          {/* Content */}
+          <div className={`${isRtl ? "text-right" : "text-left"}`}>
+            {/* Title with gradient animation */}
+            <h3 className="text-lg md:text-xl font-semibold gradient-text mb-4 drop-shadow-sm">
+              From Freddie:
+            </h3>
+            <p
+              className={`text-base md:text-lg lg:text-xl font-medium text-white drop-shadow-md leading-relaxed mb-6 ${
+                isRtl ? "font-persian" : ""
+              }`}
+              dir={isRtl ? "rtl" : "ltr"}
+            >
+              {popupText}
+            </p>
+
+            {/* Buttons */}
+            <div className={`flex flex-col sm:flex-row gap-3 ${isRtl ? "sm:flex-row-reverse" : ""}`}>
+              <Link
+                href="/shop"
+                onClick={handleClose}
+                className="flex-1 px-6 py-3 bg-brand-mint hover:bg-brand-mint/90 text-white font-semibold rounded-lg transition-all duration-300 text-center shadow-lg hover:shadow-xl transform hover:scale-105"
+              >
+                {shopButtonText}
+              </Link>
+              <Link
+                href="/subscribe"
+                onClick={handleClose}
+                className="flex-1 px-6 py-3 bg-brand-gold hover:bg-brand-gold/90 text-white font-semibold rounded-lg transition-all duration-300 text-center shadow-lg hover:shadow-xl transform hover:scale-105"
+              >
+                {subscribeButtonText}
+              </Link>
+              <Link
+                href="/login"
+                onClick={handleClose}
+                className="flex-1 px-6 py-3 glass border-2 border-brand-gold/60 hover:border-brand-gold text-white font-semibold rounded-lg transition-all duration-300 text-center shadow-lg hover:shadow-xl transform hover:scale-105"
+              >
+                {signUpButtonText}
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 

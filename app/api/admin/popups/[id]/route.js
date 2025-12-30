@@ -36,9 +36,24 @@ export async function PUT(request, { params }) {
     
     const updateData = {
       text: {
-        en: data.text?.en || "",
-        fr: data.text?.fr || "",
-        fa: data.text?.fa || "",
+        en: data.text?.en !== undefined ? data.text.en : current.text?.en || "",
+        fr: data.text?.fr !== undefined ? data.text.fr : current.text?.fr || "",
+        fa: data.text?.fa !== undefined ? data.text.fa : current.text?.fa || "",
+      },
+      shopButtonText: {
+        en: data.shopButtonText?.en !== undefined ? data.shopButtonText.en : current.shopButtonText?.en || "Shop",
+        fr: data.shopButtonText?.fr !== undefined ? data.shopButtonText.fr : current.shopButtonText?.fr || "Boutique",
+        fa: data.shopButtonText?.fa !== undefined ? data.shopButtonText.fa : current.shopButtonText?.fa || "فروشگاه",
+      },
+      subscribeButtonText: {
+        en: data.subscribeButtonText?.en !== undefined ? data.subscribeButtonText.en : current.subscribeButtonText?.en || "Subscribe",
+        fr: data.subscribeButtonText?.fr !== undefined ? data.subscribeButtonText.fr : current.subscribeButtonText?.fr || "S'abonner",
+        fa: data.subscribeButtonText?.fa !== undefined ? data.subscribeButtonText.fa : current.subscribeButtonText?.fa || "اشتراک",
+      },
+      signUpButtonText: {
+        en: data.signUpButtonText?.en !== undefined ? data.signUpButtonText.en : current.signUpButtonText?.en || "Sign Up",
+        fr: data.signUpButtonText?.fr !== undefined ? data.signUpButtonText.fr : current.signUpButtonText?.fr || "S'inscrire",
+        fa: data.signUpButtonText?.fa !== undefined ? data.signUpButtonText.fa : current.signUpButtonText?.fa || "ثبت نام",
       },
       isActive: data.isActive !== undefined ? data.isActive : current.isActive,
     }

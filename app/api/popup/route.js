@@ -11,7 +11,7 @@ export async function GET() {
     await dbConnect()
     
     const popup = await Popup.findOne({ isActive: true })
-      .select('_id text')
+      .select('_id text shopButtonText subscribeButtonText signUpButtonText')
       .lean()
     
     if (!popup) {
@@ -25,6 +25,9 @@ export async function GET() {
     return NextResponse.json({
       _id: popup._id.toString(),
       text: popup.text,
+      shopButtonText: popup.shopButtonText,
+      subscribeButtonText: popup.subscribeButtonText,
+      signUpButtonText: popup.signUpButtonText,
     }, {
       headers: {
         'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=300'
