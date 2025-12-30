@@ -137,9 +137,20 @@ function FeaturedProductCard({ product, index }) {
               {product.volume && (
                 <span className="text-xs text-white/70 mb-0.5">{product.volume}</span>
               )}
-              <span className="text-2xl md:text-3xl font-bold gradient-text">
-                ${product.price.toFixed(2)}
-              </span>
+              {product.salePrice ? (
+                <div className="flex items-baseline gap-2">
+                  <span className="text-2xl md:text-3xl font-bold gradient-text-gold">
+                    ${product.salePrice.toFixed(2)}
+                  </span>
+                  <span className="text-lg md:text-xl text-white/50 line-through">
+                    ${product.price.toFixed(2)}
+                  </span>
+                </div>
+              ) : (
+                <span className="text-2xl md:text-3xl font-bold gradient-text">
+                  ${product.price.toFixed(2)}
+                </span>
+              )}
               {product.isSubscriptionEligible && (
                 <span className="text-xs text-brand-gold/80">{tShop("subscribeAndSave")}</span>
               )}

@@ -19,6 +19,10 @@ const SubscriptionPlanSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    salePricePerWeek: {
+      type: Number,
+      default: null,
+    },
     stripePriceId: {
       type: String,
     },

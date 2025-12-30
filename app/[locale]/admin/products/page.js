@@ -24,6 +24,7 @@ export default function ProductsPage() {
     image: "",
     gallery: [],
     price: 0,
+    salePrice: null,
     volume: "",
     isSubscriptionEligible: false,
     tags: [],
@@ -123,6 +124,7 @@ export default function ProductsPage() {
       image: product.image || "",
       gallery: product.gallery || [],
       price: product.price || 0,
+      salePrice: product.salePrice || null,
       volume: product.volume || "",
       isSubscriptionEligible: product.isSubscriptionEligible || false,
       tags: product.tags || [],
@@ -168,6 +170,7 @@ export default function ProductsPage() {
       image: "",
       gallery: [],
       price: 0,
+      salePrice: null,
       isSubscriptionEligible: false,
       tags: [],
       active: true,
@@ -311,6 +314,19 @@ export default function ProductsPage() {
                   className="w-full px-3 py-2 glass border border-white/20 rounded-lg focus:ring-2 focus:ring-brand-mint text-white placeholder-white/50"
                   required
                 />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-white/90 mb-1">Sale Price (Optional)</label>
+                <input
+                  type="number"
+                  step="0.01"
+                  min="0"
+                  value={formData.salePrice || ""}
+                  onChange={(e) => setFormData({ ...formData, salePrice: e.target.value ? parseFloat(e.target.value) : null })}
+                  className="w-full px-3 py-2 glass border border-white/20 rounded-lg focus:ring-2 focus:ring-brand-mint text-white placeholder-white/50"
+                  placeholder="Leave empty for no sale"
+                />
+                <p className="text-xs text-white/60 mt-1">Set a sale price to show discount. Leave empty to remove sale.</p>
               </div>
               <div>
                 <label className="block text-sm font-medium text-white/90 mb-1">Volume/Size</label>
@@ -529,7 +545,16 @@ export default function ProductsPage() {
                     {product.type}
                   </span>
                 </td>
-                <td className="px-4 py-3 text-white/80">${product.price?.toFixed(2)}</td>
+                <td className="px-4 py-3 text-white/80">
+                  {product.salePrice ? (
+                    <div className="flex flex-col">
+                      <span className="text-brand-gold font-semibold">${product.salePrice.toFixed(2)}</span>
+                      <span className="text-xs text-white/50 line-through">${product.price?.toFixed(2)}</span>
+                    </div>
+                  ) : (
+                    <span>${product.price?.toFixed(2)}</span>
+                  )}
+                </td>
                 <td className="px-4 py-3">
                   <div className="flex gap-1 flex-wrap">
                     {product.active ? (

@@ -84,9 +84,20 @@ export default function ProductCard({ product }) {
             {product.volume && (
               <span className="text-xs text-white/70 mb-0.5">{product.volume}</span>
             )}
-            <span className="inline-flex items-center text-xl font-semibold text-white bg-brand-primary px-3 py-1 rounded-full shadow-sm">
-              ${product.price.toFixed(2)}
-            </span>
+            {product.salePrice ? (
+              <div className="flex items-baseline gap-2">
+                <span className="inline-flex items-center text-xl font-semibold text-brand-gold bg-brand-primary px-3 py-1 rounded-full shadow-sm">
+                  ${product.salePrice.toFixed(2)}
+                </span>
+                <span className="text-sm text-white/50 line-through">
+                  ${product.price.toFixed(2)}
+                </span>
+              </div>
+            ) : (
+              <span className="inline-flex items-center text-xl font-semibold text-white bg-brand-primary px-3 py-1 rounded-full shadow-sm">
+                ${product.price.toFixed(2)}
+              </span>
+            )}
           </div>
           <AddToCartButton product={product} />
         </div>

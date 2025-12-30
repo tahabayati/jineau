@@ -138,6 +138,7 @@ export async function POST(request) {
       image: data.image || "",
       gallery: data.gallery || [],
       price: data.price,
+      salePrice: data.salePrice || null,
       volume: data.volume || "",
       isSubscriptionEligible: data.isSubscriptionEligible || false,
       tags: data.tags || [],

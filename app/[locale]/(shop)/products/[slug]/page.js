@@ -145,10 +145,24 @@ export default async function ProductPage({ params }) {
                   <div className="text-sm text-gray-600 mb-1">{translatedProduct.volume}</div>
                 )}
                 <div className="flex items-baseline gap-2">
-                  <span className="text-4xl font-bold text-brand-primary">
-                    ${translatedProduct.price.toFixed(2)}
-                  </span>
-                  <span className="text-lg text-gray-500">CAD</span>
+                  {translatedProduct.salePrice ? (
+                    <>
+                      <span className="text-4xl font-bold text-brand-gold">
+                        ${translatedProduct.salePrice.toFixed(2)}
+                      </span>
+                      <span className="text-2xl font-semibold text-gray-400 line-through">
+                        ${translatedProduct.price.toFixed(2)}
+                      </span>
+                      <span className="text-lg text-gray-500">CAD</span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="text-4xl font-bold text-brand-primary">
+                        ${translatedProduct.price.toFixed(2)}
+                      </span>
+                      <span className="text-lg text-gray-500">CAD</span>
+                    </>
+                  )}
                 </div>
               </div>
 

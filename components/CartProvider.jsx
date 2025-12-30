@@ -41,16 +41,18 @@ export default function CartProvider({ children }) {
     if (product.inStock === false) {
       return
     }
+    // Use sale price if available, otherwise use regular price
+    const displayPrice = product.salePrice || product.price
     setItems((prev) => {
       const existing = prev.find((item) => item.slug === product.slug)
       if (existing) {
         return prev.map((item) =>
           item.slug === product.slug
-            ? { ...item, quantity: item.quantity + quantity }
+            ? { ...item, quantity: item.quantity + quantity, price: displayPrice }
             : item
         )
       }
-      return [...prev, { ...product, quantity }]
+      return [...prev, { ...product, quantity, price: displayPrice }]
     })
     setIsOpen(true)
   }, [])

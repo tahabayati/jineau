@@ -5,6 +5,7 @@ import dbConnect from "@/lib/mongodb"
 import Order from "@/models/Order"
 import GiftDelivery from "@/models/GiftDelivery"
 import SeniorCenter from "@/models/SeniorCenter"
+import SubscriptionPlan from "@/models/SubscriptionPlan"
 import { getShippingFee, shippingConfig } from "@/lib/config"
 
 export const runtime = 'nodejs'
@@ -33,26 +34,26 @@ export async function POST(request) {
     let checkoutMode = mode || "payment"
     
     if (mode === "subscription" && planSlug) {
-      const plans = {
-        "weekly-3-pack": { name: "Starter - 3 packs/week", price: 1899 },
-        "weekly-5-pack": { name: "Family - 5 packs/week", price: 2999 },
-        "weekly-7-pack": { name: "Chef - 7 packs/week", price: 3999 },
-      }
+      await dbConnect()
       
-      const plan = plans[planSlug]
+      const plan = await SubscriptionPlan.findOne({ slug: planSlug, active: true }).lean()
       if (!plan) {
         return NextResponse.json({ error: "Invalid plan" }, { status: 400 })
       }
+      
+      // Use sale price if available, otherwise use regular price
+      const pricePerWeek = plan.salePricePerWeek || plan.pricePerWeek
+      const priceInCents = Math.round(pricePerWeek * 100)
       
       lineItems = [
         {
           price_data: {
             currency: "cad",
             product_data: {
-              name: plan.name,
+              name: `${plan.name} - ${plan.packsPerWeek} packs/week`,
               description: "Weekly microgreens subscription - delivered Friday evening",
             },
-            unit_amount: plan.price,
+            unit_amount: priceInCents,
             recurring: {
               interval: "week",
             },
