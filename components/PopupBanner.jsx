@@ -55,70 +55,59 @@ export default function PopupBanner({ locale = "en" }) {
   const isRtl = locale === "fa"
 
   return (
-    <>
-      {/* Backdrop */}
-      <div
-        className={`fixed inset-0 bg-black/40 backdrop-blur-sm z-50 transition-opacity duration-300 ${
-          isClosing ? "opacity-0" : "opacity-100"
-        }`}
-        onClick={handleClose}
-        aria-hidden="true"
-      />
-
-      {/* Popup Banner */}
-      <div
-        className={`fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-2xl transition-all duration-300 ${
-          isClosing
-            ? "opacity-0 translate-y-[-20px] pointer-events-none"
-            : isVisible
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 translate-y-[-20px] pointer-events-none"
-        }`}
-        role="alert"
-        aria-live="polite"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="glass-card rounded-2xl md:rounded-3xl p-4 md:p-6 shadow-2xl border-2 border-brand-gold/30 relative">
-          {/* Close Button */}
-          <button
-            onClick={handleClose}
-            className={`absolute top-3 md:top-4 ${
-              isRtl ? "left-3 md:left-4" : "right-3 md:right-4"
-            } w-8 h-8 md:w-10 md:h-10 flex items-center justify-center rounded-full glass hover:bg-white/20 transition-all duration-300 text-white hover:text-brand-gold group`}
-            aria-label="Close popup"
+    <div
+      className={`fixed ${
+        isRtl ? "left-4 top-20" : "right-4 top-20"
+      } z-50 max-w-xs sm:max-w-sm transition-all duration-500 ${
+        isClosing
+          ? "opacity-0 translate-x-full pointer-events-none"
+          : isVisible
+          ? "opacity-100 translate-x-0"
+          : "opacity-0 translate-x-full pointer-events-none"
+      } ${isRtl ? "rtl:translate-x-full rtl:left-auto rtl:right-4" : ""}`}
+      role="alert"
+      aria-live="polite"
+    >
+      <div className="glass-card rounded-xl md:rounded-2xl p-4 shadow-2xl border border-brand-gold/40 relative backdrop-blur-md">
+        {/* Close Button */}
+        <button
+          onClick={handleClose}
+          className={`absolute top-2 ${
+            isRtl ? "left-2" : "right-2"
+          } w-6 h-6 flex items-center justify-center rounded-full glass hover:bg-white/20 transition-all duration-300 text-white/80 hover:text-brand-gold group`}
+          aria-label="Close popup"
+        >
+          <svg
+            className="w-4 h-4 transition-transform duration-300 group-hover:rotate-90"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
           >
-            <svg
-              className="w-5 h-5 md:w-6 md:h-6 transition-transform duration-300 group-hover:rotate-90"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
-          </button>
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
 
-          {/* Content */}
-          <div className={`pr-10 md:pr-12 ${isRtl ? "text-right" : "text-left"}`}>
-            <p
-              className={`text-base md:text-lg lg:text-xl font-semibold text-white drop-shadow-lg leading-relaxed ${
-                isRtl ? "font-persian" : ""
-              }`}
-              dir={isRtl ? "rtl" : "ltr"}
-            >
-              {popupText}
-            </p>
-          </div>
-
-          {/* Decorative gradient accent */}
-          <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-brand-mint via-brand-gold to-brand-mint rounded-b-2xl md:rounded-b-3xl" />
+        {/* Content */}
+        <div className={`pr-8 ${isRtl ? "text-right" : "text-left"}`}>
+          <p
+            className={`text-sm md:text-base font-medium text-white drop-shadow-md leading-relaxed ${
+              isRtl ? "font-persian" : ""
+            }`}
+            dir={isRtl ? "rtl" : "ltr"}
+          >
+            {popupText}
+          </p>
         </div>
+
+        {/* Decorative gradient accent */}
+        <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-brand-mint via-brand-gold to-brand-mint rounded-b-xl md:rounded-b-2xl" />
       </div>
-    </>
+    </div>
   )
 }
 
