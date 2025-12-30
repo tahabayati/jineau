@@ -9,6 +9,7 @@ import AuroraBackground from "@/components/AuroraBackground"
 import { generateWebSiteSchema } from "@/lib/seo"
 import dbConnect from "@/lib/mongodb"
 import Product from "@/models/Product"
+import Popup from "@/models/Popup"
 
 // SVG Icon Components
 const WaterIcon = () => (
@@ -154,6 +155,27 @@ async function getFeaturedProducts() {
   }
 }
 
+async function getActivePopup() {
+  try {
+    await dbConnect()
+    const popup = await Popup.findOne({ isActive: true })
+      .select('_id text')
+      .lean()
+    
+    if (!popup) {
+      return null
+    }
+
+    return {
+      _id: popup._id.toString(),
+      text: popup.text,
+    }
+  } catch (error) {
+    console.error("Error fetching popup:", error)
+    return null
+  }
+}
+
 export async function generateMetadata({ params }) {
   const { locale } = await params
   const baseUrl = "https://jineau.ca"
@@ -178,6 +200,7 @@ export default async function HomePage({ params }) {
   
   const websiteSchema = generateWebSiteSchema(locale)
   const featuredProducts = await getFeaturedProducts()
+  const popup = await getActivePopup()
 
   const translatedDifferentiators = [
     { ...differentiators[0], title: tFeatures("filteredAirWater"), description: tFeatures("filteredAirWaterDesc") },
@@ -213,7 +236,7 @@ export default async function HomePage({ params }) {
       <div className="min-h-screen relative overflow-x-hidden">
         <AuroraBackground variant="home" />
         <div className="relative z-10">
-          <PopupBanner locale={locale} />
+          <PopupBanner locale={locale} popup={popup} />
           <Hero
           title={t("heroTitle")}
           subtitle={t("heroSubtitle")}

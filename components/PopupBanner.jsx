@@ -3,70 +3,25 @@
 import { useState, useEffect } from "react"
 import { useTranslations } from "next-intl"
 
-export default function PopupBanner({ locale = "en" }) {
-  const [popup, setPopup] = useState(null)
+export default function PopupBanner({ locale = "en", popup: initialPopup = null }) {
+  const [popup, setPopup] = useState(initialPopup)
   const [isVisible, setIsVisible] = useState(false)
   const [isClosing, setIsClosing] = useState(false)
   const t = useTranslations("common")
 
   useEffect(() => {
-    // Use requestIdleCallback for non-blocking fetch, fallback to setTimeout
-    const fetchWithDelay = () => {
-      fetchPopup()
-    }
-
-    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
-      requestIdleCallback(fetchWithDelay, { timeout: 2000 })
-    } else {
-      // Fallback: fetch after a short delay to not block initial render
-      setTimeout(fetchWithDelay, 100)
-    }
-  }, [])
-
-  const fetchPopup = async () => {
-    try {
-      // Create abort controller for timeout
-      const controller = new AbortController()
-      const timeoutId = setTimeout(() => controller.abort(), 3000) // 3 second timeout
-      
-      const res = await fetch("/api/popup", {
-        signal: controller.signal,
-        cache: 'no-cache' // Don't cache to get fresh data
+    // If popup is passed as prop, show it immediately
+    if (popup && popup.text) {
+      // Show instantly with animation
+      requestAnimationFrame(() => {
+        setIsVisible(true)
       })
-      
-      clearTimeout(timeoutId)
-      
-      if (res.ok) {
-        const data = await res.json()
-        if (data && data.text) {
-          // Check if user has dismissed this popup
-          const dismissedId = localStorage.getItem("jineau-popup-dismissed")
-          if (dismissedId !== data._id) {
-            setPopup(data)
-            // Small delay for smooth animation
-            requestAnimationFrame(() => {
-              setIsVisible(true)
-            })
-          }
-        }
-      }
-    } catch (error) {
-      // Silently fail - popup is not critical
-      if (error.name !== 'AbortError') {
-        // Only log in development
-        if (process.env.NODE_ENV === 'development') {
-          console.error("Error fetching popup:", error)
-        }
-      }
     }
-  }
+  }, [popup])
 
   const handleClose = () => {
     setIsClosing(true)
     setTimeout(() => {
-      if (popup?._id) {
-        localStorage.setItem("jineau-popup-dismissed", popup._id)
-      }
       setIsVisible(false)
       setPopup(null)
     }, 300)
