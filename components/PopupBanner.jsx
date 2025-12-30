@@ -23,8 +23,8 @@ export default function PopupBanner({ locale = "en" }) {
           const dismissedId = localStorage.getItem("jineau-popup-dismissed")
           if (dismissedId !== data._id) {
             setPopup(data)
-            // Small delay for animation
-            setTimeout(() => setIsVisible(true), 100)
+            // Show immediately with animation
+            setIsVisible(true)
           }
         }
       }
@@ -57,7 +57,7 @@ export default function PopupBanner({ locale = "en" }) {
   return (
     <div
       className={`fixed ${
-        isRtl ? "left-4 top-20" : "right-4 top-20"
+        isRtl ? "left-4 top-28" : "right-4 top-28"
       } z-50 max-w-xs sm:max-w-sm transition-all duration-500 ${
         isClosing
           ? "opacity-0 translate-x-full pointer-events-none"
