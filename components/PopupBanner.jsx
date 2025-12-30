@@ -10,12 +10,14 @@ export default function PopupBanner({ locale = "en", popup: initialPopup = null 
   const t = useTranslations("common")
 
   useEffect(() => {
-    // If popup is passed as prop, show it immediately
+    // If popup is passed as prop, show it with animation
     if (popup && popup.text) {
-      // Show instantly with animation
-      requestAnimationFrame(() => {
+      // Small delay to ensure the component is mounted, then animate in
+      const timer = setTimeout(() => {
         setIsVisible(true)
-      })
+      }, 100)
+      
+      return () => clearTimeout(timer)
     }
   }, [popup])
 
@@ -24,10 +26,11 @@ export default function PopupBanner({ locale = "en", popup: initialPopup = null 
     setTimeout(() => {
       setIsVisible(false)
       setPopup(null)
-    }, 300)
+    }, 700) // Match animation duration
   }
 
-  if (!popup || !isVisible) return null
+  // Don't render if no popup
+  if (!popup) return null
 
   // Get text for current locale, fallback to English
   const popupText = popup.text?.[locale] || popup.text?.en || ""
@@ -41,12 +44,12 @@ export default function PopupBanner({ locale = "en", popup: initialPopup = null 
     <div
       className={`fixed ${
         isRtl ? "left-4 top-28" : "right-4 top-28"
-      } z-50 max-w-xs sm:max-w-sm transition-all duration-500 ${
+      } z-50 max-w-xs sm:max-w-sm transition-all duration-700 ease-out ${
         isClosing
-          ? "opacity-0 translate-x-full pointer-events-none"
+          ? "opacity-0 translate-x-full scale-95 pointer-events-none"
           : isVisible
-          ? "opacity-100 translate-x-0"
-          : "opacity-0 translate-x-full pointer-events-none"
+          ? "opacity-100 translate-x-0 scale-100"
+          : "opacity-0 translate-x-full scale-95 pointer-events-none"
       } ${isRtl ? "rtl:translate-x-full rtl:left-auto rtl:right-4" : ""}`}
       role="alert"
       aria-live="polite"
