@@ -15,7 +15,6 @@ export default function CheckoutPage() {
   const tCommon = useTranslations("common")
   const { data: session, status } = useSession()
   const router = useRouter()
-  const searchParams = useSearchParams()
   const { items, subtotal, shippingFee, total, isLoaded, clearCart } = useCart()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
@@ -55,10 +54,14 @@ export default function CheckoutPage() {
         throw new Error(data.error || "Checkout failed")
       }
 
-      if (data.url) {
-        window.location.href = data.url
+      if (!data.url) {
+        throw new Error("No checkout URL received. Please try again.")
       }
+
+      // Redirect to Stripe checkout
+      window.location.href = data.url
     } catch (err) {
+      console.error("Checkout error:", err)
       setError(err.message || "Something went wrong. Please try again.")
     } finally {
       setIsLoading(false)

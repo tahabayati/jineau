@@ -133,9 +133,26 @@ export async function POST(request) {
       await GiftDelivery.create(giftData)
     }
 
+    if (!checkoutSession.url) {
+      console.error("Stripe checkout session created but no URL returned")
+      return NextResponse.json({ error: "Failed to create checkout session" }, { status: 500 })
+    }
+
     return NextResponse.json({ url: checkoutSession.url })
   } catch (error) {
     console.error("Checkout error:", error)
-    return NextResponse.json({ error: "Checkout failed" }, { status: 500 })
+    
+    // Provide more specific error messages
+    if (error.message?.includes("STRIPE_SECRET_KEY")) {
+      return NextResponse.json({ error: "Payment system configuration error" }, { status: 500 })
+    }
+    
+    if (error.type === "StripeInvalidRequestError") {
+      return NextResponse.json({ error: error.message || "Invalid payment request" }, { status: 400 })
+    }
+    
+    return NextResponse.json({ 
+      error: error.message || "Checkout failed. Please try again." 
+    }, { status: 500 })
   }
 }
