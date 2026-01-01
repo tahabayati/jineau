@@ -89,7 +89,7 @@ export default function AuthForm({ mode = "login" }) {
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-primary focus:border-transparent"
+            className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-primary focus:border-transparent text-green-800"
             placeholder="Your Name"
             required
           />
@@ -104,7 +104,7 @@ export default function AuthForm({ mode = "login" }) {
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-primary focus:border-transparent"
+          className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-primary focus:border-transparent text-green-800"
           placeholder={t("emailPlaceholder")}
           required
         />
@@ -118,7 +118,7 @@ export default function AuthForm({ mode = "login" }) {
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-primary focus:border-transparent"
+          className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-brand-primary focus:border-transparent text-green-800"
           placeholder={t("passwordPlaceholder")}
           required
           minLength={6}
